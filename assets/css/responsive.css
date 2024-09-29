@@ -6,7 +6,7 @@
 }
 
 /* Normal desktop :992px. */
-@media (min-width: 992px) {
+@media (min-width: 1024px) {
     .col-1-5 {
         -ms-flex: 0 0 20%;
         flex: 0 0 20%;
@@ -65,7 +65,7 @@
 }
 
 /* small mobile :992px. */
-@media (max-width: 992px) {
+@media (max-width: 1024px) {
     .widget-area.pl-30 {
         padding-left: 0 !important;
     }

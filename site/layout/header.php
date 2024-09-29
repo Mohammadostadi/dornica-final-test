@@ -7,17 +7,17 @@
                         <div class="col-lg-2 col-md-3">
                             <div class="header-logo d-none d-lg-block">
                                 <a href="../../index.php">
-                                    <img class="logo-img d-inline" src="../../assets/imgs/logo.svg" alt="">
+                                    <img class="logo-img d-inline" src="../../attachment/imgs/logo.svg" alt="">
                                 </a>
                             </div>
                             <div class="logo-tablet d-md-inline d-lg-none d-none">
                                 <a href="../../index.php">
-                                    <img class="logo-img d-inline" src="../../assets/imgs/logo.svg" alt="">
+                                    <img class="logo-img d-inline" src="../../attachment/imgs/logo.svg" alt="">
                                 </a>
                             </div>
                             <div class="logo-mobile d-block d-md-none">
                                 <a href="../../index.php">
-                                    <img class="logo-img d-inline" src="../../assets/imgs/favicon.svg" alt="">
+                                    <img class="logo-img d-inline" src="../../attachment/imgs/favicon.svg" alt="">
                                 </a>
                             </div>
                         </div>
@@ -92,7 +92,7 @@
                                                 </ul>
                                                 <div class="col-md-6 text-left">
                                                     <a href="#"><img class="border-radius-10"
-                                                            src="../../assets/imgs/ads-2.jpg" alt=""></a>
+                                                            src="../../attachment/imgs/ads-2.jpg" alt=""></a>
                                                 </div>
                                             </div>
                                         </li>
@@ -118,7 +118,7 @@
                                                                 <div
                                                                     class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
                                                                     <a href="single.html">
-                                                                        <img src="../../assets/imgs/news-1.jpg" alt="">
+                                                                        <img src="../../attachment/imgs/news-1.jpg" alt="">
                                                                     </a>
                                                                     <span class="top-right-icon background2">
                                                                         <i class="mdi mdi-audiotrack"></i>
@@ -139,7 +139,7 @@
                                                                 <div
                                                                     class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
                                                                     <a href="single.html">
-                                                                        <img src="../../assets/imgs/news-2.jpg" alt="">
+                                                                        <img src="../../attachment/imgs/news-2.jpg" alt="">
                                                                     </a>
                                                                 </div>
                                                                 <div class="post-content media-body">
@@ -157,7 +157,7 @@
                                                                 <div
                                                                     class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
                                                                     <a href="single.html">
-                                                                        <img src="../../assets/imgs/news-3.jpg" alt="">
+                                                                        <img src="../../attachment/imgs/news-3.jpg" alt="">
                                                                     </a>
                                                                 </div>
                                                                 <div class="post-content media-body">
@@ -175,7 +175,7 @@
                                                                 <div
                                                                     class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
                                                                     <a href="single.html">
-                                                                        <img src="../../assets/imgs/news-8.jpg" alt="">
+                                                                        <img src="../../attachment/imgs/news-8.jpg" alt="">
                                                                     </a>
                                                                 </div>
                                                                 <div class="post-content media-body">
@@ -197,7 +197,7 @@
                                                                 <div
                                                                     class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
                                                                     <a href="single.html">
-                                                                        <img src="../../assets/imgs/news-5.jpg" alt="">
+                                                                        <img src="../../attachment/imgs/news-5.jpg" alt="">
                                                                     </a>
                                                                 </div>
                                                                 <div class="post-content media-body">
@@ -215,7 +215,7 @@
                                                                 <div
                                                                     class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
                                                                     <a href="single.html">
-                                                                        <img src="../../assets/imgs/news-6.jpg" alt="">
+                                                                        <img src="../../attachment/imgs/news-6.jpg" alt="">
                                                                     </a>
                                                                     <span class="top-right-icon background3">
                                                                         <i class="mdi mdi-videocam"></i>
@@ -236,7 +236,7 @@
                                                                 <div
                                                                     class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
                                                                     <a href="single.html">
-                                                                        <img src="../../assets/imgs/news-7.jpg" alt="">
+                                                                        <img src="../../attachment/imgs/news-7.jpg" alt="">
                                                                     </a>
                                                                 </div>
                                                                 <div class="post-content media-body">
@@ -254,7 +254,7 @@
                                                                 <div
                                                                     class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
                                                                     <a href="single.html">
-                                                                        <img src="../../assets/imgs/news-8.jpg" alt="">
+                                                                        <img src="../../attachment/imgs/news-8.jpg" alt="">
                                                                     </a>
                                                                 </div>
                                                                 <div class="post-content media-body">
@@ -276,7 +276,7 @@
                                                                 <div
                                                                     class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
                                                                     <a href="single.html">
-                                                                        <img src="../../assets/imgs/news-9.jpg" alt="">
+                                                                        <img src="../../attachment/imgs/news-9.jpg" alt="">
                                                                     </a>
                                                                     <span class="top-right-icon background2">
                                                                         <i class="mdi mdi-audiotrack"></i>
@@ -297,7 +297,7 @@
                                                                 <div
                                                                     class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
                                                                     <a href="single.html">
-                                                                        <img src="../../assets/imgs/news-10.jpg" alt="">
+                                                                        <img src="../../attachment/imgs/news-10.jpg" alt="">
                                                                     </a>
                                                                     <span class="top-right-icon background8">
                                                                         <i class="mdi mdi-favorite"></i>
@@ -318,7 +318,7 @@
                                                                 <div
                                                                     class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
                                                                     <a href="single.html">
-                                                                        <img src="../../assets/imgs/news-11.jpg" alt="">
+                                                                        <img src="../../attachment/imgs/news-11.jpg" alt="">
                                                                     </a>
                                                                 </div>
                                                                 <div class="post-content media-body">
@@ -336,7 +336,7 @@
                                                                 <div
                                                                     class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
                                                                     <a href="single.html">
-                                                                        <img src="../../assets/imgs/news-12.jpg" alt="">
+                                                                        <img src="../../attachment/imgs/news-12.jpg" alt="">
                                                                     </a>
                                                                 </div>
                                                                 <div class="post-content media-body">
@@ -358,7 +358,7 @@
                                                                 <div
                                                                     class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
                                                                     <a href="single.html">
-                                                                        <img src="../../assets/imgs/news-13.jpg" alt="">
+                                                                        <img src="../../attachment/imgs/news-13.jpg" alt="">
                                                                     </a>
                                                                 </div>
                                                                 <div class="post-content media-body">
@@ -376,7 +376,7 @@
                                                                 <div
                                                                     class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
                                                                     <a href="single.html">
-                                                                        <img src="../../assets/imgs/news-14.jpg" alt="">
+                                                                        <img src="../../attachment/imgs/news-14.jpg" alt="">
                                                                     </a>
                                                                 </div>
                                                                 <div class="post-content media-body">
@@ -394,7 +394,7 @@
                                                                 <div
                                                                     class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
                                                                     <a href="single.html">
-                                                                        <img src="../../assets/imgs/news-15.jpg" alt="">
+                                                                        <img src="../../attachment/imgs/news-15.jpg" alt="">
                                                                     </a>
                                                                 </div>
                                                                 <div class="post-content media-body">
@@ -412,7 +412,7 @@
                                                                 <div
                                                                     class="post-thumb d-flex border-radius-5 img-hover-scale mb-15">
                                                                     <a href="single.html">
-                                                                        <img src="../../assets/imgs/news-16.jpg" alt="">
+                                                                        <img src="../../attachment/imgs/news-16.jpg" alt="">
                                                                     </a>
                                                                     <span class="top-right-icon background2">
                                                                         <i class="mdi mdi-audiotrack"></i>
@@ -452,9 +452,9 @@
                                         </li>
                                     </ul>
                                     <div class="d-inline mr-50 tools-icon">
-                                        <a class="red-tooltip" href="../auth/rigester.php" data-toggle="tooltip"
-                                            data-placement="top" title="" data-original-title="ثبت نام">
-                                            <i class="ti-user"></i>
+                                        <a class="red-tooltip" href="<?= isset($_SESSION['member'])?"../panel/panel.php":"../auth/rigester.php" ?>" data-toggle="tooltip"
+                                            data-placement="top" title="" data-original-title="<?= isset($_SESSION['member'])?"پنل":"ثبت نام" ?>">
+                                            <?= isset($_SESSION['member'])?"<img src='../../admin-panel/assets/images/admin/default.png' class='rounded-circle' alt='' width='50px' height='50px' >":"<i class='ti-user'></i>" ?>
                                         </a>
                                         <a class="red-tooltip text-danger" href="#" data-toggle="tooltip"
                                             data-placement="top" title="" data-original-title="ورود">

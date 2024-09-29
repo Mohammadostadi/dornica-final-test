@@ -2,9 +2,8 @@
 require_once('../../../app/connection/DB.php');
 require_once('../../../app/controller/access.php');
 require_once('../../../app/controller/function.php');
-$cities = $db->join('provinces', 'provinces.id = cities.province_id', 'LEFT')
-    ->orderBy('id', 'DESC')
-    ->get('cities', null, 'cities.id, cities.name, cities.sort, cities.status, provinces.name as province');
+$categories = $db->orderBy('id', 'DESC')
+    ->get('categories', null);
 
 ?>
 <!doctype html>
@@ -21,7 +20,7 @@ $cities = $db->join('provinces', 'provinces.id = cities.province_id', 'LEFT')
     require_once('../../layout/css.php');
     ?>
 
-    <title>استان ها</title>
+    <title>دسته بندی اخبار</title>
 </head>
 
 <body>
@@ -62,7 +61,7 @@ $cities = $db->join('provinces', 'provinces.id = cities.province_id', 'LEFT')
                     </div>
                     <div class="ms-auto">
                         <div class="btn-group">
-                            <a class="btn btn-outline-secondary" href="city_add.php">اضافه کردن داده جدید</a>
+                            <a class="btn btn-outline-secondary" href="category_add.php">اضافه کردن داده جدید</a>
                         </div>
                     </div>
                 </div>
@@ -70,7 +69,7 @@ $cities = $db->join('provinces', 'provinces.id = cities.province_id', 'LEFT')
 
                 <div class="card">
                     <div class="card-header py-3">
-                        <h6 class="mb-0 text-uppercase">لیست استان ها</h6>
+                        <h6 class="mb-0 text-uppercase">لیست دسته بندی اخبار</h6>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -83,10 +82,7 @@ $cities = $db->join('provinces', 'provinces.id = cities.province_id', 'LEFT')
                                                     <tr>
                                                         <th>#</th>
                                                         <th class="px-5">
-                                                            نام استان
-                                                        </th>
-                                                        <th class="px-5">
-                                                            نام شهر
+                                                            نام
                                                         </th>
                                                         <th class="px-5">
                                                             ترتیب
@@ -98,34 +94,33 @@ $cities = $db->join('provinces', 'provinces.id = cities.province_id', 'LEFT')
                                                     </tr>
                                                 </thead>
                                                 <tbody class="text-center">
-                                                <?php foreach ($cities as $city) { ?>
+                                                <?php foreach ($categories as $category) { ?>
                                                     <tr class="text-center">
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="checkbox">
                                                             </div>
                                                         </td>
-                                                        <td><?= $city['province'] ?></td>
-                                                        <td><?= $city['name'] ?></td>
-                                                        <td><?= $city['sort'] ?></td>
+                                                        <td><?= $category['name'] ?></td>
+                                                        <td><?= $category['sort'] ?></td>
                                                         <td>
-                                                            <?= status('active', $city['status']) ?>
+                                                            <?= status('active', $category['status']) ?>
                                                         </td>
                                                         <td>
                                                             <div>
-                                                                <a href="city_update.php?id<?= $city['id'] ?>"
+                                                                <a href="category_update.php?id<?= $category['id'] ?>"
                                                                     class="btn border-0 disabled-sort text-warning"
                                                                     data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                     title="ویرایش اطلاعات" aria-label="Edit"><i
                                                                         class="bi bi-pencil-fill"></i></a>
                                                                 <button class="remove text-danger btn border-0 "
-                                                                    value="<?= $city['id'] ?>" data-bs-toggle="tooltip"
+                                                                    value="<?= $category['id'] ?>" data-bs-toggle="tooltip"
                                                                     data-bs-placement="bottom" title="حذف"
                                                                     aria-label="Delete" style="cursor: pointer;"><i
                                                                         class="bi bi-trash-fill"></i></button>
 
                                                                 <div class="modal fade"
-                                                                    id="exampleModal<?= $city['id'] ?>" tabindex="-1"
+                                                                    id="exampleModal<?= $category['id'] ?>" tabindex="-1"
                                                                     role="dialog" aria-labelledby="exampleModalLabel"
                                                                     aria-hidden="true">
                                                                     <div class="modal-dialog" role="document">
@@ -135,20 +130,20 @@ $cities = $db->join('provinces', 'provinces.id = cities.province_id', 'LEFT')
                                                                                 <h5 class="modal-title"
                                                                                     id="exampleModalLabel">حذف داده</h5>
                                                                                 <button type="button" class="close"
-                                                                                    value="<?= $city['id'] ?>"
+                                                                                    value="<?= $category['id'] ?>"
                                                                                     data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
                                                                             </div>
                                                                             <form
-                                                                                action="city_delete.php?id=<?= $city['id'] ?>"
+                                                                                action="category_delete.php?id=<?= $category['id'] ?>"
                                                                                 method="post">
                                                                                 <div class="modal-body">
                                                                                     <h5>آیا مطمئن هستید؟</h5>
                                                                                 </div>
                                                                                 <div class="modal-footer">
                                                                                     <button type="button"
-                                                                                        value="<?= $city['id'] ?>"
+                                                                                        value="<?= $category['id'] ?>"
                                                                                         class="btn btn-secondary close"
                                                                                         data-dismiss="modal">لغو</button>
                                                                                     <button type="submit" name="btn_delete"
@@ -183,7 +178,7 @@ $cities = $db->join('provinces', 'provinces.id = cities.province_id', 'LEFT')
     <?php require_once('../../layout/js.php'); ?>
     <script>
         $('.btn-close').click(function () {
-            window.location = 'cities_list.php';
+            window.location = 'categories_list.php';
         });
     </script>
     <script>

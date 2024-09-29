@@ -4,32 +4,27 @@ require_once('../../../app/controller/access.php');
 require_once('../../../app/controller/function.php');
 
 $errors = [];
-$provincesList = $db->where('status', 1)
-    ->orderBy('name', 'ASC')
-    ->get('provinces', null, 'id, name');
+
 if (isset($_POST['_insert'])) {
     $name = checkDataSecurity($_POST['name']);
-    $province = checkDataSecurity($_POST['province']);
 
-    checkDataEmpty($name, 'name', 'فیلد نام شهر شما خالی میباشد.');
-    checkDataEmpty($province, 'province', 'فیلد استان شما خالی میباشد.');
+    checkDataEmpty($name, 'name', 'فیلد نام دسته بندی خبر شما خالی میباشد.');
 
     if (count($errors) == 0) {
-        $db->insert('cities', [
+        $db->insert('categories', [
             'name' => $name,
-            'province_id'=>$province,
-            'sort' => getMaxSort('cities'),
+            'sort' => getMaxSort('categories'),
             'status' => 1
         ]);
         $query = $db->getLastQuery();
         $db->insert('logs', [
             'admin_id' => $_SESSION['user'],
-            'table_name' => 'cities',
+            'table_name' => 'categories',
             'changes' => $query,
             'type' => 0,
             'date' => $date
         ]);
-        header('Location:cities_list.php?ok=0');
+        header('Location:categories_list.php?ok=0');
     }
 }
 
@@ -48,7 +43,7 @@ if (isset($_POST['_insert'])) {
     <?php
     require_once('../../layout/css.php');
     ?>
-    <title>افزودن شهر</title>
+    <title>افزودن دسته بندی خبر</title>
 </head>
 
 <body>
@@ -63,37 +58,18 @@ if (isset($_POST['_insert'])) {
             <div class="card">
                 <div class="card-body">
                     <div class="border p-3 rounded">
-                        <h6 class="mb-0 text-uppercase">اضافه کردن شهر</h6>
+                        <h6 class="mb-0 text-uppercase">اضافه کردن دسته بندی خبر</h6>
                         <hr />
                         <form class="row g-3 needs-validation" action="" method="post" novalidate
                             enctype="multipart/form-data" a>
                             <div class="col-lg-6 ">
-                                <label class="form-label">استان</label>
-                                <span class="text-danger">*</span>
-                                <select class="form-select" name="province" id="province" required >
-                                    <option value="">استان را انتخاب کنید</option>
-                                    <?php foreach ($provincesList as $province) { ?>
-                                        <option <?= (isset($_POST['province']) and $_POST['province'] == $province['id']) ? "SELECTED" : "" ?>
-                                            value="<?= $province['id'] ?>"><?= $province['name'] ?></option>
-                                    <?php } ?>
-                                </select>
-                                <div class="invalid-feedback">
-                                    فیلد استان نباید خالی باشد
-                                </div>
-                                <div class="text-danger">
-                                        <?= checkDataErrorExist('province') ?>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 ">
-                                <label class="form-label">نام شهر </label>
+                                <label class="form-label">نام دسته بندی خبر </label>
                                 <span class="text-danger">*</span>
                                 <input type="text" class="form-control" name="name" required>
                                 <div class="invalid-feedback">
                                     فیلد نام نباید خالی باشد
                                 </div>
-                                <div class="text-danger">
-                                        <?= checkDataErrorExist('name') ?>
-                                </div>
+                                <div class="text-danger"><?= checkDataErrorExist('name') ?></div>
                             </div>
                             <div class="col-lg-12 d-flex justify-content-end">
                                 <div class="row">

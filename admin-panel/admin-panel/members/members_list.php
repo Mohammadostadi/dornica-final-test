@@ -1,5 +1,6 @@
 <?php 
 require_once('../../../app/connection/DB.php');
+require_once('../../../app/controller/access.php');
 require_once('../../../app/controller/function.php');
 $members = $db->join('provinces', 'provinces.id = members.province_id', 'LEFT')
 ->join('cities', 'cities.id = members.city_id', 'LEFT')

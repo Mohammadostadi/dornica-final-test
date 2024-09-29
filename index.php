@@ -1,3 +1,23 @@
+<?php
+require_once('app/connection/DB.php');
+require_once('app/controller/function.php');
+
+if (isset($_POST['btn_login'])) {
+    $username = checkDataSecurity($_POST['username']);
+    $password = checkDataSecurity($_POST['password']);
+    if ($username != '') {
+        $checkMemberExist = $db->where('username', $username)
+            ->getOne('members', 'username, password');
+        if (!is_null($checkMemberExist) and password_verify($password, $checkMemberExist['password'])) {
+            $_SESSION['member'] = $username;
+        } else {
+            header('Location:index.php?ok=4');
+        }
+    }
+}
+
+
+?>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
@@ -643,14 +663,75 @@
                                         </li>
                                     </ul>
                                     <div class="d-inline mr-50 tools-icon">
-                                        <a class="red-tooltip" href="site/auth/rigester.php" data-toggle="tooltip"
-                                            data-placement="top" title="" data-original-title="ثبت نام">
-                                            <i class="ti-user"></i>
+                                        <a class="red-tooltip"
+                                            href="<?= isset($_SESSION['member']) ? "site/panel/panel.php" : "site/auth/rigester.php" ?>"
+                                            data-toggle="tooltip" data-placement="top" title=""
+                                            data-original-title="<?= isset($_SESSION['member']) ? "پنل" : "ثبت نام" ?>">
+                                            <?= isset($_SESSION['member']) ? "<img src='admin-panel/assets/images/admin/default.png' class='rounded-circle' alt='' width='30px' height='30px' >" : "<i class='ti-user'></i>" ?>
                                         </a>
-                                        <a class="red-tooltip text-danger" href="#" data-toggle="tooltip"
-                                            data-placement="top" title="" data-original-title="ورود">
+                                        <?php if(!isset($_SESSION['member'])){ ?>
+                                        <button class="p-0 m-0 bg-white border-0 edit red-tooltip text-danger" href="#"
+                                            data-toggle="tooltip" data-placement="top" title=""
+                                            data-original-title="ورود">
                                             <i class="ti-lock"></i>
-                                        </a>
+                                        </button>
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+
+
+                                                        <h5 class="modal-title" id="exampleModalLabel">ورود</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <form action="" class="needs-validation" method="post" novalidate>
+                                                        <div class="modal-body">
+                                                            <?php
+                                                            if (isset($_GET['ok']) and $_GET['ok'] != '')
+                                                                showMessage($_GET['ok'])
+                                                                    ?>
+                                                                <div class="col-12">
+                                                                    <label for="inputEmailAddress" class="form-label">نام
+                                                                        کاربری</label>
+                                                                    <div class="ms-auto">
+                                                                        <input type="username" name="username"
+                                                                            class="form-control radius-30 ps-5"
+                                                                            id="inputEmailAddress"
+                                                                            value="<?= (isset($_POST['username'])) ? $_POST['username'] : "" ?>"
+                                                                        placeholder="نام کاربری" required>
+                                                                    <div class="invalid-feedback">
+                                                                        فیلد نام کاربری خالی باشد
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <label for="inputChoosePassword" class="form-label">رمز
+                                                                    عبور را وارد
+                                                                    کنید</label>
+                                                                <div class="ms-auto">
+                                                                    <input type="password" name="password"
+                                                                        class="form-control radius-30 ps-5"
+                                                                        id="inputChoosePassword"
+                                                                        placeholder="رمز عبور را وارد کنید" required>
+                                                                    <div class="invalid-feedback">
+                                                                        فیلد رمز عبور خالی باشد
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" name="btn_login"
+                                                                class="btn btn-primary">ورود</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php } ?>
                                     </div>
                                 </nav>
                             </div>
@@ -821,8 +902,8 @@
                                                     <div class="mb-20 overflow-hidden">
                                                         <div class="entry-meta meta-2 float-right">
                                                             <a class="float-right ml-10 author-img" href="author.html"
-                                                                tabindex="0"><img src="attachment/imgs/authors/author.png"
-                                                                    alt=""></a>
+                                                                tabindex="0"><img
+                                                                    src="attachment/imgs/authors/author.png" alt=""></a>
                                                             <a href="author.html" tabindex="0"><span
                                                                     class="author-name text-grey">مسعود راستی</span></a>
                                                             <br>
@@ -867,7 +948,8 @@
                                                     <div class="mb-20 overflow-hidden">
                                                         <div class="entry-meta meta-2 float-right">
                                                             <a class="float-right ml-10 author-img" href="author.html"
-                                                                tabindex="0"><img src="attachment/imgs/authors/author-1.png"
+                                                                tabindex="0"><img
+                                                                    src="attachment/imgs/authors/author-1.png"
                                                                     alt=""></a>
                                                             <a href="author.html" tabindex="0"><span
                                                                     class="author-name text-grey">رضا کیمیا</span></a>
@@ -1312,7 +1394,8 @@
                         <div class="row">
                             <div class="col-12 text-center mt-50 mb-50">
                                 <a href="#">
-                                    <img class="border-radius-10 d-inline" src="attachment/imgs/ads.jpg" alt="post-slider">
+                                    <img class="border-radius-10 d-inline" src="attachment/imgs/ads.jpg"
+                                        alt="post-slider">
                                 </a>
                             </div>
                         </div>
@@ -1387,8 +1470,8 @@
                                             <div class="d-flex">
                                                 <div class="post-thumb d-flex ml-15 border-radius-15 img-hover-scale">
                                                     <a class="color-white" href="single.html">
-                                                        <img class="border-radius-15" src="attachment/imgs/thumbnail-15.jpg"
-                                                            alt="">
+                                                        <img class="border-radius-15"
+                                                            src="attachment/imgs/thumbnail-15.jpg" alt="">
                                                     </a>
                                                 </div>
                                                 <div class="post-content media-body">
@@ -1419,8 +1502,8 @@
                                             <div class="d-flex">
                                                 <div class="post-thumb d-flex ml-15 border-radius-15 img-hover-scale">
                                                     <a class="color-white" href="single.html">
-                                                        <img class="border-radius-15" src="attachment/imgs/thumbnail-13.jpg"
-                                                            alt="">
+                                                        <img class="border-radius-15"
+                                                            src="attachment/imgs/thumbnail-13.jpg" alt="">
                                                     </a>
                                                 </div>
                                                 <div class="post-content media-body">
@@ -1447,8 +1530,8 @@
                                             <div class="d-flex">
                                                 <div class="post-thumb d-flex ml-15 border-radius-15 img-hover-scale">
                                                     <a class="color-white" href="single.html">
-                                                        <img class="border-radius-15" src="attachment/imgs/thumbnail-16.jpg"
-                                                            alt="">
+                                                        <img class="border-radius-15"
+                                                            src="attachment/imgs/thumbnail-16.jpg" alt="">
                                                     </a>
                                                 </div>
                                                 <div class="post-content media-body">
@@ -1478,8 +1561,8 @@
                                             <div class="d-flex">
                                                 <div class="post-thumb d-flex ml-15 border-radius-15 img-hover-scale">
                                                     <a class="color-white" href="single.html">
-                                                        <img class="border-radius-15" src="attachment/imgs/thumbnail-8.jpg"
-                                                            alt="">
+                                                        <img class="border-radius-15"
+                                                            src="attachment/imgs/thumbnail-8.jpg" alt="">
                                                     </a>
                                                 </div>
                                                 <div class="post-content media-body">
@@ -1551,7 +1634,8 @@
                                         <article class="bg-white border-radius-15 mb-30 p-10 wow fadeIn animated">
                                             <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
                                                 <a href="single.html">
-                                                    <img class="border-radius-15" src="attachment/imgs/news-22.jpg" alt="">
+                                                    <img class="border-radius-15" src="attachment/imgs/news-22.jpg"
+                                                        alt="">
                                                 </a>
                                             </div>
                                             <div class="pl-10 pr-10">
@@ -1569,7 +1653,8 @@
                                         <article class="bg-white border-radius-15 mb-30 p-10 wow fadeIn animated">
                                             <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
                                                 <a href="single.html">
-                                                    <img class="border-radius-15" src="attachment/imgs/news-20.jpg" alt="">
+                                                    <img class="border-radius-15" src="attachment/imgs/news-20.jpg"
+                                                        alt="">
                                                 </a>
                                             </div>
                                             <div class="pl-10 pr-10">
@@ -1947,6 +2032,34 @@
     <script src="../../unpkg.com/ionicons%405.0.0/dist/ionicons.js"></script>
     <!-- NewsViral JS -->
     <script src="assets/js/main.js"></script>
+    <script>
+        $(".edit").click(function () {
+            $(`#exampleModal`).modal("show");
+        });
+        $(".close").click(function () {
+            $(`#exampleModal`).modal("hide");
+        });
+    </script>
+    <script>
+        (() => {
+            'use strict'
+            const forms = document.querySelectorAll('.needs-validation')
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    </script>
+    <script>
+        $('.btn-close').click(function () {
+            window.location = 'index.php';
+        });
+    </script>
 </body>
 
 

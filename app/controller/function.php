@@ -1,30 +1,35 @@
-<?php 
+<?php
 
-function checkDataSecurity($data){
+function checkDataSecurity($data)
+{
     return htmlspecialchars(trim($data));
 }
 
-function checkDataEmpty($data, $name, $message){
+function checkDataEmpty($data, $name, $message)
+{
     global $errors;
-    if($data == ''){
+    if ($data == '') {
         $errors[$name] = $message;
     }
 }
 
-function setErrorMessage($name, $message){
+function setErrorMessage($name, $message)
+{
     global $errors;
     $errors[$name] = $message;
 }
 
 
-function checkDataErrorExist($name){
+function checkDataErrorExist($name)
+{
     global $errors;
-    if(isset($errors[$name]) and $errors[$name] != '')
+    if (isset($errors[$name]) and $errors[$name] != '')
         return $errors[$name];
 }
 
-function checkInputDataValue($name){
-    return isset($_POST[$name])?checkDataSecurity($_POST[$name]):"";
+function checkInputDataValue($name)
+{
+    return isset($_POST[$name]) ? checkDataSecurity($_POST[$name]) : "";
 }
 
 
@@ -51,10 +56,23 @@ function status($type, $value)
                 <span class="badge rounded-pill bg-danger">تایید نشده</span>
                 <?php break;
         }
+    } elseif ($type == 'log') {
+        switch ($value) {
+            case 0: ?>
+                <span class="badge rounded-pill bg-success">insert</span>
+                <?php break;
+            case 1: ?>
+                <span class="badge rounded-pill bg-danger">delete</span>
+                <?php break;
+            case 2: ?>
+                <span class="badge rounded-pill bg-info">update</span>
+                <?php break;
+        }
     }
 }
 
-function getMaxSort($table){
+function getMaxSort($table)
+{
     global $db;
     $sort = $db->getValue($table, 'MAX(sort)');
     return empty($sort) ? 1 : $sort + 1;
@@ -83,7 +101,26 @@ function showMessage($value)
             <strong>شما با موفقیت وارد شدید</strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
+    <?php } elseif ($value == 4) { ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" id="alert">
+            <strong>نام کاربری یا رمز عبور شما نادرست است</strong>
+            <button type="button" class="btn-close close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     <?php } ?>
-<?php } 
+<?php }
+
+
+function checkUniqData($data, $name, $table, $message)
+{
+    global $db;
+    if ($data != '') {
+        $checkExist = $db->where($name, $data)
+            ->getValue($table, 'COUNT(*)');
+        if ($checkExist == 1)
+            setErrorMessage($name, $message);
+    }
+}
 
 ?>

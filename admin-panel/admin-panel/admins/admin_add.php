@@ -1,4 +1,8 @@
+<?php 
+require_once('../../../app/connection/DB.php');
+require_once('../../../app/controller/access.php');
 
+?>
 <!doctype html>
 <html lang="en" dir="rtl">
 

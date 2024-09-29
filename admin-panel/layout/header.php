@@ -369,7 +369,6 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end myShow-menu " data-bs-popper="static">
                 <hr class="dropdown-divider">
-                </li>
                 <li>
                     <a class="dropdown-item" href="../../auth/logout.php" name="logout">
                         <div class="d-flex align-items-center">

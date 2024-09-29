@@ -42,6 +42,20 @@
         </li>
         <li>
             <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bi bi-newspaper"></i>
+                </div>
+                <div class="menu-title">اخبار</div>
+            </a>
+            <ul>
+                <li> <a href="../categories/categories_list.php"><i class="bi bi-circle"></i>دسته بندی اخبار</a>
+                </li>
+                <li> <a href="../blogs/blogs_list.php"><i class="bi bi-circle"></i>لیست اخبار</a>
+                </li>
+
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bi bi-building"></i>
                 </div>
                 <div class="menu-title">استان ها و شهر ها</div>
@@ -53,6 +67,14 @@
                 </li>
 
             </ul>
+        </li>
+        <li>
+            <a href="../logs/logs_list.php" class="">
+                <div class="parent-icon"><i class="bi bi-lock"></i>
+                </div>
+                <div class="menu-title">لیست لاگ ها</div>
+            </a>
+
         </li>
     </ul>
     <!--end navigation-->

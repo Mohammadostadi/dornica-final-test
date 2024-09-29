@@ -7,19 +7,19 @@ require_once('../../../app/controller/function.php');
 if(isset($_POST['btn_delete'])){
     $id = checkDataSecurity($_GET['id']);
     $checkProvinceExist = $db->where('id', $id)
-    ->getValue('provinces', 'COUNT(id)');
+    ->getValue('categories', 'COUNT(id)');
     if($checkProvinceExist == 1){
         $db->where('id', $id)
-        ->delete('provinces');
+        ->delete('categories');
         $query = $db->getLastQuery();
         $db->insert('logs', [
             'admin_id'=>$_SESSION['user'],
-            'table_name'=>'provinces',
+            'table_name'=>'categories',
             'changes'=>$query,
             'type'=>1,
             'date'=>$date
         ]);
-        header('Location:provinces_list.php?ok=1');
+        header('Location:categories_list.php?ok=1');
     }
 }
 

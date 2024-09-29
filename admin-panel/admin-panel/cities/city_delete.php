@@ -1,6 +1,7 @@
 <?php 
 
 require_once('../../../app/connection/DB.php');
+require_once('../../../app/controller/access.php');
 require_once('../../../app/controller/function.php');
 
 if(isset($_POST['btn_delete'])){

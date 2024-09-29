@@ -2,7 +2,9 @@
 require_once('../../../app/connection/DB.php');
 require_once('../../../app/controller/access.php');
 require_once('../../../app/controller/function.php');
-$admins = $db->get('admins', null);
+$blogs = $db->join('categories', 'categories.id = blogs.blog_category', 'LEFT')
+->orderBy('id', 'DESC')
+->get('blogs', null, 'blogs.id, blogs.title, categories.name, date, blogs.status');
 
 ?>
 <!doctype html>
@@ -19,7 +21,7 @@ $admins = $db->get('admins', null);
     require_once ('../../layout/css.php');
     ?>
 
-    <title>ادمین</title>
+    <title>اخبار</title>
 </head>
 
 <body>
@@ -56,7 +58,7 @@ $admins = $db->get('admins', null);
                 </div>
                 <div class="ms-auto">
                     <div class="btn-group">
-                            <a class="btn btn-outline-secondary" href="admin_add.php">اضافه کردن داده جدید</a>
+                            <a class="btn btn-outline-secondary" href="blog_add.php">اضافه کردن داده جدید</a>
                     </div>
                 </div>
             </div>
@@ -64,7 +66,7 @@ $admins = $db->get('admins', null);
 
             <div class="card">
                 <div class="card-header py-3">
-                    <h6 class="mb-0 text-uppercase">لیست ادمین</h6>
+                    <h6 class="mb-0 text-uppercase">لیست اخبار</h6>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -77,16 +79,13 @@ $admins = $db->get('admins', null);
                                                 <tr>
                                                     <th>#</th>
                                                     <th class="px-5">
-                                                        نام
+                                                        عنوان
                                                     </th>
                                                     <th class="px-5">
-                                                        نام خانوادگی
+                                                        دسته بندی 
                                                     </th>
                                                     <th class="px-5">
-                                                        نام کاربری
-                                                    </th>
-                                                    <th class="px-5">
-                                                        نقش
+                                                        تاریخ
                                                     </th>
                                                     <th class="px-5">
                                                         وضعیت
@@ -95,33 +94,32 @@ $admins = $db->get('admins', null);
                                                 </tr>
                                             </thead>
                                             <tbody class="text-center">
-                                                <?php foreach ($admins as $admin) { ?>
+                                                <?php foreach ($blogs as $blog) { ?>
                                                     <tr class="text-center">
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="checkbox">
                                                             </div>
                                                         </td>
-                                                        <td><?= $admin['fname'] ?></td>
-                                                        <td><?= $admin['lname'] ?></td>
-                                                        <td><?= $admin['username'] ?></td>
-                                                        <td><?= $admin['role'] ?></td>
+                                                        <td><?= $blog['title'] ?></td>
+                                                        <td><?= $blog['name'] ?></td>
+                                                        <td><?= $blog['date'] ?></td>
                                                         <td>
-                                                            <?= status('active', $admin['status']) ?>
+                                                            <?= status('active', $blog['status']) ?>
                                                         </td>
                                                         <td>
                                                             <div>
-                                                                <a href = "admin_update.php?id<?= $admin['id'] ?>"
+                                                                <a href = "blog_update.php?id<?= $blog['id'] ?>"
                                                                     class="btn border-0 disabled-sort text-warning" data-bs-toggle="tooltip"
                                                                     data-bs-placement="bottom" title="ویرایش اطلاعات"                                                                    aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
                                                                 <button class="edit text-danger btn border-0 "
-                                                                    value="<?= $admin['id'] ?>" data-bs-toggle="tooltip"
+                                                                    value="<?= $blog['id'] ?>" data-bs-toggle="tooltip"
                                                                     data-bs-placement="bottom" title="حذف" aria-label="Delete"
                                                                     style="cursor: pointer;"><i
                                                                         class="bi bi-trash-fill"></i></button>
                                                                         
                                                                     <div class="modal fade"
-                                                                        id="exampleModal<?= $admin['id'] ?>" tabindex="-1"
+                                                                        id="exampleModal<?= $blog['id'] ?>" tabindex="-1"
                                                                         role="dialog" aria-labelledby="exampleModalLabel"
                                                                         aria-hidden="true">
                                                                         <div class="modal-dialog" role="document">
@@ -130,17 +128,17 @@ $admins = $db->get('admins', null);
 
                                                                                     <h5 class="modal-title"
                                                                                         id="exampleModalLabel">حذف داده</h5>
-                                                                                    <button type="button" class="close" value="<?= $admin['id'] ?>"
+                                                                                    <button type="button" class="close" value="<?= $blog['id'] ?>"
                                                                                         data-dismiss="modal" aria-label="Close">
                                                                                         <span aria-hidden="true">&times;</span>
                                                                                     </button>
                                                                                 </div>
-                                                                                <form action="admin_delete.php?id=<?= $admin['id'] ?>" method="post">
+                                                                                <form action="blog_delete.php?id=<?= $blog['id'] ?>" method="post">
                                                                                     <div class="modal-body">
                                                                                         <h5>آیا مطمئن هستید؟</h5>
                                                                                     </div>
                                                                                     <div class="modal-footer">
-                                                                                        <button type="button" value="<?= $admin['id'] ?>"
+                                                                                        <button type="button" value="<?= $blog['id'] ?>"
                                                                                             class="btn btn-secondary close"
                                                                                             data-dismiss="modal">لغو</button>
                                                                                         <button type="submit"
@@ -174,7 +172,7 @@ $admins = $db->get('admins', null);
     </div>
     <!--end wrapper-->
     <?php require_once ('../../layout/js.php'); ?>
-    <script  src="assets/js/admin_list_page.js"></script>
+    <script  src="assets/js/blog_list_page.js"></script>
 
 </body>
 
