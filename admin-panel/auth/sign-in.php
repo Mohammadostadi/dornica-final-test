@@ -1,3 +1,49 @@
+<?php
+require_once('../../app/connection/DB.php');
+require_once('../../app/controller/function.php');
+if(isset($_SESSION['user']) and $_SESSION['user'] != '')
+    header('Location:../index.php');
+$errors = [];
+if (isset($_POST['sign_in'])) {
+    $username = checkDataSecurity($_POST['username']);
+    $password = checkDataSecurity($_POST['password']);
+    $captcha = checkDataSecurity($_POST['captcha']);
+
+    checkDataEmpty($username, 'username', 'فیلد نام کاربری خالی میباشد.');
+    checkDataEmpty($password, 'password', 'فیلد رمز عبور خالی میباشد.');
+    checkDataEmpty($captcha, 'captcha', 'فیلد کپچا خالی میباشد.');
+
+    if ($captcha != '' and $_SESSION['captcha_text'] != $captcha) {
+        setErrorMessage('captcha', 'کد با تصویر مطابقت ندارد.');
+        unset($_SESSION['captcha_text']);
+    }
+
+    if (count($errors) == 0) {
+        $checkUsernameExist = $db->where('username', $username)
+            ->getValue('admins', 'COUNT(id)');
+        if ($checkUsernameExist == 0) {
+            setErrorMessage('username', 'نام کاربری شما وجود ندارد.');
+        } elseif ($checkUsernameExist == 1) {
+            $databasePassword = $db->where('username', $username)
+                ->getValue('admins', 'password');
+            if (password_verify($password, $databasePassword)) {
+                $user = $db->where('username', $username)
+                    ->getOne('admins', 'id, role, status');
+                $_SESSION['user'] = $user['id'];
+                $_SESSION['user_role'] = $user['role'];
+                if ($user['status'] == 1) {
+                    header('Location:../index.php');
+                } else {
+                    setErrorMessage('status', 'شما اجازه دسترسی به پنل را ندارید');
+                }
+            } else {
+                setErrorMessage('password', 'رمز عبور شما درست نمیباشد.');
+            }
+        }
+    }
+}
+?>
+
 <!doctype html>
 <html lang="en" dir="rtl">
 
@@ -39,9 +85,14 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="card-body p-4 p-sm-5">
+                                    <div><?= isset($_SESSION['newPassword']) ? 'رمز عبور جدید شما:'.$_SESSION['newPassword'] : "" ?></div>
+                                    <?php if (isset($errors['status']) and $errors['status'] != '') { ?>
+                                        <div class="alert text-center alert-danger text-danger radius-30 px-3 py-2 my-2">
+                                            <?= checkDataErrorExist('status') ?></div>
+                                    <?php } ?>
                                     <h5 class="card-title">ورود</h5>
                                     <p class="card-text mb-5">رشد خود را ببینید و پشتیبانی مشاوره دریافت کنید!</p>
-                                    <form class="form-body needs-validation" novalidate action="../index.php" method="post">
+                                    <form class="form-body needs-validation" novalidate action="" method="post">
                                         <div class="d-grid">
                                             <a class="btn btn-white radius-30" href="javascript:;"><span
                                                     class="d-flex justify-content-center align-items-center">
@@ -61,13 +112,16 @@
                                                 <div class="ms-auto position-relative">
                                                     <div
                                                         class="position-absolute top-50 translate-middle-y search-icon px-3">
-                                                        <i class="bi bi-person-fill"></i></div>
+                                                        <i class="bi bi-person-fill"></i>
+                                                    </div>
                                                     <input type="username" name="username"
                                                         class="form-control radius-30 ps-5" id="inputEmailAddress"
-                                                        value="<?= (isset($_POST['username']))?$_POST['username']:"" ?>"
+                                                        value="<?= (isset($_POST['username'])) ? $_POST['username'] : "" ?>"
                                                         placeholder="نام کاربری" required>
                                                     <div class="invalid-feedback">
                                                         فیلد نام کاربری خالی باشد
+                                                    </div>
+                                                    <div class="text-danger"><?= checkDataErrorExist('username') ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -77,14 +131,17 @@
                                                 <div class="ms-auto position-relative">
                                                     <div
                                                         class="position-absolute top-50 translate-middle-y search-icon px-3">
-                                                        <i class="bi bi-lock-fill"></i></div>
+                                                        <i class="bi bi-lock-fill"></i>
+                                                    </div>
                                                     <input type="password" name="password"
                                                         class="form-control radius-30 ps-5" id="inputChoosePassword"
                                                         placeholder="رمز عبور را وارد کنید" required>
-                                                        <div class="invalid-feedback">
-                                                            فیلد رمز عبور خالی باشد
-                                                        </div>
+                                                    <div class="invalid-feedback">
+                                                        فیلد رمز عبور خالی باشد
                                                     </div>
+                                                    <div class="text-danger"><?= checkDataErrorExist('password') ?>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <hr>
                                             <div class="col-12 mt-0">
@@ -103,6 +160,8 @@
                                                             placeholder="کد را وارد کنید" required>
                                                         <div class="invalid-feedback">
                                                             کد را وارد کنید
+                                                        </div>
+                                                        <div class="text-danger"><?= checkDataErrorExist('captcha') ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -172,6 +231,11 @@
         refreshButton.onclick = function () {
             document.querySelector(".captcha-image").src = 'captcha.php?' + Date.now();
         }
+    </script>
+    <script>
+        $('.alert').fadeTo(2000, 500).slideUp(500, function () {
+            $(".alert").slideUp(500);
+        });
     </script>
 </body>
 

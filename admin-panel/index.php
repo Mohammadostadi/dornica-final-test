@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en" dir="rtl">
 
@@ -228,8 +227,7 @@
                                     <div>
                                         <hr class="dropdown-divider">
                                     </div>
-                                    <a class="dropdown-item"
-                                        href="#">
+                                    <a class="dropdown-item" href="#">
                                         <div class="text-center">مشاهده همه پیام ها</div>
                                     </a>
                                 </div>
@@ -263,13 +261,11 @@
                     <a class="dropdown-toggle dropdown-toggle-nocaret" id="headerDropdown" href="#"
                         data-bs-toggle="dropdown" aria-expanded="true">
                         <div class="user-setting d-flex align-items-center gap-3">
-                            <img src="assets/images/admin/default.png"
-                                alt="" class="user-img">
+                            <img src="assets/images/admin/default.png" alt="" class="user-img">
                             <div class="d-none d-sm-block">
                                 <p class="user-name mb-0">محمد استادی
                                 </p>
-                                <small
-                                    class="mb-0 dropdown-user-designation">مدیر</small>
+                                <small class="mb-0 dropdown-user-designation">مدیر</small>
                             </div>
                         </div>
                     </a>
@@ -294,12 +290,7 @@
         <aside class="sidebar-wrapper" data-simplebar="true">
             <div class="sidebar-header">
                 <a href="../index.php" class="d-flex">
-                    <div>
-                        <img src="assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
-                    </div>
-                    <div>
-                        <h4 class="logo-text">وان دش</h4>
-                    </div>
+                    <img src="../attachment/imgs/logo.svg" class="w-75" alt="logo icon">
                 </a>
                 <div class="toggle-icon ms-auto"> <i class="bi bi-list"></i>
                 </div>
@@ -314,20 +305,48 @@
                     </a>
 
                 </li>
+                <li>
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon"><i class="bi bi-grid-fill"></i>
+                        </div>
+                        <div class="menu-title">مدیران</div>
+                    </a>
+                    <ul>
+                        <li> <a href="admin-panel/admins/admins_list.php"><i class="bi bi-circle"></i>لیست مدیران</a>
+                        </li>
+                    </ul>
                     <li>
                         <a href="javascript:;" class="has-arrow">
-                            <div class="parent-icon"><i class="bi bi-grid-fill"></i>
+                            <div class="parent-icon"><i class="bi bi-people-fill"></i>
                             </div>
-                            <div class="menu-title">مدیران</div>
+                            <div class="menu-title">کاربران</div>
                         </a>
                         <ul>
-                            <li> <a href="admin-panel/admins/admins_list.php"><i class="bi bi-circle"></i>لیست مدیران</a>
+                            <li> <a href="admin-panel/members/members_list.php"><i class="bi bi-circle"></i>لیست
+                                    کاربران</a>
                             </li>
 
                         </ul>
                     </li>
+                    <li>
+                        <a href="javascript:;" class="has-arrow">
+                            <div class="parent-icon"><i class="bi bi-building"></i>
+                            </div>
+                            <div class="menu-title">استان ها و شهر ها</div>
+                        </a>
+                        <ul>
+                            <li> <a href="admin-panel/provinces/provinces_list.php"><i class="bi bi-circle"></i>لیست
+                                    استان ها</a>
+                            </li>
+                            <li> <a href="admin-panel/cities/cities_list.php"><i class="bi bi-circle"></i>لیست شهر
+                                    ها</a>
+                            </li>
 
-                
+                        </ul>
+                    </li>
+                </li>
+
+
             </ul>
             <!--end navigation-->
         </aside>

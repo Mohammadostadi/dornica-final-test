@@ -1,5 +1,6 @@
 <?php 
 require_once('../../../app/connection/DB.php');
+require_once('../../../app/controller/function.php');
 $admins = $db->get('admins', null);
 
 ?>
@@ -84,7 +85,7 @@ $admins = $db->get('admins', null);
                                                         نام کاربری
                                                     </th>
                                                     <th class="px-5">
-                                                        نقش مدیر
+                                                        نقش
                                                     </th>
                                                     <th class="px-5">
                                                         وضعیت
@@ -105,7 +106,7 @@ $admins = $db->get('admins', null);
                                                         <td><?= $admin['username'] ?></td>
                                                         <td><?= $admin['role'] ?></td>
                                                         <td>
-                                                            <?= $admin['status'] ?>
+                                                            <?= status('active', $admin['status']) ?>
                                                         </td>
                                                         <td>
                                                             <div>

@@ -1,4 +1,28 @@
+<?php 
+require_once('../../app/connection/DB.php');
+require_once('../../app/controller/function.php');
+$errors = [];
+if(isset($_POST['forgotPassword'])){
+    $username = checkDataSecurity($_POST['username']);
+    checkDataEmpty($username, 'username', 'فیلد نام کاربری شما خالی میباشد.');
+    if(count($errors) == 0){
+        $result = $db->where('username', $username)
+        ->getValue('admins', 'COUNT(id)');
+        if($result == 1){
+            $_SESSION['newPassword'] = rand(1000, 10000);
+            $password = password_hash($_SESSION['newPassword'], PASSWORD_DEFAULT);
+            $db->where('username', $username)
+            ->update('admins', [
+                'password'=> $password
+            ]);
+            header('Location:sign-in.php');
+        }else{
+            setErrorMessage('username', 'فیلد نام کاربری وجود ندارد.');
+        }
+    }
+}
 
+?>
 <!doctype html>
 <html lang="en" dir="rtl">
 
@@ -47,12 +71,15 @@
                                     <form class="form-body needs-validation" novalidate action="" method="post">
                                         <div class="row g-3">
                                             <div class="col-12">
-                                                <label for="inputEmailid" class="form-label">نام کاربری</label>
+                                                <label for="username" class="form-label">نام کاربری</label>
                                                 <input type="username" name="username"
-                                                    class="form-control form-control-lg radius-30" id="inputEmailid"
+                                                    class="form-control form-control-lg radius-30" id="username"
                                                     placeholder=" نام کاربری" required>
                                                 <div class="invalid-feedback">
                                                     فیلد نام کاربری خالی باشد
+                                                </div>
+                                                <div class="text-danger">
+                                                    <?= checkDataErrorExist('username') ?>
                                                 </div>
                                             </div>
                                             <div class="col-12">

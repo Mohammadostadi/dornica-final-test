@@ -1,38 +1,59 @@
 <aside class="sidebar-wrapper" data-simplebar="true">
-        <div class="sidebar-header">
-            <a href="../../../index.php" class="d-flex">
-                <div>
-                    <img src="../../assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
-                </div>
-                <div>
-                    <h4 class="logo-text">وان دش</h4>
-                </div>
-            </a>
-            <div class="toggle-icon ms-auto"> <i class="bi bi-list"></i>
-            </div>
+    <div class="sidebar-header">
+        <a href="../../../index.php" class="d-flex">
+            <img src="../../../attachment/imgs/logo.svg" class="w-75" alt="logo icon">
+        </a>
+        <div class="toggle-icon ms-auto"> <i class="bi bi-list"></i>
         </div>
-        <!--navigation-->
-        <ul class="metismenu" id="menu">
-            <li>
-                <a href="../../index.php" class="">
-                    <div class="parent-icon"><i class="bi bi-house-fill"></i>
-                    </div>
-                    <div class="menu-title">داشبورد</div>
-                </a>
-                
-            </li>
-            <li>
-                <a href="javascript:;" class="has-arrow">
-                    <div class="parent-icon"><i class="bi bi-grid-fill"></i>
-                    </div>
-                    <div class="menu-title">مدیران</div>
-                </a>
-                <ul>
-                    <li> <a href="../admins/admins_list.php"><i class="bi bi-circle"></i>لیست مدیران</a>
-                    </li>
-                    
-                </ul>
-            </li>
-        </ul>
-        <!--end navigation-->
-    </aside>
+    </div>
+    <!--navigation-->
+    <ul class="metismenu" id="menu">
+        <li>
+            <a href="../../index.php" class="">
+                <div class="parent-icon"><i class="bi bi-house-fill"></i>
+                </div>
+                <div class="menu-title">داشبورد</div>
+            </a>
+
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bi bi-grid-fill"></i>
+                </div>
+                <div class="menu-title">مدیران</div>
+            </a>
+            <ul>
+                <li> <a href="../admins/admins_list.php"><i class="bi bi-circle"></i>لیست مدیران</a>
+                </li>
+
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bi bi-people-fill"></i>
+                </div>
+                <div class="menu-title">کاربران</div>
+            </a>
+            <ul>
+                <li> <a href="../members/members_list.php"><i class="bi bi-circle"></i>لیست کاربران</a>
+                </li>
+
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bi bi-building"></i>
+                </div>
+                <div class="menu-title">استان ها و شهر ها</div>
+            </a>
+            <ul>
+                <li> <a href="../provinces/provinces_list.php"><i class="bi bi-circle"></i>لیست استان ها</a>
+                </li>
+                <li> <a href="../cities/cities_list.php"><i class="bi bi-circle"></i>لیست شهر ها</a>
+                </li>
+
+            </ul>
+        </li>
+    </ul>
+    <!--end navigation-->
+</aside>
