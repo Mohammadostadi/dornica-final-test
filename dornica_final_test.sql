@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 29, 2024 at 04:04 PM
+-- Generation Time: Sep 30, 2024 at 04:13 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
 
@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS `admins` (
   `username` varchar(64) COLLATE utf8mb4_persian_ci NOT NULL,
   `password` varchar(128) COLLATE utf8mb4_persian_ci NOT NULL,
   `role` int NOT NULL,
+  `levelAccess` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_persian_ci NOT NULL,
   `status` tinyint NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
@@ -44,8 +45,8 @@ CREATE TABLE IF NOT EXISTS `admins` (
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`id`, `fname`, `lname`, `username`, `password`, `role`, `status`) VALUES
-(1, 'محمد', 'استادی', 'ostadi', '$2y$10$80XIH4XadiqqeOCxJIJ7Auciimih5OE.XdS5ipq6MpX0k6BNoXPDO', 0, 1);
+INSERT INTO `admins` (`id`, `fname`, `lname`, `username`, `password`, `role`, `levelAccess`, `status`) VALUES
+(1, 'محمد', 'استادی', 'ostadi', '$2y$10$X2EGdoYbSm9WdKQUzWV6uOj18AkeU2ktzgPMcGY5wEbELvvm5RU8S', 0, 'admins_list,admin_add,admin_delete,admin_update,blogs_list,blog_delete,blog_update,blog_add,members_list,member_reset_password,member_delete,member_update,provinces_list,province_add,province_delete,province_update,cities_list,city_add,city_delete,city_update,categories_list,category_add,category_delete,category_update,logs_list', 1);
 
 -- --------------------------------------------------------
 
@@ -65,11 +66,18 @@ CREATE TABLE IF NOT EXISTS `blogs` (
   `setdate` varchar(20) COLLATE utf8mb4_persian_ci NOT NULL,
   `updated_at` varchar(20) COLLATE utf8mb4_persian_ci DEFAULT NULL,
   `admin_id` int NOT NULL,
-  `counter` int NOT NULL,
+  `counter` int NOT NULL DEFAULT '0',
   `status` int NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `blog_category` (`blog_category`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
+
+--
+-- Dumping data for table `blogs`
+--
+
+INSERT INTO `blogs` (`id`, `title`, `description`, `full_description`, `image`, `blog_category`, `date`, `setdate`, `updated_at`, `admin_id`, `counter`, `status`) VALUES
+(1, 'تست', 'تست', 'این متن تست است', '', 4, '1403/07/09', '2024/09/30 11:40:27', NULL, 1, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -84,14 +92,23 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `sort` int NOT NULL,
   `status` tinyint NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
 
 --
 -- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`id`, `name`, `sort`, `status`) VALUES
-(1, 'ورزشی', 1, 1);
+(1, 'ورزشی', 1, 1),
+(3, 'علمی', 2, 1),
+(4, 'سیاسی', 3, 1),
+(5, 'فناوری', 4, 1),
+(6, 'اقتصاد جهانی', 5, 1),
+(7, 'غذا', 6, 1),
+(8, 'سفر', 7, 1),
+(9, 'املاک', 8, 1),
+(10, 'کسب کار', 9, 1),
+(11, 'فوتبال', 10, 1);
 
 -- --------------------------------------------------------
 
@@ -153,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `logs` (
   `date` varchar(20) COLLATE utf8mb4_persian_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `admin_id` (`admin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
 
 --
 -- Dumping data for table `logs`
@@ -171,7 +188,21 @@ INSERT INTO `logs` (`id`, `admin_id`, `table_name`, `changes`, `type`, `date`) V
 (9, 1, 'cities', 'DELETE FROM cities WHERE  id = \'2\' ', 1, '2024/09/29 11:53:07'),
 (10, 1, 'categories', 'INSERT  INTO categories (`name`, `sort`, `status`)  VALUES (\'ورزشی\', \'1\', \'1\')', 0, '2024/09/29 16:21:21'),
 (11, 1, 'categories', 'INSERT  INTO categories (`name`, `sort`, `status`)  VALUES (\'fthtyfj\', \'2\', \'1\')', 0, '2024/09/29 16:22:20'),
-(12, 1, 'categories', 'DELETE FROM categories WHERE  id = \'2\' ', 1, '2024/09/29 16:22:22');
+(12, 1, 'categories', 'DELETE FROM categories WHERE  id = \'2\' ', 1, '2024/09/29 16:22:22'),
+(13, 1, 'members', 'UPDATE members SET `password` = \'$2y$10$DSlZBvZ6sUa9jDcLxyNrwuHtKz5qjJ0WhgjfqfSXP5xOAze78HMJi\' WHERE  id = \'1\' ', 2, '2024/09/30 10:43:07'),
+(14, 1, 'members', 'UPDATE members SET `password` = \'$2y$10$Sjzq3APiwBJ0.0oEDdFP2uZCw8BMyMgLiBwysv.lu1JCjGZb5o.Vy\' WHERE  id = \'1\' ', 2, '2024/09/30 10:45:06'),
+(15, 1, 'categories', 'INSERT  INTO categories (`name`, `sort`, `status`)  VALUES (\'علمی\', \'2\', \'1\')', 0, '2024/09/30 10:46:19'),
+(16, 1, 'categories', 'INSERT  INTO categories (`name`, `sort`, `status`)  VALUES (\'سیاسی\', \'3\', \'1\')', 0, '2024/09/30 10:46:25'),
+(17, 1, 'categories', 'INSERT  INTO categories (`name`, `sort`, `status`)  VALUES (\'فناوری\', \'4\', \'1\')', 0, '2024/09/30 10:46:31'),
+(18, 1, 'blogs', 'INSERT  INTO blogs (`title`, `blog_category`, `description`, `full_description`, `date`, `setdate`, `admin_id`, `counter`, `status`)  VALUES (\'تست\', \'4\', \'تست\', \'این متن تست است\', \'1403/07/09\', \'2024/09/30 11:40:27\', \'1\', \'0\', \'1\')', 0, '2024/09/30 11:40:27'),
+(19, 1, 'blogs', 'INSERT  INTO blogs (`title`, `blog_category`, `description`, `full_description`, `date`, `setdate`, `admin_id`, `counter`, `status`)  VALUES (\'sdv\', \'3\', \'ds;vlm\', \';dlvmfvs\', \'1403/06/22\', \'2024/09/30 11:44:22\', \'1\', \'0\', \'1\')', 0, '2024/09/30 11:44:22'),
+(20, 1, 'blogs', 'DELETE FROM blogs WHERE  id = \'2\' ', 1, '2024/09/30 11:46:14'),
+(21, 1, 'categories', 'INSERT  INTO categories (`name`, `sort`, `status`)  VALUES (\'اقتصاد جهانی\', \'5\', \'1\')', 0, '2024/09/30 16:55:55'),
+(22, 1, 'categories', 'INSERT  INTO categories (`name`, `sort`, `status`)  VALUES (\'غذا\', \'6\', \'1\')', 0, '2024/09/30 16:57:50'),
+(23, 1, 'categories', 'INSERT  INTO categories (`name`, `sort`, `status`)  VALUES (\'سفر\', \'7\', \'1\')', 0, '2024/09/30 16:57:56'),
+(24, 1, 'categories', 'INSERT  INTO categories (`name`, `sort`, `status`)  VALUES (\'املاک\', \'8\', \'1\')', 0, '2024/09/30 16:58:09'),
+(25, 1, 'categories', 'INSERT  INTO categories (`name`, `sort`, `status`)  VALUES (\'کسب کار\', \'9\', \'1\')', 0, '2024/09/30 16:58:21'),
+(26, 1, 'categories', 'INSERT  INTO categories (`name`, `sort`, `status`)  VALUES (\'فوتبال\', \'10\', \'1\')', 0, '2024/09/30 16:58:41');
 
 -- --------------------------------------------------------
 
@@ -208,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `members` (
 --
 
 INSERT INTO `members` (`id`, `fname`, `lname`, `ncode`, `gender`, `phone`, `email`, `image`, `username`, `password`, `province_id`, `city_id`, `military_service`, `status`, `setdate`) VALUES
-(1, 'محمد', 'استادی', '2081143542', 0, '09370709046', 'mohammad.asram2000@gmail.com', NULL, 'mohammadostadi', '$2y$10$nlzVXtkaBlA3unMhlDpGzOFRMn7eUGcuxA9Bq1R0X8d3lW1jNgNDa', 1, 1, 2, 1, '2024/09/29 14:37:50');
+(1, 'محمد', 'استادی', '2081143542', 0, '09370709046', 'mohammad.asram2000@gmail.com', NULL, 'mohammadostadi', '$2y$10$Sjzq3APiwBJ0.0oEDdFP2uZCw8BMyMgLiBwysv.lu1JCjGZb5o.Vy', 1, 1, 2, 1, '1403/07/08 14:37:50');
 
 -- --------------------------------------------------------
 
