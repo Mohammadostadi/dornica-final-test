@@ -245,12 +245,6 @@ $provinceList = $db->where('status', 1)
 		</div>
 		<!-- Content END-->
 
-		<!-- Footer -->
-		<?php
-		require_once('layout/footer.php');
-		?>
-		<!-- Footer End -->
-
 		<button class="scroltop" type="button"><i class="fas fa-arrow-up"></i></button>
 	</div>
 

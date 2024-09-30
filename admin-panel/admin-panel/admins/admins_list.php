@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once('../../../app/connection/DB.php');
 require_once('../../../app/controller/access.php');
 require_once('../../../app/controller/function.php');
@@ -16,7 +16,7 @@ $admins = $db->get('admins', null);
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php
-    require_once ('../../layout/css.php');
+    require_once('../../layout/css.php');
     ?>
 
     <title>ادمین</title>
@@ -29,13 +29,13 @@ $admins = $db->get('admins', null);
     <div class="wrapper">
         <!--start top header-->
         <?php
-        require_once ('../../layout/header.php');
+        require_once('../../layout/header.php');
         ?>
         <!--end top header-->
 
         <!--start sidebar -->
         <?php
-        require_once ('../../layout/asidebar.php');
+        require_once('../../layout/asidebar.php');
         ?>
         <!--end sidebar -->
 
@@ -56,7 +56,7 @@ $admins = $db->get('admins', null);
                 </div>
                 <div class="ms-auto">
                     <div class="btn-group">
-                            <a class="btn btn-outline-secondary" href="admin_add.php">اضافه کردن داده جدید</a>
+                        <a class="btn btn-outline-secondary" href="admin_add.php">اضافه کردن داده جدید</a>
                     </div>
                 </div>
             </div>
@@ -111,46 +111,57 @@ $admins = $db->get('admins', null);
                                                         </td>
                                                         <td>
                                                             <div>
-                                                                <a href = "admin_update.php?id=<?= $admin['id'] ?>"
-                                                                    class="btn border-0 disabled-sort text-warning" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="bottom" title="ویرایش اطلاعات"                                                                    aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
+                                                                <?php if($_SESSION['user_role'] == 0){ ?>
+                                                                <a href="admin_access.php?id=<?= $admin['id'] ?>"
+                                                                    class="btn border-0 disabled-sort text-info"
+                                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                                    title="سطح دسترسی" aria-label="Edit"><i
+                                                                        class="lni lni-ban"></i></a>
+                                                                        <?php } ?>
+                                                                <a href="admin_update.php?id=<?= $admin['id'] ?>"
+                                                                    class="btn border-0 disabled-sort text-warning"
+                                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                                    title="ویرایش اطلاعات" aria-label="Edit"><i
+                                                                        class="bi bi-pencil-fill"></i></a>
                                                                 <button class="remove text-danger btn border-0 "
                                                                     value="<?= $admin['id'] ?>" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="bottom" title="حذف" aria-label="Delete"
-                                                                    style="cursor: pointer;"><i
+                                                                    data-bs-placement="bottom" title="حذف"
+                                                                    aria-label="Delete" style="cursor: pointer;"><i
                                                                         class="bi bi-trash-fill"></i></button>
-                                                                        
-                                                                    <div class="modal fade"
-                                                                        id="exampleModal<?= $admin['id'] ?>" tabindex="-1"
-                                                                        role="dialog" aria-labelledby="exampleModalLabel"
-                                                                        aria-hidden="true">
-                                                                        <div class="modal-dialog" role="document">
-                                                                            <div class="modal-content">
-                                                                                <div class="modal-header">
 
-                                                                                    <h5 class="modal-title"
-                                                                                        id="exampleModalLabel">حذف داده</h5>
-                                                                                    <button type="button" class="close" value="<?= $admin['id'] ?>"
-                                                                                        data-dismiss="modal" aria-label="Close">
-                                                                                        <span aria-hidden="true">&times;</span>
-                                                                                    </button>
-                                                                                </div>
-                                                                                <form action="admin_delete.php?id=<?= $admin['id'] ?>" method="post">
-                                                                                    <div class="modal-body">
-                                                                                        <h5>آیا مطمئن هستید؟</h5>
-                                                                                    </div>
-                                                                                    <div class="modal-footer">
-                                                                                        <button type="button" value="<?= $admin['id'] ?>"
-                                                                                            class="btn btn-secondary close"
-                                                                                            data-dismiss="modal">لغو</button>
-                                                                                        <button type="submit"
-                                                                                            name="btn_delete"
-                                                                                            class="btn btn-primary">حذف</button>
-                                                                                    </div>
-                                                                                </form>
+                                                                <div class="modal fade" id="exampleModal<?= $admin['id'] ?>"
+                                                                    tabindex="-1" role="dialog"
+                                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+
+                                                                                <h5 class="modal-title"
+                                                                                    id="exampleModalLabel">حذف داده</h5>
+                                                                                <button type="button" class="close"
+                                                                                    value="<?= $admin['id'] ?>"
+                                                                                    data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
                                                                             </div>
+                                                                            <form
+                                                                                action="admin_delete.php?id=<?= $admin['id'] ?>"
+                                                                                method="post">
+                                                                                <div class="modal-body">
+                                                                                    <h5>آیا مطمئن هستید؟</h5>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button"
+                                                                                        value="<?= $admin['id'] ?>"
+                                                                                        class="btn btn-secondary close"
+                                                                                        data-dismiss="modal">لغو</button>
+                                                                                    <button type="submit" name="btn_delete"
+                                                                                        class="btn btn-primary">حذف</button>
+                                                                                </div>
+                                                                            </form>
                                                                         </div>
                                                                     </div>
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -169,12 +180,12 @@ $admins = $db->get('admins', null);
         <!--end page main-->
 
         <?php
-        require_once ('../../layout/footer.php');
+        require_once('../../layout/footer.php');
         ?>
     </div>
     <!--end wrapper-->
-    <?php require_once ('../../layout/js.php'); ?>
-    <script  src="assets/js/admin_list_page.js"></script>
+    <?php require_once('../../layout/js.php'); ?>
+    <script src="assets/js/admin_list_page.js"></script>
 
 </body>
 
