@@ -108,7 +108,14 @@ function showMessage($value)
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-    <?php } ?>
+    <?php } elseif ($value == 5) { ?>
+        <div class="alert alert-info alert-dismissible fade show" role="alert" id="alert">
+            <strong>رمز عبور با موفقیت بروزرسانی گردید.</strong>
+            <button type="button" class="btn-close close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php } ?> 
 <?php }
 
 
@@ -120,6 +127,24 @@ function checkUniqData($data, $name, $table, $message)
             ->getValue($table, 'COUNT(*)');
         if ($checkExist == 1)
             setErrorMessage($name, $message);
+    }
+}
+
+
+function filter($data, $name, $type, $priority){
+    global $db;
+    global $prefix;
+
+    if($data != ''){
+        $_SESSION[$prefix."_".$name] = $data;
+        if($type == "like"){
+            $_SESSION[$prefix."_filter"][$priority] = "$prefix.$name LIKE '%$data%'";
+            $db->where($_SESSION[$prefix."_filter"][$priority]);
+        } 
+        elseif($type == '='){
+            $_SESSION[$prefix."_filter"][$priority] = "$prefix.$name = $data";
+            $db->where($_SESSION[$prefix."_filter"][$priority]);
+        }
     }
 }
 

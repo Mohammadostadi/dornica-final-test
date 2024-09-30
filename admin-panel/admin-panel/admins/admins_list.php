@@ -111,10 +111,10 @@ $admins = $db->get('admins', null);
                                                         </td>
                                                         <td>
                                                             <div>
-                                                                <a href = "admin_update.php?id<?= $admin['id'] ?>"
+                                                                <a href = "admin_update.php?id=<?= $admin['id'] ?>"
                                                                     class="btn border-0 disabled-sort text-warning" data-bs-toggle="tooltip"
                                                                     data-bs-placement="bottom" title="ویرایش اطلاعات"                                                                    aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                                                                <button class="edit text-danger btn border-0 "
+                                                                <button class="remove text-danger btn border-0 "
                                                                     value="<?= $admin['id'] ?>" data-bs-toggle="tooltip"
                                                                     data-bs-placement="bottom" title="حذف" aria-label="Delete"
                                                                     style="cursor: pointer;"><i
@@ -144,7 +144,7 @@ $admins = $db->get('admins', null);
                                                                                             class="btn btn-secondary close"
                                                                                             data-dismiss="modal">لغو</button>
                                                                                         <button type="submit"
-                                                                                            name="btn_change_status"
+                                                                                            name="btn_delete"
                                                                                             class="btn btn-primary">حذف</button>
                                                                                     </div>
                                                                                 </form>

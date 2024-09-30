@@ -34,7 +34,7 @@ require_once('../../../app/controller/access.php');
                         <h6 class="mb-0 text-uppercase">اضافه کردن ادمین</h6>
                         <hr />
                         <form class="row g-3 needs-validation" action="" method="post" novalidate
-                            enctype="multipart/form-data" a>
+                            enctype="multipart/form-data">
                             <div class="col-lg-6 ">
                                 <label class="form-label">نام </label>
                                 <input type="text" class="form-control" name="fname"

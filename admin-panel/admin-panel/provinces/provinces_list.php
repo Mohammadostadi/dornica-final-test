@@ -108,7 +108,7 @@ $provinces = $db->orderBy('id', 'DESC')
                                                         </td>
                                                         <td>
                                                             <div>
-                                                                <a href="province_update.php?id<?= $province['id'] ?>"
+                                                                <a href="province_update.php?id=<?= $province['id'] ?>"
                                                                     class="btn border-0 disabled-sort text-warning"
                                                                     data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                     title="ویرایش اطلاعات" aria-label="Edit"><i

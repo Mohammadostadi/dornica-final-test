@@ -113,7 +113,7 @@ $cities = $db->join('provinces', 'provinces.id = cities.province_id', 'LEFT')
                                                         </td>
                                                         <td>
                                                             <div>
-                                                                <a href="city_update.php?id<?= $city['id'] ?>"
+                                                                <a href="city_update.php?id=<?= $city['id'] ?>"
                                                                     class="btn border-0 disabled-sort text-warning"
                                                                     data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                     title="ویرایش اطلاعات" aria-label="Edit"><i

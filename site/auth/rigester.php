@@ -2,6 +2,7 @@
 require_once('../../app/connection/DB.php');
 require_once('../../app/controller/city_show.php');
 require_once('../../app/controller/function.php');
+require_once('../../app/helper/jdf.php');
 $provinceList = $db->where('status', 1)
 ->orderBy('name', 'ASC')
 ->get('provinces', null, 'id, name');
@@ -51,7 +52,7 @@ if(isset($_POST['_insert'])){
             'image'=>isset($_POST['image'])?checkDataSecurity($_POST['image']):NULL,
             'military_service'=>isset($military_service)?$military_service:NULL,
             'status'=>1,
-            'setdate'=>$date,
+            'setdate'=>jdate('Y/m/d H:i:s', strtotime($date)),
         ]);
         $_SESSION['member'] = $username;
         header('Location:../../index.php');

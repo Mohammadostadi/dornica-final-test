@@ -108,7 +108,7 @@ $categories = $db->orderBy('id', 'DESC')
                                                         </td>
                                                         <td>
                                                             <div>
-                                                                <a href="category_update.php?id<?= $category['id'] ?>"
+                                                                <a href="category_update.php?id=<?= $category['id'] ?>"
                                                                     class="btn border-0 disabled-sort text-warning"
                                                                     data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                     title="ویرایش اطلاعات" aria-label="Edit"><i
