@@ -2,7 +2,9 @@
 require_once('../../../app/connection/DB.php');
 require_once('../../../app/controller/access.php');
 require_once('../../../app/controller/function.php');
-$admins = $db->get('admins', null);
+require_once('../../../app/helper/jdf.php');
+$admins = $db->orderBy('id', 'DESC')
+->get('admins', null);
 
 ?>
 <!doctype html>
@@ -42,6 +44,10 @@ $admins = $db->get('admins', null);
         <!--start content-->
 
         <main class="page-content">
+        <?php
+            if (isset($_GET['ok']) and $_GET['ok'] != '')
+                showMessage($_GET['ok'])
+                    ?>
             <!--breadcrumb-->
             <div class="page-breadcrumb   d-sm-flex align-items-center mb-3">
                 <div class="breadcrumb-title pe-3">جداول</div>
@@ -105,7 +111,7 @@ $admins = $db->get('admins', null);
                                                         <td><?= $admin['fname'] ?></td>
                                                         <td><?= $admin['lname'] ?></td>
                                                         <td><?= $admin['username'] ?></td>
-                                                        <td><?= $admin['role'] ?></td>
+                                                        <td><?= admin_role($admin['role']) ?></td>
                                                         <td>
                                                             <?= status('active', $admin['status']) ?>
                                                         </td>

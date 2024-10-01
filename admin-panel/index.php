@@ -1,6 +1,8 @@
 <?php
 require_once('../app/connection/DB.php');
+require_once('../app/controller/access.php');
 require_once('../app/controller/function.php');
+require_once('../app/helper/jdf.php');
 if (!isset($_SESSION['user'])) {
     header('Location:auth/sign-in.php');
 }
@@ -235,7 +237,12 @@ $start = date("Y/m/d", $last_week);
                             <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#"
                                 data-bs-toggle="dropdown">
                                 <div class="messages">
-                                    <span class="notify-badge">5</span>
+                                    <?php
+
+                                    $notification = $db->where('is_readed', 0)
+                                        ->getValue('comments', 'COUNT(id)');
+                                    ?>
+                                    <span class="notify-badge"><?= $notification ?></span>
                                     <i class="bi bi-chat-left-text-fill"></i>
                                 </div>
                             </a>
@@ -243,11 +250,44 @@ $start = date("Y/m/d", $last_week);
                                 <div class="p-2 border-bottom m-2">
                                     <h5 class="h5 mb-0">پیام ها</h5>
                                 </div>
+                                <div class="header-message-list p-2">
+                                    <?php
+                                    if ($notification == 0) { ?>
+                                        <h6 class="text-center">داده ایی برای نمایش وجود ندارد</h6>
+                                    <?php } else {
+                                        $db->pageLimit = 6;
+                                        $comments = $db->where('is_readed', 0)
+                                            ->join('members', 'members.id = comments.member_id', 'LEFT')
+                                            ->join('blogs', 'blogs.id = comments.blog_id', 'LEFT')
+                                            ->orderBy('comments.setdate', 'DESC')
+                                            ->paginate('comments', 1, "comments.id, blogs.title, CONCAT(comments.fname, ' ', comments.lname) AS name, members.image, comments.setdate, comments.status");
+                                        foreach ($comments as $comment) {
+                                            ?>
+                                            <a class="dropdown-item"
+                                                href="admin-panel/comments/comment_detail.php?id=<?= $comment['id'] ?>">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="<?= isset($comment['image']) ? $comment['image'] : "assets/images/admin/default.png" ?>"
+                                                        alt="" class="rounded-circle" width="50" height="50">
+                                                    <div class="ms-3 flex-grow-1 fw-bold">
+                                                        <h6 class="mb-0 dropdown-msg-user fw-bold">
+                                                            <?= $comment['name'] ?><span class="msg-time float-end fw-bold">
+                                                                <?= jdate('Y/m/d', strtotime($comment['setdate'])) ?>
+                                                            </span>
+                                                        </h6>
+                                                        <small
+                                                            class="mb-0 dropdown-msg-text text-secondary d-flex align-items-center"><?= $comment['title'] ?></small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        <?php }
+                                    } ?>
+                                </div>
                                 <div class="p-2">
                                     <div>
                                         <hr class="dropdown-divider">
                                     </div>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item <?= $notification == 0 ? "disabled" : "" ?>"
+                                        href="<?= $notification != 0 ? "admin-panel/comments/comments_list.php?comment=1" : "" ?>">
                                         <div class="text-center">مشاهده همه پیام ها</div>
                                     </a>
                                 </div>
@@ -386,6 +426,14 @@ $start = date("Y/m/d", $last_week);
                         <div class="parent-icon"><i class="bi bi-lock"></i>
                         </div>
                         <div class="menu-title">لیست لاگ ها</div>
+                    </a>
+
+                </li>
+                <li>
+                    <a href="admin-panel/comments/comments_list.php" class="">
+                        <div class="parent-icon"><i class="fadeIn animated bx bx-comment-detail"></i>
+                        </div>
+                        <div class="menu-title">لیست کامنت ها</div>
                     </a>
 
                 </li>

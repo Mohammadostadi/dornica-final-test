@@ -2,6 +2,7 @@
 require_once('../../../app/connection/DB.php');
 require_once('../../../app/controller/access.php');
 require_once('../../../app/controller/function.php');
+require_once('../../../app/helper/jdf.php');
 $blogs = $db->join('categories', 'categories.id = blogs.blog_category', 'LEFT')
     ->orderBy('id', 'DESC')
     ->get('blogs', null, 'blogs.id, blogs.title, categories.name, date, blogs.status');

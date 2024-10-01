@@ -1,13 +1,5 @@
-const path = "admin_delete.php";
-
-$(document).ready(function () {
-  $("#filter-row").hide();
-  $("#_filter").click(function () {
-    if ($("#filter-row").hasClass("d-none")) {
-      $("#filter-row").removeClass("d-none");
-    }
-    $("#filter-row").toggle(400);
-  });
+$(".btn-close").click(function () {
+  window.location = "admins_list.php";
 });
 $(".edit").click(function () {
   const id = $(this).val();
@@ -18,10 +10,3 @@ $(".close").click(function () {
   $(`#exampleModal${id}`).modal("hide");
 });
 
-$(document).ready(function () {
-  $("#alert")
-    .fadeTo(2000, 500)
-    .slideUp(500, function () {
-      $("#alert").slideUp(500);
-    });
-});

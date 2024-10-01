@@ -36,12 +36,8 @@
                         <span>کامنت ها</span></a>
                 </li>
                 <li>
-                    <a href="help-desk.php"><i class="far fa-id-card" aria-hidden="true"></i>
-                        <span>پشتیبانی</span></a>
-                </li>
-                <li>
-                    <a href="privacy-policy.php"><i class="fa fa-key" aria-hidden="true"></i>
-                        <span>امنیت</span></a>
+                    <a href="reset_password.php"><i class="fa fa-key" aria-hidden="true"></i>
+                        <span>تغییر رمز عبور</span></a>
                 </li>
                 <li>
                     <a href="../auth/logout.php"><i class="fas fa-sign-out-alt" aria-hidden="true"></i>

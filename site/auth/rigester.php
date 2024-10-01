@@ -119,7 +119,7 @@ if (isset($_POST['_insert'])) {
                         <div class="col-lg-6 mt-3">
                             <label class="form-label">نام </label>
                             <span class="text-danger">*</span>
-                            <input type="text" class="form-control" name="fname" required>
+                            <input type="text" class="form-control" name="fname" oninput='namejs(this)' required>
                             <div class="invalid-feedback">
                                 فیلد نام نباید خالی باشد
                             </div>
@@ -127,7 +127,7 @@ if (isset($_POST['_insert'])) {
                         <div class="col-lg-6 mt-3">
                             <label class="form-label">نام خانوادگی</label>
                             <span class="text-danger">*</span>
-                            <input type="text" class="form-control" name="lname" required>
+                            <input type="text" class="form-control" name="lname" oninput='namejs(this)' required>
                             <div class="invalid-feedback">
                                 فیلد نام خانوادگی نباید خالی باشد
                             </div>
@@ -344,6 +344,9 @@ if (isset($_POST['_insert'])) {
     <script>
         function usernamejs(input) {
             input.value = input.value.replace(/[^a-zA-Z0-9@_-]/g, "");
+        }
+        function namejs(input) {
+            input.value = input.value.replace(/[^ا-ی]/g, "");
         }
     </script>
     <script>

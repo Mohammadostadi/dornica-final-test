@@ -90,6 +90,10 @@ $path = basename($_SERVER['PHP_SELF']);
                             <div class="col-xl-9 col-lg-8 m-b30">
                                 <div class="table-responsive">
                                     <table class="table check-tbl">
+                                    <?php   
+                                    if (empty($wishlists)) { ?>
+                                                    <div class="text-center">داده ایی برای نمایش وجود ندارد</div>
+                                                <?php } else { ?>
                                         <thead>
                                             <tr>
                                                 <th>خبر</th>
@@ -98,16 +102,19 @@ $path = basename($_SERVER['PHP_SELF']);
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($wishlists as $wishlist) { ?>
-                                                <tr>
-                                                    <td class="product-item-name"><a
-                                                            href="../singe-page/single.php?id=<?= $wishlist['blog'] ?>"><?= $wishlist['title'] ?></a>
-                                                    </td>
-                                                    <td class="product-item-price"><?= $wishlist['name'] ?></td>
-                                                    <td class="product-item-close"><a
-                                                            href="wishlist.php?id=<?= $wishlist['id'] ?>"
-                                                            class="ti-close"></a></td>
-                                                </tr>
+
+                                            <?php
+                                                foreach ($wishlists as $wishlist) { ?>
+                                                    <tr>
+                                                        <td class="product-item-name"><a
+                                                                href="../singe-page/single.php?id=<?= $wishlist['blog'] ?>"><?= $wishlist['title'] ?></a>
+                                                        </td>
+                                                        <td class="product-item-price"><?= $wishlist['name'] ?></td>
+                                                        <td class="product-item-close"><a
+                                                                href="wishlist.php?id=<?= $wishlist['id'] ?>"
+                                                                class="ti-close"></a></td>
+                                                    </tr>
+                                                <?php } ?>
                                             <?php } ?>
                                         </tbody>
                                     </table>

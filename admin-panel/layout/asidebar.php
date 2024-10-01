@@ -76,6 +76,14 @@
             </a>
 
         </li>
+        <li>
+            <a href="../comments/comments_list.php" class="">
+                <div class="parent-icon"><i class="fadeIn animated bx bx-comment-detail"></i>
+                </div>
+                <div class="menu-title">لیست کامنت ها</div>
+            </a>
+
+        </li>
     </ul>
     <!--end navigation-->
 </aside>

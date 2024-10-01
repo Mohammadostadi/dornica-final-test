@@ -49,10 +49,10 @@ function status($type, $value)
             case 0: ?>
                 <span class="badge rounded-pill bg-warning">درحال بررسی</span>
                 <?php break;
-            case 1: ?>
+            case 2: ?>
                 <span class="badge rounded-pill bg-success">تایید شده</span>
                 <?php break;
-            case 2: ?>
+            case 1: ?>
                 <span class="badge rounded-pill bg-danger">تایید نشده</span>
                 <?php break;
         }
@@ -257,4 +257,17 @@ function persian_number($number)
     return str_replace($pNumbers, $eNumbers, $number);
 }
 
+function admin_role($data){
+    switch($data){
+        case 0:
+            echo "مدیر";
+            break;
+        case 1:
+            echo "ادمین";
+            break;
+        case 2:
+            echo "اپراتور";
+            break;
+    }
+}
 ?>

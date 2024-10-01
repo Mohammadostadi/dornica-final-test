@@ -375,34 +375,25 @@ if (isset($_POST['btn_login'])) {
                                                         <a class="entry-meta meta-0" href="category.html"><span
                                                                 class="post-in background1 text-danger font-x-small"><?= $lastBlog['name'] ?></span></a>
                                                         <div class="float-left font-small">
+                                                            <?php 
+                                                            
+                                                            $lastLike =$db->where('blog_id', $lastBlog['id'])
+                                                            ->getValue('wishlist', 'COUNT(id)');
+                                                            $lastComment =$db->where('blog_id', $lastBlog['id'])
+                                                            ->getValue('comments', 'COUNT(id)');
+                                                            ?>
                                                             <span><span class="ml-10 text-muted"><i class="fa fa-eye"
-                                                                        aria-hidden="true"></i></span>5.8 هزار</span>
+                                                                        aria-hidden="true"></i></span><?= $lastBlog['counter'] ?></span>
                                                             <span class="mr-30"><span class="ml-10 text-muted"><i
                                                                         class="fa fa-comment"
-                                                                        aria-hidden="true"></i></span>2.5 هزار</span>
+                                                                        aria-hidden="true"></i></span><?= $lastComment ?></span>
                                                             <span class="mr-30"><span class="ml-10 text-muted"><i
-                                                                        class="fa fa-share-alt"
-                                                                        aria-hidden="true"></i></span>125 هزار</span>
+                                                                        class="fa fa-heart"
+                                                                        aria-hidden="true"></i></span><?= $lastLike ?></span>
                                                         </div>
                                                     </div>
                                                     <h4 class="post-title mb-20"><a href="site/singe-page/single.php?id=<?= $lastBlog['id'] ?>"><?= $lastBlog['description'] ?></a></h4>
-                                                    <div class="mb-20 overflow-hidden">
-                                                        <div class="entry-meta meta-2 float-right">
-                                                            <a class="float-right ml-10 author-img" href="author.html"
-                                                                tabindex="0"><img
-                                                                    src="attachment/imgs/authors/author.png" alt=""></a>
-                                                            <a href="author.html" tabindex="0"><span
-                                                                    class="author-name text-grey">مسعود راستی</span></a>
-                                                            <br>
-                                                            <span class="author-add color-grey">میدستون ، کنت</span>
-                                                        </div>
-                                                        <div class="float-left">
-                                                            <a href="site/singe-page/single.php" class="read-more"><span
-                                                                    class="ml-10"><i class="fa fa-thumbtack"
-                                                                        aria-hidden="true"></i></span>انتخاب توسط
-                                                                ویراستار</a>
-                                                        </div>
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                         </div>

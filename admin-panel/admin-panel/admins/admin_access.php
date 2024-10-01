@@ -2,6 +2,7 @@
 require_once('../../../app/connection/DB.php');
 require_once('../../../app/controller/access.php');
 require_once('../../../app/controller/function.php');
+require_once('../../../app/helper/jdf.php');
 $id = checkDataSecurity($_GET['id']);
 
 if (isset($_POST['change_level_access'])) {
@@ -56,6 +57,8 @@ if (isset($_POST['change_level_access'])) {
         $levelAccess[] = 'category_update';
     if (isset($_POST['logs_list']))
         $levelAccess[] = 'logs_list';
+    if (isset($_POST['comments_list']))
+        $levelAccess[] = 'comments_list';
 
     if (count($levelAccess) != 0) {
         $db->where('id', $id)
@@ -313,7 +316,23 @@ $levelAccess = explode(',', $level);
                                                 </div>
                                                 <hr>
                                             </div>
+                                            <div class="col-12">
+                                                <div class="text-uppercase">
+                                                    <label for="">جدول کامنت ها</label>
+                                                    <hr>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <input type="radio" id="comments_list" name="comments_list"
+                                                            <?= in_array('comments_list', $levelAccess) ? "checked" : "" ?>>
+                                                        <label for="comments_list">لیست کامنت ها </label>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                            </div>
                                             <div class="col-12 text-end">
+                                                <a href="admins_list.php" class="btn btn-danger px-4 py-1"
+                                                    name="change_level_access">برگشت</a>
                                                 <button type="submit" class="btn btn-primary px-4 py-1"
                                                     name="change_level_access">ثبت</button>
                                             </div>
@@ -361,6 +380,7 @@ $levelAccess = explode(',', $level);
         checkBox('category_delete');
         checkBox('category_update');
         checkBox('logs_list');
+        checkBox('comments_list');
         function checkBox(name) {
             let check = ($(`input:radio[name='${name}']`).is(":checked")) ? true : false;
             $(`#${name}`).click(function () {
