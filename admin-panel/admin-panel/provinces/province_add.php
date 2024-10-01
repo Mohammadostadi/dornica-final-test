@@ -13,7 +13,7 @@ if (isset($_POST['_insert'])) {
     if (count($errors) == 0) {
         $db->insert('provinces', [
             'name' => $name,
-            'sort' => getMaxSort('provinces'),
+            'sort' => getMaxField('provinces', 'sort'),
             'status' => 1
         ]);
         $query = $db->getLastQuery();

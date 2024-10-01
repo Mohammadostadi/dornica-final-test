@@ -71,11 +71,13 @@ function status($type, $value)
     }
 }
 
-function getMaxSort($table)
+function getMaxField($table, $field, $con = '')
 {
     global $db;
-    $sort = $db->getValue($table, 'MAX(sort)');
-    return empty($sort) ? 1 : $sort + 1;
+    if($con != '')
+        $db->where('id', $con);
+    $field = $db->getValue($table, "MAX($field)");
+    return empty($field) ? 1 : $field + 1;
 }
 
 

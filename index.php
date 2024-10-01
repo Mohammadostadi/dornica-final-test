@@ -2,6 +2,7 @@
 require_once('app/connection/DB.php');
 require_once('app/controller/function.php');
 
+
 $categoriesList = $db->where('status', 1)
     ->orderBy('name', 'ASC')
     ->get('categories', null, 'id, name');
@@ -79,30 +80,33 @@ if (isset($_POST['btn_login'])) {
                     <div class="widget-header mb-30">
                         <h5 class="widget-title">پرطرفدارترین ها</h5>
                     </div>
-                    <?php 
-                    $PopularBlogs = $db->orderBy('counter' , 'DESC')
-                    ->get('blogs', 5);
+                    <?php
+                    $PopularBlogs = $db->orderBy('counter', 'DESC')
+                        ->get('blogs', 5);
                     ?>
                     <div class="post-aside-style-2">
                         <ul class="list-post">
-                            <?php foreach($PopularBlogs as $popularBlog){ ?>
-                            <li class="mb-30 wow fadeIn animated">
-                                <div class="d-flex">
-                                    <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                        <a class="color-white" href="site/singe-page/single.php">
-                                            <img src="<?= isset($popularBlog['image'])?"attachment/imgs/blogs".$popularBlog['image']:"attachment/imgs/thumbnail-2.jpg" ?>" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="post-content media-body">
-                                        <h6 class="post-title mb-10 text-limit-2-row"><a href="site/singe-page/single.php?id=<?= $popularBlog['id'] ?>"><?= $popularBlog['description'] ?></a></h6>
-                                        <div
-                                            class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
-                                            <span class="post-by">توسط <a href="author.html">همتی</a></span>
-                                            <span class="post-on"><?= $popularBlog['date'] ?></span>
+                            <?php foreach ($PopularBlogs as $popularBlog) { ?>
+                                <li class="mb-30 wow fadeIn animated">
+                                    <div class="d-flex">
+                                        <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
+                                            <a class="color-white" href="site/singe-page/single.php">
+                                                <img src="<?= isset($popularBlog['image']) ? "attachment/imgs/blogs" . $popularBlog['image'] : "attachment/imgs/thumbnail-2.jpg" ?>"
+                                                    alt="">
+                                            </a>
+                                        </div>
+                                        <div class="post-content media-body">
+                                            <h6 class="post-title mb-10 text-limit-2-row"><a
+                                                    href="site/singe-page/single.php?id=<?= $popularBlog['id'] ?>"><?= $popularBlog['description'] ?></a>
+                                            </h6>
+                                            <div
+                                                class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
+                                                <span class="post-by">توسط <a href="author.html">همتی</a></span>
+                                                <span class="post-on"><?= $popularBlog['date'] ?></span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
+                                </li>
                             <?php } ?>
                         </ul>
                     </div>
@@ -166,9 +170,11 @@ if (isset($_POST['btn_login'])) {
                                                 <ul class="col-md-2">
                                                     <li><strong>آرشیو</strong></li>
                                                     <li><a href="site/category/category.php">دسته بندی لیستی</a></li>
-                                                    <li><a href="site/category/category-grid.php">دسته بندی شبکه ای</a></li>
+                                                    <li><a href="site/category/category-grid.php">دسته بندی شبکه ای</a>
+                                                    </li>
                                                     <li><a href="site/category/category-big.php">دسته بندی بزرگ</a></li>
-                                                    <li><a href="site/category/category-metro.php">دسته بندی مترو</a></li>
+                                                    <li><a href="site/category/category-metro.php">دسته بندی مترو</a>
+                                                    </li>
                                                 </ul>
                                                 <ul class="col-md-2">
                                                     <li><strong>صفحات</strong></li>
@@ -460,40 +466,52 @@ if (isset($_POST['btn_login'])) {
                                     </div>
                                     <div class="block-tab-item post-module-1 post-module-4">
                                         <div class="row">
-                                            <?php 
-                                            $resentBlogs = $db->where('blogs.status' , 1)
-                                            ->join('categories', 'categories.id = blogs.blog_category', 'LEFT')
-                                            ->orderBy('setdate', 'DESC')
-                                            ->get('blogs', 4, 'blogs.id, title, description, categories.name, date, counter, image');
+                                            <?php
+                                            $resentBlogs = $db->where('blogs.status', 1)
+                                                ->join('categories', 'categories.id = blogs.blog_category', 'LEFT')
+                                                ->orderBy('setdate', 'DESC')
+                                                ->get('blogs', 4, 'blogs.id, title, description, categories.name, date, counter, image');
                                             ?>
-                                            <?php foreach($resentBlogs as $resentBlog){ ?>
-                                            <div class="slider-single col-md-6 mb-30">
-                                                <div class="img-hover-scale border-radius-10">
-                                                    <a href="site/singe-page/single.php?id=<?= $resentBlog['id'] ?>">
-                                                        <img class="border-radius-10" src="<?= (isset($resentBlog['image']) and $resentBlog['image'] != '')?"attachment/imgs/blogs/".$resentBlog['image']:"admin-panel/assets/images/ads/default.png" ?>"
-                                                            alt="post-slider">
-                                                    </a>
+                                            <?php foreach ($resentBlogs as $resentBlog) { ?>
+                                                <div class="slider-single col-md-6 mb-30">
+                                                    <div class="img-hover-scale border-radius-10">
+                                                        <a href="site/singe-page/single.php?id=<?= $resentBlog['id'] ?>">
+                                                            <img class="border-radius-10"
+                                                                src="<?= (isset($resentBlog['image']) and $resentBlog['image'] != '') ? "attachment/imgs/blogs/" . $resentBlog['image'] : "admin-panel/assets/images/ads/default.png" ?>"
+                                                                alt="post-slider">
+                                                        </a>
+                                                    </div>
+                                                    <a
+                                                        href="site/singe-page/single.php?id=<?= $resentBlog['id'] ?>"><?= $resentBlog['title'] ?></a>
+                                                    <h5 class="post-title pr-5 pl-5 mb-10 mt-15 text-limit-2-row">
+                                                        <a
+                                                            href="site/singe-page/single.php?id=<?= $resentBlog['id'] ?>"><?= $resentBlog['description'] ?></a>
+                                                    </h5>
+                                                    <div class="entry-meta meta-1 font-x-small mt-10 pr-5 pl-5 text-muted">
+
+                                                        <span><span class="ml-5"><i class="fa fa-eye"
+                                                                    aria-hidden="true"></i></span><?= $resentBlog['counter'] ?></span>
+
+                                                        <?php
+                                                        $countResentComment = $db->where('blog_id', $resentBlog['id'])
+                                                            ->where('status', 2)
+                                                            ->getValue('comments', 'COUNT(id)');
+
+                                                        $countResentLike = $db->where('blog_id', $resentBlog['id'])
+                                                            ->getValue('wishlist', 'COUNT(id)');
+
+                                                        ?>
+                                                        <span class="mr-15"><span class="ml-5 text-muted"><i
+                                                                    class="fa fa-comment"
+                                                                    aria-hidden="true"></i></span><?= $countResentComment ?></span>
+                                                        
+                                                        <span class="mr-15"><span class="ml-5 text-muted"><i
+                                                                    class="fa fa-heart"
+                                                                    aria-hidden="true"></i></span><?= $countResentLike ?></span>
+                                                        
+                                                        <span><span class="ml-5"></span><?= $resentBlog['date'] ?></span>
+                                                    </div>
                                                 </div>
-                                                <a href="site/singe-page/single.php?id<?= $resentBlog['id'] ?>"><?= $resentBlog['title'] ?></a>
-                                                <h5 class="post-title pr-5 pl-5 mb-10 mt-15 text-limit-2-row">
-                                                    <a href="site/singe-page/single.php?id<?= $resentBlog['id'] ?>"><?= $resentBlog['description'] ?></a>
-                                                </h5>
-                                                <div class="entry-meta meta-1 font-x-small mt-10 pr-5 pl-5 text-muted">
-                                                    
-                                                    <span><span class="ml-5"><i class="fa fa-eye"
-                                                                aria-hidden="true"></i></span><?= $resentBlog['counter'] ?></span>
-                                                    
-                                                                <?php 
-                                                                $countResentComment = $db->where('blog_id', $resentBlog['id'])
-                                                                ->getValue('comments', 'COUNT(id)');
-                                                                
-                                                                ?>
-                                                    <span class="mr-15"><span class="ml-5 text-muted"><i
-                                                                class="fa fa-comment" aria-hidden="true"></i></span><?= $countResentComment ?></span>
-                                                                <span><span class="ml-5"></span><?= $resentBlog['date'] ?></span>
-                                                    <a class="float-left" href="#"><i class="ti-heart"></i></a>
-                                                </div>
-                                            </div>
                                             <?php } ?>
                                         </div>
                                     </div>
@@ -526,7 +544,8 @@ if (isset($_POST['btn_login'])) {
                                                     </div>
                                                     <div class="post-content media-body">
                                                         <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                                href="site/singe-page/single.php">لورم ایپسوم متن ساختگی با تولید سادگی
+                                                                href="site/singe-page/single.php">لورم ایپسوم متن ساختگی
+                                                                با تولید سادگی
                                                                 نامفهوم از صنعت چاپ</a></h6>
                                                     </div>
                                                 </div>
@@ -541,7 +560,8 @@ if (isset($_POST['btn_login'])) {
                                                     </div>
                                                     <div class="post-content media-body">
                                                         <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                                href="site/singe-page/single.php">سه درصد گذشته، حال و آینده شناخت
+                                                                href="site/singe-page/single.php">سه درصد گذشته، حال و
+                                                                آینده شناخت
                                                                 فراوان</a></h6>
                                                     </div>
                                                 </div>
@@ -556,7 +576,8 @@ if (isset($_POST['btn_login'])) {
                                                     </div>
                                                     <div class="post-content media-body">
                                                         <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                                href="site/singe-page/single.php">سطرآنچنان که لازم است و برای شرایط
+                                                                href="site/singe-page/single.php">سطرآنچنان که لازم است
+                                                                و برای شرایط
                                                                 فعلی تکنولوژی</a></h6>
                                                     </div>
                                                 </div>
@@ -571,7 +592,8 @@ if (isset($_POST['btn_login'])) {
                                                     </div>
                                                     <div class="post-content media-body">
                                                         <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                                href="site/singe-page/single.php">سه درصد گذشته، حال و آینده شناخت
+                                                                href="site/singe-page/single.php">سه درصد گذشته، حال و
+                                                                آینده شناخت
                                                                 فراوان</a></h6>
                                                     </div>
                                                 </div>
@@ -618,7 +640,8 @@ if (isset($_POST['btn_login'])) {
                                                     </div>
                                                     <div class="post-content media-body">
                                                         <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                                href="site/singe-page/single.php">لورم ایپسوم متن ساختگی با تولید سادگی
+                                                                href="site/singe-page/single.php">لورم ایپسوم متن ساختگی
+                                                                با تولید سادگی
                                                                 نامفهوم از صنعت چاپ</a></h6>
                                                         <div
                                                             class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
@@ -639,7 +662,8 @@ if (isset($_POST['btn_login'])) {
                                                     </div>
                                                     <div class="post-content media-body">
                                                         <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                                href="site/singe-page/single.php">لورم ایپسوم متن ساختگی با تولید سادگی
+                                                                href="site/singe-page/single.php">لورم ایپسوم متن ساختگی
+                                                                با تولید سادگی
                                                                 نامفهوم از صنعت</a></h6>
                                                         <div
                                                             class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
@@ -660,7 +684,8 @@ if (isset($_POST['btn_login'])) {
                                                     </div>
                                                     <div class="post-content media-body">
                                                         <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                                href="site/singe-page/single.php">سه درصد گذشته، حال و آینده شناخت
+                                                                href="site/singe-page/single.php">سه درصد گذشته، حال و
+                                                                آینده شناخت
                                                                 فراوان</a></h6>
                                                         <div
                                                             class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
@@ -681,7 +706,8 @@ if (isset($_POST['btn_login'])) {
                                                     </div>
                                                     <div class="post-content media-body">
                                                         <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                                href="site/singe-page/single.php">طراحان خلاقی و فرهنگ پیشرو در زبان
+                                                                href="site/singe-page/single.php">طراحان خلاقی و فرهنگ
+                                                                پیشرو در زبان
                                                                 فارسی ایجاد کرد</a></h6>
                                                         <div
                                                             class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
@@ -702,7 +728,8 @@ if (isset($_POST['btn_login'])) {
                                                     </div>
                                                     <div class="post-content media-body">
                                                         <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                                href="site/singe-page/single.php">تایپ به پایان رسد وزمان مورد نیاز
+                                                                href="site/singe-page/single.php">تایپ به پایان رسد
+                                                                وزمان مورد نیاز
                                                                 شامل حروفچینی دستاوردهای اصلی</a></h6>
                                                         <div
                                                             class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
@@ -763,7 +790,8 @@ if (isset($_POST['btn_login'])) {
                                                     <span class="post-format-icon">
                                                         <ion-icon name="headset-outline"></ion-icon>
                                                     </span>
-                                                    <a href="site/singe-page/single.php">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                                                    <a href="site/singe-page/single.php">لورم ایپسوم متن ساختگی با تولید
+                                                        سادگی نامفهوم
                                                         از صنعت چاپ و با استفاده از طراحان گرافیک است</a>
                                                 </h4>
                                                 <div class="mb-20 overflow-hidden">
@@ -776,8 +804,8 @@ if (isset($_POST['btn_login'])) {
                                                         <p class="font-x-small mt-10">به روز شده 18/9/1400 10:28</p>
                                                     </div>
                                                     <div class="float-left">
-                                                        <a href="site/singe-page/single.php" class="read-more"><span class="ml-10"><i
-                                                                    class="fa fa-thumbtack"
+                                                        <a href="site/singe-page/single.php" class="read-more"><span
+                                                                class="ml-10"><i class="fa fa-thumbtack"
                                                                     aria-hidden="true"></i></span>انتخاب توسط
                                                             ویراستار</a>
                                                     </div>
@@ -802,7 +830,8 @@ if (isset($_POST['btn_login'])) {
                                                         <span class="post-format-icon">
                                                             <ion-icon name="videocam-outline"></ion-icon>
                                                         </span>
-                                                        <a href="site/singe-page/single.php">لورم ایپسوم متن ساختگی با تولید سادگی
+                                                        <a href="site/singe-page/single.php">لورم ایپسوم متن ساختگی با
+                                                            تولید سادگی
                                                             نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
                                                             چاپگرها و متون.</a>
                                                     </h5>
@@ -831,7 +860,8 @@ if (isset($_POST['btn_login'])) {
                                                                 class="post-in text-warning font-x-small">ورزشی</span></a>
                                                     </div>
                                                     <h5 class="post-title mb-15 text-limit-2-row">
-                                                        <a href="site/singe-page/single.php">سه درصد گذشته، حال و آینده شناخت فراوان
+                                                        <a href="site/singe-page/single.php">سه درصد گذشته، حال و آینده
+                                                            شناخت فراوان
                                                             جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت</a>
                                                     </h5>
                                                     <div
@@ -862,7 +892,8 @@ if (isset($_POST['btn_login'])) {
                                                         <span class="post-format-icon">
                                                             <ion-icon name="image-outline"></ion-icon>
                                                         </span>
-                                                        <a href="site/singe-page/single.php">طراحان خلاقی و فرهنگ پیشرو در زبان فارسی
+                                                        <a href="site/singe-page/single.php">طراحان خلاقی و فرهنگ پیشرو
+                                                            در زبان فارسی
                                                             ایجاد کرد. در این صورت می توان امید داشت</a>
                                                     </h5>
                                                     <div
@@ -893,7 +924,8 @@ if (isset($_POST['btn_login'])) {
                                                         <span class="post-format-icon">
                                                             <ion-icon name="chatbox-outline"></ion-icon>
                                                         </span>
-                                                        <a href="site/singe-page/single.php">تایپ به پایان رسد وزمان مورد نیاز شامل
+                                                        <a href="site/singe-page/single.php">تایپ به پایان رسد وزمان
+                                                            مورد نیاز شامل
                                                             حروفچینی دستاوردهای اصلی و جوابگوی سوالات</a>
                                                     </h5>
                                                     <div
@@ -939,7 +971,8 @@ if (isset($_POST['btn_login'])) {
                                                 </a>
                                             </div>
                                             <div class="pl-10 pr-10">
-                                                <h5 class="post-title mb-15"><a href="site/singe-page/single.php">لورم ایپسوم متن
+                                                <h5 class="post-title mb-15"><a href="site/singe-page/single.php">لورم
+                                                        ایپسوم متن
                                                         ساختگی با تولید سادگی نامفهوم از صنعت چاپ</a></h5>
                                                 <div
                                                     class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
@@ -958,7 +991,8 @@ if (isset($_POST['btn_login'])) {
                                                 </a>
                                             </div>
                                             <div class="pl-10 pr-10">
-                                                <h5 class="post-title mb-15"><a href="site/singe-page/single.php">لورم ایپسوم متن
+                                                <h5 class="post-title mb-15"><a href="site/singe-page/single.php">لورم
+                                                        ایپسوم متن
                                                         ساختگی با تولید</a></h5>
                                                 <div
                                                     class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
@@ -977,7 +1011,8 @@ if (isset($_POST['btn_login'])) {
                                                 </a>
                                             </div>
                                             <div class="pl-10 pr-10">
-                                                <h5 class="post-title mb-15"><a href="site/singe-page/single.php">لورم ایپسوم متن
+                                                <h5 class="post-title mb-15"><a href="site/singe-page/single.php">لورم
+                                                        ایپسوم متن
                                                         ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از
                                                         طراحان</a></h5>
                                                 <div
@@ -1004,7 +1039,8 @@ if (isset($_POST['btn_login'])) {
                                                         src="attachment/imgs/authors/author-14.png" alt=""></a>
                                             </span>
                                             <div class="alith_post_title_small">
-                                                <p class="font-medium mb-10"><a href="site/singe-page/single.php">لورم ایپسوم متن
+                                                <p class="font-medium mb-10"><a href="site/singe-page/single.php">لورم
+                                                        ایپسوم متن
                                                         ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از
                                                         طراحان.</a></p>
                                                 <div
@@ -1023,7 +1059,8 @@ if (isset($_POST['btn_login'])) {
                                                         src="attachment/imgs/authors/author-9.png" alt=""></a>
                                             </span>
                                             <div class="alith_post_title_small">
-                                                <p class="font-medium mb-10"><a href="site/singe-page/single.php">لورم ایپسوم متن
+                                                <p class="font-medium mb-10"><a href="site/singe-page/single.php">لورم
+                                                        ایپسوم متن
                                                         ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از
                                                         طراحان</a></p>
                                                 <div
@@ -1042,7 +1079,8 @@ if (isset($_POST['btn_login'])) {
                                                         src="attachment/imgs/authors/author-3.png" alt=""></a>
                                             </span>
                                             <div class="alith_post_title_small">
-                                                <p class="font-medium mb-10"><a href="site/singe-page/single.php">لورم ایپسوم متن
+                                                <p class="font-medium mb-10"><a href="site/singe-page/single.php">لورم
+                                                        ایپسوم متن
                                                         ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
                                                         گرافیک است.</a></p>
                                                 <div
@@ -1074,7 +1112,8 @@ if (isset($_POST['btn_login'])) {
                                                                 class="post-cat bg-success color-white">سفر</span></a>
                                                     </div>
                                                     <h5 class="post-title">
-                                                        <a class="color-white" href="site/singe-page/single.php">لورم ایپسوم متن ساختگی
+                                                        <a class="color-white" href="site/singe-page/single.php">لورم
+                                                            ایپسوم متن ساختگی
                                                             با تولید سادگی نامفهوم از صنعت چاپ و با استفاده</a>
                                                     </h5>
                                                     <div
@@ -1100,7 +1139,8 @@ if (isset($_POST['btn_login'])) {
                                                                 class="post-cat bg-info color-white">زیبایی</span></a>
                                                     </div>
                                                     <h5 class="post-title">
-                                                        <a class="color-white" href="site/singe-page/single.php">لورم ایپسوم متن ساختگی
+                                                        <a class="color-white" href="site/singe-page/single.php">لورم
+                                                            ایپسوم متن ساختگی
                                                             با تولید سادگی نامفهوم از صنعت چاپ</a>
                                                     </h5>
                                                     <div
@@ -1126,7 +1166,8 @@ if (isset($_POST['btn_login'])) {
                                                                 class="post-cat bg-danger color-white">هنر</span></a>
                                                     </div>
                                                     <h5 class="post-title">
-                                                        <a class="color-white" href="site/singe-page/single.php">تایپ به پایان رسد
+                                                        <a class="color-white" href="site/singe-page/single.php">تایپ به
+                                                            پایان رسد
                                                             وزمان مورد نیاز شامل حروفچینی دستاوردهای</a>
                                                     </h5>
                                                     <div
@@ -1152,7 +1193,8 @@ if (isset($_POST['btn_login'])) {
                                                                 class="post-cat bg-warning color-white">بازی</span></a>
                                                     </div>
                                                     <h5 class="post-title">
-                                                        <a class="color-white" href="site/singe-page/single.php">طراحان خلاقی و فرهنگ
+                                                        <a class="color-white" href="site/singe-page/single.php">طراحان
+                                                            خلاقی و فرهنگ
                                                             پیشرو در زبان فارسی ایجاد کرد</a>
                                                     </h5>
                                                     <div
@@ -1178,7 +1220,8 @@ if (isset($_POST['btn_login'])) {
                                                                 class="post-cat bg-primary color-white">باغچه</span></a>
                                                     </div>
                                                     <h5 class="post-title">
-                                                        <a class="color-white" href="site/singe-page/single.php">سه درصد گذشته، حال و
+                                                        <a class="color-white" href="site/singe-page/single.php">سه درصد
+                                                            گذشته، حال و
                                                             آینده شناخت فراوان جامعه و متخصصان</a>
                                                     </h5>
                                                     <div

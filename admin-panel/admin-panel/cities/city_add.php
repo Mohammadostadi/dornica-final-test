@@ -18,7 +18,7 @@ if (isset($_POST['_insert'])) {
         $db->insert('cities', [
             'name' => $name,
             'province_id'=>$province,
-            'sort' => getMaxSort('cities'),
+            'sort' => getMaxField('cities', 'sort'),
             'status' => 1
         ]);
         $query = $db->getLastQuery();

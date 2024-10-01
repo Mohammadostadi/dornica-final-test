@@ -125,7 +125,7 @@ $provinceList = $db->where('status', 1)
 													<span>امنیت</span></a>
 											</li>
 											<li>
-												<a href="shop-login.php"><i class="fas fa-sign-out-alt"
+												<a href="../auth/logout.php"><i class="fas fa-sign-out-alt"
 														aria-hidden="true"></i>
 													<span>خروج</span></a>
 											</li>
