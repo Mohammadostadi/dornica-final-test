@@ -1,7 +1,8 @@
 <?php
 require_once('../../app/connection/DB.php');
 require_once('../../app/controller/function.php');
-if(isset($_SESSION['user']) and $_SESSION['user'] != '')
+require_once('../../app/helper/view.php');
+if (isset($_SESSION['user']) and $_SESSION['user'] != '')
     header('Location:../index.php');
 $errors = [];
 if (isset($_POST['sign_in'])) {
@@ -85,10 +86,13 @@ if (isset($_POST['sign_in'])) {
                             </div>
                             <div class="col-lg-6">
                                 <div class="card-body p-4 p-sm-5">
-                                    <div><?= isset($_SESSION['newPassword']) ? 'رمز عبور جدید شما:'.$_SESSION['newPassword'] : "" ?></div>
+                                    <div>
+                                        <?= isset($_SESSION['newPassword']) ? 'رمز عبور جدید شما:' . $_SESSION['newPassword'] : "" ?>
+                                    </div>
                                     <?php if (isset($errors['status']) and $errors['status'] != '') { ?>
                                         <div class="alert text-center alert-danger text-danger radius-30 px-3 py-2 my-2">
-                                            <?= checkDataErrorExist('status') ?></div>
+                                            <?= checkDataErrorExist('status') ?>
+                                        </div>
                                     <?php } ?>
                                     <h5 class="card-title">ورود</h5>
                                     <p class="card-text mb-5">رشد خود را ببینید و پشتیبانی مشاوره دریافت کنید!</p>

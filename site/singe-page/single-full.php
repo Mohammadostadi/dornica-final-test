@@ -1,7 +1,8 @@
-<?php 
+<?php
 
 require_once('../../app/connection/DB.php');
 require_once('../../app/controller/function.php');
+require_once('../../app/helper/view.php');
 require_once('../layout/login.php');
 
 ?>
@@ -11,6 +12,7 @@ require_once('../layout/login.php');
 
 
 <!-- Mirrored from webilux.net/demo-newsviral/single-full.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 28 Sep 2024 10:08:59 GMT -->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,7 +51,8 @@ require_once('../layout/login.php');
         <main class="position-relative">
             <div class="container">
                 <div class="entry-header entry-header-3 mb-50 mt-50 text-center text-white">
-                    <div class="thumb-overlay img-hover-slide border-radius-5 position-relative" style="background-image: url(assets/imgs/news-20.jpg)">
+                    <div class="thumb-overlay img-hover-slide border-radius-5 position-relative"
+                        style="background-image: url(assets/imgs/news-20.jpg)">
                         <div class="position-midded">
                             <div class="entry-meta meta-0 font-small mb-30">
                                 <a href="category.html"><span class="post-cat bg-warning color-white">آشپزی</span></a>
@@ -59,7 +62,8 @@ require_once('../layout/login.php');
                                 رتبه بندی انواع روغن پخت و پز<br> بر اساس میزان سلامتی آنها
                             </h1>
                             <div class="entry-meta meta-1 font-x-small color-grey text-uppercase text-white">
-                                <span class="post-by text-white">توسط <a class="text-white" href="author.html">مهتاب رضایی </a> و <a class="text-white" href="author.html">سعید شمس</a></span>
+                                <span class="post-by text-white">توسط <a class="text-white" href="author.html">مهتاب
+                                        رضایی </a> و <a class="text-white" href="author.html">سعید شمس</a></span>
                                 <span class="post-on text-white">ارسال در 18/9/1400 09:35</span>
                                 <span class="time-reading text-white">زمان خواندن 12 دقیقه</span>
                                 <p class="font-x-small mt-10 text-white">
@@ -77,22 +81,43 @@ require_once('../layout/login.php');
                     <div class="col-lg-8 col-md-12">
                         <div class="single-social-share single-sidebar-share mt-30">
                             <ul>
-                                <li><a class="social-icon facebook-icon text-xs-center" target="_blank" href="#"><i class="ti-facebook"></i></a></li>
-                                <li><a class="social-icon twitter-icon text-xs-center" target="_blank" href="#"><i class="ti-twitter-alt"></i></a></li>
-                                <li><a class="social-icon pinterest-icon text-xs-center" target="_blank" href="#"><i class="ti-pinterest"></i></a></li>
-                                <li><a class="social-icon instagram-icon text-xs-center" target="_blank" href="#"><i class="ti-instagram"></i></a></li>
-                                <li><a class="social-icon linkedin-icon text-xs-center" target="_blank" href="#"><i class="ti-linkedin"></i></a></li>
-                                <li><a class="social-icon email-icon text-xs-center" target="_blank" href="#"><i class="ti-email"></i></a></li>
+                                <li><a class="social-icon facebook-icon text-xs-center" target="_blank" href="#"><i
+                                            class="ti-facebook"></i></a></li>
+                                <li><a class="social-icon twitter-icon text-xs-center" target="_blank" href="#"><i
+                                            class="ti-twitter-alt"></i></a></li>
+                                <li><a class="social-icon pinterest-icon text-xs-center" target="_blank" href="#"><i
+                                            class="ti-pinterest"></i></a></li>
+                                <li><a class="social-icon instagram-icon text-xs-center" target="_blank" href="#"><i
+                                            class="ti-instagram"></i></a></li>
+                                <li><a class="social-icon linkedin-icon text-xs-center" target="_blank" href="#"><i
+                                            class="ti-linkedin"></i></a></li>
+                                <li><a class="social-icon email-icon text-xs-center" target="_blank" href="#"><i
+                                            class="ti-email"></i></a></li>
                             </ul>
                         </div>
                         <div class="single-excerpt">
-                            <p class="font-large">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد.</p>
+                            <p class="font-large">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
+                                از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است
+                                و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می
+                                باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را
+                                می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی
+                                و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری
+                                موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد.</p>
                         </div>
                         <div class="entry-main-content">
                             <h2>بیایید برخی از روغن ها را رتبه بندی کنیم</h2>
                             <hr class="wp-block-separator is-style-wide">
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی.</p>
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای.</p>
+                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
+                                است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط
+                                فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای
+                                زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با
+                                نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو
+                                در زبان فارسی.</p>
+                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
+                                است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط
+                                فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای
+                                زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با
+                                نرم افزارها شناخت بیشتری را برای طراحان رایانه ای.</p>
                             <h2>با راهنمای ما</h2>
                             <div class="wp-block-image">
                                 <figure>
@@ -100,11 +125,23 @@ require_once('../layout/login.php');
                                     <figcaption> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم </figcaption>
                                 </figure>
                             </div>
-                            <p>1. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی.</p>
+                            <p>1. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
+                                گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای
+                                شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
+                                کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می
+                                طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و
+                                فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری
+                                موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی
+                                دستاوردهای اصلی.</p>
                             <hr class="wp-block-separator is-style-dots">
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان.</p>
+                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
+                                است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط
+                                فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای
+                                زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با
+                                نرم افزارها شناخت بیشتری را برای طراحان.</p>
                             <blockquote class="wp-block-quote is-style-large">
-                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه.</p><cite>مهتاب رضایی </cite>
+                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
+                                    گرافیک است. چاپگرها و متون بلکه روزنامه.</p><cite>مهتاب رضایی </cite>
                             </blockquote>
                             <h2>لورم ایپسوم متن ساختگی</h2>
                             <hr class="wp-block-separator is-style-wide">
@@ -116,21 +153,32 @@ require_once('../layout/login.php');
                                     <figcaption> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم </figcaption>
                                 </figure>
                             </div>
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد.</p>
+                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
+                                است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط
+                                فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای
+                                زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد.</p>
                             <h5>بعدش چی؟</h5>
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
+                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
+                                است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط
+                                فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
                             <hr class="wp-block-separator is-style-dots">
-                            <p>سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد</p>
+                            <p>سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود
+                                ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان
+                                جامعه و متخصصان را می طلبد</p>
                             <h2>نتیجه</h2>
                             <hr class="wp-block-separator is-style-wide">
-                            <p>سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی.</p>
+                            <p>سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها
+                                شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان
+                                فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها
+                                و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی.</p>
                             <p class="text-center mt-30">
                                 <a href="#"><img class="d-inline border-radius-10" src="assets/imgs/ads.jpg" alt=""></a>
                             </p>
                         </div>
                         <div class="entry-bottom mt-50 mb-30">
                             <div class="font-weight-500 entry-meta meta-1 font-x-small color-grey">
-                                <span class="update-on"><i class="ti ti-reload ml-5"></i>به روز شده 18/9/1400 10:28</span>
+                                <span class="update-on"><i class="ti ti-reload ml-5"></i>به روز شده 18/9/1400
+                                    10:28</span>
                                 <span class="hit-count"><i class="ti-comment"></i>نظرات 82</span>
                                 <span class="hit-count"><i class="ti-heart"></i>لایک 68</span>
                                 <span class="hit-count"><i class="ti-star"></i>امتیاز 8/10</span>
@@ -144,12 +192,20 @@ require_once('../layout/login.php');
                                 </div>
                                 <div class="single-social-share float-left">
                                     <ul class="d-inline-block list-inline">
-                                        <li class="list-inline-item"><span class="font-small text-muted"><i class="ti-sharethis ml-5"></i>اشتراک: </span></li>
-                                        <li class="list-inline-item"><a class="social-icon facebook-icon text-xs-center" target="_blank" href="#"><i class="ti-facebook"></i></a></li>
-                                        <li class="list-inline-item"><a class="social-icon twitter-icon text-xs-center" target="_blank" href="#"><i class="ti-twitter-alt"></i></a></li>
-                                        <li class="list-inline-item"><a class="social-icon pinterest-icon text-xs-center" target="_blank" href="#"><i class="ti-pinterest"></i></a></li>
-                                        <li class="list-inline-item"><a class="social-icon instagram-icon text-xs-center" target="_blank" href="#"><i class="ti-instagram"></i></a></li>
-                                        <li class="list-inline-item"><a class="social-icon linkedin-icon text-xs-center" target="_blank" href="#"><i class="ti-linkedin"></i></a></li>
+                                        <li class="list-inline-item"><span class="font-small text-muted"><i
+                                                    class="ti-sharethis ml-5"></i>اشتراک: </span></li>
+                                        <li class="list-inline-item"><a class="social-icon facebook-icon text-xs-center"
+                                                target="_blank" href="#"><i class="ti-facebook"></i></a></li>
+                                        <li class="list-inline-item"><a class="social-icon twitter-icon text-xs-center"
+                                                target="_blank" href="#"><i class="ti-twitter-alt"></i></a></li>
+                                        <li class="list-inline-item"><a
+                                                class="social-icon pinterest-icon text-xs-center" target="_blank"
+                                                href="#"><i class="ti-pinterest"></i></a></li>
+                                        <li class="list-inline-item"><a
+                                                class="social-icon instagram-icon text-xs-center" target="_blank"
+                                                href="#"><i class="ti-instagram"></i></a></li>
+                                        <li class="list-inline-item"><a class="social-icon linkedin-icon text-xs-center"
+                                                target="_blank" href="#"><i class="ti-linkedin"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -157,9 +213,12 @@ require_once('../layout/login.php');
                         <!--author box-->
                         <div class="author-bio border-radius-10 bg-white p-30 mb-40">
                             <div class="author-image mb-30">
-                                <a href="author.html"><img src="assets/imgs/authors/author.png" alt="" class="avatar"></a></div>
+                                <a href="author.html"><img src="assets/imgs/authors/author.png" alt=""
+                                        class="avatar"></a>
+                            </div>
                             <div class="author-info">
-                                <h3><span class="vcard author"><span class="fn"><a href="author.html" title="Posts by Robert" rel="author">سعید شمس</a></span></span></h3>
+                                <h3><span class="vcard author"><span class="fn"><a href="author.html"
+                                                title="Posts by Robert" rel="author">سعید شمس</a></span></span></h3>
                                 <h5 class="text-muted">
                                     <span class="ml-15">نویسنده نخبه</span>
                                     <i class="ti-star"></i>
@@ -168,14 +227,20 @@ require_once('../layout/login.php');
                                     <i class="ti-star"></i>
                                     <i class="ti-star"></i>
                                 </h5>
-                                <div class="author-description">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز. </div>
+                                <div class="author-description">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت
+                                    چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و
+                                    سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز. </div>
                                 <a href="author.html" class="author-bio-link text-muted">مشاهده همه پست ها</a>
                                 <div class="author-social">
                                     <ul class="author-social-icons">
-                                        <li class="author-social-link-facebook"><a href="#" target="_blank"><i class="ti-facebook"></i></a></li>
-                                        <li class="author-social-link-twitter"><a href="#" target="_blank"><i class="ti-twitter-alt"></i></a></li>
-                                        <li class="author-social-link-pinterest"><a href="#" target="_blank"><i class="ti-pinterest"></i></a></li>
-                                        <li class="author-social-link-instagram"><a href="#" target="_blank"><i class="ti-instagram"></i></a></li>
+                                        <li class="author-social-link-facebook"><a href="#" target="_blank"><i
+                                                    class="ti-facebook"></i></a></li>
+                                        <li class="author-social-link-twitter"><a href="#" target="_blank"><i
+                                                    class="ti-twitter-alt"></i></a></li>
+                                        <li class="author-social-link-pinterest"><a href="#" target="_blank"><i
+                                                    class="ti-pinterest"></i></a></li>
+                                        <li class="author-social-link-instagram"><a href="#" target="_blank"><i
+                                                    class="ti-instagram"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -193,15 +258,20 @@ require_once('../layout/login.php');
                                         </div>
                                         <div class="pl-10 pr-10">
                                             <div class="entry-meta mb-15 mt-10">
-                                                <a class="entry-meta meta-2" href="category.html"><span class="post-in text-primary font-x-small">سیاسی</span></a>
+                                                <a class="entry-meta meta-2" href="category.html"><span
+                                                        class="post-in text-primary font-x-small">سیاسی</span></a>
                                             </div>
                                             <h5 class="post-title mb-15">
                                                 <span class="post-format-icon">
-                                                    <ion-icon name="image-outline" role="img" class="md hydrated" aria-label="image outline"></ion-icon>
+                                                    <ion-icon name="image-outline" role="img" class="md hydrated"
+                                                        aria-label="image outline"></ion-icon>
                                                 </span>
-                                                <a href="single.html">لورم ایپسوم متن ساختگی با تولید سادگی </a></h5>
-                                            <div class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
-                                                <span class="post-by">توسط <a href="author.html">الناز روستایی</a></span>
+                                                <a href="single.html">لورم ایپسوم متن ساختگی با تولید سادگی </a>
+                                            </h5>
+                                            <div
+                                                class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
+                                                <span class="post-by">توسط <a href="author.html">الناز
+                                                        روستایی</a></span>
                                                 <span class="post-on">8 دقیقه پیش</span>
                                             </div>
                                         </div>
@@ -216,14 +286,18 @@ require_once('../layout/login.php');
                                         </div>
                                         <div class="pl-10 pr-10">
                                             <div class="entry-meta mb-15 mt-10">
-                                                <a class="entry-meta meta-2" href="category.html"><span class="post-in text-success font-x-small">فناوری</span></a>
+                                                <a class="entry-meta meta-2" href="category.html"><span
+                                                        class="post-in text-success font-x-small">فناوری</span></a>
                                             </div>
                                             <h5 class="post-title mb-15">
                                                 <span class="post-format-icon">
-                                                    <ion-icon name="headset-outline" role="img" class="md hydrated" aria-label="headset outline"></ion-icon>
+                                                    <ion-icon name="headset-outline" role="img" class="md hydrated"
+                                                        aria-label="headset outline"></ion-icon>
                                                 </span>
-                                                <a href="single.html">سه درصد گذشته، حال و آینده شناخت فراوان جامعه</a></h5>
-                                            <div class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
+                                                <a href="single.html">سه درصد گذشته، حال و آینده شناخت فراوان جامعه</a>
+                                            </h5>
+                                            <div
+                                                class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
                                                 <span class="post-by">توسط <a href="author.html">مهتاب رضایی</a></span>
                                                 <span class="post-on">24 دقیقه پیش</span>
                                             </div>
@@ -239,11 +313,14 @@ require_once('../layout/login.php');
                                         </div>
                                         <div class="pl-10 pr-10">
                                             <div class="entry-meta mb-15 mt-10">
-                                                <a class="entry-meta meta-2" href="category.html"><span class="post-in text-danger font-x-small">جهانی</span></a>
+                                                <a class="entry-meta meta-2" href="category.html"><span
+                                                        class="post-in text-danger font-x-small">جهانی</span></a>
                                             </div>
                                             <h5 class="post-title mb-15">
-                                                <a href="single.html">طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد</a></h5>
-                                            <div class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
+                                                <a href="single.html">طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد</a>
+                                            </h5>
+                                            <div
+                                                class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
                                                 <span class="post-by">توسط <a href="author.html">سعید شمس</a></span>
                                                 <span class="post-on">24 دقیقه پیش</span>
                                             </div>
@@ -263,7 +340,9 @@ require_once('../layout/login.php');
                                         </div>
                                         <div class="desc">
                                             <p class="comment">
-                                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی.
+                                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
+                                                از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و
+                                                سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی.
                                             </p>
                                             <div class="d-flex justify-content-between">
                                                 <div class="d-flex align-items-center">
@@ -288,7 +367,9 @@ require_once('../layout/login.php');
                                         </div>
                                         <div class="desc">
                                             <p class="comment">
-                                                سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد.
+                                                سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با
+                                                نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان
+                                                خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد.
                                             </p>
                                             <div class="d-flex justify-content-between">
                                                 <div class="d-flex align-items-center">
@@ -313,7 +394,9 @@ require_once('../layout/login.php');
                                         </div>
                                         <div class="desc">
                                             <p class="comment">
-                                                طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل.
+                                                طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان
+                                                امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به
+                                                پایان رسد و زمان مورد نیاز شامل.
                                             </p>
                                             <div class="d-flex justify-content-between">
                                                 <div class="d-flex align-items-center">
@@ -338,22 +421,26 @@ require_once('../layout/login.php');
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input class="form-control" name="name" id="name" type="text" placeholder="نام">
+                                            <input class="form-control" name="name" id="name" type="text"
+                                                placeholder="نام">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <input class="form-control" name="email" id="email" type="email" placeholder="ایمیل">
+                                            <input class="form-control" name="email" id="email" type="email"
+                                                placeholder="ایمیل">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <input class="form-control" name="website" id="website" type="text" placeholder="سایت">
+                                            <input class="form-control" name="website" id="website" type="text"
+                                                placeholder="سایت">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="نظرات"></textarea>
+                                            <textarea class="form-control w-100" name="comment" id="comment" cols="30"
+                                                rows="9" placeholder="نظرات"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -388,9 +475,12 @@ require_once('../layout/login.php');
                                                 </a>
                                             </div>
                                             <div class="post-content media-body">
-                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</a></h6>
-                                                <div class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
-                                                    <span class="post-by">توسط <a href="author.html">رضا کیمیا</a></span>
+                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">لورم
+                                                        ایپسوم متن ساختگی با تولید سادگی نامفهوم</a></h6>
+                                                <div
+                                                    class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
+                                                    <span class="post-by">توسط <a href="author.html">رضا
+                                                            کیمیا</a></span>
                                                     <span class="post-on">4 دقیقه پیش</span>
                                                 </div>
                                             </div>
@@ -404,9 +494,12 @@ require_once('../layout/login.php');
                                                 </a>
                                             </div>
                                             <div class="post-content media-body">
-                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</a></h6>
-                                                <div class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
-                                                    <span class="post-by">توسط <a href="author.html">مسعود راستی</a></span>
+                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">لورم
+                                                        ایپسوم متن ساختگی با تولید سادگی نامفهوم</a></h6>
+                                                <div
+                                                    class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
+                                                    <span class="post-by">توسط <a href="author.html">مسعود
+                                                            راستی</a></span>
                                                     <span class="post-on">3 ساعت قبل</span>
                                                 </div>
                                             </div>
@@ -420,9 +513,12 @@ require_once('../layout/login.php');
                                                 </a>
                                             </div>
                                             <div class="post-content media-body">
-                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</a></h6>
-                                                <div class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
-                                                    <span class="post-by">توسط <a href="author.html">الناز روستایی</a></span>
+                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">لورم
+                                                        ایپسوم متن ساختگی با تولید سادگی نامفهوم</a></h6>
+                                                <div
+                                                    class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
+                                                    <span class="post-by">توسط <a href="author.html">الناز
+                                                            روستایی</a></span>
                                                     <span class="post-on">4 ساعت قبل</span>
                                                 </div>
                                             </div>
@@ -447,7 +543,8 @@ require_once('../layout/login.php');
                                                 </a>
                                             </div>
                                             <div class="post-content media-body">
-                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت</a></h6>
+                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">لورم
+                                                        ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت</a></h6>
                                             </div>
                                         </div>
                                     </li>
@@ -459,7 +556,9 @@ require_once('../layout/login.php');
                                                 </a>
                                             </div>
                                             <div class="post-content media-body">
-                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد</a></h6>
+                                                <h6 class="post-title mb-10 text-limit-2-row"><a
+                                                        href="single.html">طراحان خلاقی و فرهنگ پیشرو در زبان فارسی
+                                                        ایجاد کرد</a></h6>
                                             </div>
                                         </div>
                                     </li>
@@ -471,7 +570,8 @@ require_once('../layout/login.php');
                                                 </a>
                                             </div>
                                             <div class="post-content media-body">
-                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت</a></h6>
+                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">لورم
+                                                        ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت</a></h6>
                                             </div>
                                         </div>
                                     </li>
@@ -483,7 +583,9 @@ require_once('../layout/login.php');
                                                 </a>
                                             </div>
                                             <div class="post-content media-body">
-                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد</a></h6>
+                                                <h6 class="post-title mb-10 text-limit-2-row"><a
+                                                        href="single.html">طراحان خلاقی و فرهنگ پیشرو در زبان فارسی
+                                                        ایجاد کرد</a></h6>
                                             </div>
                                         </div>
                                     </li>
@@ -498,7 +600,8 @@ require_once('../layout/login.php');
                             </div>
                             <div class="post-aside-style-2">
                                 <ul class="list-post">
-                                    <li class="mb-30 wow fadeIn   animated" style="visibility: visible; animation-name: fadeIn;">
+                                    <li class="mb-30 wow fadeIn   animated"
+                                        style="visibility: visible; animation-name: fadeIn;">
                                         <div class="d-flex">
                                             <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
                                                 <a class="color-white" href="single.html">
@@ -506,15 +609,19 @@ require_once('../layout/login.php');
                                                 </a>
                                             </div>
                                             <div class="post-content media-body">
-                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای</a></h6>
-                                                <div class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
-                                                    <span class="post-by">توسط <a href="author.html">رضا کیمیا</a></span>
+                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">تایپ
+                                                        به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای</a></h6>
+                                                <div
+                                                    class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
+                                                    <span class="post-by">توسط <a href="author.html">رضا
+                                                            کیمیا</a></span>
                                                     <span class="post-on">4 دقیقه پیش</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="mb-30 wow fadeIn   animated" style="visibility: visible; animation-name: fadeIn;">
+                                    <li class="mb-30 wow fadeIn   animated"
+                                        style="visibility: visible; animation-name: fadeIn;">
                                         <div class="d-flex">
                                             <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
                                                 <a class="color-white" href="single.html">
@@ -522,15 +629,19 @@ require_once('../layout/login.php');
                                                 </a>
                                             </div>
                                             <div class="post-content media-body">
-                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای</a></h6>
-                                                <div class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
-                                                    <span class="post-by">توسط <a href="author.html">مسعود راستی</a></span>
+                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">تایپ
+                                                        به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای</a></h6>
+                                                <div
+                                                    class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
+                                                    <span class="post-by">توسط <a href="author.html">مسعود
+                                                            راستی</a></span>
                                                     <span class="post-on">3 ساعت قبل</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="wow fadeIn animated" style="visibility: visible; animation-name: fadeIn;">
+                                    <li class="wow fadeIn animated"
+                                        style="visibility: visible; animation-name: fadeIn;">
                                         <div class="d-flex">
                                             <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
                                                 <a class="color-white" href="single.html">
@@ -538,9 +649,12 @@ require_once('../layout/login.php');
                                                 </a>
                                             </div>
                                             <div class="post-content media-body">
-                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای</a></h6>
-                                                <div class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
-                                                    <span class="post-by">توسط <a href="author.html">الناز روستایی</a></span>
+                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">تایپ
+                                                        به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای</a></h6>
+                                                <div
+                                                    class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
+                                                    <span class="post-by">توسط <a href="author.html">الناز
+                                                            روستایی</a></span>
                                                     <span class="post-on">4 ساعت قبل</span>
                                                 </div>
                                             </div>
@@ -554,15 +668,20 @@ require_once('../layout/login.php');
                         <div class="widget-header mb-30">
                             <h5 class="widget-title">آخرین <span>نظرات</span></h5>
                         </div>
-                        <div class="sidebar-widget p-20 border-radius-15 bg-white widget-latest-comments wow fadeIn  animated">
+                        <div
+                            class="sidebar-widget p-20 border-radius-15 bg-white widget-latest-comments wow fadeIn  animated">
                             <div class="post-block-list post-module-6">
                                 <div class="last-comment mb-20 d-flex wow fadeIn">
                                     <span class="item-count vertical-align">
-                                        <a class="red-tooltip author-avatar" href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Azumi - 985 posts"><img src="assets/imgs/authors/author-14.png" alt=""></a>
+                                        <a class="red-tooltip author-avatar" href="#" data-toggle="tooltip"
+                                            data-placement="top" title="" data-original-title="Azumi - 985 posts"><img
+                                                src="assets/imgs/authors/author-14.png" alt=""></a>
                                     </span>
                                     <div class="alith_post_title_small">
-                                        <p class="font-medium mb-10"><a href="single.html">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان.</a></p>
-                                        <div class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
+                                        <p class="font-medium mb-10"><a href="single.html">لورم ایپسوم متن ساختگی با
+                                                تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان.</a></p>
+                                        <div
+                                            class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
                                             <span class="post-by">توسط <a href="author.html">الناز روستایی</a></span>
                                             <span class="post-on">4 دقیقه پیش</span>
                                         </div>
@@ -570,11 +689,16 @@ require_once('../layout/login.php');
                                 </div>
                                 <div class="last-comment d-flex wow fadeIn">
                                     <span class="item-count vertical-align">
-                                        <a class="red-tooltip author-avatar" href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Johny - 445 posts"><img src="assets/imgs/authors/author-3.png" alt=""></a>
+                                        <a class="red-tooltip author-avatar" href="#" data-toggle="tooltip"
+                                            data-placement="top" title="" data-original-title="Johny - 445 posts"><img
+                                                src="assets/imgs/authors/author-3.png" alt=""></a>
                                     </span>
                                     <div class="alith_post_title_small">
-                                        <p class="font-medium mb-10"><a href="single.html">سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان.</a></p>
-                                        <div class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
+                                        <p class="font-medium mb-10"><a href="single.html">سه درصد گذشته، حال و آینده
+                                                شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری
+                                                را برای طراحان.</a></p>
+                                        <div
+                                            class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
                                             <span class="post-by">توسط <a href="author.html">مسعود راستی</a></span>
                                             <span class="post-on">4 دقیقه پیش</span>
                                         </div>
@@ -626,4 +750,5 @@ require_once('../layout/login.php');
 
 
 <!-- Mirrored from webilux.net/demo-newsviral/single-full.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 28 Sep 2024 10:08:59 GMT -->
+
 </html>

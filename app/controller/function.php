@@ -74,7 +74,7 @@ function status($type, $value)
 function getMaxField($table, $field, $con = '')
 {
     global $db;
-    if($con != '')
+    if ($con != '')
         $db->where('id', $con);
     $field = $db->getValue($table, "MAX($field)");
     return empty($field) ? 1 : $field + 1;
@@ -117,7 +117,14 @@ function showMessage($value)
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-    <?php } ?> 
+    <?php } elseif ($value == 6) { ?>
+        <div class="alert alert-info alert-dismissible fade show" role="alert" id="alert">
+            <strong>بعد از تایید ادمین کامنت شما قابل نمایش است.</strong>
+            <button type="button" class="btn-close close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php } ?>
 <?php }
 
 
@@ -133,21 +140,121 @@ function checkUniqData($data, $name, $table, $message)
 }
 
 
-function filter($data, $name, $type, $priority){
+function filter($data, $name, $type, $priority)
+{
     global $db;
     global $prefix;
 
-    if($data != ''){
-        $_SESSION[$prefix."_".$name] = $data;
-        if($type == "like"){
-            $_SESSION[$prefix."_filter"][$priority] = "$prefix.$name LIKE '%$data%'";
-            $db->where($_SESSION[$prefix."_filter"][$priority]);
-        } 
-        elseif($type == '='){
-            $_SESSION[$prefix."_filter"][$priority] = "$prefix.$name = $data";
-            $db->where($_SESSION[$prefix."_filter"][$priority]);
+    if ($data != '') {
+        $_SESSION[$prefix . "_" . $name] = $data;
+        if ($type == "like") {
+            $_SESSION[$prefix . "_filter"][$priority] = "$prefix.$name LIKE '%$data%'";
+            $db->where($_SESSION[$prefix . "_filter"][$priority]);
+        } elseif ($type == '=') {
+            $_SESSION[$prefix . "_filter"][$priority] = "$prefix.$name = $data";
+            $db->where($_SESSION[$prefix . "_filter"][$priority]);
         }
     }
+}
+
+
+function chartData($num, $field, $table)
+{
+    global $db;
+    $data = [];
+    for ($i = --$num; $i >= 0; $i--) {
+        $first_day_month = date('Y/m/01', strtotime("-$i month"));
+        $last_day_month = date('Y/m/t', strtotime("$first_day_month"));
+        $res = $db->where("DATE($field) BETWEEN '$first_day_month' AND '$last_day_month'")
+            ->getValue($table, 'COUNT(*)');
+        $data[] = $res;
+    }
+    return implode(', ', $data);
+}
+
+
+function pageLimit($tableName, $limit, $soft = true, $condition = null)
+{
+    global $db;
+    global $page;
+    global $pages;
+    if (isset($_GET['page'])) {
+        $page = checkDataSecurity($_GET['page']);
+    }
+    $db->pageLimit = $limit;
+    if (!empty($condition)) {
+        if (!empty($condition)) {
+            if (gettype($condition) == 'array') {
+                foreach ($condition as $conn) {
+                    if (!empty($conn)) {
+                        $db->where($conn);
+                    }
+                }
+            } else {
+                $db->where($condition);
+            }
+        }
+    }
+    $total = $soft ? $db->where("$tableName.deleted_at IS NULL")->getvalue($tableName, 'COUNT(*)') : $db->getvalue($tableName, 'COUNT(*)');
+    $pages = ceil($total / $db->pageLimit);
+
+}
+
+function pagination($page, $pages)
+{
+    if ($page > 0) {
+        $queryPrams = $_GET;
+        unset($queryPrams['page']);
+        $queryString = http_build_query($queryPrams);
+    }
+    if ($pages == 0) { ?>
+        <div class="d-flex justify-content-center align-items-center">
+            <p class="text-center py-2 opacity-75 rounded w-75">داده ای یافت نشد</p>
+        </div>
+    <?php } else { ?>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-start">
+                <?php if ($page > 1) { ?>
+                    <li class="page-item"><a class="page-link"
+                            href="<?= '?page=1' . ($queryString ? '&' . $queryString : "") ?>">اول</a></li>
+                    <li class="page-item"><a class="page-link"
+                            href="<?= $page > 1 ? '?page=' . ($page - 1) . ($queryString ? '&' . $queryString : "") : '' ?>"><i
+                                class="ti-angle-right"></i></a>
+                    </li>
+                <?php } ?>
+                <?php if ($page == $pages) { ?>
+                    <li class="page-item"><span class="page-link"><?= $page ?></span>
+                    </li>
+                <?php } ?>
+                <?php if ($page < $pages) { ?>
+                    <li class="page-item"><span class="page-link"><?= $page ?></span>
+                    </li>
+                    <li class="page-item"><a class="page-link" <?= ($page >= $pages) ? 'disabled' : '' ?>
+                            href="<?= $page < $pages ? '?page=' . ($page + 1) . ($queryString ? '&' . $queryString : "") : '' ?>"><?= $page + 1 ?></a>
+                    </li>
+                    <?php if($page + 1 < $pages){ ?>
+                    <li class="page-item"><a class="page-link" <?= ($page >= $pages) ? 'disabled' : '' ?>
+                            href="<?= $page + 1 < $pages ? '?page=' . ($page + 2) . ($queryString ? '&' . $queryString : "") : '' ?>"><?= $page + 2 ?></a>
+                    </li>
+                    <?php } ?>
+                    <li class="page-item"><a class="page-link" <?= ($page >= $pages) ? 'disabled' : '' ?>
+                            href="<?= $page < $pages ? '?page=' . ($page + 1) . ($queryString ? '&' . $queryString : "") : '' ?>"><i
+                                class="ti-angle-left"></i></a>
+                    </li>
+                    <li class="page-item"><a class="page-link"
+                            href="<?= '?page=' . $pages . ($queryString ? '&' . $queryString : "") ?>">آخر</a></li>
+                <?php } ?>
+            </ul>
+        </nav>
+        <?php
+    }
+}
+
+function persian_number($number)
+{
+    $pNumbers = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+    $eNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    return str_replace($pNumbers, $eNumbers, $number);
 }
 
 ?>

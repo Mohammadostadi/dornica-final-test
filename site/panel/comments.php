@@ -1,13 +1,9 @@
 <?php
 
 require_once('../../app/connection/DB.php');
-require_once('../../app/controller/function.php');
 require_once('../../app/controller/city_show.php');
-
 $member = $db->where('username', $_SESSION['member'])
-->getOne('members');
-require_once('../../app/helper/view.php');
-
+	->getOne('members');
 $provinceList = $db->where('status', 1)
 ->orderBy('name', 'ASC')
 ->get('provinces', null, 'id, name');

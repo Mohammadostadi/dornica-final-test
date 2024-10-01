@@ -1,6 +1,7 @@
 <?php
 require_once('../../app/connection/DB.php');
 require_once('../../app/controller/function.php');
+require_once('../../app/helper/view.php');
 require_once('../../app/helper/jdf.php');
 require_once('../layout/login.php');
 
@@ -58,20 +59,31 @@ if (isset($_POST['btn_comment'])) {
             'member_id' => isset($memberId) ? $memberId : null,
             'status' => 0
         ]);
-        header("Location:single.php?id=$id");
+        header("Location:single.php?id=$id&ok=6");
     }
 }
 
 
 $counterDate = $db->where('blog_id', $id)
     ->orderBy('date', 'DESC')
-    ->getValue('counter', 'date');
-if (!is_null($counterDate))
-    $counterDate = strtotime($counterDate . " +5min");
-if ((is_null($counterDate)) or ($counterDate <= strtotime($date))) {
-    $count = getMaxField('blogs', 'counter', $id);
+    ->getOne('counter', 'date, member_id');
+if (!empty($counterDate)) {
+    if (!is_null($counterDate['date']))
+        $counterDate['date'] = strtotime($counterDate['date'] . " +5min");
+    if ((is_null($counterDate['date'])) or (is_null($counterDate['member_id']) and $counterDate['date'] <= strtotime($date)) or (isset($memberId) and $memberId == $counterDate['member_id'] and $counterDate['date'] <= strtotime($date)) or (isset($memberId) and $memberId != $counterDate['member_id']) or (!isset($memberId) and $counterDate['date'] <= strtotime($date))) {
+        $count = getMaxField('blogs', 'counter', $id);
+        $db->where('id', $id)->update('blogs', [
+            'counter' => $count
+        ]);
+        $db->insert('counter', [
+            'member_id' => isset($memberId) ? $memberId : null,
+            'blog_id' => $id,
+            'date' => $date
+        ]);
+    }
+}else{
     $db->where('id', $id)->update('blogs', [
-        'counter' => $count
+        'counter' => 1
     ]);
     $db->insert('counter', [
         'member_id' => isset($memberId) ? $memberId : null,
@@ -151,10 +163,15 @@ $blogComments = $db->where('blog_id', $id)
         <?php require_once('../layout/header.php') ?>
         <!-- Main Wrap Start -->
         <main class="position-relative">
+
             <div class="container">
-                <div class="entry-header entry-header-1 mb-30 mt-50">
-                    <div class="entry-meta meta-0 font-small mb-30"><a href="category.html"><span
-                                class="post-cat bg-success color-white"><?= $blog['name'] ?></span></a></div>
+                <?php
+                if (isset($_GET['ok']) and $_GET['ok'] != '')
+                    showMessage($_GET['ok'])
+                        ?>
+                    <div class="entry-header entry-header-1 mb-30 mt-50">
+                        <div class="entry-meta meta-0 font-small mb-30"><a href="category.html"><span
+                                    class="post-cat bg-success color-white"><?= $blog['name'] ?></span></a></div>
                     <h1 class="post-title mb-30">
                         <?= $blog['title'] ?>
                     </h1>
@@ -244,7 +261,10 @@ $blogComments = $db->where('blog_id', $id)
                         <div class="related-posts">
                             <h3 class="mb-30">پست های مرتبط</h3>
                             <div class="row">
-                                <?php foreach ($relatedBlogs as $relatedBlog) { ?>
+                                <?php if(empty($relatedBlogs)){ ?>
+                                    <div class="col-12 text-center">داده ایی برای نمایش وجود ندارد</div>
+                                <?php }
+                                foreach ($relatedBlogs as $relatedBlog) { ?>
                                     <article class="col-lg-4">
                                         <div class="background-white border-radius-10 p-10 mb-30">
                                             <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
@@ -802,7 +822,7 @@ $blogComments = $db->where('blog_id', $id)
     </script>
     <script>
         $('.btn-close').click(function () {
-            window.location = 'single.php';
+            window.location = 'single.php?id=<?= $id ?>';
         });
     </script>
 </body>

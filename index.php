@@ -1,6 +1,7 @@
 <?php
 require_once('app/connection/DB.php');
 require_once('app/controller/function.php');
+require_once('app/helper/view.php');
 
 
 $categoriesList = $db->where('status', 1)
@@ -48,7 +49,7 @@ if (isset($_POST['btn_login'])) {
 
 <body>
     <!-- Preloader Start -->
-    <div id="preloader-active">
+    <!-- <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
                 <div class="text-center">
@@ -62,7 +63,7 @@ if (isset($_POST['btn_login'])) {
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="main-wrap">
         <!--Offcanvas sidebar-->
         <aside id="sidebar-wrapper" class="custom-scrollbar offcanvas-sidebar position-right">
@@ -352,7 +353,12 @@ if (isset($_POST['btn_login'])) {
                             <div class="col-lg-8 col-md-12">
                                 <!-- Featured posts -->
                                 <div class="featured-post mb-50">
-                                    <h4 class="widget-title mb-30">اخبار <span>امروز</span></h4>
+                                    <h4 class="widget-title mb-30">آخرین <span>خبر</span></h4>
+                                    <?php  
+                                    $lastBlog = $db->orderBy('date', 'DESC')
+                                    ->join('categories', 'categories.id = blogs.blog_category', 'LEFT')
+                                    ->getOne('blogs', 'blogs.id, title, description, categories.name, date, counter');
+                                    ?>
                                     <div class="featured-slider-1 border-radius-10">
                                         <div class="featured-slider-1-items">
                                             <div class="slider-single p-10">
@@ -360,14 +366,14 @@ if (isset($_POST['btn_login'])) {
                                                     class="img-hover-slide border-radius-15 mb-30 position-relative overflow-hidden">
                                                     <span class="top-right-icon bg-dark"><i
                                                             class="mdi mdi-camera-alt"></i></span>
-                                                    <a href="site/singe-page/single.php">
-                                                        <img src="attachment/imgs/news-8.jpg" alt="post-slider">
+                                                    <a href="site/singe-page/single.php?id=<?= $lastBlog['id'] ?>">
+                                                        <img src="<?= (isset($lastBlog['image']) and $lastBlog['image'] != '')?"attachment/imgs/blogs/".$lastBlog['image']:"admin-panel/assets/images/ads/default.png" ?>" alt="post-slider">
                                                     </a>
                                                 </div>
                                                 <div class="pr-10 pl-10">
                                                     <div class="entry-meta mb-30">
                                                         <a class="entry-meta meta-0" href="category.html"><span
-                                                                class="post-in background1 text-danger font-x-small">اقتصاد</span></a>
+                                                                class="post-in background1 text-danger font-x-small"><?= $lastBlog['name'] ?></span></a>
                                                         <div class="float-left font-small">
                                                             <span><span class="ml-10 text-muted"><i class="fa fa-eye"
                                                                         aria-hidden="true"></i></span>5.8 هزار</span>
@@ -379,8 +385,7 @@ if (isset($_POST['btn_login'])) {
                                                                         aria-hidden="true"></i></span>125 هزار</span>
                                                         </div>
                                                     </div>
-                                                    <h4 class="post-title mb-20"><a href="#">لورم ایپسوم متن ساختگی با
-                                                            تولید سادگی نامفهوم از صنعت چاپ و با استفاده</a></h4>
+                                                    <h4 class="post-title mb-20"><a href="site/singe-page/single.php?id=<?= $lastBlog['id'] ?>"><?= $lastBlog['description'] ?></a></h4>
                                                     <div class="mb-20 overflow-hidden">
                                                         <div class="entry-meta meta-2 float-right">
                                                             <a class="float-right ml-10 author-img" href="author.html"
@@ -388,53 +393,6 @@ if (isset($_POST['btn_login'])) {
                                                                     src="attachment/imgs/authors/author.png" alt=""></a>
                                                             <a href="author.html" tabindex="0"><span
                                                                     class="author-name text-grey">مسعود راستی</span></a>
-                                                            <br>
-                                                            <span class="author-add color-grey">میدستون ، کنت</span>
-                                                        </div>
-                                                        <div class="float-left">
-                                                            <a href="site/singe-page/single.php" class="read-more"><span
-                                                                    class="ml-10"><i class="fa fa-thumbtack"
-                                                                        aria-hidden="true"></i></span>انتخاب توسط
-                                                                ویراستار</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="slider-single pt-10 pl-10 pr-10 pb-10">
-                                                <div
-                                                    class="img-hover-slide border-radius-15 mb-30 position-relative overflow-hidden">
-                                                    <span class="top-right-icon bg-dark"><i
-                                                            class="mdi mdi-flash-on"></i></span>
-                                                    <a href="site/singe-page/single.php">
-                                                        <img src="attachment/imgs/slide-1.jpg" alt="post-slider">
-                                                    </a>
-                                                </div>
-                                                <div class="pr-10 pl-10">
-                                                    <div class="entry-meta mb-30">
-                                                        <a class="entry-meta meta-0" href="category.html"><span
-                                                                class="post-in background2 text-primary font-x-small">تکنولوژیکی</span></a>
-                                                        <div class="float-left font-small">
-                                                            <span><span class="ml-10 text-muted"><i class="fa fa-eye"
-                                                                        aria-hidden="true"></i></span>5.8 هزار</span>
-                                                            <span class="mr-30"><span class="ml-10 text-muted"><i
-                                                                        class="fa fa-comment"
-                                                                        aria-hidden="true"></i></span>2.5 هزار</span>
-                                                            <span class="mr-30"><span class="ml-10 text-muted"><i
-                                                                        class="fa fa-share-alt"
-                                                                        aria-hidden="true"></i></span>125 هزار</span>
-                                                        </div>
-                                                    </div>
-                                                    <h4 class="post-title mb-20"><a href="#">لورم ایپسوم متن ساختگی با
-                                                            تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
-                                                            گرافیک</a></h4>
-                                                    <div class="mb-20 overflow-hidden">
-                                                        <div class="entry-meta meta-2 float-right">
-                                                            <a class="float-right ml-10 author-img" href="author.html"
-                                                                tabindex="0"><img
-                                                                    src="attachment/imgs/authors/author-1.png"
-                                                                    alt=""></a>
-                                                            <a href="author.html" tabindex="0"><span
-                                                                    class="author-name text-grey">رضا کیمیا</span></a>
                                                             <br>
                                                             <span class="author-add color-grey">میدستون ، کنت</span>
                                                         </div>
@@ -761,64 +719,21 @@ if (isset($_POST['btn_login'])) {
                                         </div>
                                     </div>
                                     <div class="loop-list-style-1">
-                                        <article
-                                            class="first-post p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
-                                            <div
-                                                class="img-hover-slide border-radius-15 mb-30 position-relative overflow-hidden">
-                                                <span class="top-right-icon bg-dark"><i
-                                                        class="mdi mdi-flash-on"></i></span>
-                                                <a href="site/singe-page/single.php">
-                                                    <img src="attachment/imgs/news-21.jpg" alt="post-slider">
-                                                </a>
-                                            </div>
-                                            <div class="pr-10 pl-10">
-                                                <div class="entry-meta mb-30">
-                                                    <a class="entry-meta meta-0" href="category.html"><span
-                                                            class="post-in background2 text-primary font-x-small">تکنولوژیکی</span></a>
-                                                    <div class="float-left font-small">
-                                                        <span><span class="ml-10 text-muted"><i class="fa fa-eye"
-                                                                    aria-hidden="true"></i></span>5.8 هزار</span>
-                                                        <span class="mr-30"><span class="ml-10 text-muted"><i
-                                                                    class="fa fa-comment"
-                                                                    aria-hidden="true"></i></span>2.5 هزار</span>
-                                                        <span class="mr-30"><span class="ml-10 text-muted"><i
-                                                                    class="fa fa-share-alt"
-                                                                    aria-hidden="true"></i></span>125 هزار</span>
-                                                    </div>
-                                                </div>
-                                                <h4 class="post-title mb-20">
-                                                    <span class="post-format-icon">
-                                                        <ion-icon name="headset-outline"></ion-icon>
-                                                    </span>
-                                                    <a href="site/singe-page/single.php">لورم ایپسوم متن ساختگی با تولید
-                                                        سادگی نامفهوم
-                                                        از صنعت چاپ و با استفاده از طراحان گرافیک است</a>
-                                                </h4>
-                                                <div class="mb-20 overflow-hidden">
-                                                    <div
-                                                        class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
-                                                        <span class="post-by">توسط <a href="author.html">رضا
-                                                                کیمیا</a></span>
-                                                        <span class="post-on">ارسال در 18/9/1400 09:35</span>
-                                                        <span class="time-reading">زمان خواندن 12 دقیقه</span>
-                                                        <p class="font-x-small mt-10">به روز شده 18/9/1400 10:28</p>
-                                                    </div>
-                                                    <div class="float-left">
-                                                        <a href="site/singe-page/single.php" class="read-more"><span
-                                                                class="ml-10"><i class="fa fa-thumbtack"
-                                                                    aria-hidden="true"></i></span>انتخاب توسط
-                                                            ویراستار</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </article>
+                                        <?php 
+                                        $page = 1;
+                                        pageLimit('blogs', 5, false);
+                                        $blogs = $db->orderBy('date', 'DESC')
+                                        ->where('status', 1)
+                                        ->paginate('blogs', $page);
+                                        foreach($blogs as $blog){
+                                        ?>
                                         <article
                                             class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
                                             <div class="d-flex">
                                                 <div class="post-thumb d-flex ml-15 border-radius-15 img-hover-scale">
-                                                    <a class="color-white" href="site/singe-page/single.php">
+                                                    <a class="color-white" href="site/singe-page/single.php?id=<?= $blog['id'] ?>">
                                                         <img class="border-radius-15"
-                                                            src="attachment/imgs/thumbnail-15.jpg" alt="">
+                                                            src="<?= (isset($blog['image']) and $blog['image'] != '')?"../../attachment/imgs/blogs/".$blog['image']:"../../admin-panel/assets/images/ads/default.png" ?>" alt="">
                                                     </a>
                                                 </div>
                                                 <div class="post-content media-body">
@@ -830,129 +745,32 @@ if (isset($_POST['btn_login'])) {
                                                         <span class="post-format-icon">
                                                             <ion-icon name="videocam-outline"></ion-icon>
                                                         </span>
-                                                        <a href="site/singe-page/single.php">لورم ایپسوم متن ساختگی با
-                                                            تولید سادگی
-                                                            نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
-                                                            چاپگرها و متون.</a>
+                                                        <a href="site/singe-page/single.php?id=<?= $blog['id'] ?>"><?= $blog['description'] ?></a>
                                                     </h5>
                                                     <div
                                                         class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
-                                                        <span class="post-by">توسط <a href="author.html">الناز
-                                                                روستایی</a></span>
-                                                        <span class="post-on">ارسال در 15/9/1400 07:00</span>
-                                                        <span class="time-reading">زمان خواندن 12 دقیقه</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </article>
-                                        <article
-                                            class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
-                                            <div class="d-flex">
-                                                <div class="post-thumb d-flex ml-15 border-radius-15 img-hover-scale">
-                                                    <a class="color-white" href="site/singe-page/single.php">
-                                                        <img class="border-radius-15"
-                                                            src="attachment/imgs/thumbnail-13.jpg" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="post-content media-body">
-                                                    <div class="entry-meta mb-15 mt-10">
-                                                        <a class="entry-meta meta-2" href="category.html"><span
-                                                                class="post-in text-warning font-x-small">ورزشی</span></a>
-                                                    </div>
-                                                    <h5 class="post-title mb-15 text-limit-2-row">
-                                                        <a href="site/singe-page/single.php">سه درصد گذشته، حال و آینده
-                                                            شناخت فراوان
-                                                            جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت</a>
-                                                    </h5>
-                                                    <div
-                                                        class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
-                                                        <span class="post-by">توسط <a href="author.html">رضا
-                                                                کیمیا</a></span>
-                                                        <span class="post-on">ارسال در 15/9/1400 07:00</span>
-                                                        <span class="time-reading">زمان خواندن 14 دقیقه</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </article>
-                                        <article
-                                            class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
-                                            <div class="d-flex">
-                                                <div class="post-thumb d-flex ml-15 border-radius-15 img-hover-scale">
-                                                    <a class="color-white" href="site/singe-page/single.php">
-                                                        <img class="border-radius-15"
-                                                            src="attachment/imgs/thumbnail-16.jpg" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="post-content media-body">
-                                                    <div class="entry-meta mb-15 mt-10">
-                                                        <a class="entry-meta meta-2" href="category.html"><span
-                                                                class="post-in text-success font-x-small">سلامت</span></a>
-                                                    </div>
-                                                    <h5 class="post-title mb-15 text-limit-2-row">
-                                                        <span class="post-format-icon">
-                                                            <ion-icon name="image-outline"></ion-icon>
+                                                        <span class="post-by">
+                                                            <i class="fa fa-eye"></i>
+                                                            <?= $blog['counter'] ?>
+                                                            بازدید
                                                         </span>
-                                                        <a href="site/singe-page/single.php">طراحان خلاقی و فرهنگ پیشرو
-                                                            در زبان فارسی
-                                                            ایجاد کرد. در این صورت می توان امید داشت</a>
-                                                    </h5>
-                                                    <div
-                                                        class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
-                                                        <span class="post-by">توسط <a href="author.html">بهمن
-                                                                راستی</a></span>
-                                                        <span class="post-on">ارسال در 15/9/1400 07:00</span>
-                                                        <span class="time-reading">زمان خواندن 6 دقیقه</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </article>
-                                        <article
-                                            class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
-                                            <div class="d-flex">
-                                                <div class="post-thumb d-flex ml-15 border-radius-15 img-hover-scale">
-                                                    <a class="color-white" href="site/singe-page/single.php">
-                                                        <img class="border-radius-15"
-                                                            src="attachment/imgs/thumbnail-8.jpg" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="post-content media-body">
-                                                    <div class="entry-meta mb-15 mt-10">
-                                                        <a class="entry-meta meta-2" href="category.html"><span
-                                                                class="post-in text-info font-x-small">درگیری</span></a>
-                                                    </div>
-                                                    <h5 class="post-title mb-15 text-limit-2-row">
-                                                        <span class="post-format-icon">
-                                                            <ion-icon name="chatbox-outline"></ion-icon>
+                                                        <span class="post-by">
+                                                            <i class="fa fa-heart"></i>
+                                                            <?php $countLike = $db->where('blog_id', $blog['id'])
+                                                            ->getValue('wishlist', 'COUNT(id)') ?>
+                                                            <?= $countLike ?>
+                                                            لایک
                                                         </span>
-                                                        <a href="site/singe-page/single.php">تایپ به پایان رسد وزمان
-                                                            مورد نیاز شامل
-                                                            حروفچینی دستاوردهای اصلی و جوابگوی سوالات</a>
-                                                    </h5>
-                                                    <div
-                                                        class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
-                                                        <span class="post-by">توسط <a href="author.html">رضا
-                                                                کیمیا</a></span>
-                                                        <span class="post-on">ارسال در 15/9/1400 07:00</span>
-                                                        <span class="time-reading">زمان خواندن 13 دقیقه</span>
+                                                        <span class="post-on"><?= $blog['date'] ?></span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </article>
+                                        <?php } ?>
                                     </div>
                                 </div>
                                 <div class="pagination-area mb-30">
-                                    <nav aria-label="Page navigation example">
-                                        <ul class="pagination justify-content-start">
-                                            <li class="page-item"><a class="page-link" href="#"><i
-                                                        class="ti-angle-right"></i></a></li>
-                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                            <li class="page-item"><a class="page-link" href="#"><i
-                                                        class="ti-angle-left"></i></a></li>
-                                        </ul>
-                                    </nav>
+                                    <?= pagination($page, $pages) ?>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-12 sidebar-right">
@@ -1026,7 +844,7 @@ if (isset($_POST['btn_login'])) {
                                     </div>
                                 </div>
                                 <div
-                                    class="sidebar-widget p-20 border-radius-15 bg-white widget-latest-comments wow fadeIn animated">
+                                    class="sidebar-widget p-20 border-radius-15 bg-white widget-latest-comments wow fadeIn animated my-3">
                                     <div class="widget-header mb-30">
                                         <h5 class="widget-title">آخرین <span>نظرات</span></h5>
                                     </div>
@@ -1088,150 +906,6 @@ if (isset($_POST['btn_login'])) {
                                                     <span class="post-by">توسط <a href="author.html">مسعود
                                                             راستی</a></span>
                                                     <span class="post-on">4 دقیقه پیش</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-50 mt-15">
-                            <div class="col-md-12">
-                                <div class="widget-header position-relative mb-30">
-                                    <h4 class="widget-title mb-0">از <span>وبلاگ</span></h4>
-                                </div>
-                                <div class="post-carausel-2 post-module-1 row">
-                                    <div class="col">
-                                        <div class="post-thumb position-relative">
-                                            <div class="thumb-overlay img-hover-slide border-radius-15 position-relative"
-                                                style="background-image: url(attachment/imgs/thumbnail-7.jpg)">
-                                                <a class="img-link" href="site/singe-page/single.php"></a>
-                                                <div class="post-content-overlay">
-                                                    <div class="entry-meta meta-0 font-small mb-15">
-                                                        <a href="category.html"><span
-                                                                class="post-cat bg-success color-white">سفر</span></a>
-                                                    </div>
-                                                    <h5 class="post-title">
-                                                        <a class="color-white" href="site/singe-page/single.php">لورم
-                                                            ایپسوم متن ساختگی
-                                                            با تولید سادگی نامفهوم از صنعت چاپ و با استفاده</a>
-                                                    </h5>
-                                                    <div
-                                                        class="entry-meta meta-1 font-x-small mt-10 pr-5 pl-5 text-muted">
-                                                        <span><span class="ml-5"><i class="fa fa-eye"
-                                                                    aria-hidden="true"></i></span>5.8 هزار</span>
-                                                        <span class="mr-15"><span class="ml-5 text-muted"><i
-                                                                    class="fa fa-comment"
-                                                                    aria-hidden="true"></i></span>2.5 هزار</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="post-thumb position-relative">
-                                            <div class="thumb-overlay img-hover-slide border-radius-15 position-relative"
-                                                style="background-image: url(attachment/imgs/thumbnail-8.jpg)">
-                                                <a class="img-link" href="site/singe-page/single.php"></a>
-                                                <div class="post-content-overlay">
-                                                    <div class="entry-meta meta-0 font-small mb-15">
-                                                        <a href="category.html"><span
-                                                                class="post-cat bg-info color-white">زیبایی</span></a>
-                                                    </div>
-                                                    <h5 class="post-title">
-                                                        <a class="color-white" href="site/singe-page/single.php">لورم
-                                                            ایپسوم متن ساختگی
-                                                            با تولید سادگی نامفهوم از صنعت چاپ</a>
-                                                    </h5>
-                                                    <div
-                                                        class="entry-meta meta-1 font-x-small mt-10 pr-5 pl-5 text-muted">
-                                                        <span><span class="ml-5"><i class="fa fa-eye"
-                                                                    aria-hidden="true"></i></span>5.8 هزار</span>
-                                                        <span class="mr-15"><span class="ml-5 text-muted"><i
-                                                                    class="fa fa-comment"
-                                                                    aria-hidden="true"></i></span>2.5 هزار</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="post-thumb position-relative">
-                                            <div class="thumb-overlay img-hover-slide border-radius-15 position-relative"
-                                                style="background-image: url(attachment/imgs/thumbnail-10.jpg)">
-                                                <a class="img-link" href="site/singe-page/single.php"></a>
-                                                <div class="post-content-overlay">
-                                                    <div class="entry-meta meta-0 font-small mb-15">
-                                                        <a href="category.html"><span
-                                                                class="post-cat bg-danger color-white">هنر</span></a>
-                                                    </div>
-                                                    <h5 class="post-title">
-                                                        <a class="color-white" href="site/singe-page/single.php">تایپ به
-                                                            پایان رسد
-                                                            وزمان مورد نیاز شامل حروفچینی دستاوردهای</a>
-                                                    </h5>
-                                                    <div
-                                                        class="entry-meta meta-1 font-x-small mt-10 pr-5 pl-5 text-muted">
-                                                        <span><span class="ml-5"><i class="fa fa-eye"
-                                                                    aria-hidden="true"></i></span>5.8 هزار</span>
-                                                        <span class="mr-15"><span class="ml-5 text-muted"><i
-                                                                    class="fa fa-comment"
-                                                                    aria-hidden="true"></i></span>2.5 هزار</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="post-thumb position-relative">
-                                            <div class="thumb-overlay img-hover-slide border-radius-15 position-relative"
-                                                style="background-image: url(attachment/imgs/thumbnail-15.jpg)">
-                                                <a class="img-link" href="site/singe-page/single.php"></a>
-                                                <div class="post-content-overlay">
-                                                    <div class="entry-meta meta-0 font-small mb-10">
-                                                        <a href="category.html"><span
-                                                                class="post-cat bg-warning color-white">بازی</span></a>
-                                                    </div>
-                                                    <h5 class="post-title">
-                                                        <a class="color-white" href="site/singe-page/single.php">طراحان
-                                                            خلاقی و فرهنگ
-                                                            پیشرو در زبان فارسی ایجاد کرد</a>
-                                                    </h5>
-                                                    <div
-                                                        class="entry-meta meta-1 font-x-small mt-10 pr-5 pl-5 text-muted">
-                                                        <span><span class="ml-5"><i class="fa fa-eye"
-                                                                    aria-hidden="true"></i></span>5.8 هزار</span>
-                                                        <span class="mr-15"><span class="ml-5 text-muted"><i
-                                                                    class="fa fa-comment"
-                                                                    aria-hidden="true"></i></span>2.5 هزار</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="post-thumb position-relative">
-                                            <div class="thumb-overlay img-hover-slide border-radius-15 position-relative"
-                                                style="background-image: url(attachment/imgs/thumbnail-16.jpg)">
-                                                <a class="img-link" href="site/singe-page/single.php"></a>
-                                                <div class="post-content-overlay">
-                                                    <div class="entry-meta meta-0 font-small mb-10">
-                                                        <a href="category.html"><span
-                                                                class="post-cat bg-primary color-white">باغچه</span></a>
-                                                    </div>
-                                                    <h5 class="post-title">
-                                                        <a class="color-white" href="site/singe-page/single.php">سه درصد
-                                                            گذشته، حال و
-                                                            آینده شناخت فراوان جامعه و متخصصان</a>
-                                                    </h5>
-                                                    <div
-                                                        class="entry-meta meta-1 font-x-small mt-10 pr-5 pl-5 text-muted">
-                                                        <span><span class="ml-5"><i class="fa fa-eye"
-                                                                    aria-hidden="true"></i></span>5.8 هزار</span>
-                                                        <span class="mr-15"><span class="ml-5 text-muted"><i
-                                                                    class="fa fa-comment"
-                                                                    aria-hidden="true"></i></span>2.5 هزار</span>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

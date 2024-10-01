@@ -2,13 +2,14 @@
 require_once('../../app/connection/DB.php');
 require_once('../../app/controller/city_show.php');
 require_once('../../app/controller/function.php');
+require_once('../../app/helper/view.php');
 require_once('../../app/helper/jdf.php');
 $provinceList = $db->where('status', 1)
-->orderBy('name', 'ASC')
-->get('provinces', null, 'id, name');
+    ->orderBy('name', 'ASC')
+    ->get('provinces', null, 'id, name');
 $errors = [];
 
-if(isset($_POST['_insert'])){
+if (isset($_POST['_insert'])) {
     $fname = checkDataSecurity($_POST['fname']);
     $lname = checkDataSecurity($_POST['lname']);
     $ncode = checkDataSecurity($_POST['ncode']);
@@ -17,6 +18,7 @@ if(isset($_POST['_insert'])){
     $email = checkDataSecurity($_POST['email']);
     $username = checkDataSecurity($_POST['username']);
     $password = checkDataSecurity($_POST['password']);
+    $captcha = checkDataSecurity($_POST['captcha']);
 
     checkDataEmpty($fname, 'fname', 'نام شما نمیتواند خالی باشد.');
     checkDataEmpty($lname, 'lname', 'نام خانوادگی شما نمیتواند خالی باشد.');
@@ -26,36 +28,45 @@ if(isset($_POST['_insert'])){
     checkDataEmpty($email, 'email', 'ایمیل شما نمیتواند خالی باشد.');
     checkDataEmpty($gender, 'gender', 'جنسیت شما نمیتواند خالی باشد.');
     checkDataEmpty($password, 'password', 'رمز عبور شما نمیتواند خالی باشد.');
+    checkDataEmpty($captcha, 'captcha', 'فیلد کپچا خالی میباشد.');
     checkUniqData($username, 'username', 'members', 'نام کاربری قبلا وارد شده است.');
     checkUniqData($phone, 'phone', 'members', ' شماره تماس قبلا وارد شده است.');
     checkUniqData($ncode, 'ncode', 'members', ' کدملی قبلا وارد شده است.');
     checkUniqData($email, 'email', 'members', ' ایمیل قبلا وارد شده است.');
-    if($gender == 0 ){
+
+    if ($captcha != '' and $_SESSION['captcha'] != $captcha) {
+        setErrorMessage('captcha', 'کد با تصویر مطابقت ندارد.');
+        unset($_SESSION['captcha']);
+    }
+
+    if ($gender == 0) {
         $military_service = checkDataSecurity($_POST['military_service']);
         checkDataEmpty($military_service, 'military_service', 'نظام وظیفه نمیتواند خالی باشد');
     }
 
 
 
-    if(count($errors) == 0){
+    if (count($errors) == 0) {
         $db->insert('members', [
-            'fname'=>$fname,
-            'lname'=>$lname,
-            'ncode'=>$ncode,
-            'username'=>$username,
-            'email'=>$email,
-            'phone'=>$phone,
-            'gender'=>$gender,
-            'password'=>password_hash($password, PASSWORD_DEFAULT),
-            'province_id'=>isset($_POST['province'])?checkDataSecurity($_POST['province']):NULL,
-            'city_id'=>isset($_POST['city'])?checkDataSecurity($_POST['city']):NULL,
-            'image'=>isset($_POST['image'])?checkDataSecurity($_POST['image']):NULL,
-            'military_service'=>isset($military_service)?$military_service:NULL,
-            'status'=>1,
-            'setdate'=>jdate('Y/m/d H:i:s', strtotime($date)),
+            'fname' => $fname,
+            'lname' => $lname,
+            'ncode' => $ncode,
+            'username' => $username,
+            'email' => $email,
+            'phone' => $phone,
+            'gender' => $gender,
+            'password' => password_hash($password, PASSWORD_DEFAULT),
+            'province_id' => isset($_POST['province']) ? checkDataSecurity($_POST['province']) : NULL,
+            'city_id' => isset($_POST['city']) ? checkDataSecurity($_POST['city']) : NULL,
+            'image' => isset($_POST['image']) ? checkDataSecurity($_POST['image']) : NULL,
+            'military_service' => isset($military_service) ? $military_service : NULL,
+            'status' => 1,
+            'setdate' => persian_number(jdate('Y/m/d H:i:s', strtotime($date))),
         ]);
         $_SESSION['member'] = $username;
-        header('Location:../../index.php');
+        $message = "سلام خوش آمدید \n نام کاربری:$username \n رمز عبور: $password";
+        mail($email, 'سایت خبری', $message);
+        header('Location:../panel/my-profile.php');
     }
 }
 ?>
@@ -69,7 +80,7 @@ if(isset($_POST['_insert'])){
     <title>Document</title>
     <?php require_once('../layout/css.php') ?>
     <style>
-        .list{
+        .list {
             width: 100%;
         }
     </style>
@@ -122,54 +133,51 @@ if(isset($_POST['_insert'])){
                             </div>
                         </div>
                         <div class="col-lg-6 mt-3">
-                        <div class="d-flex flex-column">
-                            <label class="form-label">جنسیت <span class="text-danger">*</span></label>
-                            <select class="form-control" name="gender" id="gender" required>
-                                <option value="" selected >جنسیت مورد نظر را انتخاب کنید</option>
-                                <option <?= (isset($_POST['gender']) and $_POST['gender'] == 0) ? "SELECTED" : "" ?>
-                                    value="0">
-                                    مرد</option>
-                                <option <?= (isset($_POST['gender']) and $_POST['gender'] == 1) ? "SELECTED" : "" ?>
-                                    value="1">
-                                    زن</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                فیلد جنسیت نباید خالی باشد
+                            <div class="d-flex flex-column">
+                                <label class="form-label">جنسیت <span class="text-danger">*</span></label>
+                                <select class="form-control" name="gender" id="gender" required>
+                                    <option value="" selected>جنسیت مورد نظر را انتخاب کنید</option>
+                                    <option <?= (isset($_POST['gender']) and $_POST['gender'] == 0) ? "SELECTED" : "" ?>
+                                        value="0">
+                                        مرد</option>
+                                    <option <?= (isset($_POST['gender']) and $_POST['gender'] == 1) ? "SELECTED" : "" ?>
+                                        value="1">
+                                        زن</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    فیلد جنسیت نباید خالی باشد
+                                </div>
                             </div>
                         </div>
-                        </div>
                         <div class="col-lg-6 mt-3 d-none" id="military">
-                        <div class="d-flex flex-column">
-                            <label class="form-label">نظام وظیفه</label>
-                            <select class="form-control" name="military_service" id="military_service">
-                                <option value="">نظام وظیفه را انتخاب کنید</option>
-                                <option <?= (isset($_POST['military_service']) and $_POST['military_service'] == 0) ? "SELECTED" : "" ?>
-                                    value="0">
-                                    پایان خدمت</option>
-                                <option <?= (isset($_POST['military_service']) and $_POST['military_service'] == 1) ? "SELECTED" : "" ?>
-                                    value="1">
-                                    در حال خدمت</option>
-                                <option <?= (isset($_POST['military_service']) and $_POST['military_service'] == 2) ? "SELECTED" : "" ?>
-                                    value="2">
-                                    معاف</option>
-                            </select>
-                        </div>
+                            <div class="d-flex flex-column">
+                                <label class="form-label">نظام وظیفه</label>
+                                <select class="form-control" name="military_service" id="military_service">
+                                    <option value="">نظام وظیفه را انتخاب کنید</option>
+                                    <option <?= (isset($_POST['military_service']) and $_POST['military_service'] == 0) ? "SELECTED" : "" ?> value="0">
+                                        پایان خدمت</option>
+                                    <option <?= (isset($_POST['military_service']) and $_POST['military_service'] == 1) ? "SELECTED" : "" ?> value="1">
+                                        در حال خدمت</option>
+                                    <option <?= (isset($_POST['military_service']) and $_POST['military_service'] == 2) ? "SELECTED" : "" ?> value="2">
+                                        معاف</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="col-lg-6 mt-3">
                             <div class="d-flex flex-column">
                                 <label for="province" class="form-label">استان</label>
-                                <select id="province" name="province" class="form-control" >
+                                <select id="province" name="province" class="form-control">
                                     <option value="" selected disabled>استان را انتخاب کنید</option>
-                                    <?php foreach($provinceList as $province){ ?>
-                                            <option value="<?= $province['id'] ?>"><?= $province['name'] ?></option>
-                                        <?php } ?>
+                                    <?php foreach ($provinceList as $province) { ?>
+                                        <option value="<?= $province['id'] ?>"><?= $province['name'] ?></option>
+                                    <?php } ?>
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-6 mt-3">
                             <div class="d-flex flex-column">
                                 <label for="city" class="form-label">شهر</label>
-                                <select id="city" name="city" class="form-control" >
+                                <select id="city" name="city" class="form-control">
                                     <option value="" selected disabled>ابتدا استان را انتخاب کنید</option>
                                 </select>
                             </div>
@@ -201,7 +209,8 @@ if(isset($_POST['_insert'])){
                         <div class="col-lg-6 mt-3">
                             <label class="form-label">نام کاربری</label>
                             <span class="text-danger">*</span>
-                            <input type="text" class="form-control text-end" name="username" oninput='usernamejs(this)' required>
+                            <input type="text" class="form-control text-end" name="username" oninput='usernamejs(this)'
+                                required>
                             <div class="invalid-feedback">
                                 فیلد نام کاربری نباید خالی باشد
                             </div>
@@ -222,7 +231,31 @@ if(isset($_POST['_insert'])){
                             <div class="form-group">
                                 <label class="col-lg-3 control-label" for="image">تصویر :</label>
                                 <div class="col-lg-9">
-                                    <input name="image" id="image" type="file" style="border:1px solid #ccc; border-radius:4px;" value="" />
+                                    <input name="image" id="image" type="file"
+                                        style="border:1px solid #ccc; border-radius:4px;" value="" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6 mt-3">
+
+                            <!-- <label for="inputChoosePassword" class="form-label">رمز عبور را وارد کنید</label> -->
+                            <div class="  row">
+                                <!-- <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-lock-fill"></i></div> -->
+                                <div class="col-6 d-flex justify-content-end align-items-center">
+
+                                    <i class="mx-2 ti-reload refresh-captcha"></i>
+                                    <img src="captcha.php" alt="CAPTCHA" class="captcha-image">
+                                </div>
+                                <div class="col-6">
+
+                                    <input type="text" name="captcha" class="form-control radius-30"
+                                        placeholder="کد را وارد کنید" required>
+                                    <div class="invalid-feedback">
+                                        کد را وارد کنید
+                                    </div>
+                                    <div class="text-danger"><?= checkDataErrorExist('captcha') ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -230,7 +263,8 @@ if(isset($_POST['_insert'])){
                             <div class="row">
                                 <div class="col-6">
                                     <div class="d-grid">
-                                        <a href="<?= isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:"../../index.php" ?>" class="btn btn-danger">برگشت</a>
+                                        <a href="<?= isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "../../index.php" ?>"
+                                            class="btn btn-danger">برگشت</a>
                                     </div>
                                 </div>
 
@@ -249,11 +283,11 @@ if(isset($_POST['_insert'])){
     <?php require_once('../layout/js.php') ?>
 
     <script>
-        $('#gender').change(function(){
+        $('#gender').change(function () {
             const value = $(this).val();
-            if(value == 0)
+            if (value == 0)
                 $('#military').removeClass('d-none');
-            if(value == 1 || value == '')
+            if (value == 1 || value == '')
                 $('#military').addClass('d-none');
         })
     </script>
@@ -262,31 +296,31 @@ if(isset($_POST['_insert'])){
             const id = $(this).val();
             console.log(cities(id));
             cities(id);
-            });
-            const current_province = "<?= isset($_POST['province'])?$_POST['province']:""?>";
-                const current_city = "<?= isset($_POST['city'])?$_POST['city']:""?>";
-            if (current_city != "" && current_province != "") {
+        });
+        const current_province = "<?= isset($_POST['province']) ? $_POST['province'] : "" ?>";
+        const current_city = "<?= isset($_POST['city']) ? $_POST['city'] : "" ?>";
+        if (current_city != "" && current_province != "") {
             cities(current_province, current_city);
-            }
-            if (current_city == "" && current_province != "") {
+        }
+        if (current_city == "" && current_province != "") {
             cities(current_province);
-            }
+        }
 
-            function cities(province, city = null) {
+        function cities(province, city = null) {
             $.ajax({
                 url: "rigester.php",
                 type: "POST",
                 data: {
-                province_id: province,
-                city_id: city,
+                    province_id: province,
+                    city_id: city,
                 },
                 success: function (msg) {
-                $("#city").html(msg);
-                $("#city").select();
-                console.log($("#city").html(msg));
+                    $("#city").html(msg);
+                    $("#city").select();
+                    console.log($("#city").html(msg));
                 },
             });
-            }
+        }
     </script>
     <script>
         (() => {
@@ -310,7 +344,13 @@ if(isset($_POST['_insert'])){
     <script>
         function usernamejs(input) {
             input.value = input.value.replace(/[^a-zA-Z0-9@_-]/g, "");
-            }
+        }
+    </script>
+    <script>
+        const refreshButton = document.querySelector(".refresh-captcha");
+        refreshButton.onclick = function () {
+            document.querySelector(".captcha-image").src = 'captcha.php?' + Date.now();
+        }
     </script>
 </body>
 

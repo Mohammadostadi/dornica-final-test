@@ -1,16 +1,18 @@
-<?php 
+<?php
 
 require_once('../../app/connection/DB.php');
 require_once('../../app/controller/function.php');
+require_once('../../app/helper/view.php');
 require_once('../layout/login.php')
 
-?>
+    ?>
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
 
 <!-- Mirrored from webilux.net/demo-newsviral/about.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 28 Sep 2024 10:08:59 GMT -->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,7 +51,8 @@ require_once('../layout/login.php')
         <main class="position-relative">
             <div class="container">
                 <div class="entry-header entry-header-2 mb-50 mt-50 text-center">
-                    <div class="entry-meta meta-0 font-small mb-30"><a href="category.html"><span class="post-cat background4 text-danger">خوش آمدید</span></a></div>
+                    <div class="entry-meta meta-0 font-small mb-30"><a href="category.html"><span
+                                class="post-cat background4 text-danger">خوش آمدید</span></a></div>
                     <h1 class="post-title mb-30">
                         درباره شرکت ما
                     </h1>
@@ -65,16 +68,26 @@ require_once('../layout/login.php')
                     <div class="col-lg-8 col-md-12">
                         <div class="single-social-share single-sidebar-share mt-30">
                             <ul>
-                                <li><a class="social-icon facebook-icon text-xs-center" target="_blank" href="#"><i class="ti-facebook"></i></a></li>
-                                <li><a class="social-icon twitter-icon text-xs-center" target="_blank" href="#"><i class="ti-twitter-alt"></i></a></li>
-                                <li><a class="social-icon pinterest-icon text-xs-center" target="_blank" href="#"><i class="ti-pinterest"></i></a></li>
-                                <li><a class="social-icon instagram-icon text-xs-center" target="_blank" href="#"><i class="ti-instagram"></i></a></li>
-                                <li><a class="social-icon linkedin-icon text-xs-center" target="_blank" href="#"><i class="ti-linkedin"></i></a></li>
-                                <li><a class="social-icon email-icon text-xs-center" target="_blank" href="#"><i class="ti-email"></i></a></li>
+                                <li><a class="social-icon facebook-icon text-xs-center" target="_blank" href="#"><i
+                                            class="ti-facebook"></i></a></li>
+                                <li><a class="social-icon twitter-icon text-xs-center" target="_blank" href="#"><i
+                                            class="ti-twitter-alt"></i></a></li>
+                                <li><a class="social-icon pinterest-icon text-xs-center" target="_blank" href="#"><i
+                                            class="ti-pinterest"></i></a></li>
+                                <li><a class="social-icon instagram-icon text-xs-center" target="_blank" href="#"><i
+                                            class="ti-instagram"></i></a></li>
+                                <li><a class="social-icon linkedin-icon text-xs-center" target="_blank" href="#"><i
+                                            class="ti-linkedin"></i></a></li>
+                                <li><a class="social-icon email-icon text-xs-center" target="_blank" href="#"><i
+                                            class="ti-email"></i></a></li>
                             </ul>
                         </div>
                         <div class="single-excerpt">
-                            <p class="font-large">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد.</p>
+                            <p class="font-large">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
+                                از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است
+                                و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می
+                                باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را
+                                می طلبد.</p>
                             <hr class="wp-block-separator is-style-wide">
                             <p><span class="ml-5">
                                     <ion-icon name="home-outline"></ion-icon>
@@ -86,31 +99,53 @@ require_once('../layout/login.php')
                         <div class="entry-main-content">
                             <h2>محیطی عالی برای کار</h2>
                             <hr class="wp-block-separator is-style-wide">
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه. </p>
+                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
+                                است. چاپگرها و متون بلکه روزنامه. </p>
                             <h5>مدیرعامل ما را ملاقات کنید</h5>
                             <figure class="wp-block-gallery columns-6">
                                 <ul class="blocks-gallery-grid">
-                                    <li class="blocks-gallery-item"><a href="#"><img class="border-radius-5" src="assets/imgs/authors/author.png" alt=""></a>
-                                        <p class="font-small text-muted text-center mt-15"><strong>مسعود راستی</strong><br>مدیرعامل</p>
+                                    <li class="blocks-gallery-item"><a href="#"><img class="border-radius-5"
+                                                src="assets/imgs/authors/author.png" alt=""></a>
+                                        <p class="font-small text-muted text-center mt-15"><strong>مسعود
+                                                راستی</strong><br>مدیرعامل</p>
                                     </li>
-                                    <li class="blocks-gallery-item"><a href="#"><img class="border-radius-5" src="assets/imgs/authors/author-1.png" alt=""></a>
-                                        <p class="font-small text-muted text-center mt-15"><strong>رضا کیمیا</strong><br>مدیر ارشد اجرایی</p>
+                                    <li class="blocks-gallery-item"><a href="#"><img class="border-radius-5"
+                                                src="assets/imgs/authors/author-1.png" alt=""></a>
+                                        <p class="font-small text-muted text-center mt-15"><strong>رضا
+                                                کیمیا</strong><br>مدیر ارشد اجرایی</p>
                                     </li>
-                                    <li class="blocks-gallery-item"><a href="#"><img class="border-radius-5" src="assets/imgs/authors/author-2.png" alt=""></a>
-                                        <p class="font-small text-muted text-center mt-15"><strong>الناز روستایی</strong><br>مدیر بازاریابی</p>
+                                    <li class="blocks-gallery-item"><a href="#"><img class="border-radius-5"
+                                                src="assets/imgs/authors/author-2.png" alt=""></a>
+                                        <p class="font-small text-muted text-center mt-15"><strong>الناز
+                                                روستایی</strong><br>مدیر بازاریابی</p>
                                     </li>
-                                    <li class="blocks-gallery-item"><a href="#"><img class="border-radius-5" src="assets/imgs/authors/author-3.png" alt=""></a>
-                                        <p class="font-small text-muted text-center mt-15"><strong>سعید شمس</strong><br>مدیر امنیت</p>
+                                    <li class="blocks-gallery-item"><a href="#"><img class="border-radius-5"
+                                                src="assets/imgs/authors/author-3.png" alt=""></a>
+                                        <p class="font-small text-muted text-center mt-15"><strong>سعید
+                                                شمس</strong><br>مدیر امنیت</p>
                                     </li>
-                                    <li class="blocks-gallery-item"><a href="#"><img class="border-radius-5" src="assets/imgs/authors/author-7.png" alt=""></a>
-                                        <p class="font-small text-muted text-center mt-15"><strong>بهمن راستی</strong><br>سرپرست مشتری</p>
+                                    <li class="blocks-gallery-item"><a href="#"><img class="border-radius-5"
+                                                src="assets/imgs/authors/author-7.png" alt=""></a>
+                                        <p class="font-small text-muted text-center mt-15"><strong>بهمن
+                                                راستی</strong><br>سرپرست مشتری</p>
                                     </li>
                                 </ul>
                             </figure>
                             <p>
-                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ.
+                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
+                                است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط
+                                فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای
+                                زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با
+                                نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ.
                             </p>
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد.</p>
+                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
+                                است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط
+                                فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای
+                                زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با
+                                نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو
+                                در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه
+                                راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و
+                                جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد.</p>
                             <h2>چگونه مدیریت می کنیم</h2>
                             <div class="wp-block-image">
                                 <figure>
@@ -118,18 +153,32 @@ require_once('../layout/login.php')
                                     <figcaption> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم </figcaption>
                                 </figure>
                             </div>
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای.</p>
+                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
+                                است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط
+                                فعلی تکنولوژی مورد نیاز و کاربردهای.</p>
                             <hr class="wp-block-separator is-style-dots">
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی.</p>
+                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
+                                است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط
+                                فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای
+                                زیادی.</p>
                             <blockquote class="wp-block-quote is-style-large">
-                                <p>پیشرفت تکنولوژی مبتنی بر تناسب آن است به طوری که شما حتی به آن توجه نمی کنید ، بنابراین بخشی از زندگی روزمره است.</p><cite>مسعود راستی</cite>
+                                <p>پیشرفت تکنولوژی مبتنی بر تناسب آن است به طوری که شما حتی به آن توجه نمی کنید ،
+                                    بنابراین بخشی از زندگی روزمره است.</p><cite>مسعود راستی</cite>
                             </blockquote>
                             <h2>چشم انداز ما</h2>
                             <hr class="wp-block-separator is-style-wide">
-                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه.</p>
-                            <p>طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای</p>
+                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
+                                است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط
+                                فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای
+                                زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه.</p>
+                            <p>طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام
+                                و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل
+                                حروفچینی دستاوردهای</p>
                             <hr class="wp-block-separator is-style-wide">
-                            <p>سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد.</p>
+                            <p>سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود
+                                ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان
+                                جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی
+                                الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد.</p>
                             <p class="text-center mt-30">
                                 <a href="#"><img class="d-inline border-radius-10" src="assets/imgs/ads.jpg" alt=""></a>
                             </p>
@@ -138,12 +187,20 @@ require_once('../layout/login.php')
                             <div class="overflow-hidden mt-30">
                                 <div class="single-social-share float-right">
                                     <ul class="d-inline-block list-inline">
-                                        <li class="list-inline-item"><span class="font-small text-muted"><i class="ti-sharethis ml-5"></i>اشتراک: </span></li>
-                                        <li class="list-inline-item"><a class="social-icon facebook-icon text-xs-center" target="_blank" href="#"><i class="ti-facebook"></i></a></li>
-                                        <li class="list-inline-item"><a class="social-icon twitter-icon text-xs-center" target="_blank" href="#"><i class="ti-twitter-alt"></i></a></li>
-                                        <li class="list-inline-item"><a class="social-icon pinterest-icon text-xs-center" target="_blank" href="#"><i class="ti-pinterest"></i></a></li>
-                                        <li class="list-inline-item"><a class="social-icon instagram-icon text-xs-center" target="_blank" href="#"><i class="ti-instagram"></i></a></li>
-                                        <li class="list-inline-item"><a class="social-icon linkedin-icon text-xs-center" target="_blank" href="#"><i class="ti-linkedin"></i></a></li>
+                                        <li class="list-inline-item"><span class="font-small text-muted"><i
+                                                    class="ti-sharethis ml-5"></i>اشتراک: </span></li>
+                                        <li class="list-inline-item"><a class="social-icon facebook-icon text-xs-center"
+                                                target="_blank" href="#"><i class="ti-facebook"></i></a></li>
+                                        <li class="list-inline-item"><a class="social-icon twitter-icon text-xs-center"
+                                                target="_blank" href="#"><i class="ti-twitter-alt"></i></a></li>
+                                        <li class="list-inline-item"><a
+                                                class="social-icon pinterest-icon text-xs-center" target="_blank"
+                                                href="#"><i class="ti-pinterest"></i></a></li>
+                                        <li class="list-inline-item"><a
+                                                class="social-icon instagram-icon text-xs-center" target="_blank"
+                                                href="#"><i class="ti-instagram"></i></a></li>
+                                        <li class="list-inline-item"><a class="social-icon linkedin-icon text-xs-center"
+                                                target="_blank" href="#"><i class="ti-linkedin"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -161,15 +218,20 @@ require_once('../layout/login.php')
                                         </div>
                                         <div class="pl-10 pr-10">
                                             <div class="entry-meta mb-15 mt-10">
-                                                <a class="entry-meta meta-2" href="category.html"><span class="post-in text-primary font-x-small">سیاسی</span></a>
+                                                <a class="entry-meta meta-2" href="category.html"><span
+                                                        class="post-in text-primary font-x-small">سیاسی</span></a>
                                             </div>
                                             <h5 class="post-title mb-15">
                                                 <span class="post-format-icon">
-                                                    <ion-icon name="image-outline" role="img" class="md hydrated" aria-label="image outline"></ion-icon>
+                                                    <ion-icon name="image-outline" role="img" class="md hydrated"
+                                                        aria-label="image outline"></ion-icon>
                                                 </span>
-                                                <a href="single.html">لورم ایپسوم متن ساختگی با تولید سادگی</a></h5>
-                                            <div class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
-                                                <span class="post-by">توسط <a href="author.html">الناز روستایی</a></span>
+                                                <a href="single.html">لورم ایپسوم متن ساختگی با تولید سادگی</a>
+                                            </h5>
+                                            <div
+                                                class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
+                                                <span class="post-by">توسط <a href="author.html">الناز
+                                                        روستایی</a></span>
                                                 <span class="post-on">8 دقیقه پیش</span>
                                             </div>
                                         </div>
@@ -184,14 +246,18 @@ require_once('../layout/login.php')
                                         </div>
                                         <div class="pl-10 pr-10">
                                             <div class="entry-meta mb-15 mt-10">
-                                                <a class="entry-meta meta-2" href="category.html"><span class="post-in text-success font-x-small">فناوری</span></a>
+                                                <a class="entry-meta meta-2" href="category.html"><span
+                                                        class="post-in text-success font-x-small">فناوری</span></a>
                                             </div>
                                             <h5 class="post-title mb-15">
                                                 <span class="post-format-icon">
-                                                    <ion-icon name="headset-outline" role="img" class="md hydrated" aria-label="headset outline"></ion-icon>
+                                                    <ion-icon name="headset-outline" role="img" class="md hydrated"
+                                                        aria-label="headset outline"></ion-icon>
                                                 </span>
-                                                <a href="single.html">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</a></h5>
-                                            <div class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
+                                                <a href="single.html">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</a>
+                                            </h5>
+                                            <div
+                                                class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
                                                 <span class="post-by">توسط <a href="author.html">رضا کیمیا</a></span>
                                                 <span class="post-on">24 دقیقه پیش</span>
                                             </div>
@@ -207,11 +273,14 @@ require_once('../layout/login.php')
                                         </div>
                                         <div class="pl-10 pr-10">
                                             <div class="entry-meta mb-15 mt-10">
-                                                <a class="entry-meta meta-2" href="category.html"><span class="post-in text-danger font-x-small">جهانی</span></a>
+                                                <a class="entry-meta meta-2" href="category.html"><span
+                                                        class="post-in text-danger font-x-small">جهانی</span></a>
                                             </div>
                                             <h5 class="post-title mb-15">
-                                                <a href="single.html">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</a></h5>
-                                            <div class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
+                                                <a href="single.html">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</a>
+                                            </h5>
+                                            <div
+                                                class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
                                                 <span class="post-by">توسط <a href="author.html">سعید شمس</a></span>
                                                 <span class="post-on">24 دقیقه پیش</span>
                                             </div>
@@ -272,4 +341,5 @@ require_once('../layout/login.php')
 
 
 <!-- Mirrored from webilux.net/demo-newsviral/about.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 28 Sep 2024 10:08:59 GMT -->
+
 </html>

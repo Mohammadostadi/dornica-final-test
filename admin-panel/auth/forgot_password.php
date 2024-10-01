@@ -1,22 +1,23 @@
-<?php 
+<?php
 require_once('../../app/connection/DB.php');
 require_once('../../app/controller/function.php');
+require_once('../../app/helper/view.php');
 $errors = [];
-if(isset($_POST['forgotPassword'])){
+if (isset($_POST['forgotPassword'])) {
     $username = checkDataSecurity($_POST['username']);
     checkDataEmpty($username, 'username', 'فیلد نام کاربری شما خالی میباشد.');
-    if(count($errors) == 0){
+    if (count($errors) == 0) {
         $result = $db->where('username', $username)
-        ->getValue('admins', 'COUNT(id)');
-        if($result == 1){
+            ->getValue('admins', 'COUNT(id)');
+        if ($result == 1) {
             $_SESSION['newPassword'] = rand(1000, 10000);
             $password = password_hash($_SESSION['newPassword'], PASSWORD_DEFAULT);
             $db->where('username', $username)
-            ->update('admins', [
-                'password'=> $password
-            ]);
+                ->update('admins', [
+                    'password' => $password
+                ]);
             header('Location:sign-in.php');
-        }else{
+        } else {
             setErrorMessage('username', 'فیلد نام کاربری وجود ندارد.');
         }
     }
