@@ -3,9 +3,11 @@ require_once('../../../app/connection/DB.php');
 require_once('../../../app/controller/access.php');
 require_once('../../../app/controller/function.php');
 require_once('../../../app/helper/jdf.php');
+$page = 1;
+pageLimit('cities', 7, false);
 $cities = $db->join('provinces', 'provinces.id = cities.province_id', 'LEFT')
     ->orderBy('id', 'DESC')
-    ->get('cities', null, 'cities.id, cities.name, cities.sort, cities.status, provinces.name as province');
+    ->paginate('cities', $page, 'cities.id, cities.name, cities.sort, cities.status, provinces.name as province');
 
 ?>
 <!doctype html>
@@ -22,7 +24,7 @@ $cities = $db->join('provinces', 'provinces.id = cities.province_id', 'LEFT')
     require_once('../../layout/css.php');
     ?>
 
-    <title>استان ها</title>
+    <title>شهر ها</title>
 </head>
 
 <body>
@@ -71,7 +73,7 @@ $cities = $db->join('provinces', 'provinces.id = cities.province_id', 'LEFT')
 
                 <div class="card">
                     <div class="card-header py-3">
-                        <h6 class="mb-0 text-uppercase">لیست استان ها</h6>
+                        <h6 class="mb-0 text-uppercase">لیست شهر ها</h6>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -166,6 +168,7 @@ $cities = $db->join('provinces', 'provinces.id = cities.province_id', 'LEFT')
                                                 <?php } ?>
                                             </tbody>
                                         </table>
+                                        <?php pagination($page, $pages) ?>
                                     </div>
                                 </div>
                             </div>

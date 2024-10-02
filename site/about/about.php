@@ -20,7 +20,7 @@ require_once('../layout/login.php')
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.html">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../attachment/imgs/favicon.svg">
     <!-- NewsViral CSS  -->
     <?php require_once('../layout/css.php') ?>
 </head>
@@ -31,7 +31,7 @@ require_once('../layout/login.php')
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
                 <div class="text-center">
-                    <img class="jump mb-50" src="assets/imgs/loading.svg" alt="">
+                    <img class="jump mb-50" src="../../attachment/imgs/loading.svg" alt="">
                     <h6>در حال بارگذاری</h6>
                     <div class="loader">
                         <div class="bar bar1"></div>
@@ -105,27 +105,27 @@ require_once('../layout/login.php')
                             <figure class="wp-block-gallery columns-6">
                                 <ul class="blocks-gallery-grid">
                                     <li class="blocks-gallery-item"><a href="#"><img class="border-radius-5"
-                                                src="assets/imgs/authors/author.png" alt=""></a>
+                                                src="../../attachment/imgs/authors/author.png" alt=""></a>
                                         <p class="font-small text-muted text-center mt-15"><strong>مسعود
                                                 راستی</strong><br>مدیرعامل</p>
                                     </li>
                                     <li class="blocks-gallery-item"><a href="#"><img class="border-radius-5"
-                                                src="assets/imgs/authors/author-1.png" alt=""></a>
+                                                src="../../attachment/imgs/authors/author-1.png" alt=""></a>
                                         <p class="font-small text-muted text-center mt-15"><strong>رضا
                                                 کیمیا</strong><br>مدیر ارشد اجرایی</p>
                                     </li>
                                     <li class="blocks-gallery-item"><a href="#"><img class="border-radius-5"
-                                                src="assets/imgs/authors/author-2.png" alt=""></a>
+                                                src="../../attachment/imgs/authors/author-2.png" alt=""></a>
                                         <p class="font-small text-muted text-center mt-15"><strong>الناز
                                                 روستایی</strong><br>مدیر بازاریابی</p>
                                     </li>
                                     <li class="blocks-gallery-item"><a href="#"><img class="border-radius-5"
-                                                src="assets/imgs/authors/author-3.png" alt=""></a>
+                                                src="../../attachment/imgs/authors/author-3.png" alt=""></a>
                                         <p class="font-small text-muted text-center mt-15"><strong>سعید
                                                 شمس</strong><br>مدیر امنیت</p>
                                     </li>
                                     <li class="blocks-gallery-item"><a href="#"><img class="border-radius-5"
-                                                src="assets/imgs/authors/author-7.png" alt=""></a>
+                                                src="../../attachment/imgs/authors/author-7.png" alt=""></a>
                                         <p class="font-small text-muted text-center mt-15"><strong>بهمن
                                                 راستی</strong><br>سرپرست مشتری</p>
                                     </li>
@@ -149,7 +149,7 @@ require_once('../layout/login.php')
                             <h2>چگونه مدیریت می کنیم</h2>
                             <div class="wp-block-image">
                                 <figure>
-                                    <img class="border-radius-5" src="assets/imgs/news-23.jpg" alt="">
+                                    <img class="border-radius-5" src="../../attachment/imgs/news-23.jpg" alt="">
                                     <figcaption> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم </figcaption>
                                 </figure>
                             </div>
@@ -180,7 +180,7 @@ require_once('../layout/login.php')
                                 جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی
                                 الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد.</p>
                             <p class="text-center mt-30">
-                                <a href="#"><img class="d-inline border-radius-10" src="assets/imgs/ads.jpg" alt=""></a>
+                                <a href="#"><img class="d-inline border-radius-10" src="../../attachment/imgs/ads.jpg" alt=""></a>
                             </p>
                         </div>
                         <div class="entry-bottom mt-50 mb-30">
@@ -213,7 +213,7 @@ require_once('../layout/login.php')
                                     <div class="background-white border-radius-10 p-10 mb-30">
                                         <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
                                             <a href="single.html">
-                                                <img class="border-radius-15" src="assets/imgs/news-2.jpg" alt="">
+                                                <img class="border-radius-15" src="../../attachment/imgs/news-2.jpg" alt="">
                                             </a>
                                         </div>
                                         <div class="pl-10 pr-10">
@@ -241,7 +241,7 @@ require_once('../layout/login.php')
                                     <div class="background-white border-radius-10 p-10 mb-30">
                                         <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
                                             <a href="single.html">
-                                                <img class="border-radius-15" src="assets/imgs/news-5.jpg" alt="">
+                                                <img class="border-radius-15" src="../../attachment/imgs/news-5.jpg" alt="">
                                             </a>
                                         </div>
                                         <div class="pl-10 pr-10">
@@ -268,7 +268,7 @@ require_once('../layout/login.php')
                                     <div class="background-white border-radius-10 p-10">
                                         <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
                                             <a href="single.html">
-                                                <img class="border-radius-15" src="assets/imgs/news-7.jpg" alt="">
+                                                <img class="border-radius-15" src="../../attachment/imgs/news-7.jpg" alt="">
                                             </a>
                                         </div>
                                         <div class="pl-10 pr-10">
@@ -295,7 +295,7 @@ require_once('../layout/login.php')
                 <div class="row">
                     <div class="col-12 text-center mb-50">
                         <a href="#">
-                            <img class="border-radius-10 d-inline" src="assets/imgs/ads-3.png" alt="">
+                            <img class="border-radius-10 d-inline" src="../../attachment/imgs/ads-3.png" alt="">
                         </a>
                     </div>
                 </div>

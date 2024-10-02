@@ -20,7 +20,7 @@ require_once('../layout/login.php');
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.html">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../attachment/imgs/favicon.svg">
     <!-- NewsViral CSS  -->
     <?php require_once('../layout/css.php') ?>
 </head>
@@ -31,7 +31,7 @@ require_once('../layout/login.php');
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
                 <div class="text-center">
-                    <img class="jump mb-50" src="assets/imgs/loading.svg" alt="">
+                    <img class="jump mb-50" src="../../attachment/imgs/loading.svg" alt="">
                     <h6>در حال بارگذاری</h6>
                     <div class="loader">
                         <div class="bar bar1"></div>
@@ -181,7 +181,7 @@ require_once('../layout/login.php');
                                                 <div
                                                     class="post-thumb post-thumb-big d-flex ml-15 border-radius-15 img-hover-scale">
                                                     <a class="color-white" href="single.html">
-                                                        <img class="border-radius-15" src="assets/imgs/thumbnail-15.jpg"
+                                                        <img class="border-radius-15" src="../../attachment/imgs/thumbnail-15.jpg"
                                                             alt="">
                                                     </a>
                                                 </div>
@@ -219,7 +219,7 @@ require_once('../layout/login.php');
                                                 <div
                                                     class="post-thumb post-thumb-big d-flex ml-15 border-radius-15 img-hover-scale">
                                                     <a class="color-white" href="single.html">
-                                                        <img class="border-radius-15" src="assets/imgs/thumbnail-13.jpg"
+                                                        <img class="border-radius-15" src="../../attachment/imgs/thumbnail-13.jpg"
                                                             alt="">
                                                     </a>
                                                 </div>
@@ -249,7 +249,7 @@ require_once('../layout/login.php');
                                         </article>
                                         <div class="mb-30 text-center pl-50 pr-50">
                                             <a href="#">
-                                                <img class="border-radius-10 d-inline" src="assets/imgs/ads.jpg"
+                                                <img class="border-radius-10 d-inline" src="../../attachment/imgs/ads.jpg"
                                                     alt="post-slider">
                                             </a>
                                         </div>
@@ -259,7 +259,7 @@ require_once('../layout/login.php');
                                                 <div
                                                     class="post-thumb post-thumb-big d-flex ml-15 border-radius-15 img-hover-scale">
                                                     <a class="color-white" href="single.html">
-                                                        <img class="border-radius-15" src="assets/imgs/thumbnail-16.jpg"
+                                                        <img class="border-radius-15" src="../../attachment/imgs/thumbnail-16.jpg"
                                                             alt="">
                                                     </a>
                                                 </div>
@@ -296,7 +296,7 @@ require_once('../layout/login.php');
                                                 <div
                                                     class="post-thumb post-thumb-big d-flex ml-15 border-radius-15 img-hover-scale">
                                                     <a class="color-white" href="single.html">
-                                                        <img class="border-radius-15" src="assets/imgs/thumbnail-8.jpg"
+                                                        <img class="border-radius-15" src="../../attachment/imgs/thumbnail-8.jpg"
                                                             alt="">
                                                     </a>
                                                 </div>
@@ -333,7 +333,7 @@ require_once('../layout/login.php');
                                                 <div
                                                     class="post-thumb post-thumb-big d-flex ml-15 border-radius-15 img-hover-scale">
                                                     <a class="color-white" href="single.html">
-                                                        <img class="border-radius-15" src="assets/imgs/thumbnail-9.jpg"
+                                                        <img class="border-radius-15" src="../../attachment/imgs/thumbnail-9.jpg"
                                                             alt="">
                                                     </a>
                                                 </div>

@@ -6,7 +6,31 @@ require_once('../../app/controller/city_show.php');
 require_once('../../app/helper/view.php');
 
 $member = $db->where('username', $_SESSION['member'])
-->getOne('members');
+	->getOne('members');
+
+$errors = [];
+
+if(isset($_POST['_reset_password'])){
+	$password = checkDataSecurity($_POST['password']);
+	$confirmPassword = checkDataSecurity($_POST['confirmPassword']);
+
+	checkDataEmpty($password, 'password', 'رمزعبور شما نمیتواند خالی باشد.');
+	checkDataEmpty($confirmPassword, 'confirmPassword', 'تایید رمزعبور شما نمیتواند خالی باشد.');
+
+
+	if($confirmPassword != $password)
+		setErrorMessage('confirmPassword', 'رمزعبور شما با تایید رمزعبور مطابقت ندارند.');
+
+	if(count($errors) == 0){
+		$db->where('username', $_SESSION['member'])
+		->update('members', [
+			'password'=>password_hash($password, PASSWORD_DEFAULT)
+		]);
+		header('Location:my-profile.php?ok=7');
+	}
+}
+
+
 
 $path = basename($_SERVER['PHP_SELF']);
 ?>
@@ -83,26 +107,35 @@ $path = basename($_SERVER['PHP_SELF']);
 									<div class="shop-bx-title clearfix">
 										<h5 class="text-uppercase">تغییر رمز عبور</h5>
 									</div>
-									<form>
+									<form action="" method="post" class="needs-validation" novalidate>
 										<div class="row m-b30">
 											<div class="col-lg-6 col-md-6">
 												<div class="mb-3">
-													<label for="formcontrolinput1" class="form-label">رمز عبور جدید:</label>
-													<input name="fname" type="text" class="form-control"
-														id="formcontrolinput1" value=""
-														placeholder="رمز عبور جدید">
+													<label for="password" class="form-label">رمز عبور
+														جدید:</label>
+													<input name="password" type="text" class="form-control"
+														id="password" value="" placeholder="رمز عبور جدید"
+														required>
+													<div class="invalid-feedback">
+														فیلد رمزعبور نباید خالی باشد
+													</div>
 												</div>
 											</div>
 											<div class="col-lg-6 col-md-6">
 												<div class="mb-3">
-													<label for="formcontrolinput2" class="form-label">تایید رمز عبور:</label>
-													<input name="lname" type="text" class="form-control"
-														id="formcontrolinput2" value=""
-														placeholder="تایید رمز عبور">
+													<label for="confirmPassword" class="form-label">تایید رمز
+														عبور:</label>
+													<input name="confirmPassword" type="text" class="form-control"
+														id="confirmPassword" value="" placeholder="تایید رمز عبور"
+														required>
+														<div class="invalid-feedback">
+															فیلد تایید رمزعبور نباید خالی باشد
+														</div>
 												</div>
 											</div>
 										</div>
-										<button class="btn btn-primary btnhover">تغییر رمز</button>
+										<button class="btn btn-primary btnhover" name="_reset_password">تغییر
+											رمز</button>
 									</form>
 								</div>
 							</div>
@@ -123,7 +156,25 @@ $path = basename($_SERVER['PHP_SELF']);
 	<script src="vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script><!-- BOOTSTRAP SELECT MIN JS -->
 	<script src="js/custom.js"></script><!-- CUSTOM JS -->
 
-	
+	<script>
+		(() => {
+			"use strict";
+			const forms = document.querySelectorAll(".needs-validation");
+			Array.from(forms).forEach((form) => {
+				form.addEventListener(
+					"submit",
+					(event) => {
+						if (!form.checkValidity()) {
+							event.preventDefault();
+							event.stopPropagation();
+						}
+						form.classList.add("was-validated");
+					},
+					false
+				);
+			});
+		})();
+	</script>
 </body>
 
 <!-- Mirrored from bookland.dexignzone.com/xhtml/my-profile.php by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Apr 2024 14:18:19 GMT -->

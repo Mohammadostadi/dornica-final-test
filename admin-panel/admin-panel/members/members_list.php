@@ -8,6 +8,9 @@ require_once('../../../app/helper/jdf.php');
 $provinceList = $db->orderBy('name', 'ASC')
 ->get('provinces', null, 'id, name');
 
+$page = 1;
+pageLimit('members', 7, false);
+
 if(isset($_POST['filtered'])){
     $fname = checkDataSecurity($_POST['fname']);
     $lname = checkDataSecurity($_POST['lname']);
@@ -44,7 +47,7 @@ if(isset($_POST['unFilter'])){
 $members = $db->join('provinces', 'provinces.id = members.province_id', 'LEFT')
     ->join('cities', 'cities.id = members.city_id', 'LEFT')
     ->orderBy('members.id', 'DESC')
-    ->get('members', null, "members.id, fname, lname, gender, phone, username, provinces.name as province, cities.name as city, members.status, members.setdate");
+    ->paginate('members', $page, "members.id, fname, lname, gender, phone, username, provinces.name as province, cities.name as city, members.status, members.setdate");
 
 ?>
 <!doctype html>
@@ -310,6 +313,7 @@ $members = $db->join('provinces', 'provinces.id = members.province_id', 'LEFT')
                                             </tbody>
                                         </table>
                                     </div>
+                                    <?php pagination($page, $pages) ?>
                                 </div>
                             </div>
                         </div>

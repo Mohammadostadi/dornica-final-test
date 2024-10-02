@@ -3,8 +3,10 @@ require_once('../../../app/connection/DB.php');
 require_once('../../../app/controller/access.php');
 require_once('../../../app/controller/function.php');
 require_once('../../../app/helper/jdf.php');
+$page = 1;
+pageLimit('categories', 7,false);
 $categories = $db->orderBy('id', 'DESC')
-    ->get('categories', null);
+    ->paginate('categories', $page);
 
 ?>
 <!doctype html>
@@ -157,12 +159,13 @@ $categories = $db->orderBy('id', 'DESC')
                                                             </div>
                                                         </td>
                                                     </tr>
-
-                                                <?php } ?>
-                                            </tbody>
-                                        </table>
+                                                    
+                                                    <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                </div>
+                                    <?php pagination($page, $pages) ?>
                             </div>
                         </div>
                     </div><!--end row-->

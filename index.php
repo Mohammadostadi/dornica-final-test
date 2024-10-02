@@ -2,6 +2,7 @@
 require_once('app/connection/DB.php');
 require_once('app/controller/function.php');
 require_once('app/helper/view.php');
+require_once('app/helper/jdf.php');
 
 
 $categoriesList = $db->where('status', 1)
@@ -212,7 +213,14 @@ if (isset($_POST['btn_login'])) {
                                             href="<?= isset($_SESSION['member']) ? "site/panel/my-profile.php" : "site/auth/rigester.php" ?>"
                                             data-toggle="tooltip" data-placement="top" title=""
                                             data-original-title="<?= isset($_SESSION['member']) ? "پنل" : "ثبت نام" ?>">
-                                            <?= isset($_SESSION['member']) ? "<img src='admin-panel/assets/images/admin/default.png' class='rounded-circle' alt='' width='30px' height='30px' >" : "<i class='ti-user'></i>" ?>
+                                            <?php if (isset($_SESSION['member'])) {
+                                                $memberImage = $db->where('username', $_SESSION['member'])->getValue('members', 'image');
+                                                ?>
+                                                <img src='<?= (isset($memberImage) and $memberImage != '') ? "attachment/imgs/members/".$memberImage : "admin-panel/assets/images/admin/default.png" ?>'
+                                                    class='rounded-circle' alt='' width='30px' height='30px'>
+                                            <?php } else { ?>
+                                                <i class='ti-user'></i>
+                                            <?php } ?>
                                         </a>
                                         <?php if (!isset($_SESSION['member'])) { ?>
                                             <button class="p-0 m-0 bg-white border-0 edit red-tooltip text-danger" href="#"
@@ -266,7 +274,8 @@ if (isset($_POST['btn_login'])) {
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="modal-footer">
+                                                            <div class="modal-footer d-flex justify-content-between">
+                                                                <a href="site/auth/forget_password.php" class="text-start text-primary">رمز خود را فراموش کرده اید؟</a>
                                                                 <button type="submit" name="btn_login"
                                                                     class="btn btn-primary">ورود</button>
                                                             </div>
@@ -354,10 +363,10 @@ if (isset($_POST['btn_login'])) {
                                 <!-- Featured posts -->
                                 <div class="featured-post mb-50">
                                     <h4 class="widget-title mb-30">آخرین <span>خبر</span></h4>
-                                    <?php  
+                                    <?php
                                     $lastBlog = $db->orderBy('date', 'DESC')
-                                    ->join('categories', 'categories.id = blogs.blog_category', 'LEFT')
-                                    ->getOne('blogs', 'blogs.id, title, description, categories.name, date, counter');
+                                        ->join('categories', 'categories.id = blogs.blog_category', 'LEFT')
+                                        ->getOne('blogs', 'blogs.id, title, description, categories.name, date, counter');
                                     ?>
                                     <div class="featured-slider-1 border-radius-10">
                                         <div class="featured-slider-1-items">
@@ -367,7 +376,8 @@ if (isset($_POST['btn_login'])) {
                                                     <span class="top-right-icon bg-dark"><i
                                                             class="mdi mdi-camera-alt"></i></span>
                                                     <a href="site/singe-page/single.php?id=<?= $lastBlog['id'] ?>">
-                                                        <img src="<?= (isset($lastBlog['image']) and $lastBlog['image'] != '')?"attachment/imgs/blogs/".$lastBlog['image']:"admin-panel/assets/images/ads/default.png" ?>" alt="post-slider">
+                                                        <img src="<?= (isset($lastBlog['image']) and $lastBlog['image'] != '') ? "attachment/imgs/blogs/" . $lastBlog['image'] : "admin-panel/assets/images/ads/default.png" ?>"
+                                                            alt="post-slider">
                                                     </a>
                                                 </div>
                                                 <div class="pr-10 pl-10">
@@ -375,12 +385,12 @@ if (isset($_POST['btn_login'])) {
                                                         <a class="entry-meta meta-0" href="category.html"><span
                                                                 class="post-in background1 text-danger font-x-small"><?= $lastBlog['name'] ?></span></a>
                                                         <div class="float-left font-small">
-                                                            <?php 
-                                                            
-                                                            $lastLike =$db->where('blog_id', $lastBlog['id'])
-                                                            ->getValue('wishlist', 'COUNT(id)');
-                                                            $lastComment =$db->where('blog_id', $lastBlog['id'])
-                                                            ->getValue('comments', 'COUNT(id)');
+                                                            <?php
+
+                                                            $lastLike = $db->where('blog_id', $lastBlog['id'])
+                                                                ->getValue('wishlist', 'COUNT(id)');
+                                                            $lastComment = $db->where('blog_id', $lastBlog['id'])
+                                                                ->getValue('comments', 'COUNT(id)');
                                                             ?>
                                                             <span><span class="ml-10 text-muted"><i class="fa fa-eye"
                                                                         aria-hidden="true"></i></span><?= $lastBlog['counter'] ?></span>
@@ -392,8 +402,10 @@ if (isset($_POST['btn_login'])) {
                                                                         aria-hidden="true"></i></span><?= $lastLike ?></span>
                                                         </div>
                                                     </div>
-                                                    <h4 class="post-title mb-20"><a href="site/singe-page/single.php?id=<?= $lastBlog['id'] ?>"><?= $lastBlog['description'] ?></a></h4>
-                                                    
+                                                    <h4 class="post-title mb-20"><a
+                                                            href="site/singe-page/single.php?id=<?= $lastBlog['id'] ?>"><?= $lastBlog['description'] ?></a>
+                                                    </h4>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -453,11 +465,11 @@ if (isset($_POST['btn_login'])) {
                                                         <span class="mr-15"><span class="ml-5 text-muted"><i
                                                                     class="fa fa-comment"
                                                                     aria-hidden="true"></i></span><?= $countResentComment ?></span>
-                                                        
+
                                                         <span class="mr-15"><span class="ml-5 text-muted"><i
                                                                     class="fa fa-heart"
                                                                     aria-hidden="true"></i></span><?= $countResentLike ?></span>
-                                                        
+
                                                         <span><span class="ml-5"></span><?= $resentBlog['date'] ?></span>
                                                     </div>
                                                 </div>
@@ -482,71 +494,30 @@ if (isset($_POST['btn_login'])) {
                                         </div>
                                     </div>
                                     <div class="post-aside-style-1 border-radius-10 p-20 bg-white">
+                                        <?php 
+                                        $tables = ['description', 'title', 'blog_category', 'setdate', 'date', 'counter'];
+                                        $randomTable = rand(0, 5);
+                                        $randomBlogs = $db->where('status', 1)
+                                        ->orderBy($tables[$randomTable], 'DESC')
+                                        ->get('blogs', 4, 'id, description, image');
+                                        ?>
                                         <ul class="list-post">
+                                            <?php foreach($randomBlogs as $randomBlog){ ?>
                                             <li class="mb-20">
                                                 <div class="d-flex">
                                                     <div
                                                         class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                                        <a class="color-white" href="site/singe-page/single.php">
-                                                            <img src="attachment/imgs/thumbnail-4.jpg" alt="">
+                                                        <a class="color-white" href="site/singe-page/single.php?id=<?= $randomBlog['id'] ?>">
+                                                            <img src="<?= (isset($randomBlog['image']) and $randomBlog['image'] != '')?"attachment/imgs/blogs/".$randomBlog['image']:"admin-panel/assets/images/ads/default.png" ?>" alt="">
                                                         </a>
                                                     </div>
                                                     <div class="post-content media-body">
                                                         <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                                href="site/singe-page/single.php">لورم ایپسوم متن ساختگی
-                                                                با تولید سادگی
-                                                                نامفهوم از صنعت چاپ</a></h6>
+                                                                href="site/singe-page/single.php?id=<?= $randomBlog['id'] ?>"><?= $randomBlog['description'] ?></a></h6>
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="mb-20">
-                                                <div class="d-flex">
-                                                    <div
-                                                        class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                                        <a class="color-white" href="site/singe-page/single.php">
-                                                            <img src="attachment/imgs/thumbnail-15.jpg" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="post-content media-body">
-                                                        <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                                href="site/singe-page/single.php">سه درصد گذشته، حال و
-                                                                آینده شناخت
-                                                                فراوان</a></h6>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="mb-20">
-                                                <div class="d-flex">
-                                                    <div
-                                                        class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                                        <a class="color-white" href="site/singe-page/single.php">
-                                                            <img src="attachment/imgs/thumbnail-16.jpg" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="post-content media-body">
-                                                        <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                                href="site/singe-page/single.php">سطرآنچنان که لازم است
-                                                                و برای شرایط
-                                                                فعلی تکنولوژی</a></h6>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="d-flex">
-                                                    <div
-                                                        class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                                        <a class="color-white" href="site/singe-page/single.php">
-                                                            <img src="attachment/imgs/thumbnail-15.jpg" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="post-content media-body">
-                                                        <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                                href="site/singe-page/single.php">سه درصد گذشته، حال و
-                                                                آینده شناخت
-                                                                فراوان</a></h6>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                            <?php } ?>
                                         </ul>
                                     </div>
                                 </div>
@@ -578,117 +549,34 @@ if (isset($_POST['btn_login'])) {
                                         <h5 class="widget-title">پرطرفدارترین ها</h5>
                                     </div>
                                     <div class="post-aside-style-2">
+                                        <?php 
+                                        $popularBlogs = $db->orderBy('counter', 'DESC')
+                                        ->join('categories', 'categories.id = blogs.blog_category', 'LEFT')
+                                        ->get('blogs', 5, 'blogs.id, image, description, date, categories.name');
+
+                                        ?>
                                         <ul class="list-post">
+                                            <?php foreach($popularBlogs as $popularBlog){ ?>
                                             <li class="mb-30 wow fadeIn animated">
                                                 <div class="d-flex">
                                                     <div
                                                         class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                                        <a class="color-white" href="site/singe-page/single.php">
-                                                            <img src="attachment/imgs/thumbnail-2.jpg" alt="">
+                                                        <a class="color-white" href="site/singe-page/single.php?id=<?= $popularBlog['id'] ?>">
+                                                            <img src="<?= (isset($popularBlog['image']) and $popularBlog['image'] != '')?"attachment/imgs/blogs/".$popularBlog['image']:"admin-panel/assets/images/ads/default.png" ?>" alt="">
                                                         </a>
                                                     </div>
                                                     <div class="post-content media-body">
                                                         <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                                href="site/singe-page/single.php">لورم ایپسوم متن ساختگی
-                                                                با تولید سادگی
-                                                                نامفهوم از صنعت چاپ</a></h6>
+                                                                href="site/singe-page/single.php?id=<?= $popularBlog['id'] ?>"><?= $popularBlog['description'] ?></a></h6>
                                                         <div
                                                             class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
-                                                            <span class="post-by">توسط <a href="author.html">رضا
-                                                                    کیمیا</a></span>
-                                                            <span class="post-on">4 دقیقه پیش</span>
+                                                            <span class="post-by"><?= $popularBlog['name'] ?>
+                                                            <span class="post-on"><?= $popularBlog['date'] ?></span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="mb-30 wow fadeIn animated">
-                                                <div class="d-flex">
-                                                    <div
-                                                        class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                                        <a class="color-white" href="site/singe-page/single.php">
-                                                            <img src="attachment/imgs/thumbnail-3.jpg" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="post-content media-body">
-                                                        <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                                href="site/singe-page/single.php">لورم ایپسوم متن ساختگی
-                                                                با تولید سادگی
-                                                                نامفهوم از صنعت</a></h6>
-                                                        <div
-                                                            class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
-                                                            <span class="post-by">توسط <a href="author.html">سعید
-                                                                    شمس</a></span>
-                                                            <span class="post-on">3 ساعت پیش</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="mb-30 wow fadeIn animated">
-                                                <div class="d-flex">
-                                                    <div
-                                                        class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                                        <a class="color-white" href="site/singe-page/single.php">
-                                                            <img src="attachment/imgs/thumbnail-5.jpg" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="post-content media-body">
-                                                        <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                                href="site/singe-page/single.php">سه درصد گذشته، حال و
-                                                                آینده شناخت
-                                                                فراوان</a></h6>
-                                                        <div
-                                                            class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
-                                                            <span class="post-by">توسط <a href="author.html">الناز
-                                                                    روستایی</a></span>
-                                                            <span class="post-on">4 ساعت پیش</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="mb-30 wow fadeIn animated">
-                                                <div class="d-flex">
-                                                    <div
-                                                        class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                                        <a class="color-white" href="site/singe-page/single.php">
-                                                            <img src="attachment/imgs/thumbnail-7.jpg" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="post-content media-body">
-                                                        <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                                href="site/singe-page/single.php">طراحان خلاقی و فرهنگ
-                                                                پیشرو در زبان
-                                                                فارسی ایجاد کرد</a></h6>
-                                                        <div
-                                                            class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
-                                                            <span class="post-by">توسط <a href="author.html">بهمن
-                                                                    راستی</a></span>
-                                                            <span class="post-on">5 ساعت پیش</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="wow fadeIn animated">
-                                                <div class="d-flex">
-                                                    <div
-                                                        class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                                        <a class="color-white" href="site/singe-page/single.php">
-                                                            <img src="attachment/imgs/thumbnail-8.jpg" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="post-content media-body">
-                                                        <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                                href="site/singe-page/single.php">تایپ به پایان رسد
-                                                                وزمان مورد نیاز
-                                                                شامل حروفچینی دستاوردهای اصلی</a></h6>
-                                                        <div
-                                                            class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
-                                                            <span class="post-by">توسط <a href="author.html">مسعود
-                                                                    راستی</a></span>
-                                                            <span class="post-on">5 ساعت پیش</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                            <?php } ?>
                                         </ul>
                                     </div>
                                 </div>
@@ -710,53 +598,56 @@ if (isset($_POST['btn_login'])) {
                                         </div>
                                     </div>
                                     <div class="loop-list-style-1">
-                                        <?php 
+                                        <?php
                                         $page = 1;
                                         pageLimit('blogs', 5, false);
                                         $blogs = $db->orderBy('date', 'DESC')
-                                        ->where('status', 1)
-                                        ->paginate('blogs', $page);
-                                        foreach($blogs as $blog){
-                                        ?>
-                                        <article
-                                            class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
-                                            <div class="d-flex">
-                                                <div class="post-thumb d-flex ml-15 border-radius-15 img-hover-scale">
-                                                    <a class="color-white" href="site/singe-page/single.php?id=<?= $blog['id'] ?>">
-                                                        <img class="border-radius-15"
-                                                            src="<?= (isset($blog['image']) and $blog['image'] != '')?"../../attachment/imgs/blogs/".$blog['image']:"../../admin-panel/assets/images/ads/default.png" ?>" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="post-content media-body">
-                                                    <div class="entry-meta mb-15 mt-10">
-                                                        <a class="entry-meta meta-2" href="category.html"><span
-                                                                class="post-in text-danger font-x-small">سیاسی</span></a>
+                                            ->where('status', 1)
+                                            ->paginate('blogs', $page);
+                                        foreach ($blogs as $blog) {
+                                            ?>
+                                            <article
+                                                class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
+                                                <div class="d-flex">
+                                                    <div class="post-thumb d-flex ml-15 border-radius-15 img-hover-scale">
+                                                        <a class="color-white"
+                                                            href="site/singe-page/single.php?id=<?= $blog['id'] ?>">
+                                                            <img class="border-radius-15"
+                                                                src="<?= (isset($blog['image']) and $blog['image'] != '') ? "../../attachment/imgs/blogs/" . $blog['image'] : "../../admin-panel/assets/images/ads/default.png" ?>"
+                                                                alt="">
+                                                        </a>
                                                     </div>
-                                                    <h5 class="post-title mb-15 text-limit-2-row">
-                                                        <span class="post-format-icon">
-                                                            <ion-icon name="videocam-outline"></ion-icon>
-                                                        </span>
-                                                        <a href="site/singe-page/single.php?id=<?= $blog['id'] ?>"><?= $blog['description'] ?></a>
-                                                    </h5>
-                                                    <div
-                                                        class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
-                                                        <span class="post-by">
-                                                            <i class="fa fa-eye"></i>
-                                                            <?= $blog['counter'] ?>
-                                                            بازدید
-                                                        </span>
-                                                        <span class="post-by">
-                                                            <i class="fa fa-heart"></i>
-                                                            <?php $countLike = $db->where('blog_id', $blog['id'])
-                                                            ->getValue('wishlist', 'COUNT(id)') ?>
-                                                            <?= $countLike ?>
-                                                            لایک
-                                                        </span>
-                                                        <span class="post-on"><?= $blog['date'] ?></span>
+                                                    <div class="post-content media-body">
+                                                        <div class="entry-meta mb-15 mt-10">
+                                                            <a class="entry-meta meta-2" href="category.html"><span
+                                                                    class="post-in text-danger font-x-small">سیاسی</span></a>
+                                                        </div>
+                                                        <h5 class="post-title mb-15 text-limit-2-row">
+                                                            <span class="post-format-icon">
+                                                                <ion-icon name="videocam-outline"></ion-icon>
+                                                            </span>
+                                                            <a
+                                                                href="site/singe-page/single.php?id=<?= $blog['id'] ?>"><?= $blog['description'] ?></a>
+                                                        </h5>
+                                                        <div
+                                                            class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
+                                                            <span class="post-by">
+                                                                <i class="fa fa-eye"></i>
+                                                                <?= $blog['counter'] ?>
+                                                                بازدید
+                                                            </span>
+                                                            <span class="post-by">
+                                                                <i class="fa fa-heart"></i>
+                                                                <?php $countLike = $db->where('blog_id', $blog['id'])
+                                                                    ->getValue('wishlist', 'COUNT(id)') ?>
+                                                                <?= $countLike ?>
+                                                                لایک
+                                                            </span>
+                                                            <span class="post-on"><?= $blog['date'] ?></span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </article>
+                                            </article>
                                         <?php } ?>
                                     </div>
                                 </div>
@@ -770,6 +661,7 @@ if (isset($_POST['btn_login'])) {
                                         <h5 class="widget-title">محبوب ترین</h5>
                                     </div>
                                     <div class="post-aside-style-3">
+                                        
                                         <article class="bg-white border-radius-15 mb-30 p-10 wow fadeIn animated">
                                             <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
                                                 <a href="site/singe-page/single.php">
@@ -792,46 +684,6 @@ if (isset($_POST['btn_login'])) {
                                                 </div>
                                             </div>
                                         </article>
-                                        <article class="bg-white border-radius-15 mb-30 p-10 wow fadeIn animated">
-                                            <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
-                                                <a href="site/singe-page/single.php">
-                                                    <img class="border-radius-15" src="attachment/imgs/news-22.jpg"
-                                                        alt="">
-                                                </a>
-                                            </div>
-                                            <div class="pl-10 pr-10">
-                                                <h5 class="post-title mb-15"><a href="site/singe-page/single.php">لورم
-                                                        ایپسوم متن
-                                                        ساختگی با تولید</a></h5>
-                                                <div
-                                                    class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
-                                                    <span class="post-in">در <a href="category.html">سلامت</a></span>
-                                                    <span class="post-by">توسط <a href="author.html">رضا
-                                                            کیمیا</a></span>
-                                                    <span class="post-on">14 دقیقه پیش</span>
-                                                </div>
-                                            </div>
-                                        </article>
-                                        <article class="bg-white border-radius-15 mb-30 p-10 wow fadeIn animated">
-                                            <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
-                                                <a href="site/singe-page/single.php">
-                                                    <img class="border-radius-15" src="attachment/imgs/news-20.jpg"
-                                                        alt="">
-                                                </a>
-                                            </div>
-                                            <div class="pl-10 pr-10">
-                                                <h5 class="post-title mb-15"><a href="site/singe-page/single.php">لورم
-                                                        ایپسوم متن
-                                                        ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از
-                                                        طراحان</a></h5>
-                                                <div
-                                                    class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
-                                                    <span class="post-in">در <a href="category.html">تهران</a></span>
-                                                    <span class="post-by">توسط <a href="author.html">سعید شمس</a></span>
-                                                    <span class="post-on">16 دقیقه پیش</span>
-                                                </div>
-                                            </div>
-                                        </article>
                                     </div>
                                 </div>
                                 <div
@@ -839,67 +691,32 @@ if (isset($_POST['btn_login'])) {
                                     <div class="widget-header mb-30">
                                         <h5 class="widget-title">آخرین <span>نظرات</span></h5>
                                     </div>
+                                    <?php 
+                                    
+                                    $lastComments = $db->orderBy('comments.setdate', 'DESC')
+                                    ->join('members', 'members.id = comments.member_id', 'LEFT')
+                                    ->get('comments', 3, 'blog_id, members.image, concat(comments.fname, \' \', comments.lname) as name, description, comments.setdate')
+                                    
+                                    ?>
                                     <div class="post-block-list post-module-6">
+                                        <?php foreach($lastComments as $lastComment){ ?>
                                         <div class="last-comment mb-20 d-flex wow fadeIn animated">
                                             <span class="item-count vertical-align">
-                                                <a class="red-tooltip author-avatar" href="#" data-toggle="tooltip"
+                                                <a class="red-tooltip author-avatar" href="site/singe-page/single.php?id=<?= $lastComment['blog_id'] ?>" data-toggle="tooltip"
                                                     data-placement="top" title=""
-                                                    data-original-title="مرجان - 985 پست"><img
-                                                        src="attachment/imgs/authors/author-14.png" alt=""></a>
+                                                    data-original-title="<?= $lastComment['name'] ?>"><img
+                                                        src="<?= (isset($lastComment['image']) and $lastComment['image'] != '')?"attachment/imgs/members/".$lastComment['image']:"admin-panel/assets/images/admin/default.png" ?>" alt=""></a>
                                             </span>
                                             <div class="alith_post_title_small">
-                                                <p class="font-medium mb-10"><a href="site/singe-page/single.php">لورم
-                                                        ایپسوم متن
-                                                        ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از
-                                                        طراحان.</a></p>
+                                                <p class="font-medium mb-10"><a href="site/singe-page/single.php?id=<?= $lastComment['blog_id'] ?>"><?= $lastComment['description'] ?></a></p>
                                                 <div
                                                     class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
-                                                    <span class="post-by">توسط <a href="author.html">مرجان
-                                                            همتی</a></span>
-                                                    <span class="post-on">4 دقیقه پیش</span>
+                                                    <span class="post-by">توسط <?= $lastComment['name'] ?></span>
+                                                    <span dir="ltr" class="post-on"><?= jdate('Y/m/d H:i', strtotime($lastComment['setdate'])) ?></span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="last-comment mb-20 d-flex wow fadeIn animated">
-                                            <span class="item-count vertical-align">
-                                                <a class="red-tooltip author-avatar" href="#" data-toggle="tooltip"
-                                                    data-placement="top" title=""
-                                                    data-original-title="بهمن - 1245 پست"><img
-                                                        src="attachment/imgs/authors/author-9.png" alt=""></a>
-                                            </span>
-                                            <div class="alith_post_title_small">
-                                                <p class="font-medium mb-10"><a href="site/singe-page/single.php">لورم
-                                                        ایپسوم متن
-                                                        ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از
-                                                        طراحان</a></p>
-                                                <div
-                                                    class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
-                                                    <span class="post-by">توسط <a href="author.html">بهمن
-                                                            راستی</a></span>
-                                                    <span class="post-on">4 دقیقه پیش</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="last-comment d-flex wow fadeIn animated">
-                                            <span class="item-count vertical-align">
-                                                <a class="red-tooltip author-avatar" href="#" data-toggle="tooltip"
-                                                    data-placement="top" title=""
-                                                    data-original-title="مسعود - 445 پست"><img
-                                                        src="attachment/imgs/authors/author-3.png" alt=""></a>
-                                            </span>
-                                            <div class="alith_post_title_small">
-                                                <p class="font-medium mb-10"><a href="site/singe-page/single.php">لورم
-                                                        ایپسوم متن
-                                                        ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
-                                                        گرافیک است.</a></p>
-                                                <div
-                                                    class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
-                                                    <span class="post-by">توسط <a href="author.html">مسعود
-                                                            راستی</a></span>
-                                                    <span class="post-on">4 دقیقه پیش</span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
@@ -923,7 +740,6 @@ if (isset($_POST['btn_login'])) {
                                     <?php foreach ($categoriesList as $category) {
                                         if (isset($categoriesList[$j])) {
                                             ?>
-
                                             <li class="cat-item cat-item-2"><a href="#"><?= $categoriesList[$j]['name'] ?></a></li>
                                         <?php }
                                         $j += 1;

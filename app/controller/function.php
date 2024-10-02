@@ -124,16 +124,29 @@ function showMessage($value)
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
+    <?php }  elseif ($value == 7) { ?>
+        <div class="alert alert-info alert-dismissible fade show" role="alert" id="alert">
+            <strong>رمز عبور شما با موفقیت تغییر کرد.</strong>
+            <button type="button" class="btn-close close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     <?php } ?>
 <?php }
 
 
-function checkUniqData($data, $name, $table, $message)
+function checkUniqData($data, $name, $table, $message , $update = false)
 {
     global $db;
     if ($data != '') {
-        $checkExist = $db->where($name, $data)
-            ->getValue($table, 'COUNT(*)');
+        if($update){
+            $checkExist = $db->where('username', $_SESSION['member'] , '!=')
+                ->where($name, $data)
+                ->getValue($table, 'COUNT(*)');
+        }else{
+            $checkExist = $db->where($name, $data)
+                ->getValue($table, 'COUNT(*)');
+        }
         if ($checkExist == 1)
             setErrorMessage($name, $message);
     }
@@ -218,8 +231,7 @@ function pagination($page, $pages)
                     <li class="page-item"><a class="page-link"
                             href="<?= '?page=1' . ($queryString ? '&' . $queryString : "") ?>">اول</a></li>
                     <li class="page-item"><a class="page-link"
-                            href="<?= $page > 1 ? '?page=' . ($page - 1) . ($queryString ? '&' . $queryString : "") : '' ?>"><i
-                                class="ti-angle-right"></i></a>
+                            href="<?= $page > 1 ? '?page=' . ($page - 1) . ($queryString ? '&' . $queryString : "") : '' ?>">قبلی</a>
                     </li>
                 <?php } ?>
                 <?php if ($page == $pages) { ?>
@@ -238,8 +250,7 @@ function pagination($page, $pages)
                     </li>
                     <?php } ?>
                     <li class="page-item"><a class="page-link" <?= ($page >= $pages) ? 'disabled' : '' ?>
-                            href="<?= $page < $pages ? '?page=' . ($page + 1) . ($queryString ? '&' . $queryString : "") : '' ?>"><i
-                                class="ti-angle-left"></i></a>
+                            href="<?= $page < $pages ? '?page=' . ($page + 1) . ($queryString ? '&' . $queryString : "") : '' ?>">بعدی</a>
                     </li>
                     <li class="page-item"><a class="page-link"
                             href="<?= '?page=' . $pages . ($queryString ? '&' . $queryString : "") ?>">آخر</a></li>
@@ -270,4 +281,13 @@ function admin_role($data){
             break;
     }
 }
+
+function fn_resize($image_resource_id, $width, $height)
+    {
+        $target_width = 50;
+        $target_height = 50;
+        $target_layer = imagecreatetruecolor($target_width, $target_height);
+        imagecopyresampled($target_layer, $image_resource_id, 0, 0, 0, 0, $target_width, $target_height, $width, $height);
+        return $target_layer;
+    }
 ?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 $categoriesList = $db->where('status', 1)
@@ -16,7 +16,7 @@ if (isset($_POST['btn_login'])) {
             $_SESSION['member'] = $username;
             header('Location:../panel/my-profile.php');
         } else {
-            header("Location:".$_SERVER['PHP_SELF'].'?ok=4');
+            header("Location:" . $_SERVER['PHP_SELF'] . '?ok=4');
         }
     }
 }
@@ -67,72 +67,79 @@ if (isset($_POST['btn_login'])) {
                             <li class="cat-item cat-item-2"><a href="#">روابط رسانه ای</a></li>
                         </ul>
                         <nav>
-                            
-                        <ul class="main-menu d-none d-lg-inline">
-                                        <li class="menu-item-has-children">
-                                            <a href="../../index.php">
-                                                <span class="ml-15">
-                                                    <i name="home-outline"></i>
-                                                </span>
-                                                خانه
-                                            </a>
-                                            <ul class="sub-menu text-muted font-small">
-                                                <li><a href="../../index.php">صفحه اصلی 1</a></li>
-                                                <li><a href="home-2.html">صفحه اصلی 2</a></li>
-                                                <li><a href="home-3.html">صفحه اصلی 3</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="mega-menu-item">
-                                            <a href="#">
-                                                <span class="ml-15">
-                                                    <i class="ti-desktop mr-5"></i>
-                                                </span>
-                                                صفحات
-                                            </a>
-                                            <div class="sub-mega-menu sub-menu-list row text-muted font-small">
-                                                <ul class="col-md-2">
-                                                    <li><strong>آرشیو</strong></li>
-                                                    <li><a href="../category/category.php">دسته بندی لیستی</a></li>
-                                                    <li><a href="../category/category-grid.php">دسته بندی شبکه ای</a></li>
-                                                    <li><a href="../category/category-big.php">دسته بندی بزرگ</a></li>
-                                                    <li><a href="../category/category-metro.php">دسته بندی مترو</a></li>
-                                                </ul>
-                                                <ul class="col-md-2">
-                                                    <li><strong>صفحات</strong></li>
-                                                    <li><a href="../typography/typography.php">تایپوگرافی</a></li>
-                                                    <li><a href="../about/about.php">درباره ما</a></li>
-                                                    <li><a href="../contact/contact.php">تماس با ما</a></li>
-                                                    <li><a href="../search/search.php">جستجو</a></li>
-                                                    <li><a href="../error/404.php">صفحه 404</a></li>
-                                                </ul>
-                                                <div class="col-md-6 text-left">
-                                                    <a href="#"><img class="border-radius-10"
-                                                            src="../../attachment/imgs/ads-2.jpg" alt=""></a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <a href="contact.html">
-                                                <span class="ml-15">
-                                                    <i class="ti-email mr-5"></i>
-                                                </span>
-                                                تماس با ما
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="../../admin-panel/auth/sign-in.php">
-                                                <span class="ml-15">
-                                                    <i class="ti-panel mr-5"></i>
-                                                </span> پنل ادمین
-                                            </a>
-                                        </li>
+
+                            <ul class="main-menu d-none d-lg-inline">
+                                <li class="menu-item-has-children">
+                                    <a href="../../index.php">
+                                        <span class="ml-15">
+                                            <i name="home-outline"></i>
+                                        </span>
+                                        خانه
+                                    </a>
+                                    <ul class="sub-menu text-muted font-small">
+                                        <li><a href="../../index.php">صفحه اصلی 1</a></li>
+                                        <li><a href="home-2.html">صفحه اصلی 2</a></li>
+                                        <li><a href="home-3.html">صفحه اصلی 3</a></li>
                                     </ul>
+                                </li>
+                                <li class="mega-menu-item">
+                                    <a href="#">
+                                        <span class="ml-15">
+                                            <i class="ti-desktop mr-5"></i>
+                                        </span>
+                                        صفحات
+                                    </a>
+                                    <div class="sub-mega-menu sub-menu-list row text-muted font-small">
+                                        <ul class="col-md-2">
+                                            <li><strong>آرشیو</strong></li>
+                                            <li><a href="../category/category.php">دسته بندی لیستی</a></li>
+                                            <li><a href="../category/category-grid.php">دسته بندی شبکه ای</a></li>
+                                            <li><a href="../category/category-big.php">دسته بندی بزرگ</a></li>
+                                            <li><a href="../category/category-metro.php">دسته بندی مترو</a></li>
+                                        </ul>
+                                        <ul class="col-md-2">
+                                            <li><strong>صفحات</strong></li>
+                                            <li><a href="../typography/typography.php">تایپوگرافی</a></li>
+                                            <li><a href="../about/about.php">درباره ما</a></li>
+                                            <li><a href="../contact/contact.php">تماس با ما</a></li>
+                                            <li><a href="../search/search.php">جستجو</a></li>
+                                            <li><a href="../error/404.php">صفحه 404</a></li>
+                                        </ul>
+                                        <div class="col-md-6 text-left">
+                                            <a href="#"><img class="border-radius-10"
+                                                    src="../../attachment/imgs/ads-2.jpg" alt=""></a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="../contact/contact.php">
+                                        <span class="ml-15">
+                                            <i class="ti-email mr-5"></i>
+                                        </span>
+                                        تماس با ما
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../../admin-panel/auth/sign-in.php">
+                                        <span class="ml-15">
+                                            <i class="ti-panel mr-5"></i>
+                                        </span> پنل ادمین
+                                    </a>
+                                </li>
+                            </ul>
                             <div class="d-inline mr-50 tools-icon">
                                 <a class="red-tooltip"
                                     href="<?= isset($_SESSION['member']) ? "../panel/my-profile.php" : "../auth/rigester.php" ?>"
                                     data-toggle="tooltip" data-placement="top" title=""
                                     data-original-title="<?= isset($_SESSION['member']) ? "پنل" : "ثبت نام" ?>">
-                                    <?= isset($_SESSION['member']) ? "<img src='../../admin-panel/assets/images/admin/default.png' class='rounded-circle' alt='' width='30px' height='30px' >" : "<i class='ti-user'></i>" ?>
+                                    <?php if (isset($_SESSION['member'])) { 
+                                        $memberImage =$db->where('username', $_SESSION['member'])->getValue('members', 'image');
+                                        ?>
+                                        <img src='<?= (isset($memberImage) and $memberImage != '')?"../../attachment/imgs/members/".$memberImage:"../../admin-panel/assets/images/admin/default.png" ?>' class='rounded-circle'
+                                            alt='' width='30px' height='30px'>
+                                    <?php } else { ?>
+                                        <i class='ti-user'></i> 
+                                    <?php } ?>
                                 </a>
                                 <?php if (!isset($_SESSION['member'])) { ?>
                                     <button class="p-0 m-0 bg-white border-0 edit red-tooltip text-danger" href="#"

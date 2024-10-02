@@ -4,8 +4,11 @@ require_once('../../../app/controller/access.php');
 require_once('../../../app/controller/function.php');
 require_once('../../../app/helper/jdf.php');
 
+$page = 1;
+pageLimit('provinces', 7, false);
+
 $provinces = $db->orderBy('id', 'DESC')
-    ->get('provinces', null);
+    ->paginate('provinces', 7);
 
 ?>
 <!doctype html>
@@ -163,6 +166,7 @@ $provinces = $db->orderBy('id', 'DESC')
                                             </tbody>
                                         </table>
                                     </div>
+                                    <?php pagination($page, $pages) ?>
                                 </div>
                             </div>
                         </div>

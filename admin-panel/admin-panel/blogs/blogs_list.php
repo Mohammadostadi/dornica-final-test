@@ -3,9 +3,13 @@ require_once('../../../app/connection/DB.php');
 require_once('../../../app/controller/access.php');
 require_once('../../../app/controller/function.php');
 require_once('../../../app/helper/jdf.php');
+
+$page = 1;
+pageLimit('blogs', 7);
+
 $blogs = $db->join('categories', 'categories.id = blogs.blog_category', 'LEFT')
     ->orderBy('id', 'DESC')
-    ->get('blogs', null, 'blogs.id, blogs.title, categories.name, date, blogs.status');
+    ->paginate('blogs', $page, 'blogs.id, blogs.title, categories.name, date, blogs.status');
 
 ?>
 <!doctype html>
@@ -167,6 +171,7 @@ $blogs = $db->join('categories', 'categories.id = blogs.blog_category', 'LEFT')
                                             </tbody>
                                         </table>
                                     </div>
+                                    <?php pagination($page, $pages) ?>
                                 </div>
                             </div>
                         </div>

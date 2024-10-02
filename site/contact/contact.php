@@ -20,7 +20,7 @@ require_once('../layout/login.php');
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.html">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../attachment/imgs/favicon.svg">
     <!-- NewsViral CSS  -->
     <?php require_once('../layout/css.php') ?>
 </head>
@@ -31,7 +31,7 @@ require_once('../layout/login.php');
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
                 <div class="text-center">
-                    <img class="jump mb-50" src="assets/imgs/loading.svg" alt="">
+                    <img class="jump mb-50" src="../../attachment/imgs/loading.svg" alt="">
                     <h6>در حال بارگذاری</h6>
                     <div class="loader">
                         <div class="bar bar1"></div>
@@ -52,7 +52,7 @@ require_once('../layout/login.php');
             <div class="container">
                 <div class="entry-header entry-header-2 mb-50 mt-50 text-center">
                     <div class="thumb-overlay img-hover-slide border-radius-5 position-relative"
-                        style="background-image: url(assets/imgs/news-24.jpg)">
+                        style="background-image: url(../../attachment/imgs/news-24.jpg)">
                         <div class="position-midded">
                             <div class="entry-meta meta-0 font-small mb-30">
                                 <a href="category.html"><span class="post-cat bg-success color-white">در تماس
@@ -178,7 +178,7 @@ require_once('../layout/login.php');
                 <div class="row">
                     <div class="col-12 text-center mb-50">
                         <a href="#">
-                            <img class="d-inline border-radius-10" src="assets/imgs/ads.jpg" alt="">
+                            <img class="d-inline border-radius-10" src="../../attachment/imgs/ads.jpg" alt="">
                         </a>
                     </div>
                 </div>

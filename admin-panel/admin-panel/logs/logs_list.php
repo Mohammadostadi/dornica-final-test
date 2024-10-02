@@ -3,9 +3,11 @@ require_once('../../../app/connection/DB.php');
 require_once('../../../app/controller/access.php');
 require_once('../../../app/controller/function.php');
 require_once('../../../app/helper/jdf.php');
+$page = 1;
+pageLimit('logs', 7, false);
 $logs = $db->join('admins', 'admins.id = logs.admin_id', 'LEFT')
 ->orderBy('logs.id', 'DESC')
-    ->get('logs', null, 'admins.username, logs.date, changes, table_name, type');
+    ->paginate('logs', $page, 'admins.username, logs.date, changes, table_name, type');
 
 ?>
 <!doctype html>
@@ -120,6 +122,7 @@ $logs = $db->join('admins', 'admins.id = logs.admin_id', 'LEFT')
                                             </tbody>
                                         </table>
                                     </div>
+                                    <?php pagination($page, $pages) ?>
                                 </div>
                             </div>
                         </div>

@@ -9,6 +9,9 @@ $provinceList = $db->where('status', 1)
     ->get('provinces', null, 'id, name');
 $errors = [];
 
+
+
+
 if (isset($_POST['_insert'])) {
     $fname = checkDataSecurity($_POST['fname']);
     $lname = checkDataSecurity($_POST['lname']);
@@ -18,6 +21,7 @@ if (isset($_POST['_insert'])) {
     $email = checkDataSecurity($_POST['email']);
     $username = checkDataSecurity($_POST['username']);
     $password = checkDataSecurity($_POST['password']);
+    $confirmPassword = checkDataSecurity($_POST['confirmPassword']);
     $captcha = checkDataSecurity($_POST['captcha']);
 
     checkDataEmpty($fname, 'fname', 'نام شما نمیتواند خالی باشد.');
@@ -28,12 +32,14 @@ if (isset($_POST['_insert'])) {
     checkDataEmpty($email, 'email', 'ایمیل شما نمیتواند خالی باشد.');
     checkDataEmpty($gender, 'gender', 'جنسیت شما نمیتواند خالی باشد.');
     checkDataEmpty($password, 'password', 'رمز عبور شما نمیتواند خالی باشد.');
+    checkDataEmpty($confirmPassword, 'confirmPassword', 'تکرار رمز عبور شما نمیتواند خالی باشد.');
     checkDataEmpty($captcha, 'captcha', 'فیلد کپچا خالی میباشد.');
     checkUniqData($username, 'username', 'members', 'نام کاربری قبلا وارد شده است.');
     checkUniqData($phone, 'phone', 'members', ' شماره تماس قبلا وارد شده است.');
     checkUniqData($ncode, 'ncode', 'members', ' کدملی قبلا وارد شده است.');
     checkUniqData($email, 'email', 'members', ' ایمیل قبلا وارد شده است.');
-
+    if (strlen($ncode) != 10)
+        setErrorMessage('ncode', 'کدملی شما نا معتبر میباشد.');
     if ($captcha != '' and $_SESSION['captcha'] != $captcha) {
         setErrorMessage('captcha', 'کد با تصویر مطابقت ندارد.');
         unset($_SESSION['captcha']);
@@ -44,9 +50,48 @@ if (isset($_POST['_insert'])) {
         checkDataEmpty($military_service, 'military_service', 'نظام وظیفه نمیتواند خالی باشد');
     }
 
+    if ($confirmPassword != $password)
+        setErrorMessage('confirmPassword', 'تکرار رمز عبور با رمز عبور شما باهم مطابقت ندارند.');
 
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+        setErrorMessage('email', 'فرمت ایمیل شما صحیح نمیباشد .');
+    if (!preg_match("/^[0-9]*$/", $phone))
+        setErrorMessage('phone', 'فقط عدد میتوانید وارد کنید.');
 
+    if (isset($_FILES['image'])) {
+        $dir = '../../attachment/imgs/members/';
+        $image = $_FILES['image']['tmp_name'];
+        $image_name = rand().$_FILES['image']['name'];
+        $source_properties = getimagesize($image);
+        if($_FILES['image']['size'] <= 819200){
+            $types = ['image/jpeg', 'image/gif', 'image/png'];
+            $image_type = $source_properties['mime'];
+            if(!in_array($image_type, $types))
+                setErrorMessage('image', 'فرمت تصویر شما باید جز jpeg, gif, png, باشد.');
+        }else{
+            setErrorMessage('image', 'حجم فایل مربوطه بیشتر از ۸۰۰ کیلوبایت میباشد.');
+        }
+    }
+
+    
     if (count($errors) == 0) {
+        if(isset($image_name)){
+            $target_file = $dir.$image_name;
+            if ($image_type == 'image/jpeg') {
+                $image_resource_id = imagecreatefromjpeg($image);
+                $target_layer = fn_resize($image_resource_id, $source_properties[0], $source_properties[1]);
+                imagejpeg($target_layer, $image_name);
+            } elseif ($image_type == 'image/gif') {
+                $image_resource_id = imagecreatefromgif($image);
+                $target_layer = fn_resize($image_resource_id, $source_properties[0], $source_properties[1]);
+                imagegif($target_layer, $image_name);
+            } elseif ($image_type == 'image/png') {
+                $image_resource_id = imagecreatefrompng($image);
+                $target_layer = fn_resize($image_resource_id, $source_properties[0], $source_properties[1]);
+                imagepng($target_layer, $image_name);
+            }
+            rename($image_name, $target_file);
+        }
         $db->insert('members', [
             'fname' => $fname,
             'lname' => $lname,
@@ -58,7 +103,7 @@ if (isset($_POST['_insert'])) {
             'password' => password_hash($password, PASSWORD_DEFAULT),
             'province_id' => isset($_POST['province']) ? checkDataSecurity($_POST['province']) : NULL,
             'city_id' => isset($_POST['city']) ? checkDataSecurity($_POST['city']) : NULL,
-            'image' => isset($_POST['image']) ? checkDataSecurity($_POST['image']) : NULL,
+            'image' => isset($image_name) ? checkDataSecurity($image_name) : NULL,
             'military_service' => isset($military_service) ? $military_service : NULL,
             'status' => 1,
             'setdate' => persian_number(jdate('Y/m/d H:i:s', strtotime($date))),
@@ -119,18 +164,20 @@ if (isset($_POST['_insert'])) {
                         <div class="col-lg-6 mt-3">
                             <label class="form-label">نام </label>
                             <span class="text-danger">*</span>
-                            <input type="text" class="form-control" name="fname" oninput='namejs(this)' required>
+                            <input type="text" class="form-control" name="fname" value="<?= checkInputDataValue('fname') ?>" oninput='namejs(this)' required>
                             <div class="invalid-feedback">
                                 فیلد نام نباید خالی باشد
                             </div>
+                            <div class="text-danger"><?= checkDataErrorExist('fname') ?></div>
                         </div>
                         <div class="col-lg-6 mt-3">
                             <label class="form-label">نام خانوادگی</label>
                             <span class="text-danger">*</span>
-                            <input type="text" class="form-control" name="lname" oninput='namejs(this)' required>
+                            <input type="text" class="form-control" name="lname" value="<?= checkInputDataValue('lname') ?>" oninput='namejs(this)' required>
                             <div class="invalid-feedback">
                                 فیلد نام خانوادگی نباید خالی باشد
                             </div>
+                            <div class="text-danger"><?= checkDataErrorExist('lname') ?></div>
                         </div>
                         <div class="col-lg-6 mt-3">
                             <div class="d-flex flex-column">
@@ -147,6 +194,7 @@ if (isset($_POST['_insert'])) {
                                 <div class="invalid-feedback">
                                     فیلد جنسیت نباید خالی باشد
                                 </div>
+                                <div class="text-danger"><?= checkDataErrorExist('gender') ?></div>
                             </div>
                         </div>
                         <div class="col-lg-6 mt-3 d-none" id="military">
@@ -161,6 +209,7 @@ if (isset($_POST['_insert'])) {
                                     <option <?= (isset($_POST['military_service']) and $_POST['military_service'] == 2) ? "SELECTED" : "" ?> value="2">
                                         معاف</option>
                                 </select>
+                                <div class="text-danger"><?= checkDataErrorExist('military_service') ?></div>
                             </div>
                         </div>
                         <div class="col-lg-6 mt-3">
@@ -169,7 +218,7 @@ if (isset($_POST['_insert'])) {
                                 <select id="province" name="province" class="form-control">
                                     <option value="" selected disabled>استان را انتخاب کنید</option>
                                     <?php foreach ($provinceList as $province) { ?>
-                                        <option value="<?= $province['id'] ?>"><?= $province['name'] ?></option>
+                                        <option <?= (isset($_POST['province']) and $_POST['province'] == $province['id'])?"selected":"" ?> value="<?= $province['id'] ?>"><?= $province['name'] ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
@@ -185,35 +234,42 @@ if (isset($_POST['_insert'])) {
                         <div class="col-lg-6 mt-3">
                             <label class="form-label">کدملی</label>
                             <span class="text-danger">*</span>
-                            <input type="text" class="form-control text-end" name="ncode" required>
+                            <input type="text" class="form-control text-end" value="<?= checkInputDataValue('ncode') ?>" name="ncode" id="ncode"
+                                oninput='numberjs(this)' required>
                             <div class="invalid-feedback">
                                 فیلد کدملی نباید خالی باشد
                             </div>
+                            <div class="text-danger" id="result"></div>
+                            <div class="text-danger"><?= checkDataErrorExist('ncode') ?></div>
                         </div>
                         <div class="col-lg-6 mt-3">
                             <label class="form-label">ایمیل</label>
                             <span class="text-danger">*</span>
-                            <input type="text" class="form-control" name="email" required>
+                            <input type="text" class="form-control" name="email" value="<?= checkInputDataValue('email') ?>" required>
                             <div class="invalid-feedback">
                                 فیلد ایمیل نباید خالی باشد
                             </div>
+                            <div class="text-danger"><?= checkDataErrorExist('email') ?></div>
                         </div>
                         <div class="col-lg-6 mt-3">
                             <label class="form-label">َشماره</label>
                             <span class="text-danger">*</span>
-                            <input type="text" class="form-control text-end" name="phone" required>
+                            <input type="text" class="form-control text-end" name="phone" value="<?= checkInputDataValue('phone') ?>" oninput='numberjs(this)'
+                                required>
                             <div class="invalid-feedback">
                                 فیلد شماره نباید خالی باشد
                             </div>
+                            <div class="text-danger"><?= checkDataErrorExist('phone') ?></div>
                         </div>
                         <div class="col-lg-6 mt-3">
                             <label class="form-label">نام کاربری</label>
                             <span class="text-danger">*</span>
-                            <input type="text" class="form-control text-end" name="username" oninput='usernamejs(this)'
+                            <input type="text" class="form-control text-end" name="username" value="<?= checkInputDataValue('username') ?>" oninput='usernamejs(this)'
                                 required>
                             <div class="invalid-feedback">
                                 فیلد نام کاربری نباید خالی باشد
                             </div>
+                            <div class="text-danger"><?= checkDataErrorExist('username') ?></div>
                         </div>
                         <div class="col-lg-6 mt-3">
                             <label class="form-label">کلمه عبور</label>
@@ -222,10 +278,12 @@ if (isset($_POST['_insert'])) {
                             <div class="invalid-feedback">
                                 فیلد پسورد نباید خالی باشد
                             </div>
+                            <div class="text-danger"><?= checkDataErrorExist('password') ?></div>
                         </div>
                         <div class="col-lg-6 mt-3">
                             <label class="form-label">تکرار رمز عبور</label>
                             <input type="text" class="form-control" name="confirmPassword">
+                            <div class="text-danger"><?= checkDataErrorExist('confirmPassword') ?></div>
                         </div>
                         <div class="col-md-6 mt-3">
                             <div class="form-group">
@@ -234,6 +292,7 @@ if (isset($_POST['_insert'])) {
                                     <input name="image" id="image" type="file"
                                         style="border:1px solid #ccc; border-radius:4px;" value="" />
                                 </div>
+                                <div class="text-danger"><?= checkDataErrorExist('image') ?></div>
                             </div>
                         </div>
 
@@ -345,6 +404,9 @@ if (isset($_POST['_insert'])) {
         function usernamejs(input) {
             input.value = input.value.replace(/[^a-zA-Z0-9@_-]/g, "");
         }
+        function numberjs(input) {
+            input.value = input.value.replace(/[^0-9]/g, "");
+        }
         function namejs(input) {
             input.value = input.value.replace(/[^ا-ی]/g, "");
         }
@@ -354,6 +416,34 @@ if (isset($_POST['_insert'])) {
         refreshButton.onclick = function () {
             document.querySelector(".captcha-image").src = 'captcha.php?' + Date.now();
         }
+    </script>
+    <script>
+        function validateNationalCode(code) {
+            if (!/^\d{10}$/.test(code)) {
+                return false;
+            }
+            var check = parseInt(code[9]);
+            console.log(check);
+            var sum = 0;
+            for (var i = 0; i < 9; i++) {
+                sum += parseInt(code[i]) * (10 - i);
+            }
+            sum = sum % 11;
+            return (sum < 2 && check == sum) || (sum >= 2 && check + sum == 11);
+        }
+
+        $('#ncode').on('input', function () {
+            var code = $(this).val();
+            if (validateNationalCode(code)) {
+                $('#result').text('کد ملی معتبر است');
+            }
+            else {
+                $('#result').text('کد ملی نامعتبر است');
+            }
+            if (code == '') {
+                $('#result').text('');
+            }
+        });
     </script>
 </body>
 

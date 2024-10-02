@@ -3,6 +3,8 @@ require_once('../../../app/connection/DB.php');
 require_once('../../../app/controller/access.php');
 require_once('../../../app/controller/function.php');
 require_once('../../../app/helper/jdf.php');
+$page = 1;
+pageLimit('comments', 7, false);
 if (isset($_POST['change_status'])) {
     list($id, $status) = explode('/', checkDataSecurity($_POST['change_status']));
     $db->where('id', $id)
@@ -13,7 +15,7 @@ if (isset($_POST['change_status'])) {
 }
 
 $comments = $db->join('blogs', 'blogs.id = comments.blog_id')
-->get('comments', null, 'comments.id, concat(comments.fname, \' \', comments.lname) as name, blogs.title, comments.setdate, comments.status');
+->paginate('comments', $page, 'comments.id, concat(comments.fname, \' \', comments.lname) as name, blogs.title, comments.setdate, comments.status');
 ?>
 
 <!doctype html>
@@ -197,6 +199,7 @@ $comments = $db->join('blogs', 'blogs.id = comments.blog_id')
                                             </tbody>
                                         </table>
                                     </div>
+                                    <?php pagination($page, $pages) ?>
                                 </div>
                             </div>
                         </div>

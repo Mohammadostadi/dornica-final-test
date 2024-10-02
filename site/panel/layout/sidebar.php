@@ -4,7 +4,7 @@
             <div class="account-detail text-center">
                 <div class="my-image">
                     <a href="javascript:void(0);">
-                        <img alt="" src="../../admin-panel/assets/images/admin/default.png">
+                        <img alt="" src="<?= (isset($member['image']) and $member['image'] != '')?"../../attachment/imgs/members/".$member['image']:"../../admin-panel/assets/images/admin/default.png" ?>">
                     </a>
                 </div>
                 <div class="account-title">

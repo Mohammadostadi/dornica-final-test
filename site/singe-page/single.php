@@ -28,10 +28,23 @@ if (isset($_GET['like']) and $_GET['like'] == 1) {
             'member_id' => $memberId,
             'setdate' => $date
         ]);
+        $liked = getMaxField('blogs', 'post_liked', $id);
+        $db->where('id', $id)
+        ->update('blogs', [
+            'post_liked'=> $liked
+        ]);
     } else {
         $data = $db->where('member_id', $memberId)
             ->where('blog_id', $id)
             ->delete('wishlist');
+        $deleteLike = $db->where('id', $id)
+        ->getValue('blogs', 'post_liked');
+        $deleteLike -= 1;
+        $db->where('id', $id)
+        ->update('blogs', [
+            'post_liked'=> $deleteLike
+        ]);
+        
     }
     header('Location:single.php?id=' . $id);
 }

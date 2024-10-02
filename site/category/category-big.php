@@ -21,7 +21,7 @@ require_once('../layout/login.php');
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.html">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../attachment/imgs/favicon.svg">
     <!-- NewsViral CSS  -->
     <?php require_once('../layout/css.php') ?>
 </head>
@@ -32,7 +32,7 @@ require_once('../layout/login.php');
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
                 <div class="text-center">
-                    <img class="jump mb-50" src="assets/imgs/loading.svg" alt="">
+                    <img class="jump mb-50" src="../../attachment/imgs/loading.svg" alt="">
                     <h6>در حال بارگذاری</h6>
                     <div class="loader">
                         <div class="bar bar1"></div>
@@ -184,7 +184,7 @@ require_once('../layout/login.php');
                                                 <span class="top-right-icon bg-dark"><i
                                                         class="mdi mdi-flash-on"></i></span>
                                                 <a href="single.html">
-                                                    <img src="assets/imgs/news-18.jpg" alt="post-slider">
+                                                    <img src="../../attachment/imgs/news-18.jpg" alt="post-slider">
                                                 </a>
                                             </div>
                                             <div class="pr-10 pl-10">
@@ -235,7 +235,7 @@ require_once('../layout/login.php');
                                                 <span class="top-right-icon bg-dark"><i
                                                         class="mdi mdi-flash-on"></i></span>
                                                 <a href="single.html">
-                                                    <img src="assets/imgs/news-19.jpg" alt="post-slider">
+                                                    <img src="../../attachment/imgs/news-19.jpg" alt="post-slider">
                                                 </a>
                                             </div>
                                             <div class="pr-10 pl-10">
@@ -285,7 +285,7 @@ require_once('../layout/login.php');
                                                 <span class="top-right-icon bg-dark"><i
                                                         class="mdi mdi-flash-on"></i></span>
                                                 <a href="single.html">
-                                                    <img src="assets/imgs/news-20.jpg" alt="post-slider">
+                                                    <img src="../../attachment/imgs/news-20.jpg" alt="post-slider">
                                                 </a>
                                             </div>
                                             <div class="pr-10 pl-10">
@@ -334,7 +334,7 @@ require_once('../layout/login.php');
                                                 <span class="top-right-icon bg-dark"><i
                                                         class="mdi mdi-flash-on"></i></span>
                                                 <a href="single.html">
-                                                    <img src="assets/imgs/news-17.jpg" alt="post-slider">
+                                                    <img src="../../attachment/imgs/news-17.jpg" alt="post-slider">
                                                 </a>
                                             </div>
                                             <div class="pr-10 pl-10">
@@ -416,7 +416,7 @@ require_once('../layout/login.php');
                                                     <div
                                                         class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
                                                         <a class="color-white" href="single.html">
-                                                            <img src="assets/imgs/thumbnail-4.jpg" alt="">
+                                                            <img src="../../attachment/imgs/thumbnail-4.jpg" alt="">
                                                         </a>
                                                     </div>
                                                     <div class="post-content media-body">
@@ -431,7 +431,7 @@ require_once('../layout/login.php');
                                                     <div
                                                         class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
                                                         <a class="color-white" href="single.html">
-                                                            <img src="assets/imgs/thumbnail-15.jpg" alt="">
+                                                            <img src="../../attachment/imgs/thumbnail-15.jpg" alt="">
                                                         </a>
                                                     </div>
                                                     <div class="post-content media-body">
@@ -446,7 +446,7 @@ require_once('../layout/login.php');
                                                     <div
                                                         class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
                                                         <a class="color-white" href="single.html">
-                                                            <img src="assets/imgs/thumbnail-16.jpg" alt="">
+                                                            <img src="../../attachment/imgs/thumbnail-16.jpg" alt="">
                                                         </a>
                                                     </div>
                                                     <div class="post-content media-body">
@@ -461,7 +461,7 @@ require_once('../layout/login.php');
                                                     <div
                                                         class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
                                                         <a class="color-white" href="single.html">
-                                                            <img src="assets/imgs/thumbnail-15.jpg" alt="">
+                                                            <img src="../../attachment/imgs/thumbnail-15.jpg" alt="">
                                                         </a>
                                                     </div>
                                                     <div class="post-content media-body">
@@ -482,58 +482,58 @@ require_once('../layout/login.php');
                                         </div>
                                         <a class="red-tooltip active" href="#" data-toggle="tooltip"
                                             data-placement="top" title="" data-original-title="الناز - 1034 پست"><img
-                                                src="assets/imgs/authors/author-2.png" alt=""></a>
+                                                src="../../attachment/imgs/authors/author-2.png" alt=""></a>
                                         <a class="red-tooltip" href="#" data-toggle="tooltip" data-placement="top"
                                             title="" data-original-title="مسعود - 245 پست"><img
-                                                src="assets/imgs/authors/author-3.png" alt=""></a>
+                                                src="../../attachment/imgs/authors/author-3.png" alt=""></a>
                                         <a class="red-tooltip" href="#" data-toggle="tooltip" data-placement="top"
                                             title="" data-original-title="مریم - 356 پست"><img
-                                                src="assets/imgs/authors/author-4.png" alt=""></a>
+                                                src="../../attachment/imgs/authors/author-4.png" alt=""></a>
                                         <a class="red-tooltip active" href="#" data-toggle="tooltip"
                                             data-placement="top" title="" data-original-title="مجید - 152 پست"><img
-                                                src="assets/imgs/authors/author-5.png" alt=""></a>
+                                                src="../../attachment/imgs/authors/author-5.png" alt=""></a>
                                         <a class="red-tooltip" href="#" data-toggle="tooltip" data-placement="top"
                                             title="" data-original-title="بهمن - 245 پست"><img
-                                                src="assets/imgs/authors/author-17.png" alt=""></a>
+                                                src="../../attachment/imgs/authors/author-17.png" alt=""></a>
                                         <a class="red-tooltip" href="#" data-toggle="tooltip" data-placement="top"
                                             title="" data-original-title="حامد - 758 پست"><img
-                                                src="assets/imgs/authors/author-7.png" alt=""></a>
+                                                src="../../attachment/imgs/authors/author-7.png" alt=""></a>
                                         <a class="red-tooltip" href="#" data-toggle="tooltip" data-placement="top"
                                             title="" data-original-title="نادیا - 231 پست"><img
-                                                src="assets/imgs/authors/author-8.png" alt=""></a>
+                                                src="../../attachment/imgs/authors/author-8.png" alt=""></a>
                                         <a class="red-tooltip active" href="#" data-toggle="tooltip"
                                             data-placement="top" title="" data-original-title="فردین - 256 پست"><img
-                                                src="assets/imgs/authors/author-9.png" alt=""></a>
+                                                src="../../attachment/imgs/authors/author-9.png" alt=""></a>
                                         <a class="red-tooltip" href="#" data-toggle="tooltip" data-placement="top"
                                             title="" data-original-title="ستاره - 652 پست"><img
-                                                src="assets/imgs/authors/author-10.png" alt=""></a>
+                                                src="../../attachment/imgs/authors/author-10.png" alt=""></a>
                                         <a class="red-tooltip active" href="#" data-toggle="tooltip"
                                             data-placement="top" title="" data-original-title="حمید - 125 پست"><img
-                                                src="assets/imgs/authors/author-11.png" alt=""></a>
+                                                src="../../attachment/imgs/authors/author-11.png" alt=""></a>
                                         <a class="red-tooltip" href="#" data-toggle="tooltip" data-placement="top"
                                             title="" data-original-title="مهتاب - 452 پست"><img
-                                                src="assets/imgs/authors/author-12.png" alt=""></a>
+                                                src="../../attachment/imgs/authors/author-12.png" alt=""></a>
                                         <a class="red-tooltip" href="#" data-toggle="tooltip" data-placement="top"
                                             title="" data-original-title="ناصر - 124 پست"><img
-                                                src="assets/imgs/authors/author-13.png" alt=""></a>
+                                                src="../../attachment/imgs/authors/author-13.png" alt=""></a>
                                         <a class="red-tooltip" href="#" data-toggle="tooltip" data-placement="top"
                                             title="" data-original-title="مرجان - 1245 پست"><img
-                                                src="assets/imgs/authors/author-14.png" alt=""></a>
+                                                src="../../attachment/imgs/authors/author-14.png" alt=""></a>
                                         <a class="red-tooltip active" href="#" data-toggle="tooltip"
                                             data-placement="top" title="" data-original-title="مرتضی - 1325 پست"><img
-                                                src="assets/imgs/authors/author-15.png" alt=""></a>
+                                                src="../../attachment/imgs/authors/author-15.png" alt=""></a>
                                         <a class="red-tooltip" href="#" data-toggle="tooltip" data-placement="top"
                                             title="" data-original-title="نیلوفر - 562 پست"><img
-                                                src="assets/imgs/authors/author-16.png" alt=""></a>
+                                                src="../../attachment/imgs/authors/author-16.png" alt=""></a>
                                         <a class="red-tooltip active" href="#" data-toggle="tooltip"
                                             data-placement="top" title="" data-original-title="رضا - 256 پست"><img
-                                                src="assets/imgs/authors/author-17.png" alt=""></a>
+                                                src="../../attachment/imgs/authors/author-17.png" alt=""></a>
                                         <a class="red-tooltip" href="#" data-toggle="tooltip" data-placement="top"
                                             title="" data-original-title="یکتا - 652 پست"><img
-                                                src="assets/imgs/authors/author-18.png" alt=""></a>
+                                                src="../../attachment/imgs/authors/author-18.png" alt=""></a>
                                         <a class="red-tooltip active" href="#" data-toggle="tooltip"
                                             data-placement="top" title="" data-original-title="فرانک - 125 پست"><img
-                                                src="assets/imgs/authors/author-20.png" alt=""></a>
+                                                src="../../attachment/imgs/authors/author-20.png" alt=""></a>
                                     </div>
                                 </div>
                                 <div class="sidebar-widget widget_newsletter border-radius-10 p-20 bg-white mb-50">
@@ -586,7 +586,7 @@ require_once('../layout/login.php');
                                         <article class="bg-white border-radius-15 mb-30 p-10 wow fadeIn animated">
                                             <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
                                                 <a href="single.html">
-                                                    <img class="border-radius-15" src="assets/imgs/news-22.jpg" alt="">
+                                                    <img class="border-radius-15" src="../../attachment/imgs/news-22.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="pl-10 pr-10">
@@ -604,7 +604,7 @@ require_once('../layout/login.php');
                                         <article class="bg-white border-radius-15 mb-30 p-10 wow fadeIn animated">
                                             <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
                                                 <a href="single.html">
-                                                    <img class="border-radius-15" src="assets/imgs/news-20.jpg" alt="">
+                                                    <img class="border-radius-15" src="../../attachment/imgs/news-20.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="pl-10 pr-10">
@@ -633,7 +633,7 @@ require_once('../layout/login.php');
                                                     <div
                                                         class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
                                                         <a class="color-white" href="single.html">
-                                                            <img src="assets/imgs/thumbnail-2.jpg" alt="">
+                                                            <img src="../../attachment/imgs/thumbnail-2.jpg" alt="">
                                                         </a>
                                                     </div>
                                                     <div class="post-content media-body">
@@ -655,7 +655,7 @@ require_once('../layout/login.php');
                                                     <div
                                                         class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
                                                         <a class="color-white" href="single.html">
-                                                            <img src="assets/imgs/thumbnail-3.jpg" alt="">
+                                                            <img src="../../attachment/imgs/thumbnail-3.jpg" alt="">
                                                         </a>
                                                     </div>
                                                     <div class="post-content media-body">
@@ -677,7 +677,7 @@ require_once('../layout/login.php');
                                                     <div
                                                         class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
                                                         <a class="color-white" href="single.html">
-                                                            <img src="assets/imgs/thumbnail-5.jpg" alt="">
+                                                            <img src="../../attachment/imgs/thumbnail-5.jpg" alt="">
                                                         </a>
                                                     </div>
                                                     <div class="post-content media-body">
@@ -707,7 +707,7 @@ require_once('../layout/login.php');
                                                 <a class="red-tooltip author-avatar" href="#" data-toggle="tooltip"
                                                     data-placement="top" title=""
                                                     data-original-title="مرجان - 985 پست"><img
-                                                        src="assets/imgs/authors/author-14.png" alt=""></a>
+                                                        src="../../attachment/imgs/authors/author-14.png" alt=""></a>
                                             </span>
                                             <div class="alith_post_title_small">
                                                 <p class="font-medium mb-10"><a href="single.html">لورم ایپسوم متن
@@ -726,7 +726,7 @@ require_once('../layout/login.php');
                                                 <a class="red-tooltip author-avatar" href="#" data-toggle="tooltip"
                                                     data-placement="top" title=""
                                                     data-original-title="بهمن - 1245 پست"><img
-                                                        src="assets/imgs/authors/author-9.png" alt=""></a>
+                                                        src="../../attachment/imgs/authors/author-9.png" alt=""></a>
                                             </span>
                                             <div class="alith_post_title_small">
                                                 <p class="font-medium mb-10"><a href="single.html">لورم ایپسوم متن
@@ -745,7 +745,7 @@ require_once('../layout/login.php');
                                                 <a class="red-tooltip author-avatar" href="#" data-toggle="tooltip"
                                                     data-placement="top" title=""
                                                     data-original-title="مسعود - 445 پست"><img
-                                                        src="assets/imgs/authors/author-3.png" alt=""></a>
+                                                        src="../../attachment/imgs/authors/author-3.png" alt=""></a>
                                             </span>
                                             <div class="alith_post_title_small">
                                                 <p class="font-medium mb-10"><a href="single.html">لورم ایپسوم متن

@@ -21,7 +21,7 @@ require_once('../layout/login.php');
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.html">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../attachment/imgs/favicon.svg">
     <!-- NewsViral CSS  -->
     <?php require_once('../layout/css.php') ?>
 </head>
@@ -32,7 +32,7 @@ require_once('../layout/login.php');
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
                 <div class="text-center">
-                    <img class="jump mb-50" src="assets/imgs/loading.svg" alt="">
+                    <img class="jump mb-50" src="../../attachment/imgs/loading.svg" alt="">
                     <h6>در حال بارگذاری</h6>
                     <div class="loader">
                         <div class="bar bar1"></div>
@@ -69,7 +69,7 @@ require_once('../layout/login.php');
                     <article class="col-lg-3 col-md-6 col-sm-12 mb-30">
                         <div class="post-thumb position-relative p-10 bg-white border-radius-10">
                             <div class="thumb-overlay img-hover-slide border-radius-15 position-relative"
-                                style="background-image: url(assets/imgs/thumbnail-1.jpg)">
+                                style="background-image: url(../../attachment/imgs/thumbnail-1.jpg)">
                                 <a class="img-link" href="single.html"></a>
                                 <div class="post-content-overlay">
                                     <div class="entry-meta meta-0 font-small mb-15">
@@ -95,7 +95,7 @@ require_once('../layout/login.php');
                             <div class="img-hover-scale border-radius-10">
                                 <span class="top-right-icon background10"><i class="mdi mdi-share"></i></span>
                                 <a href="single.html">
-                                    <img class="border-radius-10" src="assets/imgs/news-5.jpg" alt="post-slider">
+                                    <img class="border-radius-10" src="../../attachment/imgs/news-5.jpg" alt="post-slider">
                                 </a>
                             </div>
                             <h6 class="post-title pr-5 pl-5 mb-10 mt-15 text-limit-2-row">
@@ -106,7 +106,7 @@ require_once('../layout/login.php');
                     <article class="col-lg-3 col-md-6 col-sm-12 mb-30">
                         <div class="post-thumb position-relative p-10 bg-white border-radius-10">
                             <div class="thumb-overlay img-hover-slide border-radius-15 position-relative"
-                                style="background-image: url(assets/imgs/thumbnail-2.jpg)">
+                                style="background-image: url(../../attachment/imgs/thumbnail-2.jpg)">
                                 <a class="img-link" href="single.html"></a>
                                 <div class="post-content-overlay">
                                     <div class="entry-meta meta-0 font-small mb-15">
@@ -130,7 +130,7 @@ require_once('../layout/login.php');
                     <article class="col-lg-3 col-md-6 col-sm-12 mb-30">
                         <div class="post-thumb position-relative p-10 bg-white border-radius-10">
                             <div class="thumb-overlay img-hover-slide border-radius-15 position-relative"
-                                style="background-image: url(assets/imgs/thumbnail-3.jpg)">
+                                style="background-image: url(../../attachment/imgs/thumbnail-3.jpg)">
                                 <a class="img-link" href="single.html"></a>
                                 <div class="post-content-overlay">
                                     <div class="entry-meta meta-0 font-small mb-15">
@@ -154,7 +154,7 @@ require_once('../layout/login.php');
                     <article class="col-lg-6 col-md-6 col-sm-12 mb-30">
                         <div class="post-thumb position-relative p-10 bg-white border-radius-10">
                             <div class="thumb-overlay img-hover-slide border-radius-15 position-relative"
-                                style="background-image: url(assets/imgs/news-20.jpg)">
+                                style="background-image: url(../../attachment/imgs/news-20.jpg)">
                                 <a class="img-link" href="single.html"></a>
                                 <div class="post-content-overlay">
                                     <div class="entry-meta meta-0 font-small mb-15">
@@ -178,7 +178,7 @@ require_once('../layout/login.php');
                     <article class="col-lg-3 col-md-6 col-sm-12 mb-30">
                         <div class="post-thumb position-relative p-10 bg-white border-radius-10">
                             <div class="thumb-overlay img-hover-slide border-radius-15 position-relative"
-                                style="background-image: url(assets/imgs/thumbnail-16.jpg)">
+                                style="background-image: url(../../attachment/imgs/thumbnail-16.jpg)">
                                 <a class="img-link" href="single.html"></a>
                                 <div class="post-content-overlay">
                                     <div class="entry-meta meta-0 font-small mb-15">
@@ -204,7 +204,7 @@ require_once('../layout/login.php');
                             <div class="img-hover-scale border-radius-10">
                                 <span class="top-right-icon background10"><i class="mdi mdi-share"></i></span>
                                 <a href="single.html">
-                                    <img class="border-radius-10" src="assets/imgs/news-6.jpg" alt="post-slider">
+                                    <img class="border-radius-10" src="../../attachment/imgs/news-6.jpg" alt="post-slider">
                                 </a>
                             </div>
                             <h6 class="post-title pr-5 pl-5 mb-10 mt-15 text-limit-2-row">
@@ -217,7 +217,7 @@ require_once('../layout/login.php');
                             <div class="img-hover-scale border-radius-10">
                                 <span class="top-right-icon background10"><i class="mdi mdi-share"></i></span>
                                 <a href="single.html">
-                                    <img class="border-radius-10" src="assets/imgs/news-8.jpg" alt="post-slider">
+                                    <img class="border-radius-10" src="../../attachment/imgs/news-8.jpg" alt="post-slider">
                                 </a>
                             </div>
                             <h6 class="post-title pr-5 pl-5 mb-10 mt-15 text-limit-2-row">
@@ -228,7 +228,7 @@ require_once('../layout/login.php');
                     <article class="col-lg-3 col-md-6 col-sm-12">
                         <div class="post-thumb position-relative p-10 bg-white border-radius-10">
                             <div class="thumb-overlay img-hover-slide border-radius-15 position-relative"
-                                style="background-image: url(assets/imgs/thumbnail-11.jpg)">
+                                style="background-image: url(../../attachment/imgs/thumbnail-11.jpg)">
                                 <a class="img-link" href="single.html"></a>
                                 <div class="post-content-overlay">
                                     <div class="entry-meta meta-0 font-small mb-15">
@@ -252,7 +252,7 @@ require_once('../layout/login.php');
                     <article class="col-lg-3 col-md-6 col-sm-12">
                         <div class="post-thumb position-relative p-10 bg-white border-radius-10">
                             <div class="thumb-overlay img-hover-slide border-radius-15 position-relative"
-                                style="background-image: url(assets/imgs/thumbnail-7.jpg)">
+                                style="background-image: url(../../attachment/imgs/thumbnail-7.jpg)">
                                 <a class="img-link" href="single.html"></a>
                                 <div class="post-content-overlay">
                                     <div class="entry-meta meta-0 font-small mb-15">
@@ -276,7 +276,7 @@ require_once('../layout/login.php');
                     <article class="col-lg-3 col-md-6 col-sm-12">
                         <div class="post-thumb position-relative p-10 bg-white border-radius-10">
                             <div class="thumb-overlay img-hover-slide border-radius-15 position-relative"
-                                style="background-image: url(assets/imgs/thumbnail-9.jpg)">
+                                style="background-image: url(../../attachment/imgs/thumbnail-9.jpg)">
                                 <a class="img-link" href="single.html"></a>
                                 <div class="post-content-overlay">
                                     <div class="entry-meta meta-0 font-small mb-15">
@@ -301,7 +301,7 @@ require_once('../layout/login.php');
                 <div class="row">
                     <div class="col-12 text-center mb-50">
                         <a href="#">
-                            <img class="border-radius-10 d-inline" src="assets/imgs/ads.jpg" alt="post-slider">
+                            <img class="border-radius-10 d-inline" src="../../attachment/imgs/ads.jpg" alt="post-slider">
                         </a>
                     </div>
                 </div>
@@ -317,7 +317,7 @@ require_once('../layout/login.php');
                                         <div class="d-flex">
                                             <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
                                                 <a class="color-white" href="single.html">
-                                                    <img src="assets/imgs/thumbnail-12.jpg" alt="">
+                                                    <img src="../../attachment/imgs/thumbnail-12.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="post-content media-body">
@@ -336,7 +336,7 @@ require_once('../layout/login.php');
                                         <div class="d-flex">
                                             <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
                                                 <a class="color-white" href="single.html">
-                                                    <img src="assets/imgs/thumbnail-13.jpg" alt="">
+                                                    <img src="../../attachment/imgs/thumbnail-13.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="post-content media-body">
@@ -355,7 +355,7 @@ require_once('../layout/login.php');
                                         <div class="d-flex">
                                             <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
                                                 <a class="color-white" href="single.html">
-                                                    <img src="assets/imgs/thumbnail-15.jpg" alt="">
+                                                    <img src="../../attachment/imgs/thumbnail-15.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="post-content media-body">
@@ -385,7 +385,7 @@ require_once('../layout/login.php');
                                         <div class="d-flex">
                                             <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
                                                 <a class="color-white" href="single.html">
-                                                    <img src="assets/imgs/thumbnail-4.jpg" alt="">
+                                                    <img src="../../attachment/imgs/thumbnail-4.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="post-content media-body">
@@ -398,7 +398,7 @@ require_once('../layout/login.php');
                                         <div class="d-flex">
                                             <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
                                                 <a class="color-white" href="single.html">
-                                                    <img src="assets/imgs/thumbnail-15.jpg" alt="">
+                                                    <img src="../../attachment/imgs/thumbnail-15.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="post-content media-body">
@@ -412,7 +412,7 @@ require_once('../layout/login.php');
                                         <div class="d-flex">
                                             <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
                                                 <a class="color-white" href="single.html">
-                                                    <img src="assets/imgs/thumbnail-16.jpg" alt="">
+                                                    <img src="../../attachment/imgs/thumbnail-16.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="post-content media-body">
@@ -425,7 +425,7 @@ require_once('../layout/login.php');
                                         <div class="d-flex">
                                             <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
                                                 <a class="color-white" href="single.html">
-                                                    <img src="assets/imgs/thumbnail-15.jpg" alt="">
+                                                    <img src="../../attachment/imgs/thumbnail-15.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="post-content media-body">
@@ -451,7 +451,7 @@ require_once('../layout/login.php');
                                         <div class="d-flex">
                                             <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
                                                 <a class="color-white" href="single.html">
-                                                    <img src="assets/imgs/thumbnail-2.jpg" alt="">
+                                                    <img src="../../attachment/imgs/thumbnail-2.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="post-content media-body">
@@ -471,7 +471,7 @@ require_once('../layout/login.php');
                                         <div class="d-flex">
                                             <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
                                                 <a class="color-white" href="single.html">
-                                                    <img src="assets/imgs/thumbnail-3.jpg" alt="">
+                                                    <img src="../../attachment/imgs/thumbnail-3.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="post-content media-body">
@@ -491,7 +491,7 @@ require_once('../layout/login.php');
                                         <div class="d-flex">
                                             <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
                                                 <a class="color-white" href="single.html">
-                                                    <img src="assets/imgs/thumbnail-5.jpg" alt="">
+                                                    <img src="../../attachment/imgs/thumbnail-5.jpg" alt="">
                                                 </a>
                                             </div>
                                             <div class="post-content media-body">
@@ -521,7 +521,7 @@ require_once('../layout/login.php');
                                     <span class="item-count vertical-align">
                                         <a class="red-tooltip author-avatar" href="#" data-toggle="tooltip"
                                             data-placement="top" title="" data-original-title="Azumi - 985 posts"><img
-                                                src="assets/imgs/authors/author-14.png" alt=""></a>
+                                                src="../../attachment/imgs/authors/author-14.png" alt=""></a>
                                     </span>
                                     <div class="alith_post_title_small">
                                         <p class="font-medium mb-10"><a href="single.html">لورم ایپسوم متن ساختگی با
@@ -537,7 +537,7 @@ require_once('../layout/login.php');
                                     <span class="item-count vertical-align">
                                         <a class="red-tooltip author-avatar" href="#" data-toggle="tooltip"
                                             data-placement="top" title="" data-original-title="Johny - 445 posts"><img
-                                                src="assets/imgs/authors/author-3.png" alt=""></a>
+                                                src="../../attachment/imgs/authors/author-3.png" alt=""></a>
                                     </span>
                                     <div class="alith_post_title_small">
                                         <p class="font-medium mb-10"><a href="single.html">سه درصد گذشته، حال و آینده
