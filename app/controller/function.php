@@ -311,7 +311,6 @@ function fn_resize($image_resource_id, $width, $height)
         global $db;
         $levelAccess = $db->where('id', $id)
         ->getValue('admins', 'levelAccess');
-        
         return in_array($access, explode(',', $levelAccess));
     }
 ?>

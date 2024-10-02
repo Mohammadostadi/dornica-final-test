@@ -166,7 +166,8 @@ $start = date("Y/m/d", $last_week);
                             <div class="d-none d-sm-block">
                                 <p class="user-name mb-0"><?= $adminShow['name'] ?>
                                 </p>
-                                <small class="mb-0 dropdown-user-designation"><?= admin_role($adminShow['role']) ?></small>
+                                <small
+                                    class="mb-0 dropdown-user-designation"><?= admin_role($adminShow['role']) ?></small>
                             </div>
                         </div>
                     </a>
@@ -206,6 +207,7 @@ $start = date("Y/m/d", $last_week);
                     </a>
 
                 </li>
+                <?php if(has_admin_access($_SESSION['user'], 'admins_list')){ ?>
                 <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class="bi bi-grid-fill"></i>
@@ -216,6 +218,8 @@ $start = date("Y/m/d", $last_week);
                         <li> <a href="admin-panel/admins/admins_list.php"><i class="bi bi-circle"></i>لیست مدیران</a>
                         </li>
                     </ul>
+                    <?php } ?>
+                    <?php if(has_admin_access($_SESSION['user'], 'members_list')){ ?>
                 <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class="bi bi-people-fill"></i>
@@ -229,6 +233,8 @@ $start = date("Y/m/d", $last_week);
 
                     </ul>
                 </li>
+                <?php } ?>
+                <?php if(has_admin_access($_SESSION['user'], 'blogs_list') or has_admin_access($_SESSION['user'], 'categories_list')){ ?>
                 <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class="bi bi-newspaper"></i>
@@ -236,15 +242,21 @@ $start = date("Y/m/d", $last_week);
                         <div class="menu-title">اخبار</div>
                     </a>
                     <ul>
+                    <?php if(has_admin_access($_SESSION['user'], 'categories_list')){ ?>
                         <li> <a href="admin-panel/categories/categories_list.php"><i class="bi bi-circle"></i>لیست
                                 دسته بندی</a>
                         </li>
+                        <?php } ?>
+                        <?php if(has_admin_access($_SESSION['user'], 'blogs_list')){ ?>
                         <li> <a href="admin-panel/blogs/blogs_list.php"><i class="bi bi-circle"></i>لیست
                                 اخبار</a>
                         </li>
+                        <?php } ?>
 
                     </ul>
                 </li>
+                <?php } ?>
+                <?php if(has_admin_access($_SESSION['user'], 'provinces_list') or has_admin_access($_SESSION['user'], 'cities_list')){ ?>
                 <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class="bi bi-building"></i>
@@ -252,14 +264,20 @@ $start = date("Y/m/d", $last_week);
                         <div class="menu-title">استان ها و شهر ها</div>
                     </a>
                     <ul>
+                    <?php if(has_admin_access($_SESSION['user'], 'provinces_list')){ ?>
                         <li> <a href="admin-panel/provinces/provinces_list.php"><i class="bi bi-circle"></i>لیست
                                 استان ها</a>
                         </li>
+                        <?php } ?>
+                        <?php if(has_admin_access($_SESSION['user'], 'cities_list')){ ?>
                         <li> <a href="admin-panel/cities/cities_list.php"><i class="bi bi-circle"></i>لیست شهر
                                 ها</a>
                         </li>
+                        <?php } ?>
 
                     </ul>
+                    <?php } ?>
+                    <?php if(has_admin_access($_SESSION['user'], 'logs_list')){ ?>
                 </li>
                 </li>
                 <li>
@@ -270,6 +288,8 @@ $start = date("Y/m/d", $last_week);
                     </a>
 
                 </li>
+                <?php } ?>
+                <?php if(has_admin_access($_SESSION['user'], 'comments_list')){ ?>
                 <li>
                     <a href="admin-panel/comments/comments_list.php" class="">
                         <div class="parent-icon"><i class="fadeIn animated bx bx-comment-detail"></i>
@@ -278,6 +298,7 @@ $start = date("Y/m/d", $last_week);
                     </a>
 
                 </li>
+                <?php } ?>
 
 
             </ul>
@@ -319,112 +340,73 @@ $start = date("Y/m/d", $last_week);
                             </div>
                         </div>
                     </div>
-                    <!--end page main-->
 
-                    <!--start overlay-->
-                    <div class="overlay nav-toggle-icon"></div>
-                    <!--end overlay-->
-
-
-
-                    <!--Start Back To Top Button-->
-                    <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
-                    <!--End Back To Top Button-->
-
-                    <!--start switcher-->
-                    <div class="switcher-body">
-                        <button class="btn btn-primary btn-switcher shadow-sm" type="button" data-bs-toggle="offcanvas"
-                            data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i
-                                class="bi bi-paint-bucket me-0"></i></button>
-                        <div class="offcanvas offcanvas-end shadow border-start-0 p-2" data-bs-scroll="true"
-                            data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling">
-                            <div class="offcanvas-header border-bottom">
-                                <h5 class="offcanvas-title" id="offcanvasScrollingLabel">سفارشی ساز تم</h5>
-                                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+                </div>
+                <div class="col-12 col-lg-6 d-flex">
+                    <div class="card radius-10 w-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <h6 class="mb-0">بازدید کنندگان</h6>
+                                <div class="fs-5 ms-auto dropdown">
+                                    <div class="dropdown-toggle dropdown-toggle-nocaret cursor-pointer"
+                                        data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></div>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">عمل</a></li>
+                                        <li><a class="dropdown-item" href="#">یک اقدام دیگر</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item" href="#">یه چیز دیگه اینجا</a></li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="offcanvas-body">
-                                <h6 class="mb-0">تنوع تم</h6>
-                                <hr>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                        id="LightTheme" value="option1">
-                                    <label class="form-check-label" for="LightTheme">روشن</label>
+                            <div id="chart11" class=""></div>
+                            <div
+                                class="d-flex align-items-center gap-5 justify-content-center mt-3 p-2 radius-10 border">
+                                <div class="text-center">
+                                    <?php
+                                    $oldMembers = $db->where("setdate < '$start'")
+                                        ->getValue('members', 'COUNT(*)');
+                                    $newMembers = $db->where("DATE(setdate) BETWEEN '$start' AND '$end'")
+                                        ->getValue('members', 'COUNT(*)');
+                                    ?>
+                                    <h3 class="mb-2 text-primary"><?= $newMembers ?></h3>
+                                    <p class="mb-0">کاربران جدید</p>
                                 </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                        id="DarkTheme" value="option2">
-                                    <label class="form-check-label" for="DarkTheme">تاریک</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                        id="SemiDarkTheme" value="option3">
-                                    <label class="form-check-label" for="SemiDarkTheme">نیمه دارک</label>
-                                </div>
-                                <hr>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                        id="MinimalTheme" value="option3" checked>
-                                    <label class="form-check-label" for="MinimalTheme">تم مینیمال</label>
-                                </div>
-                                <hr />
-                                <h6 class="mb-0">رنگ های سرصفحه</h6>
-                                <hr />
-                                <div class="header-colors-indigators">
-                                    <div class="row row-cols-auto g-3">
-                                        <div class="col">
-                                            <div class="indigator headercolor1" id="headercolor1"></div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="indigator headercolor2" id="headercolor2"></div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="indigator headercolor3" id="headercolor3"></div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="indigator headercolor4" id="headercolor4"></div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="indigator headercolor5" id="headercolor5"></div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="indigator headercolor6" id="headercolor6"></div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="indigator headercolor7" id="headercolor7"></div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="indigator headercolor8" id="headercolor8"></div>
-                                        </div>
-                                    </div>
+                                <div class="border-end sepration"></div>
+                                <div class="text-center">
+                                    <h3 class="mb-2 text-primary-2"><?= $oldMembers ?></h3>
+                                    <p class="mb-0">کاربران قدیمی</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!--end switcher-->
-
                 </div>
-                <!--end wrapper-->
+            </div>
+        </main>
+    </div>
+    <!--end wrapper-->
 
 
-                <!-- Bootstrap bundle JS -->
-                <script src="assets/js/bootstrap.bundle.min.js"></script>
-                <!--plugins-->
-                <script src="assets/js/jquery.min.js"></script>
-                <script src="assets/plugins/simplebar/js/simplebar.min.js"></script>
-                <script src="assets/plugins/metismenu/js/metisMenu.min.js"></script>
-                <script src="assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
-                <script src="assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
-                <script src="assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js"></script>
-                <script src="assets/js/pace.min.js"></script>
-                <script src="assets/plugins/chartjs/js/Chart.min.js"></script>
-                <script src="assets/plugins/chartjs/js/Chart.extension.js"></script>
-                <script src="assets/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
-                <!--app-->
-                <script src="assets/js/app.js"></script>
-                <?php require_once('assets/js/index3.php') ?>
-                <script>
-                    new PerfectScrollbar(".best-product")
-                </script>
+    <!-- Bootstrap bundle JS -->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!--plugins-->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/plugins/simplebar/js/simplebar.min.js"></script>
+    <script src="assets/plugins/metismenu/js/metisMenu.min.js"></script>
+    <script src="assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+    <script src="assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="assets/js/pace.min.js"></script>
+    <script src="assets/plugins/chartjs/js/Chart.min.js"></script>
+    <script src="assets/plugins/chartjs/js/Chart.extension.js"></script>
+    <script src="assets/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
+    <!--app-->
+    <script src="assets/js/app.js"></script>
+    <?php require_once('assets/js/index3.php') ?>
+    <script>
+        new PerfectScrollbar(".best-product")
+    </script>
 
 </body>
 
