@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 01, 2024 at 03:39 PM
+-- Generation Time: Oct 02, 2024 at 07:31 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `admins` (
 --
 
 INSERT INTO `admins` (`id`, `fname`, `lname`, `username`, `password`, `role`, `levelAccess`, `status`) VALUES
-(1, 'محمد', 'استادی', 'ostadi', '$2y$10$2AlvHYbZlEZQl81CwM/lH.xV5b9lxscP4ZBewy8ZyUwLxZ/jAJl/6', 0, 'admins_list,admin_add,admin_delete,admin_update,blogs_list,blog_delete,blog_update,blog_add,members_list,member_reset_password,member_delete,member_update,provinces_list,province_add,province_delete,province_update,cities_list,city_add,city_delete,city_update,categories_list,category_add,category_delete,category_update,logs_list,comments_list', 1),
+(1, 'محمد', 'استادی', 'ostadi', '$2y$10$TXpSACJFQBnSjoJiV2isD.YPA9CiiC8N3LsNVA31b58wCW7ixGb8.', 0, 'admins_list,admin_add,admin_delete,admin_update,blogs_list,blog_delete,blog_update,blog_add,members_list,member_reset_password,member_delete,member_update,provinces_list,province_add,province_delete,province_update,cities_list,city_add,city_delete,city_update,categories_list,category_add,category_delete,category_update,logs_list,comments_list', 1),
 (2, 'مبینا', 'رمضانی', 'mbn_ramezani', '$2y$10$.qhDNqYmK9C1Bwi5AUxpiOdRJ1LUKRy832iQbX5pOXAqEStmQ/OPq', 1, 'admins_list,blogs_list,blog_delete,blog_update,blog_add,members_list,member_reset_password,member_delete,member_update,provinces_list,province_add,province_delete,province_update,cities_list,city_add,city_delete,city_update,categories_list,category_add,category_delete,category_update', 1);
 
 -- --------------------------------------------------------
@@ -68,22 +68,25 @@ CREATE TABLE IF NOT EXISTS `blogs` (
   `updated_at` varchar(20) COLLATE utf8mb4_persian_ci DEFAULT NULL,
   `admin_id` int NOT NULL,
   `counter` int NOT NULL DEFAULT '0',
+  `post_liked` int NOT NULL DEFAULT '0',
   `status` int NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `blog_category` (`blog_category`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
 
 --
 -- Dumping data for table `blogs`
 --
 
-INSERT INTO `blogs` (`id`, `title`, `description`, `full_description`, `image`, `blog_category`, `date`, `setdate`, `updated_at`, `admin_id`, `counter`, `status`) VALUES
-(1, 'تست', 'تست', 'این متن تست است', '', 4, '1403/07/09', '2024/09/30 11:40:27', NULL, 1, 21, 1),
-(3, 'لورم اپیزوم', 'لورم ایپسوم متن ساختگی با تولید سادگی', 'لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تو', '', 4, '1403/06/10', '2024/10/01 09:16:20', NULL, 1, 12, 1),
-(4, 'تست شماره سه', 'لورم ایپسوم متن ساختگی', 'لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی', '', 4, '1403/07/10', '2024/10/01 09:17:21', NULL, 1, 11, 1),
-(5, 'تست خبر', 'سه درصد گذشته، حال وآینده شناخت  فراوان', 'سه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوان', '', 6, '1403/07/09', '2024/10/01 15:22:33', NULL, 1, 0, 1),
-(6, 'خبر فوتبالی', 'مسی بهتر از رونالدو است', 'مسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو است', '', 11, '1403/06/18', '2024/10/01 15:23:22', NULL, 1, 2, 1),
-(7, 'پیتزا بهترین', 'پیتزا بهترین غذای دنیا است', 'پیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا است پیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا است', '', 7, '1403/07/08', '2024/10/01 15:24:13', NULL, 1, 2, 1);
+INSERT INTO `blogs` (`id`, `title`, `description`, `full_description`, `image`, `blog_category`, `date`, `setdate`, `updated_at`, `admin_id`, `counter`, `post_liked`, `status`) VALUES
+(1, 'تست', 'تست', 'این متن تست است', '198785192thumbnail-8.jpg', 4, '1403/07/09', '2024/10/02 15:20:44', NULL, 1, 0, 1, 1),
+(3, 'لورم اپیزوم', 'لورم ایپسوم متن ساختگی با تولید سادگی', 'لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تو', '', 4, '1403/06/10', '2024/10/01 09:16:20', NULL, 1, 14, 1, 1),
+(4, 'تست شماره سه', 'لورم ایپسوم متن ساختگی', 'لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی لورم ایپسوم متن ساختگی با تولید سادگی', '', 4, '1403/07/10', '2024/10/01 09:17:21', NULL, 1, 15, 3, 1),
+(5, 'تست خبر', 'سه درصد گذشته، حال وآینده شناخت  فراوان', 'سه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، حال وآینده شناخت  فراوان', '', 6, '1403/07/09', '2024/10/01 15:22:33', NULL, 1, 2, 1, 1),
+(6, 'خبر فوتبالی', 'مسی بهتر از رونالدو است', 'مسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو است', '1913595631news-18.jpg', 11, '1403/06/18', '2024/10/02 14:42:57', NULL, 1, 4, 3, 1),
+(7, 'پیتزا بهترین', 'پیتزا بهترین غذای دنیا است', 'پیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا است پیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا است', '1567434570news-20.jpg', 7, '1403/07/08', '2024/10/02 14:42:38', NULL, 1, 4, 2, 1),
+(9, 'خبر جهانی', 'این یک خبر جهانی است', 'این یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی است', '1666857741news-17.jpg', 6, '1403/07/11', '2024/10/02 14:42:14', NULL, 1, 6, 1, 1),
+(10, 'خبر فوتبالی', 'فوتبال ورزش اهل دلها', 'فوتبال تست است فوتبال تست است فوتبال تست استفوتبال تست است رررفوتبال تست استفوتبال تست استفوتبال تست استفوتبال تست استفوتبال تست استفوتبال تست استفوتبال تست استفوتبال تست استفوتبال تست استفوتبال تست استفوتبال تست استفوتبال تست استفوتبال تست استفوتبال تست استفوتبال تست استفوتبال تست استفوتبال تست است', '791908130thumbnail-14.jpg', 11, '1403/06/31', '2024/10/02 14:28:21', NULL, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -98,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `sort` int NOT NULL,
   `status` tinyint NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
 
 --
 -- Dumping data for table `categories`
@@ -114,7 +117,8 @@ INSERT INTO `categories` (`id`, `name`, `sort`, `status`) VALUES
 (8, 'سفر', 7, 1),
 (9, 'املاک', 8, 1),
 (10, 'کسب کار', 9, 1),
-(11, 'فوتبال', 10, 1);
+(11, 'فوتبال', 10, 1),
+(12, 'جهان', 11, 1);
 
 -- --------------------------------------------------------
 
@@ -159,7 +163,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `is_readed` tinyint NOT NULL DEFAULT '0',
   `readed_at` varchar(20) COLLATE utf8mb4_persian_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
 
 --
 -- Dumping data for table `comments`
@@ -167,10 +171,11 @@ CREATE TABLE IF NOT EXISTS `comments` (
 
 INSERT INTO `comments` (`id`, `fname`, `lname`, `blog_id`, `email`, `description`, `member_id`, `setdate`, `status`, `is_readed`, `readed_at`) VALUES
 (1, 'محمد', 'استادی', 3, 'mohammad.asram2000@gmail.com', 'سلام\r\nبسیار عالی!', NULL, '2024/10/01 10:04:39', 2, 1, '2024/10/01 18:22:52'),
-(2, 'محمد', 'استادی', 3, 'mohammad.asram2000@gmail.com', 'سلام\r\nایول!', 1, '2024/10/01 10:29:00', 2, 0, ''),
-(10, 'مبینا', 'رمضانی', 4, 'mobinaramezani99@gmail.com', 'بسیار ارزشمند', NULL, '2024/10/01 10:35:39', 2, 0, ''),
-(11, 'مبینا', 'رمضانی', 1, 'mobinaramezani99@gmail.com', 'سلام \r\nمرسی برای مطلب زیبایتان', 2, '2024/10/01 12:28:14', 2, 0, ''),
-(12, 'محمد', 'استادی', 6, 'mohammad.asram2000@gmail.com', 'قطعا همینطوره', 1, '2024/10/01 15:48:00', 2, 1, '2024/10/01 19:01:21');
+(2, 'محمد', 'استادی', 3, 'mohammad.asram2000@gmail.com', 'سلام\r\nایول!', 1, '2024/10/01 10:29:00', 2, 1, '2024/10/02 14:47:51'),
+(10, 'مبینا', 'رمضانی', 4, 'mobinaramezani99@gmail.com', 'بسیار ارزشمند', NULL, '2024/10/01 10:35:39', 2, 1, '2024/10/02 14:47:53'),
+(11, 'مبینا', 'رمضانی', 1, 'mobinaramezani99@gmail.com', 'سلام \r\nمرسی برای مطلب زیبایتان', 2, '2024/10/01 12:28:14', 2, 1, '2024/10/02 14:47:49'),
+(12, 'محمد', 'استادی', 6, 'mohammad.asram2000@gmail.com', 'قطعا همینطوره', 1, '2024/10/01 15:48:00', 2, 1, '2024/10/01 19:01:21'),
+(13, 'علیرضا', 'بوباش', 6, 'alirezaBob@gmail.com', 'افرین داره خوشم میاد.', 14, '2024/10/02 14:47:37', 2, 1, '2024/10/02 14:47:45');
 
 -- --------------------------------------------------------
 
@@ -185,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `counter` (
   `blog_id` int DEFAULT NULL,
   `date` varchar(20) COLLATE utf8mb4_persian_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
 
 --
 -- Dumping data for table `counter`
@@ -242,7 +247,37 @@ INSERT INTO `counter` (`id`, `member_id`, `blog_id`, `date`) VALUES
 (55, 1, 4, '2024/10/01 16:56:18'),
 (56, 1, 7, '2024/10/01 16:56:29'),
 (57, NULL, 4, '2024/10/01 18:24:44'),
-(58, NULL, 1, '2024/10/01 18:24:57');
+(58, NULL, 1, '2024/10/01 18:24:57'),
+(59, 1, 4, '2024/10/02 11:19:49'),
+(60, 1, 6, '2024/10/02 11:54:12'),
+(61, 1, 4, '2024/10/02 11:54:20'),
+(62, 1, 0, '2024/10/02 11:54:49'),
+(63, 1, 7, '2024/10/02 13:14:53'),
+(64, 1, 1, '2024/10/02 13:15:02'),
+(65, 1, 5, '2024/10/02 13:15:09'),
+(66, 1, 3, '2024/10/02 13:15:25'),
+(67, 2, 4, '2024/10/02 13:16:31'),
+(68, 2, 6, '2024/10/02 13:16:39'),
+(69, 10, 4, '2024/10/02 13:17:09'),
+(70, 10, 7, '2024/10/02 13:17:29'),
+(71, 14, 6, '2024/10/02 14:43:34'),
+(72, 14, 9, '2024/10/02 14:48:12'),
+(73, 14, 5, '2024/10/02 14:48:16'),
+(74, 14, 10, '2024/10/02 15:06:12'),
+(75, 14, 6, '2024/10/02 15:06:19'),
+(76, 14, 9, '2024/10/02 15:06:33'),
+(77, 14, 7, '2024/10/02 15:06:51'),
+(78, 14, 3, '2024/10/02 15:07:14'),
+(79, 14, 1, '2024/10/02 15:07:32'),
+(80, 14, 9, '2024/10/02 15:15:22'),
+(81, 14, 7, '2024/10/02 15:15:31'),
+(82, 14, 9, '2024/10/02 15:15:41'),
+(83, 14, 7, '2024/10/02 15:15:48'),
+(84, 14, 7, '2024/10/02 15:15:56'),
+(85, NULL, 6, '2024/10/02 16:24:16'),
+(86, NULL, 9, '2024/10/02 16:25:53'),
+(87, 1, 6, '2024/10/02 18:08:09'),
+(88, 1, 9, '2024/10/02 18:17:41');
 
 -- --------------------------------------------------------
 
@@ -260,7 +295,7 @@ CREATE TABLE IF NOT EXISTS `logs` (
   `date` varchar(20) COLLATE utf8mb4_persian_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `admin_id` (`admin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
 
 --
 -- Dumping data for table `logs`
@@ -278,7 +313,7 @@ INSERT INTO `logs` (`id`, `admin_id`, `table_name`, `changes`, `type`, `date`) V
 (9, 1, 'cities', 'DELETE FROM cities WHERE  id = \'2\' ', 1, '2024/09/29 11:53:07'),
 (10, 1, 'categories', 'INSERT  INTO categories (`name`, `sort`, `status`)  VALUES (\'ورزشی\', \'1\', \'1\')', 0, '2024/09/29 16:21:21'),
 (11, 1, 'categories', 'INSERT  INTO categories (`name`, `sort`, `status`)  VALUES (\'fthtyfj\', \'2\', \'1\')', 0, '2024/09/29 16:22:20'),
-(12, 1, 'categories', 'DELETE FROM categories WHERE  id = \'2\' ', 1, '2024/09/29 16:22:22'),
+(12, 1, 'categories', 'INSERT  INTO categories (`name`, `sort`, `status`)  VALUES (\'جهان\', \'11\', \'1\')', 2, '2024/10/02 15:36:02'),
 (13, 1, 'members', 'UPDATE members SET `password` = \'$2y$10$DSlZBvZ6sUa9jDcLxyNrwuHtKz5qjJ0WhgjfqfSXP5xOAze78HMJi\' WHERE  id = \'1\' ', 2, '2024/09/30 10:43:07'),
 (14, 1, 'members', 'UPDATE members SET `password` = \'$2y$10$Sjzq3APiwBJ0.0oEDdFP2uZCw8BMyMgLiBwysv.lu1JCjGZb5o.Vy\' WHERE  id = \'1\' ', 2, '2024/09/30 10:45:06'),
 (15, 1, 'categories', 'INSERT  INTO categories (`name`, `sort`, `status`)  VALUES (\'علمی\', \'2\', \'1\')', 0, '2024/09/30 10:46:19'),
@@ -298,7 +333,18 @@ INSERT INTO `logs` (`id`, `admin_id`, `table_name`, `changes`, `type`, `date`) V
 (29, 1, 'blogs', 'INSERT  INTO blogs (`title`, `blog_category`, `description`, `full_description`, `date`, `setdate`, `admin_id`, `counter`, `status`)  VALUES (\'تست خبر\', \'6\', \'سه درصد گذشته، حال وآینده شناخت  فراوان\', \'سه درصد گذشته، حال وآینده شناخت  فراوانسه درصد گذشته، ', 0, '2024/10/01 15:22:33'),
 (30, 1, 'blogs', 'INSERT  INTO blogs (`title`, `blog_category`, `description`, `full_description`, `date`, `setdate`, `admin_id`, `counter`, `status`)  VALUES (\'خبر فوتبالی\', \'11\', \'مسی بهتر از رونالدو است\', \'مسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو', 0, '2024/10/01 15:23:22'),
 (31, 1, 'blogs', 'INSERT  INTO blogs (`title`, `blog_category`, `description`, `full_description`, `date`, `setdate`, `admin_id`, `counter`, `status`)  VALUES (\'پیتزا بهترین\', \'7\', \'پیتزا بهترین غذای دنیا است\', \'پیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهتر', 0, '2024/10/01 15:24:13'),
-(32, 1, 'admins', 'INSERT  INTO admins (`fname`, `lname`, `username`, `role`, `password`, `status`)  VALUES (\'مبینا\', \'رمضانی\', \'mbn_ramezani\', \'1\', \'$2y$10$.qhDNqYmK9C1Bwi5AUxpiOdRJ1LUKRy832iQbX5pOXAqEStmQ/OPq\', \'1\')', 0, '2024/10/01 16:09:27');
+(32, 1, 'admins', 'INSERT  INTO admins (`fname`, `lname`, `username`, `role`, `password`, `status`)  VALUES (\'مبینا\', \'رمضانی\', \'mbn_ramezani\', \'1\', \'$2y$10$.qhDNqYmK9C1Bwi5AUxpiOdRJ1LUKRy832iQbX5pOXAqEStmQ/OPq\', \'1\')', 0, '2024/10/01 16:09:27'),
+(33, 1, 'blogs', 'INSERT  INTO blogs (`title`, `blog_category`, `description`, `full_description`, `image`, `date`, `setdate`, `admin_id`, `counter`, `status`)  VALUES (\'خبر فناوری\', \'5\', \'خبر فناوری تست\', \'خبر فناوری تستخبر فناوری تستخبر فناوری تستخبر فناوری تستخبر فناوری ', 0, '2024/10/02 14:22:52'),
+(34, 1, 'blogs', 'DELETE FROM blogs WHERE  id = \'8\' ', 1, '2024/10/02 14:23:27'),
+(35, 1, 'blogs', 'INSERT  INTO blogs (`title`, `blog_category`, `description`, `full_description`, `image`, `date`, `setdate`, `admin_id`, `counter`, `status`)  VALUES (\'خبر جهانی\', \'6\', \'این یک خبر جهانی است\', \'این یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استای', 0, '2024/10/02 14:24:40'),
+(36, 1, 'blogs', 'INSERT  INTO blogs (`title`, `blog_category`, `description`, `full_description`, `image`, `date`, `setdate`, `admin_id`, `counter`, `status`)  VALUES (\'خبر فوتبالی\', \'11\', \'فوتبال ورزش اهل دلها\', \'فوتبال تست است فوتبال تست است فوتبال تست استفوتبال تست است ', 0, '2024/10/02 14:28:21'),
+(37, 1, 'blogs', 'UPDATE blogs SET `title` = \'خبر جهانی\', `blog_category` = \'6\', `description` = \'این یک خبر جهانی است\', `full_description` = \'این یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استاین یک خبر جهانی استاین یک خبر ', 2, '2024/10/02 14:42:14'),
+(38, 1, 'blogs', 'UPDATE blogs SET `title` = \'پیتزا بهترین\', `blog_category` = \'7\', `description` = \'پیتزا بهترین غذای دنیا است\', `full_description` = \'پیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای دنیا استپیتزا بهترین غذای ', 2, '2024/10/02 14:42:38'),
+(39, 1, 'blogs', 'UPDATE blogs SET `title` = \'خبر فوتبالی\', `blog_category` = \'11\', `description` = \'مسی بهتر از رونالدو است\', `full_description` = \'مسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر از رونالدو استمسی بهتر ا', 2, '2024/10/02 14:42:57'),
+(40, 1, 'blogs', 'UPDATE blogs SET `title` = \'تست\', `blog_category` = \'4\', `description` = \'تست\', `full_description` = \'این متن تست است\', `image` = \'198785192thumbnail-8.jpg\', `date` = \'1403/07/09\', `setdate` = \'2024/10/02 15:20:44\', `admin_id` = \'1\', `counter` = \'0\', `stat', 2, '2024/10/02 15:20:44'),
+(41, 1, 'categories', 'INSERT  INTO categories (`name`, `sort`, `status`)  VALUES (\'جهانس\', \'11\', \'1\')', 0, '2024/10/02 15:35:22'),
+(42, 1, 'categories', 'UPDATE categories SET `name` = \'جهان\', `sort` = \'11\', `status` = \'1\' WHERE  id = \'12\' ', 2, '2024/10/02 15:37:23'),
+(43, 1, 'categories', 'DELETE FROM categories WHERE  id = \'13\' ', 1, '2024/10/02 15:37:27');
 
 -- --------------------------------------------------------
 
@@ -328,15 +374,19 @@ CREATE TABLE IF NOT EXISTS `members` (
   UNIQUE KEY `phone` (`phone`),
   UNIQUE KEY `ncode` (`ncode`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
 
 --
 -- Dumping data for table `members`
 --
 
 INSERT INTO `members` (`id`, `fname`, `lname`, `ncode`, `gender`, `phone`, `email`, `image`, `username`, `password`, `province_id`, `city_id`, `military_service`, `status`, `setdate`) VALUES
-(1, 'محمد', 'استادی', '2081143542', 0, '09370709046', 'mohammad.asram2000@gmail.com', NULL, 'mohammadostadi', '$2y$10$Sjzq3APiwBJ0.0oEDdFP2uZCw8BMyMgLiBwysv.lu1JCjGZb5o.Vy', 1, 1, 2, 1, '1403/07/08 14:37:50'),
-(2, 'مبینا', 'رمضانی', '2093388121', 1, '09338059046', 'mobinaramezani99@gmail.com', NULL, 'mbn_ramezani', '$2y$10$nfTbtGD90dPUmfup.9lFeeHvgsFlbCX9XI8TnZT6B22I2Z2H1.F/G', 1, 1, NULL, 1, '1403/07/10 12:26:42');
+(1, 'محمد', 'استادی', '2081143542', 0, '09370709046', 'mohammad.asram2000@gmail.com', '719774916photo_۲۰۲۴-۰۵-۲۵_۱۶-۰۷-۳۳.jpg', 'mohammadostadi', '$2y$10$89lLPNQribpyITo.drz0cOKAGR5yzSifONmS4FO/RceNdRSyjUkRO', 1, 1, 2, 1, '1403/07/11 11:19:04'),
+(2, 'مبینا', 'رمضانی', '2093388121', 1, '09338059046', 'mobinaramezani99@gmail.com', '1600259566photo_۲۰۲۳-۱۱-۲۹_۰۲-۰۰-۵۲.jpg', 'mbn_ramezani', '$2y$10$rHk/vuCqb3DKEgk.3upw3uAUdPvcmq5Wh6x3ezuY5/3Z92sE.Jyga', 1, 1, NULL, 1, '1403/07/11 11:56:57'),
+(10, 'امیر', 'قنبری', '2081111111', 0, '09112521147', 'amir@gmail.com', '1589788479photo_۲۰۲۳-۰۶-۱۶_۱۰-۲۳-۱۵.jpg', 'amir_ghanbari', '$2y$10$C9F3CQF8m1uiOAH3L6GZGubdGeMxMFZ9uSxSVuyXf.R3XWKyNm/C.', 1, 1, 0, 1, '1403/07/11 11:12:45'),
+(11, 'زهرا', 'ولی', '0150176651', 1, '09334817911', 'mmd@gmail.com', '230318409photo_۲۰۲۴-۰۴-۰۶_۱۹-۲۶-۲۳.jpg', 'zhr_vali', '$2y$10$8IUlGmvTAkUh9HDR8qWzIOzxd9wUYPav1NOwEVgt6iWCmErj3dMFG', 0, 0, NULL, 1, '1403/07/11 13:52:12'),
+(13, 'ابوالفضل', 'امینی', '4990246101', 0, '09071254759', 'abol@gmail.com', '232452062photo_۲۰۲۴-۰۶-۰۸_۱۹-۴۸-۱۵.jpg', 'abolix', '$2y$10$1GaQMbjZls9Cuc3vr4Rfd.a7FqoyP8KPEI5xFX7x/mt5wPcpirK82', 1, 1, 2, 1, '1403/07/11 14:01:00'),
+(14, 'علیرضا', 'بوباش', '7130000112', 0, '09015739046', 'alirezaBob@gmail.com', '1451846919photo_۲۰۲۴-۰۷-۰۹_۱۵-۴۳-۵۱.jpg', 'groot', '$2y$10$sdpMAY3VwSPuNw2v.3lZtuKTryynL34XN/E8h5zF6XGtV6aWYov4K', 1, 1, 2, 1, '1403/07/11 14:08:26');
 
 -- --------------------------------------------------------
 
@@ -376,16 +426,16 @@ CREATE TABLE IF NOT EXISTS `view` (
   `ip` varchar(20) COLLATE utf8mb4_persian_ci NOT NULL,
   `setdate` varchar(20) COLLATE utf8mb4_persian_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
 
 --
 -- Dumping data for table `view`
 --
 
 INSERT INTO `view` (`id`, `member_id`, `ip`, `setdate`) VALUES
-(1, NULL, '::1', '2024/10/01 13:10:55'),
-(2, NULL, '::1', '2024/10/01 13:41:23'),
-(3, NULL, '::1', '2024/10/01 13:41:23'),
+(1, NULL, '::1', '2024/09/30 13:10:55'),
+(2, NULL, '::1', '2024/09/30 13:41:23'),
+(3, NULL, '::1', '2024/09/29 13:41:23'),
 (4, NULL, '::1', '2024/10/01 13:46:18'),
 (5, NULL, '::1', '2024/10/01 13:46:18'),
 (6, NULL, '::1', '2024/10/01 13:46:51'),
@@ -406,7 +456,54 @@ INSERT INTO `view` (`id`, `member_id`, `ip`, `setdate`) VALUES
 (21, 1, '::1', '2024/10/01 16:32:23'),
 (22, 1, '::1', '2024/10/01 17:34:11'),
 (23, NULL, '::1', '2024/10/01 18:24:44'),
-(24, NULL, '::1', '2024/10/01 19:08:07');
+(24, NULL, '::1', '2024/10/01 19:08:07'),
+(25, NULL, '::1', '2024/10/02 08:06:28'),
+(26, NULL, '::1', '2024/10/02 08:46:49'),
+(27, NULL, '::1', '2024/10/02 09:17:06'),
+(28, 3, '::1', '2024/10/02 09:39:00'),
+(29, NULL, '::1', '2024/10/02 09:43:22'),
+(30, NULL, '::1', '2024/10/02 09:43:22'),
+(31, NULL, '::1', '2024/10/02 09:43:25'),
+(32, 4, '::1', '2024/10/02 09:45:49'),
+(33, NULL, '::1', '2024/10/02 09:46:07'),
+(34, NULL, '::1', '2024/10/02 09:46:31'),
+(35, NULL, '::1', '2024/10/02 09:47:52'),
+(36, NULL, '::1', '2024/10/02 09:47:54'),
+(37, NULL, '::1', '2024/10/02 09:48:44'),
+(38, NULL, '::1', '2024/10/02 09:48:57'),
+(39, NULL, '::1', '2024/10/02 09:51:07'),
+(40, NULL, '::1', '2024/10/02 09:51:31'),
+(41, NULL, '::1', '2024/10/02 09:51:42'),
+(42, NULL, '::1', '2024/10/02 09:54:51'),
+(43, 5, '::1', '2024/10/02 09:54:53'),
+(44, 6, '::1', '2024/10/02 09:58:43'),
+(45, 7, '::1', '2024/10/02 10:01:49'),
+(46, 8, '::1', '2024/10/02 10:06:02'),
+(47, 9, '::1', '2024/10/02 10:28:55'),
+(48, 10, '::1', '2024/10/02 10:32:39'),
+(49, 10, '::1', '2024/10/02 11:03:21'),
+(50, 1, '::1', '2024/10/02 11:13:06'),
+(51, 1, '::1', '2024/10/02 11:52:50'),
+(52, 2, '::1', '2024/10/02 11:56:40'),
+(53, NULL, '::1', '2024/10/02 12:28:12'),
+(54, 1, '::1', '2024/10/02 12:37:08'),
+(55, 1, '::1', '2024/10/02 13:13:30'),
+(56, 2, '::1', '2024/10/02 13:16:16'),
+(57, 10, '::1', '2024/10/02 13:16:58'),
+(58, NULL, '::1', '2024/10/02 13:48:18'),
+(59, 11, '::1', '2024/10/02 13:49:05'),
+(60, 12, '::1', '2024/10/02 13:57:15'),
+(61, NULL, '::1', '2024/10/02 14:00:39'),
+(62, NULL, '::1', '2024/10/02 14:01:00'),
+(63, 13, '::1', '2024/10/02 14:01:02'),
+(64, 14, '::1', '2024/10/02 14:04:39'),
+(65, 14, '::1', '2024/10/02 14:42:18'),
+(66, 14, '::1', '2024/10/02 15:15:19'),
+(67, NULL, '::1', '2024/10/02 15:45:20'),
+(68, NULL, '::1', '2024/10/02 16:22:48'),
+(69, NULL, '::1', '2024/10/02 17:20:55'),
+(70, NULL, '::1', '2024/10/02 18:05:09'),
+(71, 1, '::1', '2024/10/02 18:06:42');
 
 -- --------------------------------------------------------
 
@@ -421,7 +518,7 @@ CREATE TABLE IF NOT EXISTS `wishlist` (
   `blog_id` int NOT NULL,
   `setdate` varchar(20) COLLATE utf8mb4_persian_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_persian_ci;
 
 --
 -- Dumping data for table `wishlist`
@@ -432,7 +529,15 @@ INSERT INTO `wishlist` (`id`, `member_id`, `blog_id`, `setdate`) VALUES
 (21, 1, 4, '2024/10/01 12:01:28'),
 (22, 1, 1, '2024/10/01 12:01:39'),
 (25, 1, 6, '2024/10/01 15:47:32'),
-(26, 1, 7, '2024/10/01 16:56:36');
+(26, 1, 7, '2024/10/01 16:56:36'),
+(27, 1, 5, '2024/10/02 13:15:58'),
+(28, 2, 4, '2024/10/02 13:16:34'),
+(29, 2, 6, '2024/10/02 13:16:41'),
+(30, 10, 4, '2024/10/02 13:17:12'),
+(31, 10, 7, '2024/10/02 13:17:31'),
+(32, 14, 6, '2024/10/02 14:47:06'),
+(33, 14, 10, '2024/10/02 15:06:15'),
+(34, 1, 9, '2024/10/02 18:18:17');
 
 --
 -- Constraints for dumped tables
