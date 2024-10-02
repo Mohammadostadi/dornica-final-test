@@ -85,153 +85,12 @@ $start = date("Y/m/d", $last_week);
                                 </div>
                             </a>
                         </li>
-                        <li class="nav-item dropdown dropdown-laungauge d-none d-sm-flex">
-                            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;"
-                                data-bs-toggle="dropdown"><img src="assets/images/county/02.png" width="22" alt="">
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end p-2">
-                                <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
-                                            src="assets/images/county/01.png" width="20" alt=""><span
-                                            class="ms-2">انگلیسی</span></a>
-                                </li>
-                                <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
-                                            src="assets/images/county/02.png" width="20" alt=""><span
-                                            class="ms-2">کاتالان</span></a>
-                                </li>
-                                <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
-                                            src="assets/images/county/03.png" width="20" alt=""><span
-                                            class="ms-2">فرانسوی</span></a>
-                                </li>
-                                <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
-                                            src="assets/images/county/04.png" width="20" alt=""><span
-                                            class="ms-2">بلیز</span></a>
-                                </li>
-                                <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
-                                            src="assets/images/county/05.png" width="20" alt=""><span
-                                            class="ms-2">کلمبیا</span></a>
-                                </li>
-                                <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
-                                            src="assets/images/county/06.png" width="20" alt=""><span
-                                            class="ms-2">اسپانیایی</span></a>
-                                </li>
-                                <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
-                                            src="assets/images/county/07.png" width="20" alt=""><span
-                                            class="ms-2">گرجی</span></a>
-                                </li>
-                                <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img
-                                            src="assets/images/county/08.png" width="20" alt=""><span
-                                            class="ms-2">هندی</span></a>
-                                </li>
-                            </ul>
-                        </li>
                         <li class="nav-item dark-mode d-none d-sm-flex">
                             <a class="nav-link dark-mode-icon" href="javascript:;">
                                 <div class="">
                                     <i class="bi bi-moon-fill"></i>
                                 </div>
                             </a>
-                        </li>
-                        <li class="nav-item dropdown dropdown-large">
-                            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#"
-                                data-bs-toggle="dropdown">
-                                <div class="projects">
-                                    <i class="bi bi-grid-3x3-gap-fill"></i>
-                                </div>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <div class="row row-cols-3 gx-2">
-                                    <div class="col">
-                                        <a href="ecommerce-view.html">
-                                            <div class="apps p-2 radius-10 text-center">
-                                                <div class="apps-icon-box mb-1 text-white bg-gradient-purple">
-                                                    <i class="bi bi-basket2-fill"></i>
-                                                </div>
-                                                <p class="mb-0 apps-name">سفارشات</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="javascript:;">
-                                            <div class="apps p-2 radius-10 text-center">
-                                                <div class="apps-icon-box mb-1 text-white bg-gradient-info">
-                                                    <i class="bi bi-people-fill"></i>
-                                                </div>
-                                                <p class="mb-0 apps-name">کاربران</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="ecommerce-products-grid.html">
-                                            <div class="apps p-2 radius-10 text-center">
-                                                <div class="apps-icon-box mb-1 text-white bg-gradient-success">
-                                                    <i class="bi bi-trophy-fill"></i>
-                                                </div>
-                                                <p class="mb-0 apps-name">محصولات</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="component-media-object.html">
-                                            <div class="apps p-2 radius-10 text-center">
-                                                <div class="apps-icon-box mb-1 text-white bg-gradient-danger">
-                                                    <i class="bi bi-collection-play-fill"></i>
-                                                </div>
-                                                <p class="mb-0 apps-name">رسانه ها</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="pages-user-profile.html">
-                                            <div class="apps p-2 radius-10 text-center">
-                                                <div class="apps-icon-box mb-1 text-white bg-gradient-warning">
-                                                    <i class="bi bi-person-circle"></i>
-                                                </div>
-                                                <p class="mb-0 apps-name">حساب</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="javascript:;">
-                                            <div class="apps p-2 radius-10 text-center">
-                                                <div class="apps-icon-box mb-1 text-white bg-gradient-voilet">
-                                                    <i class="bi bi-file-earmark-text-fill"></i>
-                                                </div>
-                                                <p class="mb-0 apps-name">اسناد</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="ecommerce-orders-detail.html">
-                                            <div class="apps p-2 radius-10 text-center">
-                                                <div class="apps-icon-box mb-1 text-white bg-gradient-branding">
-                                                    <i class="bi bi-credit-card-fill"></i>
-                                                </div>
-                                                <p class="mb-0 apps-name">پرداخت</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="javascript:;">
-                                            <div class="apps p-2 radius-10 text-center">
-                                                <div class="apps-icon-box mb-1 text-white bg-gradient-desert">
-                                                    <i class="bi bi-calendar-check-fill"></i>
-                                                </div>
-                                                <p class="mb-0 apps-name">مناسبت ها</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a href="javascript:;">
-                                            <div class="apps p-2 radius-10 text-center">
-                                                <div class="apps-icon-box mb-1 text-white bg-gradient-amour">
-                                                    <i class="bi bi-book-half"></i>
-                                                </div>
-                                                <p class="mb-0 apps-name">داستان</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div><!--end row-->
-                            </div>
                         </li>
                         <li class="nav-item dropdown dropdown-large">
                             <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#"
@@ -293,39 +152,21 @@ $start = date("Y/m/d", $last_week);
                                 </div>
                             </div>
                         </li>
-                        <li class="nav-item dropdown dropdown-large">
-                            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#"
-                                data-bs-toggle="dropdown">
-                                <div class="notifications">
-                                    <span class="notify-badge">8</span>
-                                    <i class="bi bi-bell-fill"></i>
-                                </div>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end p-0">
-                                <div class="p-2 border-bottom m-2">
-                                    <h5 class="h5 mb-0">اطلاعیه</h5>
-                                </div>
-                                <div class="p-2">
-                                    <div>
-                                        <hr class="dropdown-divider">
-                                    </div>
-                                    <a class="dropdown-item" href="#">
-                                        <div class="text-center">مشاهده همه اعلان ها</div>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
                     </ul>
                 </div>
                 <div class="dropdown dropdown-user-setting">
                     <a class="dropdown-toggle dropdown-toggle-nocaret" id="headerDropdown" href="#"
                         data-bs-toggle="dropdown" aria-expanded="true">
+                        <?php
+                        $adminShow = $db->where('id', $_SESSION['user'])
+                            ->getOne('admins', 'concat(fname, \' \', lname) as name, role')
+                            ?>
                         <div class="user-setting d-flex align-items-center gap-3">
                             <img src="assets/images/admin/default.png" alt="" class="user-img">
                             <div class="d-none d-sm-block">
-                                <p class="user-name mb-0">محمد استادی
+                                <p class="user-name mb-0"><?= $adminShow['name'] ?>
                                 </p>
-                                <small class="mb-0 dropdown-user-designation">مدیر</small>
+                                <small class="mb-0 dropdown-user-designation"><?= admin_role($adminShow['role']) ?></small>
                             </div>
                         </div>
                     </a>

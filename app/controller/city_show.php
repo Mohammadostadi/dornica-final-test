@@ -1,4 +1,6 @@
+
 <?php
+
 if (isset($_POST['province_id']) && is_numeric($_POST['province_id'])) {
     $province_id = (int) $_POST['province_id'];
     $cities = $db->where('province_id', $province_id)

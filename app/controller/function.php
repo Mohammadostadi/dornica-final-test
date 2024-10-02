@@ -27,9 +27,12 @@ function checkDataErrorExist($name)
         return $errors[$name];
 }
 
-function checkInputDataValue($name)
+function checkInputDataValue($name, $update = false)
 {
-    return isset($_POST[$name]) ? checkDataSecurity($_POST[$name]) : "";
+    if(!$update)
+        return isset($_POST[$name]) ? checkDataSecurity($_POST[$name]) : "";
+    
+    return isset($_POST[$name]) ? checkDataSecurity($_POST[$name]) : $update;
 }
 
 
@@ -289,5 +292,26 @@ function fn_resize($image_resource_id, $width, $height)
         $target_layer = imagecreatetruecolor($target_width, $target_height);
         imagecopyresampled($target_layer, $image_resource_id, 0, 0, 0, 0, $target_width, $target_height, $width, $height);
         return $target_layer;
+    }
+
+    function checkImage($data){
+        global $image_type;
+        if (isset($data)) {
+            if($data['size'] <= 819200){
+                $types = ['image/jpeg', 'image/gif', 'image/png'];
+                if(!in_array($image_type, $types))
+                    setErrorMessage('image', 'فرمت تصویر شما باید جز jpeg, gif, png, باشد.');
+            }else{
+                setErrorMessage('image', 'حجم فایل مربوطه بیشتر از ۸۰۰ کیلوبایت میباشد.');
+            }
+        }
+    }
+
+    function has_admin_access($id, $access){
+        global $db;
+        $levelAccess = $db->where('id', $id)
+        ->getValue('admins', 'levelAccess');
+        
+        return in_array($access, explode(',', $levelAccess));
     }
 ?>

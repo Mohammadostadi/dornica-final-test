@@ -1,12 +1,13 @@
 <?php
 require_once('../../../app/connection/DB.php');
-require_once('../../../app/controller/access.php');
+
 require_once('../../../app/controller/function.php');
+require_once('../../../app/controller/access.php');
 require_once('../../../app/helper/jdf.php');
 $page = 1;
 pageLimit('logs', 7, false);
 $logs = $db->join('admins', 'admins.id = logs.admin_id', 'LEFT')
-->orderBy('logs.id', 'DESC')
+    ->orderBy('logs.id', 'DESC')
     ->paginate('logs', $page, 'admins.username, logs.date, changes, table_name, type');
 
 ?>
@@ -76,7 +77,7 @@ $logs = $db->join('admins', 'admins.id = logs.admin_id', 'LEFT')
                                 <div class="card border shadow-none w-100">
                                     <div class="card-body">
                                         <div class="table-responsive">
-                                            <table class="table" dir="ltr" >
+                                            <table class="table" dir="ltr">
                                                 <thead class="text-center">
                                                     <tr>
                                                         <th>#</th>
@@ -108,13 +109,13 @@ $logs = $db->join('admins', 'admins.id = logs.admin_id', 'LEFT')
                                                         <td><?= $log['username'] ?></td>
                                                         <td><?= $log['table_name'] ?></td>
                                                         <td>
-                                                            <?=  status('log', $log['type']) ?>
+                                                            <?= status('log', $log['type']) ?>
                                                         </td>
                                                         <td>
-                                                            <?=  $log['changes'] ?>
+                                                            <?= $log['changes'] ?>
                                                         </td>
                                                         <td>
-                                                            <?=  jdate('Y/m/d H:i', strtotime($log['date'])) ?>
+                                                            <?= jdate('Y/m/d H:i', strtotime($log['date'])) ?>
                                                         </td>
                                                     </tr>
 

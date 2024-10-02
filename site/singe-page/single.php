@@ -9,6 +9,18 @@ if (!isset($_GET['id']) or $_GET['id'] == '' or !is_numeric($_GET['id']))
     header('Location:../../index.php');
 
 $id = checkDataSecurity($_GET['id']);
+if(isset($_GET['click'])){
+    $count = getMaxField('blogs', 'counter', $id);
+        $db->where('id', $id)->update('blogs', [
+            'counter' => $count
+        ]);
+        $db->insert('counter', [
+            'member_id' => isset($memberId) ? $memberId : null,
+            'blog_id' => $id,
+            'date' => $date
+        ]);
+        header('Location:single.php?id='.$id);
+}
 if (isset($_SESSION['member'])) {
     $memberId = $db->where('username', $_SESSION['member'])
         ->getValue('members', 'id');

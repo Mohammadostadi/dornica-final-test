@@ -7,26 +7,33 @@ require_once('../../../app/helper/jdf.php');
 
 $errors = [];
 
+$id = checkDataSecurity($_GET['id']);
+$editCategory = $db->where('id', $id)
+    ->getOne('categories');
+
 if (isset($_POST['_insert'])) {
     $name = checkDataSecurity($_POST['name']);
+    $sort = checkDataSecurity($_POST['sort']);
 
     checkDataEmpty($name, 'name', 'فیلد نام دسته بندی خبر شما خالی میباشد.');
+    checkDataEmpty($sort, 'sort', 'فیلد ترتیب دسته بندی خبر شما خالی میباشد.');
 
     if (count($errors) == 0) {
-        $db->insert('categories', [
-            'name' => $name,
-            'sort' => getMaxField('categories', 'sort'),
-            'status' => 1
-        ]);
+        $db->where('id', $id)
+            ->update('categories', [
+                'name' => $name,
+                'sort' => $sort,
+                'status' => 1
+            ]);
         $query = $db->getLastQuery();
         $db->insert('logs', [
             'admin_id' => $_SESSION['user'],
             'table_name' => 'categories',
             'changes' => $query,
-            'type' => 0,
+            'type' => 2,
             'date' => $date
         ]);
-        header('Location:categories_list.php?ok=0');
+        header('Location:categories_list.php?ok=2');
     }
 }
 
@@ -45,7 +52,7 @@ if (isset($_POST['_insert'])) {
     <?php
     require_once('../../layout/css.php');
     ?>
-    <title>افزودن دسته بندی خبر</title>
+    <title>بروزرسانی دسته بندی خبر</title>
 </head>
 
 <body>
@@ -60,18 +67,31 @@ if (isset($_POST['_insert'])) {
             <div class="card">
                 <div class="card-body">
                     <div class="border p-3 rounded">
-                        <h6 class="mb-0 text-uppercase">اضافه کردن دسته بندی خبر</h6>
+                        <h6 class="mb-0 text-uppercase">بروزرسانی دسته بندی خبر</h6>
                         <hr />
                         <form class="row g-3 needs-validation" action="" method="post" novalidate
                             enctype="multipart/form-data" a>
                             <div class="col-lg-6 ">
                                 <label class="form-label">نام دسته بندی خبر </label>
                                 <span class="text-danger">*</span>
-                                <input type="text" class="form-control" name="name" required>
+                                <input type="text" class="form-control"
+                                    value="<?= checkInputDataValue('name', $editCategory['name']) ?>" name="name"
+                                    required>
                                 <div class="invalid-feedback">
                                     فیلد نام نباید خالی باشد
                                 </div>
                                 <div class="text-danger"><?= checkDataErrorExist('name') ?></div>
+                            </div>
+                            <div class="col-lg-6 ">
+                                <label class="form-label">ترتیب دسته بندی خبر </label>
+                                <span class="text-danger">*</span>
+                                <input type="text" class="form-control" name="sort"
+                                    value="<?= checkInputDataValue('sort', $editCategory['sort']) ?>" dir="ltr"
+                                    required>
+                                <div class="invalid-feedback">
+                                    فیلد ترتیب نباید خالی باشد
+                                </div>
+                                <div class="text-danger"><?= checkDataErrorExist('sort') ?></div>
                             </div>
                             <div class="col-lg-12 d-flex justify-content-end">
                                 <div class="row">

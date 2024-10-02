@@ -58,25 +58,18 @@ if (isset($_POST['_insert'])) {
     if (!preg_match("/^[0-9]*$/", $phone))
         setErrorMessage('phone', 'فقط عدد میتوانید وارد کنید.');
 
-    if (isset($_FILES['image'])) {
+    if (isset($_FILES['image']) and !empty($_FILES['image']['name'])) {
         $dir = '../../attachment/imgs/members/';
+        $image_name = rand() . $_FILES['image']['name'];
         $image = $_FILES['image']['tmp_name'];
-        $image_name = rand().$_FILES['image']['name'];
         $source_properties = getimagesize($image);
-        if($_FILES['image']['size'] <= 819200){
-            $types = ['image/jpeg', 'image/gif', 'image/png'];
-            $image_type = $source_properties['mime'];
-            if(!in_array($image_type, $types))
-                setErrorMessage('image', 'فرمت تصویر شما باید جز jpeg, gif, png, باشد.');
-        }else{
-            setErrorMessage('image', 'حجم فایل مربوطه بیشتر از ۸۰۰ کیلوبایت میباشد.');
-        }
+        $image_type = $source_properties['mime'];
+        checkImage($_FILES['image'] );
     }
 
-    
     if (count($errors) == 0) {
-        if(isset($image_name)){
-            $target_file = $dir.$image_name;
+        if (isset($image_name)) {
+            $target_file = $dir . $image_name;
             if ($image_type == 'image/jpeg') {
                 $image_resource_id = imagecreatefromjpeg($image);
                 $target_layer = fn_resize($image_resource_id, $source_properties[0], $source_properties[1]);
@@ -164,7 +157,8 @@ if (isset($_POST['_insert'])) {
                         <div class="col-lg-6 mt-3">
                             <label class="form-label">نام </label>
                             <span class="text-danger">*</span>
-                            <input type="text" class="form-control" name="fname" value="<?= checkInputDataValue('fname') ?>" oninput='namejs(this)' required>
+                            <input type="text" class="form-control" name="fname"
+                                value="<?= checkInputDataValue('fname') ?>" oninput='namejs(this)' required>
                             <div class="invalid-feedback">
                                 فیلد نام نباید خالی باشد
                             </div>
@@ -173,7 +167,8 @@ if (isset($_POST['_insert'])) {
                         <div class="col-lg-6 mt-3">
                             <label class="form-label">نام خانوادگی</label>
                             <span class="text-danger">*</span>
-                            <input type="text" class="form-control" name="lname" value="<?= checkInputDataValue('lname') ?>" oninput='namejs(this)' required>
+                            <input type="text" class="form-control" name="lname"
+                                value="<?= checkInputDataValue('lname') ?>" oninput='namejs(this)' required>
                             <div class="invalid-feedback">
                                 فیلد نام خانوادگی نباید خالی باشد
                             </div>
@@ -218,7 +213,8 @@ if (isset($_POST['_insert'])) {
                                 <select id="province" name="province" class="form-control">
                                     <option value="" selected disabled>استان را انتخاب کنید</option>
                                     <?php foreach ($provinceList as $province) { ?>
-                                        <option <?= (isset($_POST['province']) and $_POST['province'] == $province['id'])?"selected":"" ?> value="<?= $province['id'] ?>"><?= $province['name'] ?></option>
+                                        <option <?= (isset($_POST['province']) and $_POST['province'] == $province['id']) ? "selected" : "" ?>
+                                            value="<?= $province['id'] ?>"><?= $province['name'] ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
@@ -234,8 +230,8 @@ if (isset($_POST['_insert'])) {
                         <div class="col-lg-6 mt-3">
                             <label class="form-label">کدملی</label>
                             <span class="text-danger">*</span>
-                            <input type="text" class="form-control text-end" value="<?= checkInputDataValue('ncode') ?>" name="ncode" id="ncode"
-                                oninput='numberjs(this)' required>
+                            <input type="text" class="form-control text-end" value="<?= checkInputDataValue('ncode') ?>"
+                                name="ncode" id="ncode" oninput='numberjs(this)' required>
                             <div class="invalid-feedback">
                                 فیلد کدملی نباید خالی باشد
                             </div>
@@ -245,7 +241,8 @@ if (isset($_POST['_insert'])) {
                         <div class="col-lg-6 mt-3">
                             <label class="form-label">ایمیل</label>
                             <span class="text-danger">*</span>
-                            <input type="text" class="form-control" name="email" value="<?= checkInputDataValue('email') ?>" required>
+                            <input type="text" class="form-control" name="email"
+                                value="<?= checkInputDataValue('email') ?>" required>
                             <div class="invalid-feedback">
                                 فیلد ایمیل نباید خالی باشد
                             </div>
@@ -254,8 +251,8 @@ if (isset($_POST['_insert'])) {
                         <div class="col-lg-6 mt-3">
                             <label class="form-label">َشماره</label>
                             <span class="text-danger">*</span>
-                            <input type="text" class="form-control text-end" name="phone" value="<?= checkInputDataValue('phone') ?>" oninput='numberjs(this)'
-                                required>
+                            <input type="text" class="form-control text-end" name="phone"
+                                value="<?= checkInputDataValue('phone') ?>" oninput='numberjs(this)' required>
                             <div class="invalid-feedback">
                                 فیلد شماره نباید خالی باشد
                             </div>
@@ -264,8 +261,8 @@ if (isset($_POST['_insert'])) {
                         <div class="col-lg-6 mt-3">
                             <label class="form-label">نام کاربری</label>
                             <span class="text-danger">*</span>
-                            <input type="text" class="form-control text-end" name="username" value="<?= checkInputDataValue('username') ?>" oninput='usernamejs(this)'
-                                required>
+                            <input type="text" class="form-control text-end" name="username"
+                                value="<?= checkInputDataValue('username') ?>" oninput='usernamejs(this)' required>
                             <div class="invalid-feedback">
                                 فیلد نام کاربری نباید خالی باشد
                             </div>

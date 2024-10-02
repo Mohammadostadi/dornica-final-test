@@ -1,7 +1,8 @@
 <?php
 require_once('../../../app/connection/DB.php');
-require_once('../../../app/controller/access.php');
+
 require_once('../../../app/controller/function.php');
+require_once('../../../app/controller/access.php');
 require_once('../../../app/helper/jdf.php');
 $page = 1;
 pageLimit('cities', 7, false);
@@ -127,10 +128,9 @@ $cities = $db->join('provinces', 'provinces.id = cities.province_id', 'LEFT')
                                                                     aria-label="Delete" style="cursor: pointer;"><i
                                                                         class="bi bi-trash-fill"></i></button>
 
-                                                                <div class="modal fade"
-                                                                    id="exampleModal<?= $city['id'] ?>" tabindex="-1"
-                                                                    role="dialog" aria-labelledby="exampleModalLabel"
-                                                                    aria-hidden="true">
+                                                                <div class="modal fade" id="exampleModal<?= $city['id'] ?>"
+                                                                    tabindex="-1" role="dialog"
+                                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">

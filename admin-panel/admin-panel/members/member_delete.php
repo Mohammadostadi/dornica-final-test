@@ -1,8 +1,9 @@
 <?php
 
 require_once('../../../app/connection/DB.php');
-require_once('../../../app/controller/access.php');
+
 require_once('../../../app/controller/function.php');
+require_once('../../../app/controller/access.php');
 
 if (isset($_POST['btn_delete'])) {
     $id = checkDataSecurity($_GET['id']);
@@ -13,6 +14,19 @@ if (isset($_POST['btn_delete'])) {
             ->getOne('members', 'image');
         if (file_exists('../../../attachment' . $path['image']))
             unlink('../../../attachment' . $path['image']);
+        $db->where('member_id', $id)
+            ->update('comments', [
+                'member_id' => null
+            ]);
+        $db->where('member_id', $id)
+            ->update('counter', [
+                'member_id' => null
+            ]);
+        $db->where('member_id', $id)
+            ->update('view', [
+                'member_id' => null
+            ]);
+
         $db->where('id', $id)
             ->delete('members');
         $query = $db->getLastQuery();

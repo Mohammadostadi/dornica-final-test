@@ -1,7 +1,8 @@
 <?php
 require_once('../../../app/connection/DB.php');
-require_once('../../../app/controller/access.php');
+
 require_once('../../../app/controller/function.php');
+require_once('../../../app/controller/access.php');
 require_once('../../../app/helper/jdf.php');
 
 $errors = [];
@@ -85,7 +86,8 @@ if (isset($_POST['changePassword'])) {
                                         ->getOne('members', 'fname, lname, username');
 
                                     ?>
-                                    <h6 class="fw-bold"><?= !empty($member) ? $member['fname'] . ' ' . $member['lname'] . ' ' : "" ?>
+                                    <h6 class="fw-bold">
+                                        <?= !empty($member) ? $member['fname'] . ' ' . $member['lname'] . ' ' : "" ?>
                                         (<span class="text-primary"><?= ($member['username']) ?></span>)
                                     </h6>
                                 <?php } ?>

@@ -1,7 +1,8 @@
 <?php
 require_once('../../../app/connection/DB.php');
-require_once('../../../app/controller/access.php');
+
 require_once('../../../app/controller/function.php');
+require_once('../../../app/controller/access.php');
 require_once('../../../app/helper/jdf.php');
 if (isset($_GET['id'])) {
     $id = checkDataSecurity($_GET['id']);
@@ -17,12 +18,12 @@ if (isset($_GET['id'])) {
             );
     }
 }
-if(isset($_POST['changeStatus'])){
+if (isset($_POST['changeStatus'])) {
     $status = checkDataSecurity($_POST['status']);
     $db->where('id', $id)
-    ->update('comments', [
-        'status'=>$status
-    ]);
+        ->update('comments', [
+            'status' => $status
+        ]);
     header('Location:comments_list.php');
 }
 ?>
@@ -40,7 +41,8 @@ if(isset($_POST['changeStatus'])){
     <?php
     require_once('../../layout/css.php');
     ?>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <style>
         @media (min-width: 0) {
             .g-mr-15 {
@@ -119,50 +121,61 @@ if(isset($_POST['changeStatus'])){
                         <div class="col-12 d-flex">
                             <div class="card border shadow-none w-100">
                                 <div class="card-body">
-                                        <div class="container d-flex justify-content-center">
-                                            <?php 
-                                            
-                                            if(isset($_GET['id'])){
-                                                $comment = $db->where('comments.id', $id)
+                                    <div class="container d-flex justify-content-center">
+                                        <?php
+
+                                        if (isset($_GET['id'])) {
+                                            $comment = $db->where('comments.id', $id)
                                                 ->join('members', 'members.id = comments.member_id', 'LEFT')
                                                 ->getOne('comments', "CONCAT(comments.fname, ' ', comments.lname) as name, description, comments.setdate, members.image, comments.status");
-                                            }
-                                            
-                                            ?>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="media g-mb-30 media-comment d-flex justify-content-center">
-                                                        <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15"
-                                                            src="../../<?= isset($comment['image']) ? $comment['image'] : "assets/images/admin/default.png" ?>"
-                                                            alt="Image Description">
-                                                        <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
-                                                            <div class="g-mb-15">
-                                                                <h5 class="h5 g-color-gray-dark-v1 mb-0"><?= $comment['name'] ?></h5>
-                                                                <span class="g-color-gray-dark-v4 g-font-size-12"><?= jdate('Y/m/d', strtotime($comment['setdate'])) ?></span>
+                                        }
+
+                                        ?>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="media g-mb-30 media-comment d-flex justify-content-center">
+                                                    <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15"
+                                                        src="../../<?= isset($comment['image']) ? $comment['image'] : "assets/images/admin/default.png" ?>"
+                                                        alt="Image Description">
+                                                    <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
+                                                        <div class="g-mb-15">
+                                                            <h5 class="h5 g-color-gray-dark-v1 mb-0">
+                                                                <?= $comment['name'] ?></h5>
+                                                            <span
+                                                                class="g-color-gray-dark-v4 g-font-size-12"><?= jdate('Y/m/d', strtotime($comment['setdate'])) ?></span>
+                                                        </div>
+                                                        <div>
+                                                            <p class="text-start"><?= $comment['description'] ?></p>
+                                                        </div>
+                                                        <div class="container">
+                                                            <form class="row d-flex justify-content-between" action=""
+                                                                method="post">
+                                                                <div class="col-md-6 mt-3">
+                                                                    <select name="status" id="status"
+                                                                        class="form-select">
+                                                                        <option <?= $comment['status'] == 2 ?> value="2">
+                                                                            تایید</option>
+                                                                        <option <?= $comment['status'] == 1 ?> value="1">رد
+                                                                        </option>
+                                                                        <option <?= $comment['status'] == 0 ?> value="0">در
+                                                                            حال بررسی</option>
+                                                                    </select>
                                                                 </div>
-                                                                <div>
-                                                                    <p class="text-start"><?= $comment['description'] ?></p>
+                                                                <div class="col-md-6 text-end">
+                                                                    <div class="btn-group mt-3">
+                                                                        <button class="btn btn-primary w-100"
+                                                                            type="submit"
+                                                                            name="changeStatus">ثبت</button>
+                                                                        <a href="comments_list.php"
+                                                                            class="btn btn-danger w-100"
+                                                                            type="submit">لغو</a>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="container">
-                                                                    <form class="row d-flex justify-content-between" action="" method="post">
-                                                                        <div class="col-md-6 mt-3">
-                                                                            <select name="status" id="status" class="form-select">
-                                                                                <option <?= $comment['status'] == 2 ?> value="2">تایید</option>
-                                                                                <option <?= $comment['status'] == 1 ?> value="1">رد</option>
-                                                                                <option <?= $comment['status'] == 0 ?> value="0">در حال بررسی</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="col-md-6 text-end">
-                                                                            <div class="btn-group mt-3">
-                                                                                <button class="btn btn-primary w-100" type="submit" name="changeStatus">ثبت</button>
-                                                                                <a href="comments_list.php" class="btn btn-danger w-100" type="submit">لغو</a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

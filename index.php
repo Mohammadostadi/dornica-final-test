@@ -99,7 +99,7 @@ if (isset($_POST['btn_login'])) {
                                         </div>
                                         <div class="post-content media-body">
                                             <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                    href="site/singe-page/single.php?id=<?= $popularBlog['id'] ?>"><?= $popularBlog['description'] ?></a>
+                                                    href="site/singe-page/single.php?id=<?= $popularBlog['id'] ?>&click=1"><?= $popularBlog['description'] ?></a>
                                             </h6>
                                             <div
                                                 class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
@@ -366,7 +366,7 @@ if (isset($_POST['btn_login'])) {
                                     <?php
                                     $lastBlog = $db->orderBy('date', 'DESC')
                                         ->join('categories', 'categories.id = blogs.blog_category', 'LEFT')
-                                        ->getOne('blogs', 'blogs.id, title, description, categories.name, date, counter');
+                                        ->getOne('blogs', 'blogs.id, title, description, categories.name, date, counter, image');
                                     ?>
                                     <div class="featured-slider-1 border-radius-10">
                                         <div class="featured-slider-1-items">
@@ -375,7 +375,7 @@ if (isset($_POST['btn_login'])) {
                                                     class="img-hover-slide border-radius-15 mb-30 position-relative overflow-hidden">
                                                     <span class="top-right-icon bg-dark"><i
                                                             class="mdi mdi-camera-alt"></i></span>
-                                                    <a href="site/singe-page/single.php?id=<?= $lastBlog['id'] ?>">
+                                                    <a href="site/singe-page/single.php?id=<?= $lastBlog['id'] ?>&click=1">
                                                         <img src="<?= (isset($lastBlog['image']) and $lastBlog['image'] != '') ? "attachment/imgs/blogs/" . $lastBlog['image'] : "admin-panel/assets/images/ads/default.png" ?>"
                                                             alt="post-slider">
                                                     </a>
@@ -403,7 +403,7 @@ if (isset($_POST['btn_login'])) {
                                                         </div>
                                                     </div>
                                                     <h4 class="post-title mb-20"><a
-                                                            href="site/singe-page/single.php?id=<?= $lastBlog['id'] ?>"><?= $lastBlog['description'] ?></a>
+                                                            href="site/singe-page/single.php?id=<?= $lastBlog['id'] ?>&click=1"><?= $lastBlog['description'] ?></a>
                                                     </h4>
 
                                                 </div>
@@ -436,17 +436,17 @@ if (isset($_POST['btn_login'])) {
                                             <?php foreach ($resentBlogs as $resentBlog) { ?>
                                                 <div class="slider-single col-md-6 mb-30">
                                                     <div class="img-hover-scale border-radius-10">
-                                                        <a href="site/singe-page/single.php?id=<?= $resentBlog['id'] ?>">
+                                                        <a href="site/singe-page/single.php?id=<?= $resentBlog['id'] ?>&click=1">
                                                             <img class="border-radius-10"
                                                                 src="<?= (isset($resentBlog['image']) and $resentBlog['image'] != '') ? "attachment/imgs/blogs/" . $resentBlog['image'] : "admin-panel/assets/images/ads/default.png" ?>"
                                                                 alt="post-slider">
                                                         </a>
                                                     </div>
                                                     <a
-                                                        href="site/singe-page/single.php?id=<?= $resentBlog['id'] ?>"><?= $resentBlog['title'] ?></a>
+                                                        href="site/singe-page/single.php?id=<?= $resentBlog['id'] ?>&click=1"><?= $resentBlog['title'] ?></a>
                                                     <h5 class="post-title pr-5 pl-5 mb-10 mt-15 text-limit-2-row">
                                                         <a
-                                                            href="site/singe-page/single.php?id=<?= $resentBlog['id'] ?>"><?= $resentBlog['description'] ?></a>
+                                                            href="site/singe-page/single.php?id=<?= $resentBlog['id'] ?>&click=1"><?= $resentBlog['description'] ?></a>
                                                     </h5>
                                                     <div class="entry-meta meta-1 font-x-small mt-10 pr-5 pl-5 text-muted">
 
@@ -507,13 +507,13 @@ if (isset($_POST['btn_login'])) {
                                                 <div class="d-flex">
                                                     <div
                                                         class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                                        <a class="color-white" href="site/singe-page/single.php?id=<?= $randomBlog['id'] ?>">
-                                                            <img src="<?= (isset($randomBlog['image']) and $randomBlog['image'] != '')?"attachment/imgs/blogs/".$randomBlog['image']:"admin-panel/assets/images/ads/default.png" ?>" alt="">
+                                                        <a class="color-white" href="site/singe-page/single.php?id=<?= $randomBlog['id'] ?>&click=1">
+                                                            <img src="<?= (isset($randomBlog['image']) and $randomBlog['image'] != '')?"attachment/imgs/blogs/".$randomBlog['image']:"admin-panel/assets/images/ads/default.png" ?>" width="50px" height="50px" alt="">
                                                         </a>
                                                     </div>
                                                     <div class="post-content media-body">
                                                         <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                                href="site/singe-page/single.php?id=<?= $randomBlog['id'] ?>"><?= $randomBlog['description'] ?></a></h6>
+                                                                href="site/singe-page/single.php?id=<?= $randomBlog['id'] ?>&click=1"><?= $randomBlog['description'] ?></a></h6>
                                                     </div>
                                                 </div>
                                             </li>
@@ -561,13 +561,13 @@ if (isset($_POST['btn_login'])) {
                                                 <div class="d-flex">
                                                     <div
                                                         class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                                        <a class="color-white" href="site/singe-page/single.php?id=<?= $popularBlog['id'] ?>">
+                                                        <a class="color-white" href="site/singe-page/single.php?id=<?= $popularBlog['id'] ?>&click=1">
                                                             <img src="<?= (isset($popularBlog['image']) and $popularBlog['image'] != '')?"attachment/imgs/blogs/".$popularBlog['image']:"admin-panel/assets/images/ads/default.png" ?>" alt="">
                                                         </a>
                                                     </div>
                                                     <div class="post-content media-body">
                                                         <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                                href="site/singe-page/single.php?id=<?= $popularBlog['id'] ?>"><?= $popularBlog['description'] ?></a></h6>
+                                                                href="site/singe-page/single.php?id=<?= $popularBlog['id'] ?>&click=1"><?= $popularBlog['description'] ?></a></h6>
                                                         <div
                                                             class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
                                                             <span class="post-by"><?= $popularBlog['name'] ?>
@@ -602,8 +602,9 @@ if (isset($_POST['btn_login'])) {
                                         $page = 1;
                                         pageLimit('blogs', 5, false);
                                         $blogs = $db->orderBy('date', 'DESC')
-                                            ->where('status', 1)
-                                            ->paginate('blogs', $page);
+                                            ->where('blogs.status', 1)
+                                            ->join('categories', 'categories.id = blogs.blog_category', 'LEFT')
+                                            ->paginate('blogs', $page, 'blogs.id, categories.name, description, date, counter, post_liked, image');
                                         foreach ($blogs as $blog) {
                                             ?>
                                             <article
@@ -611,7 +612,7 @@ if (isset($_POST['btn_login'])) {
                                                 <div class="d-flex">
                                                     <div class="post-thumb d-flex ml-15 border-radius-15 img-hover-scale">
                                                         <a class="color-white"
-                                                            href="site/singe-page/single.php?id=<?= $blog['id'] ?>">
+                                                            href="site/singe-page/single.php?id=<?= $blog['id'] ?>&click=1">
                                                             <img class="border-radius-15"
                                                                 src="<?= (isset($blog['image']) and $blog['image'] != '') ? "../../attachment/imgs/blogs/" . $blog['image'] : "../../admin-panel/assets/images/ads/default.png" ?>"
                                                                 alt="">
@@ -620,14 +621,14 @@ if (isset($_POST['btn_login'])) {
                                                     <div class="post-content media-body">
                                                         <div class="entry-meta mb-15 mt-10">
                                                             <a class="entry-meta meta-2" href="category.html"><span
-                                                                    class="post-in text-danger font-x-small">سیاسی</span></a>
+                                                                    class="post-in text-danger font-x-small"><?= $blog['name'] ?></span></a>
                                                         </div>
                                                         <h5 class="post-title mb-15 text-limit-2-row">
                                                             <span class="post-format-icon">
                                                                 <ion-icon name="videocam-outline"></ion-icon>
                                                             </span>
                                                             <a
-                                                                href="site/singe-page/single.php?id=<?= $blog['id'] ?>"><?= $blog['description'] ?></a>
+                                                                href="site/singe-page/single.php?id=<?= $blog['id'] ?>&click=1"><?= $blog['description'] ?></a>
                                                         </h5>
                                                         <div
                                                             class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
@@ -638,9 +639,7 @@ if (isset($_POST['btn_login'])) {
                                                             </span>
                                                             <span class="post-by">
                                                                 <i class="fa fa-heart"></i>
-                                                                <?php $countLike = $db->where('blog_id', $blog['id'])
-                                                                    ->getValue('wishlist', 'COUNT(id)') ?>
-                                                                <?= $countLike ?>
+                                                                <?= $blog['post_liked'] ?>
                                                                 لایک
                                                             </span>
                                                             <span class="post-on"><?= $blog['date'] ?></span>
@@ -661,29 +660,32 @@ if (isset($_POST['btn_login'])) {
                                         <h5 class="widget-title">محبوب ترین</h5>
                                     </div>
                                     <div class="post-aside-style-3">
+                                        <?php 
                                         
+                                        $mostLikedBlogs = $db->orderBy('post_liked', 'DESC')
+                                        ->orderBy('date', 'DESC')
+                                        ->join('categories', 'categories.id = blogs.blog_category', 'LEFT')
+                                        ->get('blogs', 4, 'categories.name, blogs.id, description, image, date');
+                                            foreach($mostLikedBlogs as $mostLikedBlog){
+                                        ?>
                                         <article class="bg-white border-radius-15 mb-30 p-10 wow fadeIn animated">
                                             <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
                                                 <a href="site/singe-page/single.php">
-                                                    <video autoplay="" class="photo-item__video" loop="" muted=""
-                                                        preload="none">
-                                                        <source src="#" type="video/mp4">
-                                                    </video>
+                                                <img class="border-radius-15"
+                                                                src="<?= (isset($mostLikedBlog['image']) and $mostLikedBlog['image'] != '') ? "../../attachment/imgs/blogs/" . $mostLikedBlog['image'] : "../../admin-panel/assets/images/ads/default.png" ?>"
+                                                                alt="">
                                                 </a>
                                             </div>
                                             <div class="pl-10 pr-10">
-                                                <h5 class="post-title mb-15"><a href="site/singe-page/single.php">لورم
-                                                        ایپسوم متن
-                                                        ساختگی با تولید سادگی نامفهوم از صنعت چاپ</a></h5>
+                                                <h5 class="post-title mb-15"><a href="site/singe-page/single.php"><?= $mostLikedBlog['description'] ?></a></h5>
                                                 <div
                                                     class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
-                                                    <span class="post-in">در <a href="category.html">جهان</a></span>
-                                                    <span class="post-by">توسط <a href="author.html">الناز
-                                                            روستایی</a></span>
-                                                    <span class="post-on">4 دقیقه پیش</span>
+                                                    <span class="post-in">در <a href="category.html"><?= $mostLikedBlog['name'] ?></a></span>
+                                                    <span class="post-on"><?= $mostLikedBlog['date'] ?></span>
                                                 </div>
                                             </div>
                                         </article>
+                                        <?php } ?>
                                     </div>
                                 </div>
                                 <div
@@ -702,13 +704,13 @@ if (isset($_POST['btn_login'])) {
                                         <?php foreach($lastComments as $lastComment){ ?>
                                         <div class="last-comment mb-20 d-flex wow fadeIn animated">
                                             <span class="item-count vertical-align">
-                                                <a class="red-tooltip author-avatar" href="site/singe-page/single.php?id=<?= $lastComment['blog_id'] ?>" data-toggle="tooltip"
+                                                <a class="red-tooltip author-avatar" href="site/singe-page/single.php?id=<?= $lastComment['blog_id'] ?>&click=1" data-toggle="tooltip"
                                                     data-placement="top" title=""
                                                     data-original-title="<?= $lastComment['name'] ?>"><img
                                                         src="<?= (isset($lastComment['image']) and $lastComment['image'] != '')?"attachment/imgs/members/".$lastComment['image']:"admin-panel/assets/images/admin/default.png" ?>" alt=""></a>
                                             </span>
                                             <div class="alith_post_title_small">
-                                                <p class="font-medium mb-10"><a href="site/singe-page/single.php?id=<?= $lastComment['blog_id'] ?>"><?= $lastComment['description'] ?></a></p>
+                                                <p class="font-medium mb-10"><a href="site/singe-page/single.php?id=<?= $lastComment['blog_id'] ?>&click=1"><?= $lastComment['description'] ?></a></p>
                                                 <div
                                                     class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
                                                     <span class="post-by">توسط <?= $lastComment['name'] ?></span>

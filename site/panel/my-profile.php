@@ -51,14 +51,8 @@ if (isset($_POST['_update'])) {
 		$image = $_FILES['image']['tmp_name'];
 		$image_name = rand() . $_FILES['image']['name'];
 		$source_properties = getimagesize($image);
-		if ($_FILES['image']['size'] <= 819200) {
-			$types = ['image/jpeg', 'image/gif', 'image/png'];
-			$image_type = $source_properties['mime'];
-			if (!in_array($image_type, $types))
-				setErrorMessage('image', 'فرمت تصویر شما باید جز jpeg, gif, png, باشد.');
-		} else {
-			setErrorMessage('image', 'حجم فایل مربوطه بیشتر از ۸۰۰ کیلوبایت میباشد.');
-		}
+		$image_type = $source_properties['mime'];
+		checkImage($_FILES['image']);
 	}
 
 
@@ -239,7 +233,7 @@ $path = basename($_SERVER['PHP_SELF']);
 													<input value="0" id="male" type="radio" name="gender"
 														<?= $member['gender'] == 0 ? "checked" : "" ?>>
 													<label for="female">زن</label>
-													<input id="female" name="gender" type="radio"
+													<input value="1" id="female" name="gender" type="radio"
 														<?= $member['gender'] == 1 ? "checked" : "" ?>>
 												</div>
 											</div>

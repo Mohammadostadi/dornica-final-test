@@ -660,7 +660,7 @@ jQuery(window).on('load',function () {
 	
 	setTimeout(function(){
 		jQuery('#loading-area').remove();
-	}, 2000);
+	}, 500);
 	
 });
 /*  Window Load END */

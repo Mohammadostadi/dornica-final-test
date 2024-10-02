@@ -1,11 +1,12 @@
 <?php
 require_once('../../../app/connection/DB.php');
-require_once('../../../app/controller/access.php');
+
 require_once('../../../app/controller/function.php');
+require_once('../../../app/controller/access.php');
 require_once('../../../app/helper/jdf.php');
 
 $page = 1;
-pageLimit('blogs', 7);
+pageLimit('blogs', 7, false);
 
 $blogs = $db->join('categories', 'categories.id = blogs.blog_category', 'LEFT')
     ->orderBy('id', 'DESC')
@@ -155,8 +156,7 @@ $blogs = $db->join('categories', 'categories.id = blogs.blog_category', 'LEFT')
                                                                                         value="<?= $blog['id'] ?>"
                                                                                         class="btn btn-secondary close"
                                                                                         data-dismiss="modal">لغو</button>
-                                                                                    <button type="submit"
-                                                                                        name="btn_delete"
+                                                                                    <button type="submit" name="btn_delete"
                                                                                         class="btn btn-primary">حذف</button>
                                                                                 </div>
                                                                             </form>

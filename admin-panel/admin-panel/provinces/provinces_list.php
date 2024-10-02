@@ -1,14 +1,15 @@
 <?php
 require_once('../../../app/connection/DB.php');
-require_once('../../../app/controller/access.php');
+
 require_once('../../../app/controller/function.php');
+require_once('../../../app/controller/access.php');
 require_once('../../../app/helper/jdf.php');
 
 $page = 1;
 pageLimit('provinces', 7, false);
 
 $provinces = $db->orderBy('id', 'DESC')
-    ->paginate('provinces', 7);
+    ->paginate('provinces', $page);
 
 ?>
 <!doctype html>
