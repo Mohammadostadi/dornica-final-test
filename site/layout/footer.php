@@ -13,7 +13,7 @@
                                 if(isset($categoriesList[$j])){
                                 ?>
                                 
-                            <li class="cat-item cat-item-2"><a href="#"><?= $categoriesList[$j]['name'] ?></a></li>
+                            <li class="cat-item cat-item-2"><a href="<?= $SITE_PATH ?>/category/category-big.php?category=<?= $category['id'] ?>"><?= $categoriesList[$j]['name'] ?></a></li>
                             <?php }
                             $j += 1;
                             $counter += 1;
@@ -34,7 +34,7 @@
                     <div class="col-12">
                         <ul class="list-inline font-small">
                             <?php foreach ($categoriesList as $category) { ?>
-                                <li class="list-inline-item"><a href="#"><?= $category['name'] ?></a></li>
+                                <li class="list-inline-item"><a href="<?= $URL_PATH ?>/category/category-big?category=<?= $category['id'] ?>"><?= $category['name'] ?></a></li>
                             <?php } ?>
                         </ul>
                     </div>

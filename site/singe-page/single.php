@@ -3,6 +3,8 @@ require_once('../../app/connection/DB.php');
 require_once('../../app/controller/function.php');
 require_once('../../app/helper/view.php');
 require_once('../../app/helper/jdf.php');
+$SITE_PATH = '..';
+$URL_PATH = '../..';
 require_once('../layout/login.php');
 
 if (!isset($_GET['id']) or $_GET['id'] == '' or !is_numeric($_GET['id']))
@@ -127,7 +129,7 @@ $relatedBlogs = $db->where('blog_category', $blog['blog_category'])
     ->where('blogs.id', $id, '!=')
     ->join('categories', 'categories.id = blogs.blog_category')
     ->orderBy('date', 'DESC')
-    ->get('blogs', 3, 'blogs.id, title, description, categories.name, date, image');
+    ->get('blogs', 3, 'blogs.id, title, description, categories.name, date, image , blog_category');
 
 $countComment = $db->where('blog_id', $id)
     ->where('comments.status', 2)
@@ -166,21 +168,7 @@ $blogComments = $db->where('blog_id', $id)
 
 <body>
     <!-- Preloader Start -->
-    <div id="preloader-active">
-        <div class="preloader d-flex align-items-center justify-content-center">
-            <div class="preloader-inner position-relative">
-                <div class="text-center">
-                    <img class="jump mb-50" src="../../attachment/imgs/loading.svg" alt="">
-                    <h6>در حال بارگذاری</h6>
-                    <div class="loader">
-                        <div class="bar bar1"></div>
-                        <div class="bar bar2"></div>
-                        <div class="bar bar3"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php require_once('../layout/loader.php') ?>
     <div class="main-wrap">
         <!--Offcanvas sidebar-->
         <?php require_once('../layout/sidebar.php') ?>
@@ -195,7 +183,7 @@ $blogComments = $db->where('blog_id', $id)
                     showMessage($_GET['ok'])
                         ?>
                     <div class="entry-header entry-header-1 mb-30 mt-50">
-                        <div class="entry-meta meta-0 font-small mb-30"><a href="category.html"><span
+                        <div class="entry-meta meta-0 font-small mb-30"><a href="../category/category-big.php?category=<?= $blog['blog_category'] ?>"><span
                                     class="post-cat bg-success color-white"><?= $blog['name'] ?></span></a></div>
                     <h1 class="post-title mb-30">
                         <?= $blog['title'] ?>
@@ -293,15 +281,15 @@ $blogComments = $db->where('blog_id', $id)
                                     <article class="col-lg-4">
                                         <div class="background-white border-radius-10 p-10 mb-30">
                                             <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
-                                                <a href="single.php?id=<?= $relatedBlog['id'] ?>">
+                                                <a href="single.php?id=<?= $relatedBlog['id'] ?>&click=1">
                                                     <img class="border-radius-15"
                                                         src="<?= (isset($relatedBlog['image']) and $relatedBlog['image'] != '') ? "../../attachment/imgs/blogs/" . $relatedBlog['image'] : "../../admin-panel/assets/images/ads/default.png" ?>"
-                                                        alt="">
+                                                        width="260px" height="260px" alt="">
                                                 </a>
                                             </div>
                                             <div class="pl-10 pr-10">
                                                 <div class="entry-meta mb-15 mt-10">
-                                                    <a class="entry-meta meta-2" href="category.html"><span
+                                                    <a class="entry-meta meta-2" href="../category/category-big.php?category=<?= $relatedBlog['blog_category'] ?>"><span
                                                             class="post-in text-primary font-x-small"><?= $relatedBlog['name'] ?></span></a>
                                                 </div>
                                                 <h5 class="post-title mb-15">
@@ -310,7 +298,7 @@ $blogComments = $db->where('blog_id', $id)
                                                             aria-label="image outline"></ion-icon>
                                                     </span>
                                                     <a
-                                                        href="single.php?id=<?= $relatedBlog['id'] ?>"><?= $relatedBlog['description'] ?></a>
+                                                        href="single.php?id=<?= $relatedBlog['id'] ?>&click=1"><?= $relatedBlog['description'] ?></a>
                                                 </h5>
                                                 <div
                                                     class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
@@ -396,420 +384,10 @@ $blogComments = $db->where('blog_id', $id)
                         </div>
                     </div>
                     <!--End col-lg-8-->
-                    <div class="col-lg-4 col-md-12 sidebar-right sticky-sidebar">
-                        <div class="pl-lg-50">
-                            <!--Post aside style 1-->
-                            <div class="sidebar-widget mb-30">
-                                <div class="widget-header position-relative mb-30">
-                                    <div class="row">
-                                        <div class="col-7">
-                                            <h4 class="widget-title mb-0">از دست <span>ندهید</span></h4>
-                                        </div>
-                                        <div class="col-5 text-left">
-                                            <h6 class="font-medium pl-15">
-                                                <a class="text-muted font-small" href="#">مشاهده همه</a>
-                                            </h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="post-aside-style-1 border-radius-10 p-20 bg-white">
-                                    <ul class="list-post">
-                                        <li class="mb-20">
-                                            <div class="d-flex">
-                                                <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                                    <a class="color-white" href="single.html">
-                                                        <img src="../../attachment/imgs/thumbnail-4.jpg" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="post-content media-body">
-                                                    <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                            href="single.html">لورم ایپسوم متن ساختگی با تولید سادگی
-                                                            نامفهوم از صنعت چاپ</a></h6>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="mb-20">
-                                            <div class="d-flex">
-                                                <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                                    <a class="color-white" href="single.html">
-                                                        <img src="../../attachment/imgs/thumbnail-15.jpg" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="post-content media-body">
-                                                    <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                            href="single.html">سه درصد گذشته، حال و آینده شناخت
-                                                            فراوان</a></h6>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="mb-20">
-                                            <div class="d-flex">
-                                                <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                                    <a class="color-white" href="single.html">
-                                                        <img src="../../attachment/imgs/thumbnail-16.jpg" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="post-content media-body">
-                                                    <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                            href="single.html">سطرآنچنان که لازم است و برای شرایط فعلی
-                                                            تکنولوژی</a></h6>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="d-flex">
-                                                <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                                    <a class="color-white" href="single.html">
-                                                        <img src="../../attachment/imgs/thumbnail-15.jpg" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="post-content media-body">
-                                                    <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                            href="single.html">سه درصد گذشته، حال و آینده شناخت
-                                                            فراوان</a></h6>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!--Newsletter-->
-                            <div class="sidebar-widget widget_newsletter border-radius-10 p-20 bg-white mb-30">
-                                <div class="widget-header widget-header-style-1 position-relative mb-15">
-                                    <h5 class="widget-title">خبرنامه</h5>
-                                </div>
-                                <div class="newsletter">
-                                    <p class="font-medium">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ</p>
-                                    <form target="_blank" action="#" method="get"
-                                        class="subscribe_form relative mail_part">
-                                        <div class="form-newsletter-cover">
-                                            <div class="form-newsletter position-relative">
-                                                <input type="email" name="EMAIL"
-                                                    placeholder="ایمیل خود را اینجا وارد کنید" required="">
-                                                <button type="submit">
-                                                    <i class="ti ti-email"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <!--Post aside style 2-->
-                            <div class="sidebar-widget mb-50">
-                                <div class="widget-header mb-30">
-                                    <h5 class="widget-title">پست های <span>اخیر</span></h5>
-                                </div>
-                                <div class="post-aside-style-3">
-                                    <article class="bg-white border-radius-15 mb-30 p-10 wow fadeIn  animated">
-                                        <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
-                                            <a href="single.html">
-                                                <video autoplay="" class="photo-item__video" loop="" muted=""
-                                                    preload="none">
-                                                    <source src="#" type="video/mp4">
-                                                </video>
-                                            </a>
-                                        </div>
-                                        <div class="pl-10 pr-10">
-                                            <h5 class="post-title mb-15"><a href="single.html">لورم ایپسوم متن ساختگی با
-                                                    تولید سادگی نامفهوم از صنعت چاپ</a></h5>
-                                            <div
-                                                class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
-                                                <span class="post-in">در <a href="category.html">جهان</a></span>
-                                                <span class="post-by">توسط <a href="author.html">الناز
-                                                        روستایی</a></span>
-                                                <span class="post-on">4 دقیقه پیش</span>
-                                            </div>
-                                        </div>
-                                    </article>
-                                    <article class="bg-white border-radius-15 mb-30 p-10 wow fadeIn  animated">
-                                        <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
-                                            <a href="single.html">
-                                                <img class="border-radius-15" src="../../attachment/imgs/news-22.jpg"
-                                                    alt="">
-                                            </a>
-                                        </div>
-                                        <div class="pl-10 pr-10">
-                                            <h5 class="post-title mb-15"><a href="single.html">طراحان خلاقی و فرهنگ
-                                                    پیشرو در زبان</a></h5>
-                                            <div
-                                                class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
-                                                <span class="post-in">در <a href="category.html">سلامت</a></span>
-                                                <span class="post-by">توسط <a href="author.html">سعید شمس</a></span>
-                                                <span class="post-on">14 دقیقه پیش</span>
-                                            </div>
-                                        </div>
-                                    </article>
-                                    <article class="bg-white border-radius-15 mb-30 p-10 wow fadeIn  animated">
-                                        <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
-                                            <a href="single.html">
-                                                <img class="border-radius-15" src="../../attachment/imgs/news-20.jpg"
-                                                    alt="">
-                                            </a>
-                                        </div>
-                                        <div class="pl-10 pr-10">
-                                            <h5 class="post-title mb-15"><a href="single.html">سطرآنچنان که لازم است و
-                                                    برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف</a></h5>
-                                            <div
-                                                class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
-                                                <span class="post-in">در <a href="category.html">کانادا</a></span>
-                                                <span class="post-by">توسط <a href="author.html">بهمن راستی</a></span>
-                                                <span class="post-on">16 دقیقه پیش</span>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="col-lg-4 col-md-12">
+                    <?php require_once('../layout/right_sidebar.php') ?>
                     <!--End col-lg-4-->
-                </div>
-                <div class="row mb-50">
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="sidebar-widget mb-md-30">
-                            <div class="widget-header mb-30">
-                                <h5 class="widget-title">پرطرفدارترین ها</h5>
-                            </div>
-                            <div class="post-aside-style-2">
-                                <ul class="list-post">
-                                    <li class="mb-30 wow fadeIn animated">
-                                        <div class="d-flex">
-                                            <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img src="../../attachment/imgs/thumbnail-12.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="post-content media-body">
-                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">لورم
-                                                        ایپسوم متن ساختگی با تولید سادگی نامفهوم</a></h6>
-                                                <div
-                                                    class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
-                                                    <span class="post-by">توسط <a href="author.html">رضا
-                                                            کیمیا</a></span>
-                                                    <span class="post-on">4 دقیقه پیش</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="mb-30 wow fadeIn animated">
-                                        <div class="d-flex">
-                                            <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img src="../../attachment/imgs/thumbnail-13.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="post-content media-body">
-                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">لورم
-                                                        ایپسوم متن ساختگی با تولید سادگی نامفهوم</a></h6>
-                                                <div
-                                                    class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
-                                                    <span class="post-by">توسط <a href="author.html">مسعود
-                                                            راستی</a></span>
-                                                    <span class="post-on">3 ساعت قبل</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="wow fadeIn animated">
-                                        <div class="d-flex">
-                                            <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img src="../../attachment/imgs/thumbnail-15.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="post-content media-body">
-                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">لورم
-                                                        ایپسوم متن ساختگی با تولید سادگی نامفهوم</a></h6>
-                                                <div
-                                                    class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
-                                                    <span class="post-by">توسط <a href="author.html">الناز
-                                                            روستایی</a></span>
-                                                    <span class="post-on">4 ساعت قبل</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="sidebar-widget mb-md-30">
-                            <div class="widget-header mb-30">
-                                <h5 class="widget-title">انتخاب <span>ویرایشگر</span></h5>
-                            </div>
-                            <div class="post-aside-style-1 border-radius-10 p-20 bg-white">
-                                <ul class="list-post">
-                                    <li class="mb-20">
-                                        <div class="d-flex">
-                                            <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img src="../../attachment/imgs/thumbnail-4.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="post-content media-body">
-                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">لورم
-                                                        ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت</a></h6>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="mb-20">
-                                        <div class="d-flex">
-                                            <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img src="../../attachment/imgs/thumbnail-15.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="post-content media-body">
-                                                <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                        href="single.html">طراحان خلاقی و فرهنگ پیشرو در زبان فارسی
-                                                        ایجاد کرد</a></h6>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="mb-20">
-                                        <div class="d-flex">
-                                            <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img src="../../attachment/imgs/thumbnail-16.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="post-content media-body">
-                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">لورم
-                                                        ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت</a></h6>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="d-flex">
-                                            <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img src="../../attachment/imgs/thumbnail-15.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="post-content media-body">
-                                                <h6 class="post-title mb-10 text-limit-2-row"><a
-                                                        href="single.html">طراحان خلاقی و فرهنگ پیشرو در زبان فارسی
-                                                        ایجاد کرد</a></h6>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="sidebar-widget mb-sm-30">
-                            <div class="widget-header mb-30">
-                                <h5 class="widget-title">محبوب ترین</h5>
-                            </div>
-                            <div class="post-aside-style-2">
-                                <ul class="list-post">
-                                    <li class="mb-30 wow fadeIn   animated"
-                                        style="visibility: visible; animation-name: fadeIn;">
-                                        <div class="d-flex">
-                                            <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img src="../../attachment/imgs/thumbnail-2.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="post-content media-body">
-                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">تایپ
-                                                        به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای</a></h6>
-                                                <div
-                                                    class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
-                                                    <span class="post-by">توسط <a href="author.html">رضا
-                                                            کیمیا</a></span>
-                                                    <span class="post-on">4 دقیقه پیش</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="mb-30 wow fadeIn   animated"
-                                        style="visibility: visible; animation-name: fadeIn;">
-                                        <div class="d-flex">
-                                            <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img src="../../attachment/imgs/thumbnail-3.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="post-content media-body">
-                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">تایپ
-                                                        به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای</a></h6>
-                                                <div
-                                                    class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
-                                                    <span class="post-by">توسط <a href="author.html">مسعود
-                                                            راستی</a></span>
-                                                    <span class="post-on">3 ساعت قبل</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="wow fadeIn animated"
-                                        style="visibility: visible; animation-name: fadeIn;">
-                                        <div class="d-flex">
-                                            <div class="post-thumb d-flex ml-15 border-radius-5 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img src="../../attachment/imgs/thumbnail-5.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="post-content media-body">
-                                                <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">تایپ
-                                                        به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای</a></h6>
-                                                <div
-                                                    class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase">
-                                                    <span class="post-by">توسط <a href="author.html">الناز
-                                                            روستایی</a></span>
-                                                    <span class="post-on">4 ساعت قبل</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="widget-header mb-30">
-                            <h5 class="widget-title">آخرین <span>نظرات</span></h5>
-                        </div>
-                        <div
-                            class="sidebar-widget p-20 border-radius-15 bg-white widget-latest-comments wow fadeIn  animated">
-                            <div class="post-block-list post-module-6">
-                                <div class="last-comment mb-20 d-flex wow fadeIn">
-                                    <span class="item-count vertical-align">
-                                        <a class="red-tooltip author-avatar" href="#" data-toggle="tooltip"
-                                            data-placement="top" title="" data-original-title="Azumi - 985 posts"><img
-                                                src="../../attachment/imgs/authors/author-14.png" alt=""></a>
-                                    </span>
-                                    <div class="alith_post_title_small">
-                                        <p class="font-medium mb-10"><a href="single.html">لورم ایپسوم متن ساختگی با
-                                                تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان.</a></p>
-                                        <div
-                                            class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
-                                            <span class="post-by">توسط <a href="author.html">الناز روستایی</a></span>
-                                            <span class="post-on">4 دقیقه پیش</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="last-comment d-flex wow fadeIn">
-                                    <span class="item-count vertical-align">
-                                        <a class="red-tooltip author-avatar" href="#" data-toggle="tooltip"
-                                            data-placement="top" title="" data-original-title="Johny - 445 posts"><img
-                                                src="../../attachment/imgs/authors/author-3.png" alt=""></a>
-                                    </span>
-                                    <div class="alith_post_title_small">
-                                        <p class="font-medium mb-10"><a href="single.html">سه درصد گذشته، حال و آینده
-                                                شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری
-                                                را برای طراحان.</a></p>
-                                        <div
-                                            class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
-                                            <span class="post-by">توسط <a href="author.html">مسعود راستی</a></span>
-                                            <span class="post-on">4 دقیقه پیش</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <?php require_once('../layout/right_sidebar_second.php') ?>
                     </div>
                 </div>
             </div>

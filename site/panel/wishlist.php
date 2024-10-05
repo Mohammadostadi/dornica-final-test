@@ -3,6 +3,8 @@
 require_once('../../app/connection/DB.php');
 require_once('../../app/controller/function.php');
 require_once('../../app/helper/view.php');
+$SITE_PATH = '..';
+$URL_PATH = '../..';
 $member = $db->where('username', $_SESSION['member'])
     ->getOne('members');
 
@@ -47,37 +49,13 @@ $path = basename($_SERVER['PHP_SELF']);
     <!-- MOBILE SPECIFIC -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php require_once('../layout/css.php') ?>
-    <!-- STYLESHEETS -->
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="icons/fontawesome/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
-
-    <!-- GOOGLE FONTS-->
-    <link rel="preconnect" href="https://fonts.googleapis.com/">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&amp;family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-        rel="stylesheet">
+    <?php require_once('assets/layout/css.php') ?>
 
 </head>
 
 <body id="bg" dir="rtl">
     <div class="page-wraper">
-        <div id="loading-area">
-            <div class="preloader d-flex align-items-center justify-content-center">
-                <div class="preloader-inner position-relative">
-                    <div class="text-center">
-                        <img class="jump mb-50" src="../../attachment/imgs/loading.svg" alt="">
-                        <h6>در حال بارگذاری</h6>
-                        <div class="loader">
-                            <div class="bar bar1"></div>
-                            <div class="bar bar2"></div>
-                            <div class="bar bar3"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php require_once('assets/layout/loader.php') ?>
         <!-- Content -->
         <div class="page-content bg-white">
             <!-- contact area -->
@@ -86,7 +64,7 @@ $path = basename($_SERVER['PHP_SELF']);
                 <section class="content-inner bg-white">
                     <div class="container">
                         <div class="row">
-                            <?php require_once('layout/sidebar.php') ?>
+                            <?php require_once('assets/layout/sidebar.php') ?>
                             <div class="col-xl-9 col-lg-8 m-b30">
                                 <div class="table-responsive">
                                     <table class="table check-tbl">
@@ -131,11 +109,7 @@ $path = basename($_SERVER['PHP_SELF']);
         <button class="scroltop" type="button"><i class="fas fa-arrow-up"></i></button>
     </div>
 
-    <!-- JAVASCRIPT FILES ========================================= -->
-    <script src="js/jquery.min.js"></script><!-- JQUERY MIN JS -->
-    <script src="vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script><!-- BOOTSTRAP MIN JS -->
-    <script src="vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script><!-- BOOTSTRAP SELECT MIN JS -->
-    <script src="js/custom.js"></script><!-- CUSTOM JS -->
+    <?php require_once('assets/layout/js.php') ?>
 
 </body>
 

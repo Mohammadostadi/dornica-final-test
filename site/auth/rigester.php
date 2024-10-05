@@ -4,6 +4,8 @@ require_once('../../app/controller/city_show.php');
 require_once('../../app/controller/function.php');
 require_once('../../app/helper/view.php');
 require_once('../../app/helper/jdf.php');
+$SITE_PATH = '..';
+$URL_PATH = '../..';
 $provinceList = $db->where('status', 1)
     ->orderBy('name', 'ASC')
     ->get('provinces', null, 'id, name');

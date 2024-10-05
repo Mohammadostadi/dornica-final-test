@@ -4,7 +4,8 @@ require_once('../../app/connection/DB.php');
 require_once('../../app/controller/function.php');
 require_once('../../app/helper/view.php');
 require_once('../layout/login.php');
-
+$SITE_PATH = '..';
+$URL_PATH = '../..';
 ?>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
