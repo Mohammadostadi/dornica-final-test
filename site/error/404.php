@@ -42,11 +42,12 @@ require_once('../layout/login.php');
                             <p>صفحه مورد نظر شما یافت نشد.</p>
                             <p class="text-muted">ممکن است آدرس را اشتباه تایپ کرده باشید یا از پیوند قدیمی استفاده کرده باشید :) </p>
                             <h6 class="mt-50 mb-15">در سایت ما جستجو کنید</h6>
-                            <form action="#" method="get" class="search-form d-lg-flex open-search mb-30">
+                            <form action="../search/search.php" method="post" class="search-form d-lg-flex open-search mb-30">
                                 <i class="icon-search"></i>
-                                <input class="form-control" name="name" id="search" type="text" placeholder="جستجو ...">
+                                <input class="form-control search_field" name="search" id="search" type="text" placeholder="جستجو ...">
+                                <button name="btn_search" class="d-none" type="submit"></button>
                             </form>
-                            <p>بازدید از <a href="../../index.php">صفحه نخست</a> یا در مورد مشکل <a href="contact.html">با ما تماس بگیرید</a></p>
+                            <p>بازدید از <a href="../../index.php">صفحه نخست</a> یا در مورد مشکل <a href="../contact/contact.php">با ما تماس بگیرید</a></p>
                         </div>
                     </div>
                 </div>

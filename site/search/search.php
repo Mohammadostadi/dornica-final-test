@@ -19,6 +19,10 @@ $limit = $db->pageLimit;
 $limitation = ($page - 1)*$db->pageLimit;
 $categories = $db->rawQuery("SELECT blogs.id, title, categories.name, description, date, image, post_liked, counter, full_description, blog_category FROM `blogs` LEFT JOIN `categories` on categories.id = blogs.blog_category WHERE description LIKE '%".$_SESSION['search']."%' or title LIKE '%".$_SESSION['search']."%' or categories.name LIKE '%".$_SESSION['search']."%' LIMIT $limitation, $limit");
 $countBlogs = $db->rawQuery("SELECT COUNT(blogs.id) as count FROM `blogs` LEFT JOIN `categories` on categories.id = blogs.blog_category WHERE description LIKE '%".$_SESSION['search']."%' or title LIKE '%".$_SESSION['search']."%' or categories.name LIKE '%".$_SESSION['search']."%'");
+if($countBlogs[0]['count'] == 0){
+    unset($_SESSION['search']);
+    header('Location:../error/404.php');
+}
 $pages = $countBlogs[0]['count']/$db->pageLimit;
 ?>
 
