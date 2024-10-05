@@ -207,97 +207,97 @@ $start = date("Y/m/d", $last_week);
                     </a>
 
                 </li>
-                <?php if(has_admin_access($_SESSION['user'], 'admins_list')){ ?>
-                <li>
-                    <a href="javascript:;" class="has-arrow">
-                        <div class="parent-icon"><i class="bi bi-grid-fill"></i>
-                        </div>
-                        <div class="menu-title">مدیران</div>
-                    </a>
-                    <ul>
-                        <li> <a href="admin-panel/admins/admins_list.php"><i class="bi bi-circle"></i>لیست مدیران</a>
-                        </li>
-                    </ul>
+                <?php if (has_admin_access($_SESSION['user'], 'admins_list')) { ?>
+                    <li>
+                        <a href="javascript:;" class="has-arrow">
+                            <div class="parent-icon"><i class="bi bi-grid-fill"></i>
+                            </div>
+                            <div class="menu-title">مدیران</div>
+                        </a>
+                        <ul>
+                            <li> <a href="admin-panel/admins/admins_list.php"><i class="bi bi-circle"></i>لیست مدیران</a>
+                            </li>
+                        </ul>
                     <?php } ?>
-                    <?php if(has_admin_access($_SESSION['user'], 'members_list')){ ?>
-                <li>
-                    <a href="javascript:;" class="has-arrow">
-                        <div class="parent-icon"><i class="bi bi-people-fill"></i>
-                        </div>
-                        <div class="menu-title">کاربران</div>
-                    </a>
-                    <ul>
-                        <li> <a href="admin-panel/members/members_list.php"><i class="bi bi-circle"></i>لیست
-                                کاربران</a>
-                        </li>
+                    <?php if (has_admin_access($_SESSION['user'], 'members_list')) { ?>
+                    <li>
+                        <a href="javascript:;" class="has-arrow">
+                            <div class="parent-icon"><i class="bi bi-people-fill"></i>
+                            </div>
+                            <div class="menu-title">کاربران</div>
+                        </a>
+                        <ul>
+                            <li> <a href="admin-panel/members/members_list.php"><i class="bi bi-circle"></i>لیست
+                                    کاربران</a>
+                            </li>
 
-                    </ul>
-                </li>
+                        </ul>
+                    </li>
                 <?php } ?>
-                <?php if(has_admin_access($_SESSION['user'], 'blogs_list') or has_admin_access($_SESSION['user'], 'categories_list')){ ?>
-                <li>
-                    <a href="javascript:;" class="has-arrow">
-                        <div class="parent-icon"><i class="bi bi-newspaper"></i>
-                        </div>
-                        <div class="menu-title">اخبار</div>
-                    </a>
-                    <ul>
-                    <?php if(has_admin_access($_SESSION['user'], 'categories_list')){ ?>
-                        <li> <a href="admin-panel/categories/categories_list.php"><i class="bi bi-circle"></i>لیست
-                                دسته بندی</a>
-                        </li>
-                        <?php } ?>
-                        <?php if(has_admin_access($_SESSION['user'], 'blogs_list')){ ?>
-                        <li> <a href="admin-panel/blogs/blogs_list.php"><i class="bi bi-circle"></i>لیست
-                                اخبار</a>
-                        </li>
-                        <?php } ?>
+                <?php if (has_admin_access($_SESSION['user'], 'blogs_list') or has_admin_access($_SESSION['user'], 'categories_list')) { ?>
+                    <li>
+                        <a href="javascript:;" class="has-arrow">
+                            <div class="parent-icon"><i class="bi bi-newspaper"></i>
+                            </div>
+                            <div class="menu-title">اخبار</div>
+                        </a>
+                        <ul>
+                            <?php if (has_admin_access($_SESSION['user'], 'categories_list')) { ?>
+                                <li> <a href="admin-panel/categories/categories_list.php"><i class="bi bi-circle"></i>لیست
+                                        دسته بندی</a>
+                                </li>
+                            <?php } ?>
+                            <?php if (has_admin_access($_SESSION['user'], 'blogs_list')) { ?>
+                                <li> <a href="admin-panel/blogs/blogs_list.php"><i class="bi bi-circle"></i>لیست
+                                        اخبار</a>
+                                </li>
+                            <?php } ?>
 
-                    </ul>
-                </li>
+                        </ul>
+                    </li>
                 <?php } ?>
-                <?php if(has_admin_access($_SESSION['user'], 'provinces_list') or has_admin_access($_SESSION['user'], 'cities_list')){ ?>
-                <li>
-                    <a href="javascript:;" class="has-arrow">
-                        <div class="parent-icon"><i class="bi bi-building"></i>
-                        </div>
-                        <div class="menu-title">استان ها و شهر ها</div>
-                    </a>
-                    <ul>
-                    <?php if(has_admin_access($_SESSION['user'], 'provinces_list')){ ?>
-                        <li> <a href="admin-panel/provinces/provinces_list.php"><i class="bi bi-circle"></i>لیست
-                                استان ها</a>
-                        </li>
-                        <?php } ?>
-                        <?php if(has_admin_access($_SESSION['user'], 'cities_list')){ ?>
-                        <li> <a href="admin-panel/cities/cities_list.php"><i class="bi bi-circle"></i>لیست شهر
-                                ها</a>
-                        </li>
-                        <?php } ?>
+                <?php if (has_admin_access($_SESSION['user'], 'provinces_list') or has_admin_access($_SESSION['user'], 'cities_list')) { ?>
+                    <li>
+                        <a href="javascript:;" class="has-arrow">
+                            <div class="parent-icon"><i class="bi bi-building"></i>
+                            </div>
+                            <div class="menu-title">استان ها و شهر ها</div>
+                        </a>
+                        <ul>
+                            <?php if (has_admin_access($_SESSION['user'], 'provinces_list')) { ?>
+                                <li> <a href="admin-panel/provinces/provinces_list.php"><i class="bi bi-circle"></i>لیست
+                                        استان ها</a>
+                                </li>
+                            <?php } ?>
+                            <?php if (has_admin_access($_SESSION['user'], 'cities_list')) { ?>
+                                <li> <a href="admin-panel/cities/cities_list.php"><i class="bi bi-circle"></i>لیست شهر
+                                        ها</a>
+                                </li>
+                            <?php } ?>
 
-                    </ul>
+                        </ul>
                     <?php } ?>
-                    <?php if(has_admin_access($_SESSION['user'], 'logs_list')){ ?>
-                </li>
-                </li>
-                <li>
-                    <a href="admin-panel/logs/logs_list.php" class="">
-                        <div class="parent-icon"><i class="bi bi-lock"></i>
-                        </div>
-                        <div class="menu-title">لیست لاگ ها</div>
-                    </a>
+                    <?php if (has_admin_access($_SESSION['user'], 'logs_list')) { ?>
+                    </li>
+                    </li>
+                    <li>
+                        <a href="admin-panel/logs/logs_list.php" class="">
+                            <div class="parent-icon"><i class="bi bi-lock"></i>
+                            </div>
+                            <div class="menu-title">لیست لاگ ها</div>
+                        </a>
 
-                </li>
+                    </li>
                 <?php } ?>
-                <?php if(has_admin_access($_SESSION['user'], 'comments_list')){ ?>
-                <li>
-                    <a href="admin-panel/comments/comments_list.php" class="">
-                        <div class="parent-icon"><i class="fadeIn animated bx bx-comment-detail"></i>
-                        </div>
-                        <div class="menu-title">لیست کامنت ها</div>
-                    </a>
+                <?php if (has_admin_access($_SESSION['user'], 'comments_list')) { ?>
+                    <li>
+                        <a href="admin-panel/comments/comments_list.php" class="">
+                            <div class="parent-icon"><i class="fadeIn animated bx bx-comment-detail"></i>
+                            </div>
+                            <div class="menu-title">لیست کامنت ها</div>
+                        </a>
 
-                </li>
+                    </li>
                 <?php } ?>
 
 
@@ -347,20 +347,8 @@ $start = date("Y/m/d", $last_week);
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <h6 class="mb-0">بازدید کنندگان</h6>
-                                <div class="fs-5 ms-auto dropdown">
-                                    <div class="dropdown-toggle dropdown-toggle-nocaret cursor-pointer"
-                                        data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></div>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">عمل</a></li>
-                                        <li><a class="dropdown-item" href="#">یک اقدام دیگر</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item" href="#">یه چیز دیگه اینجا</a></li>
-                                    </ul>
-                                </div>
                             </div>
-                            <div id="chart11" class=""></div>
+                            <div id="timeline-chart"></div>
                             <div
                                 class="d-flex align-items-center gap-5 justify-content-center mt-3 p-2 radius-10 border">
                                 <div class="text-center">

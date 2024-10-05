@@ -143,9 +143,9 @@ function checkUniqData($data, $name, $table, $message , $update = false)
     global $db;
     if ($data != '') {
         if($update){
-            $checkExist = $db->where('username', $_SESSION['member'] , '!=')
+            $checkExist = $db->where('username', $update , '!=')
                 ->where($name, $data)
-                ->getValue($table, 'COUNT(*)');
+                ->getValue( $table, 'COUNT(*)');
         }else{
             $checkExist = $db->where($name, $data)
                 ->getValue($table, 'COUNT(*)');

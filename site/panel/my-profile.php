@@ -29,10 +29,10 @@ if (isset($_POST['_update'])) {
 	checkDataEmpty($username, 'username', 'نام کاربری شما نمیتواند خالی باشد.');
 	checkDataEmpty($email, 'email', 'ایمیل شما نمیتواند خالی باشد.');
 	checkDataEmpty($gender, 'gender', 'جنسیت شما نمیتواند خالی باشد.');
-	checkUniqData($username, 'username', 'members', 'نام کاربری قبلا وارد شده است.', true);
-	checkUniqData($phone, 'phone', 'members', ' شماره تماس قبلا وارد شده است.', true);
-	checkUniqData($ncode, 'ncode', 'members', ' کدملی قبلا وارد شده است.', true);
-	checkUniqData($email, 'email', 'members', ' ایمیل قبلا وارد شده است.', true);
+	checkUniqData($username, 'username', 'members', 'نام کاربری قبلا وارد شده است.', $_SESSION['member']);
+	checkUniqData($phone, 'phone', 'members', ' شماره تماس قبلا وارد شده است.', $_SESSION['member']);
+	checkUniqData($ncode, 'ncode', 'members', ' کدملی قبلا وارد شده است.', $_SESSION['member']);
+	checkUniqData($email, 'email', 'members', ' ایمیل قبلا وارد شده است.', $_SESSION['member']);
 	if (strlen($ncode) != 10)
 		setErrorMessage('ncode', 'کدملی شما نا معتبر میباشد.');
 
@@ -141,7 +141,7 @@ $path = basename($_SERVER['PHP_SELF']);
 
 <body id="bg" dir="rtl">
 	<div class="page-wraper">
-	<?php require_once('assets/layout/loader.php') ?>
+		<?php require_once('assets/layout/loader.php') ?>
 		<!-- Content -->
 		<div class="page-content bg-white">
 			<!-- contact area -->
@@ -157,34 +157,44 @@ $path = basename($_SERVER['PHP_SELF']);
 									showMessage($_GET['ok'])
 										?>
 									<div class="shop-bx shop-profile">
-										<div class="shop-bx-title clearfix">
-											<h5 class="text-uppercase">اطلاعات پایه</h5>
-										</div>
-										<form action="" method="post" enctype="multipart/form-data">
+										<form class="needs-validation " novalidate action="" method="post"
+											enctype="multipart/form-data">
 											<div class="row m-b30">
 												<div class="col-lg-6 col-md-6">
 													<div class="mb-3">
 														<label for="formcontrolinput1" class="form-label">نام:</label>
-														<input name="fname" type="text" class="form-control"
+														<input name="fname" type="text" class="form-control" required
 															id="formcontrolinput1" value="<?= $member['fname'] ?>"
 														placeholder="نام">
+													<div class="invalid-feedback">
+														فیلد نام نباید خالی باشد
+													</div>
+													<div class="text-danger"><?= checkDataErrorExist('fname') ?></div>
 												</div>
 											</div>
 											<div class="col-lg-6 col-md-6">
 												<div class="mb-3">
 													<label for="formcontrolinput2" class="form-label">نام
 														خانوادگی:</label>
-													<input name="lname" type="text" class="form-control"
+													<input name="lname" type="text" class="form-control" required
 														id="formcontrolinput2" value="<?= $member['lname'] ?>"
 														placeholder="نام خانوادگی">
+													<div class="invalid-feedback">
+														فیلد نام خانوادگی نباید خالی باشد
+													</div>
+													<div class="text-danger"><?= checkDataErrorExist('lname') ?></div>
 												</div>
 											</div>
 											<div class="col-lg-6 col-md-6">
 												<div class="mb-3">
 													<label for="formcontrolinput3" class="form-label">کدملی:</label>
 													<input name="ncode" dir="ltr" type="text" class="form-control"
-														id="formcontrolinput3" value="<?= $member['ncode'] ?>"
+														required id="formcontrolinput3" value="<?= $member['ncode'] ?>"
 														placeholder="کدملی">
+													<div class="invalid-feedback">
+														فیلد کدملی نباید خالی باشد
+													</div>
+													<div class="text-danger"><?= checkDataErrorExist('ncode') ?></div>
 												</div>
 											</div>
 											<div class="col-lg-6 col-md-6">
@@ -193,14 +203,20 @@ $path = basename($_SERVER['PHP_SELF']);
 													<input name="image" dir="ltr" type="file" class="form-control"
 														id="formcontrolinput4" placeholder="تصویر">
 												</div>
+												<div class="text-danger"><?= checkDataErrorExist('image') ?></div>
 											</div>
 											<div class="col-lg-12 col-md-12">
 												<div class="mb-3">
 													<label for="formcontrolinput4" class="form-label">نام
 														کاربری:</label>
 													<input name="username" dir="ltr" type="text" class="form-control"
-														id="formcontrolinput4" value="<?= $member['username'] ?>"
-														placeholder="نام کاربری">
+														required id="formcontrolinput4"
+														value="<?= $member['username'] ?>" placeholder="نام کاربری">
+													<div class="invalid-feedback">
+														فیلد نام کاربری نباید خالی باشد
+													</div>
+													<div class="text-danger"><?= checkDataErrorExist('username') ?>
+													</div>
 												</div>
 											</div>
 											<div class="col-lg-6 col-md-6">
@@ -228,6 +244,8 @@ $path = basename($_SERVER['PHP_SELF']);
 														<option <?= $member['military_service'] == 2 ? "SELECTED" : "" ?>
 															value="2">معاف</option>
 													</select>
+													<div class="text-danger">
+														<?= checkDataErrorExist('military_service') ?></div>
 												</div>
 											</div>
 										</div>
@@ -240,16 +258,24 @@ $path = basename($_SERVER['PHP_SELF']);
 													<label for="formcontrolinput5" class="form-label">شماره
 														تماس:</label>
 													<input name="phone" value="<?= $member['phone'] ?>" dir="ltr"
-														type="text" class="form-control" id="formcontrolinput5"
+														required type="text" class="form-control" id="formcontrolinput5"
 														placeholder="+98">
+													<div class="invalid-feedback">
+														فیلد شماره تماس نباید خالی باشد
+													</div>
+													<div class="text-danger"><?= checkDataErrorExist('phone') ?></div>
 												</div>
 											</div>
 											<div class="col-lg-6 col-md-6">
 												<div class="mb-3">
 													<label for="formcontrolinput6" class="form-label">ایمیل:</label>
 													<input name="email" value="<?= $member['email'] ?>" dir="ltr"
-														type="text" class="form-control" id="formcontrolinput6"
+														required type="text" class="form-control" id="formcontrolinput6"
 														placeholder="info@example.com">
+													<div class="invalid-feedback">
+														فیلد ایمیل نباید خالی باشد
+													</div>
+													<div class="text-danger"><?= checkDataErrorExist('email') ?></div>
 												</div>
 											</div>
 											<div class="col-lg-6 col-md-6">
@@ -258,8 +284,7 @@ $path = basename($_SERVER['PHP_SELF']);
 													<select name="province" class="form-select" id="province">
 														<option value="">استان را انتخاب کنید</option>
 														<?php foreach ($provinceList as $province) { ?>
-															<option <?= (!is_null($member['province_id']) and $member['province_id'] == $province['id']) ? "SELECTED" : "" ?>
-																value="<?= $province['id'] ?>"><?= $province['name'] ?>
+															<option <?= (!is_null($member['province_id']) and $member['province_id'] == $province['id']) ? "SELECTED" : "" ?> value="<?= $province['id'] ?>"><?= $province['name'] ?>
 															</option>
 														<?php } ?>
 													</select>
@@ -274,6 +299,7 @@ $path = basename($_SERVER['PHP_SELF']);
 												</div>
 											</div>
 										</div>
+
 										<button class="btn btn-primary btnhover" name="_update">ذخیره تنظیمات</button>
 									</form>
 								</div>
@@ -288,7 +314,7 @@ $path = basename($_SERVER['PHP_SELF']);
 
 		<button class="scroltop" type="button"><i class="fas fa-arrow-up"></i></button>
 	</div>
-<?php require_once('assets/layout/js.php') ?>
+	<?php require_once('assets/layout/js.php') ?>
 
 	<script>
 		$('#male').click(function () {
@@ -329,10 +355,29 @@ $path = basename($_SERVER['PHP_SELF']);
 		}
 	</script>
 	<script>
-        $('.btn-close').click(function () {
-            window.location = 'my-profile.php';
-        });
-    </script>
+		(() => {
+			"use strict";
+			const forms = document.querySelectorAll(".needs-validation");
+			Array.from(forms).forEach((form) => {
+				form.addEventListener(
+					"submit",
+					(event) => {
+						if (!form.checkValidity()) {
+							event.preventDefault();
+							event.stopPropagation();
+						}
+						form.classList.add("was-validated");
+					},
+					false
+				);
+			});
+		})();
+	</script>
+	<script>
+		$('.btn-close').click(function () {
+			window.location = 'my-profile.php';
+		});
+	</script>
 
 </body>
 

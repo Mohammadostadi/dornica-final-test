@@ -4,38 +4,42 @@ require_once('../../../app/connection/DB.php');
 require_once('../../../app/controller/function.php');
 require_once('../../../app/controller/access.php');
 require_once('../../../app/helper/jdf.php');
-
-$errors = [];
-
 $id = checkDataSecurity($_GET['id']);
-$editCategory = $db->where('id', $id)
-    ->getOne('categories');
-
+$errors = [];
+$provincesList = $db->where('status', 1)
+    ->orderBy('name', 'ASC')
+    ->get('provinces', null, 'id, name');
 if (isset($_POST['_update'])) {
     $name = checkDataSecurity($_POST['name']);
+    $province = checkDataSecurity($_POST['province']);
     $sort = checkDataSecurity($_POST['sort']);
 
-    checkDataEmpty($name, 'name', 'فیلد نام دسته بندی خبر شما خالی میباشد.');
-    checkDataEmpty($sort, 'sort', 'فیلد ترتیب دسته بندی خبر شما خالی میباشد.');
+    checkDataEmpty($name, 'name', 'فیلد نام شهر شما خالی میباشد.');
+    checkDataEmpty($name, 'name', 'فیلد ترتیب شهر شما خالی میباشد.');
+    checkDataEmpty($province, 'province', 'فیلد استان شما خالی میباشد.');
 
     if (count($errors) == 0) {
         $db->where('id', $id)
-            ->update('categories', [
-                'name' => $name,
-                'sort' => $sort,
-                'status' => 1
-            ]);
+        ->update('cities', [
+            'name' => $name,
+            'province_id'=>$province,
+            'sort' => $sort,
+            'status' => 1
+        ]);
         $query = $db->getLastQuery();
         $db->insert('logs', [
             'admin_id' => $_SESSION['user'],
-            'table_name' => 'categories',
+            'table_name' => 'cities',
             'changes' => $query,
             'type' => 2,
             'date' => $date
         ]);
-        header('Location:categories_list.php?ok=2');
+        header('Location:cities_list.php?ok=2');
     }
 }
+
+$city = $db->where('id', $id)
+->getOne('cities', 'id, name, province_id, sort');
 
 
 ?>
@@ -52,7 +56,7 @@ if (isset($_POST['_update'])) {
     <?php
     require_once('../../layout/css.php');
     ?>
-    <title>بروزرسانی دسته بندی خبر</title>
+    <title>بروزرسانی شهر</title>
 </head>
 
 <body>
@@ -67,37 +71,54 @@ if (isset($_POST['_update'])) {
             <div class="card">
                 <div class="card-body">
                     <div class="border p-3 rounded">
-                        <h6 class="mb-0 text-uppercase">بروزرسانی دسته بندی خبر</h6>
+                        <h6 class="mb-0 text-uppercase">بروزرسانی شهر</h6>
                         <hr />
                         <form class="row g-3 needs-validation" action="" method="post" novalidate
                             enctype="multipart/form-data" a>
                             <div class="col-lg-6 ">
-                                <label class="form-label">نام دسته بندی خبر </label>
+                                <label class="form-label">استان</label>
                                 <span class="text-danger">*</span>
-                                <input type="text" class="form-control"
-                                    value="<?= checkInputDataValue('name', $editCategory['name']) ?>" name="name"
-                                    required>
+                                <select class="form-select" name="province" id="province" required >
+                                    <option value="">استان را انتخاب کنید</option>
+                                    <?php foreach ($provincesList as $province) { ?>
+                                        <option <?= ((isset($_POST['province']) and $_POST['province'] == $province['id']) or ($city['province_id'] == $province['id'])) ? "SELECTED" : "" ?>
+                                            value="<?= $province['id'] ?>"><?= $province['name'] ?></option>
+                                    <?php } ?>
+                                </select>
+                                <div class="invalid-feedback">
+                                    فیلد استان نباید خالی باشد
+                                </div>
+                                <div class="text-danger">
+                                        <?= checkDataErrorExist('province') ?>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 ">
+                                <label class="form-label">نام شهر </label>
+                                <span class="text-danger">*</span>
+                                <input value="<?= checkInputDataValue('name', $city['name']) ?>" type="text" class="form-control" name="name" required>
                                 <div class="invalid-feedback">
                                     فیلد نام نباید خالی باشد
                                 </div>
-                                <div class="text-danger"><?= checkDataErrorExist('name') ?></div>
+                                <div class="text-danger">
+                                        <?= checkDataErrorExist('name') ?>
+                                </div>
                             </div>
                             <div class="col-lg-6 ">
-                                <label class="form-label">ترتیب دسته بندی خبر </label>
+                                <label class="form-label">ترتیب شهر </label>
                                 <span class="text-danger">*</span>
-                                <input type="text" class="form-control" name="sort"
-                                    value="<?= checkInputDataValue('sort', $editCategory['sort']) ?>" dir="ltr"
-                                    required>
+                                <input value="<?= checkInputDataValue('sort', $city['sort']) ?>" type="text" class="form-control" name="name" required>
                                 <div class="invalid-feedback">
                                     فیلد ترتیب نباید خالی باشد
                                 </div>
-                                <div class="text-danger"><?= checkDataErrorExist('sort') ?></div>
+                                <div class="text-danger">
+                                        <?= checkDataErrorExist('sort') ?>
+                                </div>
                             </div>
                             <div class="col-lg-12 d-flex justify-content-end">
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="d-grid">
-                                            <a class="btn btn-danger" href="categories_list.php">برگشت</a>
+                                            <a class="btn btn-danger" href="cities_list.php">برگشت</a>
                                         </div>
                                     </div>
                                     <div class="col-6">

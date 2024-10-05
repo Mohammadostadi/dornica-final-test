@@ -152,9 +152,11 @@ $members = $db->join('provinces', 'provinces.id = members.province_id', 'LEFT')
                                                     <th class="px-5">
                                                         وضعیت
                                                     </th>
+                                                    <?php if(has_admin_access($_SESSION['user'], 'member_update') or has_admin_access($_SESSION['user'], 'member_reset_password') or has_admin_access($_SESSION['user'], 'member_delete')){ ?>
                                                     <th class="px-5">
                                                         اقدامات
                                                     </th>
+                                                    <?php } ?>
                                                 </tr>
                                             </thead>
                                             <tbody class="text-center">
@@ -253,18 +255,24 @@ $members = $db->join('provinces', 'provinces.id = members.province_id', 'LEFT')
                                                         <td>
                                                             <?= status('active', $member['status']) ?>
                                                         </td>
+                                                        <?php if(has_admin_access($_SESSION['user'], 'member_update') or has_admin_access($_SESSION['user'], 'member_reset_password') or has_admin_access($_SESSION['user'], 'member_delete')){ ?>
                                                         <td>
                                                         <div>
+                                                        <?php if(has_admin_access($_SESSION['user'], 'member_reset_password')){ ?>
                                                                 <a href="member_reset_password.php?id=<?= $member['id'] ?>"
                                                                     class="btn border-0 disabled-sort text-info"
                                                                     data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                     title="بازیابی رمزعبور" aria-label="Edit"><i
                                                                         class="bx bx-reset"></i></a>
+                                                                        <?php } ?>
+                                                                        <?php if(has_admin_access($_SESSION['user'], 'member_update')){ ?>
                                                                 <a href="member_update.php?id=<?= $member['id'] ?>"
                                                                     class="btn border-0 disabled-sort text-warning"
                                                                     data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                     title="ویرایش اطلاعات" aria-label="Edit"><i
                                                                         class="bi bi-pencil-fill"></i></a>
+                                                                        <?php } ?>
+                                                                        <?php if(has_admin_access($_SESSION['user'], 'member_delete')){ ?>
                                                                 <button class="remove text-danger btn border-0 "
                                                                     value="<?= $member['id'] ?>" data-bs-toggle="tooltip"
                                                                     data-bs-placement="bottom" title="حذف"
@@ -305,8 +313,10 @@ $members = $db->join('provinces', 'provinces.id = members.province_id', 'LEFT')
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                <?php } ?>
                                                             </div>
                                                         </td>
+                                                        <?php } ?>
                                                     </tr>
 
                                                 <?php } ?>

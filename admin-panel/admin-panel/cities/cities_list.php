@@ -64,11 +64,13 @@ $cities = $db->join('provinces', 'provinces.id = cities.province_id', 'LEFT')
                             </ol>
                         </nav>
                     </div>
+                    <?php if(has_admin_access($_SESSION['user'], 'city_add')){ ?>
                     <div class="ms-auto">
                         <div class="btn-group">
                             <a class="btn btn-outline-secondary" href="city_add.php">اضافه کردن داده جدید</a>
                         </div>
                     </div>
+                    <?php } ?>
                 </div>
                 <!--end breadcrumb-->
 
@@ -98,10 +100,12 @@ $cities = $db->join('provinces', 'provinces.id = cities.province_id', 'LEFT')
                                                         <th class="px-5">
                                                             وضعیت
                                                         </th>
+                                                    <?php if (has_admin_access($_SESSION['user'], 'city_update') or has_admin_access($_SESSION['user'], 'city_delete')) { ?>
                                                         <th>اقدامات</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="text-center">
+                                                    <?php } ?>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="text-center">
                                                 <?php foreach ($cities as $city) { ?>
                                                     <tr class="text-center">
                                                         <td>
@@ -115,54 +119,63 @@ $cities = $db->join('provinces', 'provinces.id = cities.province_id', 'LEFT')
                                                         <td>
                                                             <?= status('active', $city['status']) ?>
                                                         </td>
+                                                        <?php if (has_admin_access($_SESSION['user'], 'city_update') or has_admin_access($_SESSION['user'], 'city_delete')) { ?>
                                                         <td>
                                                             <div>
-                                                                <a href="city_update.php?id=<?= $city['id'] ?>"
-                                                                    class="btn border-0 disabled-sort text-warning"
-                                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                                    title="ویرایش اطلاعات" aria-label="Edit"><i
-                                                                        class="bi bi-pencil-fill"></i></a>
-                                                                <button class="remove text-danger btn border-0 "
-                                                                    value="<?= $city['id'] ?>" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="bottom" title="حذف"
-                                                                    aria-label="Delete" style="cursor: pointer;"><i
-                                                                        class="bi bi-trash-fill"></i></button>
+                                                                <?php if (has_admin_access($_SESSION['user'], 'city_update')) { ?>
+                                                                    <a href="city_update.php?id=<?= $city['id'] ?>"
+                                                                        class="btn border-0 disabled-sort text-warning"
+                                                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                                        title="ویرایش اطلاعات" aria-label="Edit"><i
+                                                                            class="bi bi-pencil-fill"></i></a>
+                                                                <?php } ?>
+                                                                <?php if (has_admin_access($_SESSION['user'], 'city_delete')) { 
+                                                                    $cityDelete = $db->where('city_id', $city['id'])
+                                                                    ->getValue('members', 'COUNT(id)');
+                                                                    ?>
+                                                                    <button class="<?= ($cityDelete == 0)?"remove text-danger":"text-secondary" ?> btn border-0 "
+                                                                        value="<?= $city['id'] ?>" data-bs-toggle="tooltip"
+                                                                        data-bs-placement="bottom" title="<?= ($cityDelete == 0)?"حذف":"غیر قابل حذف    " ?>"
+                                                                        aria-label="Delete" style="cursor: pointer;"><i
+                                                                            class="bi bi-trash-fill"></i></button>
 
-                                                                <div class="modal fade" id="exampleModal<?= $city['id'] ?>"
-                                                                    tabindex="-1" role="dialog"
-                                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                    <div class="modal-dialog" role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
+                                                                    <div class="modal fade" id="exampleModal<?= $city['id'] ?>"
+                                                                        tabindex="-1" role="dialog"
+                                                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
 
-                                                                                <h5 class="modal-title"
-                                                                                    id="exampleModalLabel">حذف داده</h5>
-                                                                                <button type="button" class="close"
-                                                                                    value="<?= $city['id'] ?>"
-                                                                                    data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <form
-                                                                                action="city_delete.php?id=<?= $city['id'] ?>"
-                                                                                method="post">
-                                                                                <div class="modal-body">
-                                                                                    <h5>آیا مطمئن هستید؟</h5>
-                                                                                </div>
-                                                                                <div class="modal-footer">
-                                                                                    <button type="button"
+                                                                                    <h5 class="modal-title"
+                                                                                        id="exampleModalLabel">حذف داده</h5>
+                                                                                    <button type="button" class="close"
                                                                                         value="<?= $city['id'] ?>"
-                                                                                        class="btn btn-secondary close"
-                                                                                        data-dismiss="modal">لغو</button>
-                                                                                    <button type="submit" name="btn_delete"
-                                                                                        class="btn btn-primary">حذف</button>
+                                                                                        data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
                                                                                 </div>
-                                                                            </form>
+                                                                                <form
+                                                                                    action="city_delete.php?id=<?= $city['id'] ?>"
+                                                                                    method="post">
+                                                                                    <div class="modal-body">
+                                                                                        <h5>آیا مطمئن هستید؟</h5>
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                        <button type="button"
+                                                                                            value="<?= $city['id'] ?>"
+                                                                                            class="btn btn-secondary close"
+                                                                                            data-dismiss="modal">لغو</button>
+                                                                                        <button type="submit" name="btn_delete"
+                                                                                            class="btn btn-primary">حذف</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
+                                                                <?php } ?>
                                                             </div>
                                                         </td>
+                                                        <?php } ?>
                                                     </tr>
 
                                                 <?php } ?>

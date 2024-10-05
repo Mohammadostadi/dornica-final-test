@@ -66,11 +66,13 @@ $blogs = $db->join('categories', 'categories.id = blogs.blog_category', 'LEFT')
                             </ol>
                         </nav>
                     </div>
+                    <?php if(has_admin_access($_SESSION['user'], 'blog_add')){ ?>
                     <div class="ms-auto">
                         <div class="btn-group">
                             <a class="btn btn-outline-secondary" href="blog_add.php">اضافه کردن داده جدید</a>
                         </div>
                     </div>
+                    <?php } ?>
                 </div>
                 <!--end breadcrumb-->
 
@@ -100,10 +102,12 @@ $blogs = $db->join('categories', 'categories.id = blogs.blog_category', 'LEFT')
                                                         <th class="px-5">
                                                             وضعیت
                                                         </th>
+                                                    <?php if (has_admin_access($_SESSION['user'], 'blog_update') or has_admin_access($_SESSION['user'], 'blog_delete')) { ?>
                                                         <th>اقدامات</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="text-center">
+                                                    <?php } ?>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="text-center">
                                                 <?php foreach ($blogs as $blog) { ?>
                                                     <tr class="text-center">
                                                         <td>
@@ -117,54 +121,60 @@ $blogs = $db->join('categories', 'categories.id = blogs.blog_category', 'LEFT')
                                                         <td>
                                                             <?= status('active', $blog['status']) ?>
                                                         </td>
+                                                        <?php if (has_admin_access($_SESSION['user'], 'blog_update') or has_admin_access($_SESSION['user'], 'blog_delete')) { ?>
                                                         <td>
                                                             <div>
-                                                                <a href="blog_update.php?id=<?= $blog['id'] ?>"
-                                                                    class="btn border-0 disabled-sort text-warning"
-                                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                                    title="ویرایش اطلاعات" aria-label="Edit"><i
-                                                                        class="bi bi-pencil-fill"></i></a>
-                                                                <button class="remove text-danger btn border-0 "
-                                                                    value="<?= $blog['id'] ?>" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="bottom" title="حذف"
-                                                                    aria-label="Delete" style="cursor: pointer;"><i
-                                                                        class="bi bi-trash-fill"></i></button>
+                                                                <?php if (has_admin_access($_SESSION['user'], 'blog_update')) { ?>
+                                                                    <a href="blog_update.php?id=<?= $blog['id'] ?>"
+                                                                        class="btn border-0 disabled-sort text-warning"
+                                                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                                        title="ویرایش اطلاعات" aria-label="Edit"><i
+                                                                            class="bi bi-pencil-fill"></i></a>
+                                                                <?php } ?>
+                                                                <?php if (has_admin_access($_SESSION['user'], 'blog_delete')) { ?>
+                                                                    <button class="remove text-danger btn border-0 "
+                                                                        value="<?= $blog['id'] ?>" data-bs-toggle="tooltip"
+                                                                        data-bs-placement="bottom" title="حذف"
+                                                                        aria-label="Delete" style="cursor: pointer;"><i
+                                                                            class="bi bi-trash-fill"></i></button>
 
-                                                                <div class="modal fade" id="exampleModal<?= $blog['id'] ?>"
-                                                                    tabindex="-1" role="dialog"
-                                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                    <div class="modal-dialog" role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
+                                                                    <div class="modal fade" id="exampleModal<?= $blog['id'] ?>"
+                                                                        tabindex="-1" role="dialog"
+                                                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
 
-                                                                                <h5 class="modal-title"
-                                                                                    id="exampleModalLabel">حذف داده</h5>
-                                                                                <button type="button" class="close"
-                                                                                    value="<?= $blog['id'] ?>"
-                                                                                    data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <form
-                                                                                action="blog_delete.php?id=<?= $blog['id'] ?>"
-                                                                                method="post">
-                                                                                <div class="modal-body">
-                                                                                    <h5>آیا مطمئن هستید؟</h5>
-                                                                                </div>
-                                                                                <div class="modal-footer">
-                                                                                    <button type="button"
+                                                                                    <h5 class="modal-title"
+                                                                                        id="exampleModalLabel">حذف داده</h5>
+                                                                                    <button type="button" class="close"
                                                                                         value="<?= $blog['id'] ?>"
-                                                                                        class="btn btn-secondary close"
-                                                                                        data-dismiss="modal">لغو</button>
-                                                                                    <button type="submit" name="btn_delete"
-                                                                                        class="btn btn-primary">حذف</button>
+                                                                                        data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
                                                                                 </div>
-                                                                            </form>
+                                                                                <form
+                                                                                    action="blog_delete.php?id=<?= $blog['id'] ?>"
+                                                                                    method="post">
+                                                                                    <div class="modal-body">
+                                                                                        <h5>آیا مطمئن هستید؟</h5>
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                        <button type="button"
+                                                                                            value="<?= $blog['id'] ?>"
+                                                                                            class="btn btn-secondary close"
+                                                                                            data-dismiss="modal">لغو</button>
+                                                                                        <button type="submit" name="btn_delete"
+                                                                                            class="btn btn-primary">حذف</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
+                                                                <?php } ?>
                                                             </div>
                                                         </td>
+                                                        <?php } ?>
                                                     </tr>
 
                                                 <?php } ?>

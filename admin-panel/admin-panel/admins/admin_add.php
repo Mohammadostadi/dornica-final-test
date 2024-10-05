@@ -78,7 +78,7 @@ if (isset($_POST['_insert'])) {
                             <div class="col-lg-6 ">
                                 <label class="form-label">نام </label>
                                 <span class="text-danger">*</span>
-                                <input type="text" class="form-control" name="fname" required>
+                                <input value="<?= checkInputDataValue('fname') ?>" type="text" class="form-control" name="fname" required>
                                 <div class="invalid-feedback">
                                     فیلد نام نباید خالی باشد
                                 </div>
@@ -87,7 +87,7 @@ if (isset($_POST['_insert'])) {
                             <div class="col-lg-6 ">
                                 <label class="form-label">نام خانوادگی</label>
                                 <span class="text-danger">*</span>
-                                <input type="text" class="form-control" name="lname" required>
+                                <input value="<?= checkInputDataValue('lname') ?>" type="text" class="form-control" name="lname" required>
                                 <div class="invalid-feedback">
                                     فیلد نام خانوادگی نباید خالی باشد
                                 </div>
@@ -96,7 +96,7 @@ if (isset($_POST['_insert'])) {
                             <div class="col-lg-6 ">
                                 <label class="form-label">نام کاربری</label>
                                 <span class="text-danger">*</span>
-                                <input type="text" class="form-control" name="username" required>
+                                <input value="<?= checkInputDataValue('username') ?>" type="text" class="form-control" name="username" required>
                                 <div class="invalid-feedback">
                                     فیلد نام کاربری نباید خالی باشد
                                 </div>
@@ -107,9 +107,9 @@ if (isset($_POST['_insert'])) {
                                 <span class="text-danger">*</span>
                                 <select name="role" class="form-select" id="role" required>
                                     <option value="" selected>نقش</option>
-                                    <option value="1">
+                                    <option <?= (isset($_POST['role']) and $_POST['role'] == 1)?"SELECTED":"" ?> value="1">
                                         ادمین</option>
-                                    <option value="2">
+                                    <option <?= (isset($_POST['role']) and $_POST['role'] == 2)?"SELECTED":"" ?> value="2">
                                         اپراتور</option>
                                 </select>
                                 <div class="invalid-feedback">

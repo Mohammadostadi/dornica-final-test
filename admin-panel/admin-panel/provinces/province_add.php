@@ -67,7 +67,7 @@ if (isset($_POST['_insert'])) {
                             <div class="col-lg-6 ">
                                 <label class="form-label">نام استان </label>
                                 <span class="text-danger">*</span>
-                                <input type="text" class="form-control" name="name" required>
+                                <input value="<?= checkInputDataValue('name') ?>" type="text" class="form-control" name="name" required>
                                 <div class="invalid-feedback">
                                     فیلد نام نباید خالی باشد
                                 </div>

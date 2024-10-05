@@ -13,7 +13,7 @@ $errors = [];
 $categoriesList = $db->where('status', 1)
     ->orderBy('name', 'ASC')
     ->get('categories', null, 'id, name');
-if (isset($_POST['_insert'])) {
+if (isset($_POST['_update'])) {
     $title = checkDataSecurity($_POST['title']);
     $category = checkDataSecurity($_POST['category']);
     $description = checkDataSecurity($_POST['description']);
@@ -55,7 +55,6 @@ if (isset($_POST['_insert'])) {
                 'date' => $newDate,
                 'updated_at' => $date,
                 'admin_id' => $_SESSION['user'],
-                'counter' => 0,
                 'status' => 1
             ]);
         $query = $db->getLastQuery();
@@ -182,12 +181,12 @@ if (isset($_POST['_insert'])) {
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="d-grid">
-                                            <a class="btn btn-danger" href="admins_list.php">برگشت</a>
+                                            <a class="btn btn-danger" href="blogs_list.php">برگشت</a>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="d-grid">
-                                            <button type="submit" class="btn btn-primary" name="_insert">ثبت</button>
+                                            <button type="submit" class="btn btn-primary" name="_update">بروزرسانی</button>
                                         </div>
                                     </div>
                                 </div>

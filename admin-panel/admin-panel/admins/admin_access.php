@@ -60,6 +60,8 @@ if (isset($_POST['change_level_access'])) {
         $levelAccess[] = 'logs_list';
     if (isset($_POST['comments_list']))
         $levelAccess[] = 'comments_list';
+    if (isset($_POST['comment_detail']))
+        $levelAccess[] = 'comment_detail';
 
     if (count($levelAccess) != 0) {
         $db->where('id', $id)
@@ -328,6 +330,11 @@ $levelAccess = explode(',', $level);
                                                             <?= in_array('comments_list', $levelAccess) ? "checked" : "" ?>>
                                                         <label for="comments_list">لیست کامنت ها </label>
                                                     </div>
+                                                    <div class="col-sm-3">
+                                                        <input type="radio" id="comment_detail" name="comment_detail"
+                                                            <?= in_array('comment_detail', $levelAccess) ? "checked" : "" ?>>
+                                                        <label for="comment_detail">جزئیات کامنت  </label>
+                                                    </div>
                                                 </div>
                                                 <hr>
                                             </div>
@@ -382,6 +389,7 @@ $levelAccess = explode(',', $level);
         checkBox('category_update');
         checkBox('logs_list');
         checkBox('comments_list');
+        checkBox('comment_detail');
         function checkBox(name) {
             let check = ($(`input:radio[name='${name}']`).is(":checked")) ? true : false;
             $(`#${name}`).click(function () {
