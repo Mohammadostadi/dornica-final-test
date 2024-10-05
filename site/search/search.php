@@ -8,21 +8,18 @@ $SITE_PATH = '..';
 $URL_PATH = '../..';
 require_once('../layout/login.php');
 
-if(isset($_GET['category'])){
-    $id = checkDataSecurity($_GET['category']);
-    $category_name = $db->where('id', $id)
-    ->getValue('categories', 'name');
-    $db->where('blog_category', $id);
+if(isset($_POST['btn_search'])){
+    $_SESSION['search'] = checkDataSecurity($_POST['search']);
 }
 $page = 1;
-pageLimit('blogs', 5, false);
-if(isset($_GET['category']))
-    $db->where('blog_category', $id);
-$categories = $db->orderBy('date', 'DESC')
-->where('blogs.status', 1)
-->join('categories', 'categories.id = blogs.blog_category', 'LEFT')
-->paginate('blogs', $page, 'blogs.id, title, categories.name, description, date, image, post_liked, counter, full_description, blog_category');
-
+if(isset($_GET['page']))
+    $page = checkDataSecurity($_GET['page']);
+$db->pageLimit = 5;
+$limit = $db->pageLimit;
+$limitation = ($page - 1)*$db->pageLimit;
+$categories = $db->rawQuery("SELECT blogs.id, title, categories.name, description, date, image, post_liked, counter, full_description, blog_category FROM `blogs` LEFT JOIN `categories` on categories.id = blogs.blog_category WHERE description LIKE '%".$_SESSION['search']."%' or title LIKE '%".$_SESSION['search']."%' or categories.name LIKE '%".$_SESSION['search']."%' LIMIT $limitation, $limit");
+$countBlogs = $db->rawQuery("SELECT COUNT(blogs.id) as count FROM `blogs` LEFT JOIN `categories` on categories.id = blogs.blog_category WHERE description LIKE '%".$_SESSION['search']."%' or title LIKE '%".$_SESSION['search']."%' or categories.name LIKE '%".$_SESSION['search']."%'");
+$pages = $countBlogs[0]['count']/$db->pageLimit;
 ?>
 
 <!DOCTYPE html>
@@ -53,19 +50,16 @@ $categories = $db->orderBy('date', 'DESC')
         <?php require_once('../layout/header.php') ?>
         <!-- Main Wrap Start -->
         <main class="position-relative">
-            <?php if(isset($id)){ ?>
             <div class="archive-header text-center mb-50">
                 <div class="container">
-                    <h2><span class="text-info">اخبار <?= $category_name ?></span></h2>
+                    <h2><span class="text-success">خبر های جستجو شده : <?= $countBlogs[0]['count'] ?></span></h2>
                     <div class="breadcrumb">
                         <span class="no-arrow">شما الان اینجا هستید:</span>
                         <a href="../../index.php" rel="nofollow">خانه</a>
-                        <span></span>
-                        اخبار <?= $category_name ?>
+                        <span> جستجو </span>
                     </div>
                 </div>
             </div>
-            <?php } ?>
             <div class="container">
                 <div class="row">
                     <!-- sidebar-left -->
@@ -151,7 +145,7 @@ $categories = $db->orderBy('date', 'DESC')
     <script src="../../assets/js/validation.js" ></script>
     <script>
         $('.btn-close').click(function () {
-            window.location = 'category-big.php';
+            window.location = 'search.php';
         });
     </script>
 </body>

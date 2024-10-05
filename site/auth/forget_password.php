@@ -95,25 +95,7 @@ if (isset($_POST['_delete_password'])) {
     </div>
     <?php require_once('../layout/js.php') ?>
 
-    <script>
-        (() => {
-            "use strict";
-            const forms = document.querySelectorAll(".needs-validation");
-            Array.from(forms).forEach((form) => {
-                form.addEventListener(
-                    "submit",
-                    (event) => {
-                        if (!form.checkValidity()) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add("was-validated");
-                    },
-                    false
-                );
-            });
-        })();
-    </script>
+    <script src="../../assets/js/validation.js" ></script>
     <script>
         function usernamejs(input) {
             input.value = input.value.replace(/[^a-zA-Z0-9@_-]/g, "");

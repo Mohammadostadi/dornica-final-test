@@ -114,25 +114,7 @@ $province = $db->where('id', $id)
     <?php
     require_once('../../layout/js.php');
     ?>
-    <script>
-        (() => {
-            "use strict";
-            const forms = document.querySelectorAll(".needs-validation");
-            Array.from(forms).forEach((form) => {
-                form.addEventListener(
-                    "submit",
-                    (event) => {
-                        if (!form.checkValidity()) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add("was-validated");
-                    },
-                    false
-                );
-            });
-        })();
-    </script>
+    <script src="../../../assets/js/validation.js" ></script>
     <!--end wrapper-->
 </body>
 <!-- Mirrored from codetheme.ir/onedash/demo/rtl/form-layouts.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 31 May 2024 08:56:22 GMT -->

@@ -305,35 +305,15 @@ require_once('site/layout/login.php');
         </main>
         <!-- Footer Start-->
         <?php require_once('site/layout/footer.php') ?>
+        <script src="assets/js/validation.js" ></script>
     </div> <!-- Main Wrap End-->
     <div class="dark-mark"></div>
     <!-- Vendor JS-->
     <?php require_once('site/layout/js.php') ?>
     <script src="assets/js/vendor/jquery.nice-select.min.js"></script>
     <script src="assets/js/vendor/perfect-scrollbar.js"></script>
-    <script>
-        $(".edit").click(function () {
-            $(`#exampleModal`).modal("show");
-        });
-        $(".close").click(function () {
-            $(`#exampleModal`).modal("hide");
-        });
-    </script>
-    <script>
-        (() => {
-            'use strict'
-            const forms = document.querySelectorAll('.needs-validation')
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-                    form.classList.add('was-validated')
-                }, false)
-            })
-        })()
-    </script>
+    <script src="assets/js/model.js"></script>
+    
     <script>
         $('.btn-close').click(function () {
             window.location = 'index.php';

@@ -5,17 +5,17 @@ require_once('../../../app/controller/function.php');
 require_once('../../../app/controller/access.php');
 require_once('../../../app/helper/jdf.php');
 $page = 1;
-pageLimit('comments', 7, false);
+pageLimit('contacts', 7, false);
 if (isset($_POST['change_status'])) {
     list($id, $status) = explode('/', checkDataSecurity($_POST['change_status']));
     $db->where('id', $id)
-        ->update('comments', [
+        ->update('contacts', [
             'status' => $status
         ]);
 }
 
-$comments = $db->join('blogs', 'blogs.id = comments.blog_id')
-    ->paginate('comments', $page, 'comments.id, concat(comments.fname, \' \', comments.lname) as name, blogs.title, comments.setdate, comments.status');
+$contacts = $db
+    ->paginate('contacts', $page, 'contacts.id,  name, contacts.setdate, contacts.status, phone, email');
 ?>
 
 <!doctype html>
@@ -62,7 +62,7 @@ $comments = $db->join('blogs', 'blogs.id = comments.blog_id')
                         <ol class="breadcrumb mb-0 p-0">
                             <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">لیست نظرات</li>
+                            <li class="breadcrumb-item active" aria-current="page">لیست پیام ها</li>
                         </ol>
                     </nav>
                 </div>
@@ -70,7 +70,7 @@ $comments = $db->join('blogs', 'blogs.id = comments.blog_id')
             <!--end breadcrumb-->
             <div class="card">
                 <div class="card-header py-3">
-                    <h6 class="mb-0 text-uppercase">لیست کامنت ها</h6>
+                    <h6 class="mb-0 text-uppercase">لیست تماس ها</h6>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -83,10 +83,13 @@ $comments = $db->join('blogs', 'blogs.id = comments.blog_id')
                                                 <tr>
                                                     <th>#</th>
                                                     <th class="px-5">
-                                                        خبر
+                                                        نام
                                                     </th>
                                                     <th class="px-5">
-                                                        نام
+                                                        شماره تماس
+                                                    </th>
+                                                    <th class="px-5">
+                                                        ایمیل
                                                     </th>
                                                     <th class="px-5">
                                                         زمان
@@ -94,37 +97,38 @@ $comments = $db->join('blogs', 'blogs.id = comments.blog_id')
                                                     <th class="px-5">
                                                         وضعیت
                                                     </th>
-                                                    <?php if (has_admin_access($_SESSION['user'], 'comment_detail')) { ?>
+                                                    <?php if (has_admin_access($_SESSION['user'], 'contact_detail')) { ?>
                                                         <th>اقدامات</th>
                                                     <?php } ?>
                                                 </tr>
                                             </thead>
                                             <tbody class="text-center">
-                                                <?php foreach ($comments as $comment) { ?>
+                                                <?php foreach ($contacts as $contact) { ?>
                                                     <tr>
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="checkbox">
                                                             </div>
                                                         </td>
-                                                        <td><?= $comment['title'] ?></td>
-                                                        <td><?= $comment['name'] ?></td>
+                                                        <td><?= $contact['name'] ?></td>
+                                                        <td><?= $contact['phone'] ?></td>
+                                                        <td><?= $contact['email'] ?></td>
                                                         <td dir="ltr">
-                                                            <?= jdate('Y/m/d', strtotime($comment['setdate'])) ?>
+                                                            <?= jdate('Y/m/d', strtotime($contact['setdate'])) ?>
                                                         </td>
                                                         <td>
-                                                            <?php status('read', $comment['status']); ?>
+                                                            <?php status('read', $contact['status']); ?>
                                                         </td>
-                                                        <?php if (has_admin_access($_SESSION['user'], 'comment_detail')) { ?>
+                                                        <?php if (has_admin_access($_SESSION['user'], 'contact_detail')) { ?>
                                                             <td>
                                                                 <div>
-                                                                    <button value="<?= $comment['id'] ?>"
+                                                                    <button value="<?= $contact['id'] ?>"
                                                                         class=" btn border-0 bx p-0 bx-edit edit"
                                                                         data-toggle="modal" data-bs-toggle="tooltip"
                                                                         data-bs-placement="bottom" title="ویرایش وضعیت"
                                                                         data-target="#exampleModal"></button>
                                                                     <div class="modal fade"
-                                                                        id="exampleModal<?= $comment['id'] ?>" tabindex="-1"
+                                                                        id="exampleModal<?= $contact['id'] ?>" tabindex="-1"
                                                                         role="dialog" aria-labelledby="exampleModalLabel"
                                                                         aria-hidden="true">
                                                                         <div class="modal-dialog" role="document">
@@ -135,7 +139,7 @@ $comments = $db->join('blogs', 'blogs.id = comments.blog_id')
                                                                                         id="exampleModalLabel">ویرایش
                                                                                         وضعیت</h5>
                                                                                     <button type="button" class="close"
-                                                                                        value="<?= $comment['id'] ?>"
+                                                                                        value="<?= $contact['id'] ?>"
                                                                                         data-dismiss="modal" aria-label="Close">
                                                                                         <span aria-hidden="true">&times;</span>
                                                                                     </button>
@@ -144,23 +148,23 @@ $comments = $db->join('blogs', 'blogs.id = comments.blog_id')
                                                                                     <div class="modal-body">
                                                                                         <select class="form-select"
                                                                                             name="change_status" id="SelectBox">
-                                                                                            <?php if ($comment['status'] != 2) { ?>
+                                                                                            <?php if ($contact['status'] != 2) { ?>
                                                                                                 <option
-                                                                                                    value="<?= $comment['id'] ?>/2">
+                                                                                                    value="<?= $contact['id'] ?>/2">
                                                                                                     تایید شده
                                                                                                 </option>
                                                                                             <?php }
-                                                                                            if ($comment['status'] != 0) {
+                                                                                            if ($contact['status'] != 0) {
                                                                                                 ?>
                                                                                                 <option
-                                                                                                    value="<?= $comment['id'] ?>/0">
+                                                                                                    value="<?= $contact['id'] ?>/0">
                                                                                                     درحال بررسی
                                                                                                 </option>
                                                                                             <?php }
-                                                                                            if ($comment['status'] != 1) {
+                                                                                            if ($contact['status'] != 1) {
                                                                                                 ?>
                                                                                                 <option
-                                                                                                    value="<?= $comment['id'] ?>/1">
+                                                                                                    value="<?= $contact['id'] ?>/1">
                                                                                                     تایید نشده
                                                                                                 </option>
                                                                                             <?php } ?>
@@ -169,7 +173,7 @@ $comments = $db->join('blogs', 'blogs.id = comments.blog_id')
                                                                                     <div class="modal-footer">
                                                                                         <button type="button"
                                                                                             class="btn btn-secondary close"
-                                                                                            value="<?= $comment['id'] ?>"
+                                                                                            value="<?= $contact['id'] ?>"
                                                                                             data-dismiss="modal">لغو</button>
                                                                                         <button type="submit"
                                                                                             name="btn_change_status"
@@ -180,7 +184,7 @@ $comments = $db->join('blogs', 'blogs.id = comments.blog_id')
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <a href="comment_detail.php?id=<?= $comment['id'] ?>"
+                                                                    <a href="contact_detail.php?id=<?= $contact['id'] ?>"
                                                                         class="text-primary" data-bs-toggle="tooltip"
                                                                         data-bs-placement="bottom" title="وضعیت جزئیات"
                                                                         data-bs-original-title="وضعیت جزئیات"

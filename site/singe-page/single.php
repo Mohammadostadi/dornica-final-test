@@ -11,17 +11,17 @@ if (!isset($_GET['id']) or $_GET['id'] == '' or !is_numeric($_GET['id']))
     header('Location:../../index.php');
 
 $id = checkDataSecurity($_GET['id']);
-if(isset($_GET['click'])){
+if (isset($_GET['click'])) {
     $count = getMaxField('blogs', 'counter', $id);
-        $db->where('id', $id)->update('blogs', [
-            'counter' => $count
-        ]);
-        $db->insert('counter', [
-            'member_id' => isset($memberId) ? $memberId : null,
-            'blog_id' => $id,
-            'date' => $date
-        ]);
-        header('Location:single.php?id='.$id);
+    $db->where('id', $id)->update('blogs', [
+        'counter' => $count
+    ]);
+    $db->insert('counter', [
+        'member_id' => isset($memberId) ? $memberId : null,
+        'blog_id' => $id,
+        'date' => $date
+    ]);
+    header('Location:single.php?id=' . $id);
 }
 if (isset($_SESSION['member'])) {
     $memberId = $db->where('username', $_SESSION['member'])
@@ -44,21 +44,21 @@ if (isset($_GET['like']) and $_GET['like'] == 1) {
         ]);
         $liked = getMaxField('blogs', 'post_liked', $id);
         $db->where('id', $id)
-        ->update('blogs', [
-            'post_liked'=> $liked
-        ]);
+            ->update('blogs', [
+                'post_liked' => $liked
+            ]);
     } else {
         $data = $db->where('member_id', $memberId)
             ->where('blog_id', $id)
             ->delete('wishlist');
         $deleteLike = $db->where('id', $id)
-        ->getValue('blogs', 'post_liked');
+            ->getValue('blogs', 'post_liked');
         $deleteLike -= 1;
         $db->where('id', $id)
-        ->update('blogs', [
-            'post_liked'=> $deleteLike
-        ]);
-        
+            ->update('blogs', [
+                'post_liked' => $deleteLike
+            ]);
+
     }
     header('Location:single.php?id=' . $id);
 }
@@ -108,7 +108,7 @@ if (!empty($counterDate)) {
             'date' => $date
         ]);
     }
-}else{
+} else {
     $db->where('id', $id)->update('blogs', [
         'counter' => 1
     ]);
@@ -183,8 +183,9 @@ $blogComments = $db->where('blog_id', $id)
                     showMessage($_GET['ok'])
                         ?>
                     <div class="entry-header entry-header-1 mb-30 mt-50">
-                        <div class="entry-meta meta-0 font-small mb-30"><a href="../category/category-big.php?category=<?= $blog['blog_category'] ?>"><span
-                                    class="post-cat bg-success color-white"><?= $blog['name'] ?></span></a></div>
+                        <div class="entry-meta meta-0 font-small mb-30"><a
+                                href="../category/category-big.php?category=<?= $blog['blog_category'] ?>"><span
+                                class="post-cat bg-success color-white"><?= $blog['name'] ?></span></a></div>
                     <h1 class="post-title mb-30">
                         <?= $blog['title'] ?>
                     </h1>
@@ -274,7 +275,7 @@ $blogComments = $db->where('blog_id', $id)
                         <div class="related-posts">
                             <h3 class="mb-30">پست های مرتبط</h3>
                             <div class="row">
-                                <?php if(empty($relatedBlogs)){ ?>
+                                <?php if (empty($relatedBlogs)) { ?>
                                     <div class="col-12 text-center">داده ایی برای نمایش وجود ندارد</div>
                                 <?php }
                                 foreach ($relatedBlogs as $relatedBlog) { ?>
@@ -289,7 +290,8 @@ $blogComments = $db->where('blog_id', $id)
                                             </div>
                                             <div class="pl-10 pr-10">
                                                 <div class="entry-meta mb-15 mt-10">
-                                                    <a class="entry-meta meta-2" href="../category/category-big.php?category=<?= $relatedBlog['blog_category'] ?>"><span
+                                                    <a class="entry-meta meta-2"
+                                                        href="../category/category-big.php?category=<?= $relatedBlog['blog_category'] ?>"><span
                                                             class="post-in text-primary font-x-small"><?= $relatedBlog['name'] ?></span></a>
                                                 </div>
                                                 <h5 class="post-title mb-15">
@@ -355,24 +357,36 @@ $blogComments = $db->where('blog_id', $id)
                                         <div class="form-group">
                                             <input class="form-control" name="fname" id="fname" type="text"
                                                 placeholder="نام" required>
+                                                <div class="invalid-feedback">
+                                                    فیلد نام نباید خالی باشد
+                                                </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <input class="form-control" name="lname" id="lname" type="lname"
                                                 placeholder="نام خانوادگی" required>
+                                                <div class="invalid-feedback">
+                                                    فیلد نام خانوادگی نباید خالی باشد
+                                                </div>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <input class="form-control" name="email" id="email" type="text"
                                                 placeholder="ایمیل" required>
+                                                <div class="invalid-feedback">
+                                                    فیلد ایمیل نباید خالی باشد
+                                                </div>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <textarea class="form-control w-100" name="description" id="description"
                                                 cols="30" rows="9" placeholder="نظرات" required></textarea>
+                                            <div class="invalid-feedback">
+                                                فیلد نظرات نباید خالی باشد
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -385,9 +399,9 @@ $blogComments = $db->where('blog_id', $id)
                     </div>
                     <!--End col-lg-8-->
                     <div class="col-lg-4 col-md-12">
-                    <?php require_once('../layout/right_sidebar.php') ?>
-                    <!--End col-lg-4-->
-                    <?php require_once('../layout/right_sidebar_second.php') ?>
+                        <?php require_once('../layout/right_sidebar.php') ?>
+                        <!--End col-lg-4-->
+                        <?php require_once('../layout/right_sidebar_second.php') ?>
                     </div>
                 </div>
             </div>
@@ -400,29 +414,8 @@ $blogComments = $db->where('blog_id', $id)
     <?php require_once('../layout/js.php') ?>
     <script src="../../assets/js/vendor/jquery.nice-select.min.js"></script>
     <script src="../../assets/js/vendor/perfect-scrollbar.js"></script>
-    <script>
-        $(".edit").click(function () {
-            $(`#exampleModal`).modal("show");
-        });
-        $(".close").click(function () {
-            $(`#exampleModal`).modal("hide");
-        });
-    </script>
-    <script>
-        (() => {
-            'use strict'
-            const forms = document.querySelectorAll('.needs-validation')
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-                    form.classList.add('was-validated')
-                }, false)
-            })
-        })()
-    </script>
+    <script src="../../assets/js/model.js"></script>
+    <script src="../../assets/js/validation.js"></script>
     <script>
         $('.btn-close').click(function () {
             window.location = 'single.php?id=<?= $id ?>';

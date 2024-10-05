@@ -62,6 +62,10 @@ if (isset($_POST['change_level_access'])) {
         $levelAccess[] = 'comments_list';
     if (isset($_POST['comment_detail']))
         $levelAccess[] = 'comment_detail';
+    if (isset($_POST['contact_detail']))
+        $levelAccess[] = 'contact_detail';
+    if (isset($_POST['contacts_list']))
+        $levelAccess[] = 'contacts_list';
 
     if (count($levelAccess) != 0) {
         $db->where('id', $id)
@@ -338,6 +342,25 @@ $levelAccess = explode(',', $level);
                                                 </div>
                                                 <hr>
                                             </div>
+                                            <div class="col-12">
+                                                <div class="text-uppercase">
+                                                    <label for="">جدول پیام ها</label>
+                                                    <hr>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <input type="radio" id="contacts_list" name="contacts_list"
+                                                            <?= in_array('contacts_list', $levelAccess) ? "checked" : "" ?>>
+                                                        <label for="contacts_list">لیست پیام ها </label>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <input type="radio" id="contact_detail" name="contact_detail"
+                                                            <?= in_array('contact_detail', $levelAccess) ? "checked" : "" ?>>
+                                                        <label for="contact_detail">جزئیات پیام  </label>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                            </div>
                                             <div class="col-12 text-end">
                                                 <a href="admins_list.php" class="btn btn-danger px-4 py-1"
                                                     name="change_level_access">برگشت</a>
@@ -390,6 +413,8 @@ $levelAccess = explode(',', $level);
         checkBox('logs_list');
         checkBox('comments_list');
         checkBox('comment_detail');
+        checkBox('contact_detail');
+        checkBox('contacts_list');
         function checkBox(name) {
             let check = ($(`input:radio[name='${name}']`).is(":checked")) ? true : false;
             $(`#${name}`).click(function () {

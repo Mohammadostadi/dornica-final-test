@@ -354,25 +354,7 @@ $path = basename($_SERVER['PHP_SELF']);
 			});
 		}
 	</script>
-	<script>
-		(() => {
-			"use strict";
-			const forms = document.querySelectorAll(".needs-validation");
-			Array.from(forms).forEach((form) => {
-				form.addEventListener(
-					"submit",
-					(event) => {
-						if (!form.checkValidity()) {
-							event.preventDefault();
-							event.stopPropagation();
-						}
-						form.classList.add("was-validated");
-					},
-					false
-				);
-			});
-		})();
-	</script>
+	<script src="../../assets/js/validation.js" ></script>
 	<script>
 		$('.btn-close').click(function () {
 			window.location = 'my-profile.php';

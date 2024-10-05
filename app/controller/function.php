@@ -134,6 +134,14 @@ function showMessage($value)
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
+    <?php }
+    elseif ($value == 8) { ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert" id="alert">
+            <strong>پیام شما برای ادمین ارسال شد.</strong>
+            <button type="button" class="btn-close close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     <?php } ?>
 <?php }
 

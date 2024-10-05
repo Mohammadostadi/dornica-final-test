@@ -191,25 +191,7 @@ if (isset($_POST['_insert'])) {
     <?php
     require_once('../../layout/js.php');
     ?>
-    <script>
-        (() => {
-            "use strict";
-            const forms = document.querySelectorAll(".needs-validation");
-            Array.from(forms).forEach((form) => {
-                form.addEventListener(
-                    "submit",
-                    (event) => {
-                        if (!form.checkValidity()) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add("was-validated");
-                    },
-                    false
-                );
-            });
-        })();
-    </script>
+    <script src="../../../assets/js/validation.js" ></script>
     <script type="text/javascript" src="../../assets/datePiker/js/persianDatepicker.min.js"></script>
     <script>
         const p = new persianDate();

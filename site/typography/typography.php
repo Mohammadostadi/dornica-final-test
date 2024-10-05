@@ -343,29 +343,8 @@ $URL_PATH = '../..';
     <?php require_once('../layout/js.php') ?>
     <script src="../../assets/js/vendor/jquery.nice-select.min.js"></script>
     <script src="../../assets/js/vendor/perfect-scrollbar.js"></script>
-    <script>
-        $(".edit").click(function () {
-            $(`#exampleModal`).modal("show");
-        });
-        $(".close").click(function () {
-            $(`#exampleModal`).modal("hide");
-        });
-    </script>
-    <script>
-        (() => {
-            'use strict'
-            const forms = document.querySelectorAll('.needs-validation')
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-                    form.classList.add('was-validated')
-                }, false)
-            })
-        })()
-    </script>
+    <script src="../../assets/js/model.js"></script>
+    <script src="../../assets/js/validation.js" ></script>
     <script>
         $('.btn-close').click(function () {
             window.location = 'typography.php';

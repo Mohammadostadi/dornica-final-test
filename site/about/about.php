@@ -6,7 +6,7 @@ require_once('../../app/helper/view.php');
 $SITE_PATH = '..';
 $URL_PATH = '../..';
 require_once('../layout/login.php');
-    ?>
+?>
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -167,7 +167,8 @@ require_once('../layout/login.php');
                                 جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی
                                 الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد.</p>
                             <p class="text-center mt-30">
-                                <a href="#"><img class="d-inline border-radius-10" src="../../attachment/imgs/ads.jpg" alt=""></a>
+                                <a href="#"><img class="d-inline border-radius-10" src="../../attachment/imgs/ads.jpg"
+                                        alt=""></a>
                             </p>
                         </div>
                         <div class="entry-bottom mt-50 mb-30">
@@ -194,86 +195,44 @@ require_once('../layout/login.php');
                         </div>
                         <!--related posts-->
                         <div class="related-posts">
-                            <h3 class="mb-30">از وبلاگ ما</h3>
+                            <h3 class="mb-30">از اخبار ما</h3>
                             <div class="row">
+                                <?php
+                                $resentBlogs = $db->where('blogs.status', 1)
+                                    ->join('categories', 'categories.id = blogs.blog_category', 'LEFT')
+                                    ->orderBy('setdate', 'DESC')
+                                    ->get('blogs', 3, 'blogs.id, title, description, categories.name, date, counter, image');
+                                    foreach($resentBlogs as $resentBlog){
+                                ?>
                                 <article class="col-lg-4">
                                     <div class="background-white border-radius-10 p-10 mb-30">
                                         <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
-                                            <a href="single.html">
-                                                <img class="border-radius-15" src="../../attachment/imgs/news-2.jpg" alt="">
+                                            <a href="../singe-page/single.php?id=<?= $resentBlog['id'] ?>">
+                                                <img class="border-radius-15" src="<?= (isset($resentBlog['image']) and $resentBlog['image'] != '') ? "../../attachment/imgs/blogs/" . $resentBlog['image'] : "../../admin-panel/assets/images/ads/default.png" ?>"
+                                                    alt="" width="260px" height="260px">
                                             </a>
                                         </div>
                                         <div class="pl-10 pr-10">
                                             <div class="entry-meta mb-15 mt-10">
                                                 <a class="entry-meta meta-2" href="category.html"><span
-                                                        class="post-in text-primary font-x-small">سیاسی</span></a>
+                                                        class="post-in text-primary font-x-small"><?= $resentBlog['name'] ?></span></a>
                                             </div>
                                             <h5 class="post-title mb-15">
                                                 <span class="post-format-icon">
                                                     <ion-icon name="image-outline" role="img" class="md hydrated"
                                                         aria-label="image outline"></ion-icon>
                                                 </span>
-                                                <a href="single.html">لورم ایپسوم متن ساختگی با تولید سادگی</a>
+                                                <a href="../singe-page/single.php?id=<?= $resentBlog['id'] ?>"><?= $resentBlog['description'] ?></a>
                                             </h5>
                                             <div
                                                 class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
-                                                <span class="post-by">توسط <a href="author.html">الناز
-                                                        روستایی</a></span>
-                                                <span class="post-on">8 دقیقه پیش</span>
+                                                <span class="post-by"><a href="../singe-page/single.php?id=<?= $resentBlog['id'] ?>"><?= $resentBlog['title'] ?></a></span>
+                                                <span class="post-on"><?= $resentBlog['date'] ?></span>
                                             </div>
                                         </div>
                                     </div>
                                 </article>
-                                <article class="col-lg-4">
-                                    <div class="background-white border-radius-10 p-10 mb-30">
-                                        <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
-                                            <a href="single.html">
-                                                <img class="border-radius-15" src="../../attachment/imgs/news-5.jpg" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="pl-10 pr-10">
-                                            <div class="entry-meta mb-15 mt-10">
-                                                <a class="entry-meta meta-2" href="category.html"><span
-                                                        class="post-in text-success font-x-small">فناوری</span></a>
-                                            </div>
-                                            <h5 class="post-title mb-15">
-                                                <span class="post-format-icon">
-                                                    <ion-icon name="headset-outline" role="img" class="md hydrated"
-                                                        aria-label="headset outline"></ion-icon>
-                                                </span>
-                                                <a href="single.html">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</a>
-                                            </h5>
-                                            <div
-                                                class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
-                                                <span class="post-by">توسط <a href="author.html">رضا کیمیا</a></span>
-                                                <span class="post-on">24 دقیقه پیش</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </article>
-                                <article class="col-lg-4">
-                                    <div class="background-white border-radius-10 p-10">
-                                        <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
-                                            <a href="single.html">
-                                                <img class="border-radius-15" src="../../attachment/imgs/news-7.jpg" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="pl-10 pr-10">
-                                            <div class="entry-meta mb-15 mt-10">
-                                                <a class="entry-meta meta-2" href="category.html"><span
-                                                        class="post-in text-danger font-x-small">جهانی</span></a>
-                                            </div>
-                                            <h5 class="post-title mb-15">
-                                                <a href="single.html">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</a>
-                                            </h5>
-                                            <div
-                                                class="entry-meta meta-1 font-x-small color-grey float-right text-uppercase mb-10">
-                                                <span class="post-by">توسط <a href="author.html">سعید شمس</a></span>
-                                                <span class="post-on">24 دقیقه پیش</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </article>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
@@ -296,29 +255,8 @@ require_once('../layout/login.php');
     <?php require_once('../layout/js.php') ?>
     <script src="../../assets/js/vendor/jquery.nice-select.min.js"></script>
     <script src="../../assets/js/vendor/perfect-scrollbar.js"></script>
-    <script>
-        $(".edit").click(function () {
-            $(`#exampleModal`).modal("show");
-        });
-        $(".close").click(function () {
-            $(`#exampleModal`).modal("hide");
-        });
-    </script>
-    <script>
-        (() => {
-            'use strict'
-            const forms = document.querySelectorAll('.needs-validation')
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-                    form.classList.add('was-validated')
-                }, false)
-            })
-        })()
-    </script>
+    <script src="../../assets/js/model.js"></script>
+    <script src="../../assets/js/validation.js"></script>
     <script>
         $('.btn-close').click(function () {
             window.location = 'about.php';

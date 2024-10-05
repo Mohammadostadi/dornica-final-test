@@ -10,7 +10,7 @@ pageLimit('blogs', 7, false);
 
 $blogs = $db->join('categories', 'categories.id = blogs.blog_category', 'LEFT')
     ->orderBy('id', 'DESC')
-    ->paginate('blogs', $page, 'blogs.id, blogs.title, categories.name, date, blogs.status');
+    ->paginate('blogs', $page, 'blogs.id, blogs.title, categories.name, date, blogs.status, image');
 
 ?>
 <!doctype html>
@@ -91,6 +91,9 @@ $blogs = $db->join('categories', 'categories.id = blogs.blog_category', 'LEFT')
                                                     <tr>
                                                         <th>#</th>
                                                         <th class="px-5">
+                                                            تصویر
+                                                        </th>
+                                                        <th class="px-5">
                                                             عنوان
                                                         </th>
                                                         <th class="px-5">
@@ -113,6 +116,11 @@ $blogs = $db->join('categories', 'categories.id = blogs.blog_category', 'LEFT')
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="checkbox">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div>
+                                                                <img src="<?= (isset($blog['image']) and $blog['image'] != '')?"../../../attachment/imgs/blogs/".$blog['image']:"../../assets/images/ads/default.png" ?>" alt="" class="rounded text-center" width="60px">
                                                             </div>
                                                         </td>
                                                         <td><?= $blog['title'] ?></td>

@@ -113,7 +113,7 @@ if (isset($_POST['_update'])) {
                                 <label class="form-label">نقش</label>
                                 <span class="text-danger">*</span>
                                 <select name="role" class="form-select" id="role" required>
-                                    <?php if ($_SESSION['user_role'] == 0) { ?>
+                                    <?php if ($admin['role'] == 0) { ?>
                                         <option selected value="0">مدیر</option>
                                     <?php } else { ?>
                                         <option value="" selected>نقش</option>

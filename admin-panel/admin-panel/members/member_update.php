@@ -79,7 +79,7 @@ if (isset($_POST['_update'])) {
             }
             rename($image_name, $target_file);
         }
-        $db->where('username', $id)
+        $db->where('id', $id)
             ->update('members', [
                 'fname' => $fname,
                 'lname' => $lname,
@@ -93,7 +93,6 @@ if (isset($_POST['_update'])) {
                 'image' => isset($image_name) ? checkDataSecurity($image_name) : $lastImage,
                 'military_service' => isset($military_service) ? $military_service : NULL,
                 'status' => 1,
-                'setdate' => persian_number(jdate('Y/m/d H:i:s', strtotime($date))),
             ]);
         $query = $db->getLastQuery();
         $db->insert('logs', [
@@ -353,25 +352,7 @@ $provinceList = $db->where('status', 1)
             });
         }
     </script>
-    <script>
-        (() => {
-            "use strict";
-            const forms = document.querySelectorAll(".needs-validation");
-            Array.from(forms).forEach((form) => {
-                form.addEventListener(
-                    "submit",
-                    (event) => {
-                        if (!form.checkValidity()) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add("was-validated");
-                    },
-                    false
-                );
-            });
-        })();
-    </script>
+    <script src="../../../assets/js/validation.js" ></script>
 
 </body>
 

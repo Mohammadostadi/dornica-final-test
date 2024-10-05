@@ -102,6 +102,16 @@
 
         </li>
         <?php } ?>
+        <?php if(has_admin_access($_SESSION['user'], 'contacts_list')){ ?>
+        <li>
+            <a href="../contacts/contacts_list.php" class="">
+                <div class="parent-icon"><i class="fadeIn animated bx bx-comment-detail"></i>
+                </div>
+                <div class="menu-title">لیست پیام ها</div>
+            </a>
+
+        </li>
+        <?php } ?>
     </ul>
     <!--end navigation-->
 </aside>

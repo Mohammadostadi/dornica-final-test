@@ -48,6 +48,7 @@ $members = $db->join('provinces', 'provinces.id = members.province_id', 'LEFT')
     ->join('cities', 'cities.id = members.city_id', 'LEFT')
     ->orderBy('members.id', 'DESC')
     ->paginate('members', $page, "members.id, fname, lname, gender, phone, username, provinces.name as province, cities.name as city, members.status, members.setdate");
+    // var_dump($members);die;
 
 ?>
 <!doctype html>

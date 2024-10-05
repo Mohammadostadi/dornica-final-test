@@ -129,25 +129,7 @@ $path = basename($_SERVER['PHP_SELF']);
 
 	<?php require_once('assets/layout/js.php') ?>
 
-	<script>
-		(() => {
-			"use strict";
-			const forms = document.querySelectorAll(".needs-validation");
-			Array.from(forms).forEach((form) => {
-				form.addEventListener(
-					"submit",
-					(event) => {
-						if (!form.checkValidity()) {
-							event.preventDefault();
-							event.stopPropagation();
-						}
-						form.classList.add("was-validated");
-					},
-					false
-				);
-			});
-		})();
-	</script>
+	<script src="../../assets/js/validation.js" ></script>
 </body>
 
 <!-- Mirrored from bookland.dexignzone.com/xhtml/my-profile.php by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Apr 2024 14:18:19 GMT -->

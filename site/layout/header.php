@@ -184,10 +184,10 @@ if (isset($_POST['btn_login'])) {
                         </nav>
                     </div>
                     <!-- Search -->
-                    <form action="#" method="get"
+                    <form action="<?= $SITE_PATH ?>/search/search.php" method="post"
                         class="search-form d-lg-inline float-left position-relative ml-30 d-none">
-                        <input type="text" class="search_field" placeholder="جستجو ..." value="" name="s">
-                        <span class="search-icon"><i class="ti-search mr-5"></i></span>
+                        <input type="text" name="search" class="search_field" placeholder="جستجو ..." value="" name="s">
+                        <button name="btn_search" class="search-icon" type="submit"><i class="ti-search mr-5"></i></button>
                     </form>
                     <!-- Off canvas -->
                     <div class="off-canvas-toggle-cover">
